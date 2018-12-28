@@ -1,0 +1,32 @@
+
+-rwxr--r-- 1 pi pi 111 Dec 28 13:29 powersave
+#!/bin/bash
+sudo tvservice --off
+echo 0 | sudo tee /sys/devices/platform/soc/3f980000.usb/buspower >/dev/null
+
+-rw-r--r-- 1 pi pi 166 Dec 27 13:54 reader.py
+import serial
+s = serial.Serial('/dev/serial0', 115200)
+
+cmdstr = ' '
+
+while True:
+        cmdstr = s.readline();
+        print(cmdstr)
+        if cmdstr.strip() == 'OK -> stop':
+                break
+
+-rw-r--r-- 1 pi pi 198 Dec 27 14:00 writer.py				
+import serial
+s = serial.Serial('/dev/serial0', 115200)
+
+userinput = ' '
+
+while True:
+        userinput = raw_input("Command:")
+        s.write(userinput)
+        s.write('\n')
+
+        if userinput.strip() == 'stop':
+                break
+pi@davebot:~/projects/robot $
