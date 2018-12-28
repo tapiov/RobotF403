@@ -54,6 +54,8 @@
 #include "stdlib.h"
 #include "string.h"
 
+#include "motor_control.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -79,7 +81,13 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+
 /* USER CODE BEGIN PFP */
+
+extern void motor_init(void);
+extern bool BSP_MotorControl_SetMaxSpeed(uint8_t deviceId, uint16_t newMaxSpeed);
+extern bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed);
+extern
 
 /* USER CODE END PFP */
 
@@ -133,6 +141,8 @@ int main(void)
 
   uint8_t *readline = malloc(100 * sizeof(uint8_t));
 
+  motor_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -142,6 +152,31 @@ int main(void)
 
 	  fgets(readline,100,stdin);
 	  printf("OK -> %s",readline);
+
+	  if ((strncmp(readline, "f",1) == 0)) {
+			BSP_MotorControl_SetMaxSpeed(0, 20);
+			BSP_MotorControl_Run(0, BACKWARD);
+
+			BSP_MotorControl_SetMaxSpeed(1, 20);
+			BSP_MotorControl_Run(1, FORWARD);
+
+			HAL_Delay(1000);
+
+	  } else if ((strncmp(readline,"b",1) == 0)) {
+			BSP_MotorControl_SetMaxSpeed(0, 20);
+			BSP_MotorControl_Run(0, FORWARD);
+
+			BSP_MotorControl_SetMaxSpeed(1, 20);
+			BSP_MotorControl_Run(1, BACKWARD);
+
+			HAL_Delay(1000);
+
+	  } else {
+		  printf("NOK -> %s",readline);
+	  }
+
+		BSP_MotorControl_SetMaxSpeed(0, 0);
+		BSP_MotorControl_SetMaxSpeed(1, 0);
 
     /* USER CODE END WHILE */
 
