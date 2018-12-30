@@ -27,7 +27,7 @@
 /**
  * Define this macro at project level if UART is available
  */
-#	define VL53L1A1_HAVE_UART 0
+#       define VL53L1A1_HAVE_UART 0
 #endif
 
 
@@ -93,7 +93,7 @@
 extern void XNUCLEO53L1A1_USART2_UART_Init(void);
 
 #else
-#	define XNUCLEO53L1A1_USART2_UART_Init(...) (void)0
+#       define XNUCLEO53L1A1_USART2_UART_Init(...) (void)0
 #endif
 
 /** @}  */
@@ -222,7 +222,7 @@ extern void XNUCLEO53L1A1_USART2_UART_Init(void);
 #       ifndef VL53L1A1_EXTI4_15_USE_PIN
 #           define VL53L1A1_EXTI4_15_USE_PIN    VL53L1A1_GPIO1_L_GPIO_PIN
 #       else
-#           #warning "shared use of interrupt 9 in group 4-15 for L sensor"
+#           # warning "shared use of interrupt 9 in group 4-15 for L sensor"
 #       endif
 #   endif // STM32L053xx
 #endif //else VL53L1A1_GPIO1_L_OPTION
@@ -258,7 +258,7 @@ extern void XNUCLEO53L1A1_USART2_UART_Init(void);
 #       ifndef VL53L1A1_EXTI4_15_USE_PIN
 #           define VL53L1A1_EXTI4_15_USE_PIN    VL53L1A1_GPIO1_R_GPIO_PIN
 #       else
-#           #warning "shared use of interrupt 5 in group 4-15 for R sensor"
+#           # warning "shared use of interrupt 5 in group 4-15 for R sensor"
 #       endif // STM32L053xx
 #   endif // STM32L053xx
 #endif //else VL53L1A1_GPIO1_R_OPTION
@@ -293,7 +293,7 @@ extern void XNUCLEO53L1A1_USART2_UART_Init(void);
  * We trace out function names and line numbers plus any text formated with some extra arguments
  */
 #if XNUCLEO53L1A1_TRACE
-#   define XNUCLEO53L1A1_ErrLog( msg, ...) trace_printf("[Err] %s l %d \t" msg "\n", __func__, __LINE__, ##__VA_ARGS__)
+#   define XNUCLEO53L1A1_ErrLog(msg, ...) trace_printf("[Err] %s l %d \t" msg "\n", __func__, __LINE__, ## __VA_ARGS__)
 #else
 #   define XNUCLEO53L1A1_ErrLog(...) (void)0
 #endif
@@ -312,17 +312,17 @@ extern void XNUCLEO53L1A1_USART2_UART_Init(void);
  *
  * @note Most functions are using a device selector as input. ASCII 'c', 'l' or 'r' are also accepted.
  */
-enum XNUCLEO53L1A1_dev_e{
-    XNUCLEO53L1A1_DEV_LEFT =  0,    //!< left satellite device P21 header : 'l'
-    XNUCLEO53L1A1_DEV_CENTER  =  1, //!< center (built-in) vl053 device : 'c"
-    XNUCLEO53L1A1_DEV_RIGHT=  2     //!< Right satellite device P22 header : 'r'
+enum XNUCLEO53L1A1_dev_e {
+	XNUCLEO53L1A1_DEV_LEFT =  0,//!< left satellite device P21 header : 'l'
+	XNUCLEO53L1A1_DEV_CENTER  =  1,//!< center (built-in) vl053 device : 'c"
+	XNUCLEO53L1A1_DEV_RIGHT=  2 //!< Right satellite device P22 header : 'r'
 };
 
 /**
  * I2C1 handle
  * @note setup and configured by @ref XNUCLEO53L1A1_Init
  */
-extern I2C_HandleTypeDef  XNUCLEO53L1A1_hi2c;
+extern I2C_HandleTypeDef XNUCLEO53L1A1_hi2c;
 /** UART2 handle
  *
  * UART2 is the nucleo Virtual Com Port
@@ -355,7 +355,7 @@ int XNUCLEO53L1A1_Init(void);
  * @param  state  State of the device reset (xsdn) pin @warning reset  pin is active low
  * @return 0 on success
  */
-int XNUCLEO53L1A1_ResetId(int DevNo,  int state );
+int XNUCLEO53L1A1_ResetId(int DevNo, int state);
 
 /**
  * Get PB1 push button state
@@ -459,7 +459,7 @@ int XNUCLEO53L1A1_SetIntrStateId(int EnableIntr, int DevNo);
  * @param IntPriority Interrupt Priority to set
  * @param SubPriority Interrupt SubPriority to set
  */
-void VL53L1A1_EXTI_IOConfigure(int DevNo, int  IntPriority, int SubPriority);
+void VL53L1A1_EXTI_IOConfigure(int DevNo, int IntPriority, int SubPriority);
 
 /**
  * Un-configure sensor interrupt line to mcu

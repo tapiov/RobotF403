@@ -1,41 +1,41 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  ** This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
-  *
-  * COPYRIGHT(c) 2018 STMicroelectronics
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ ** This notice applies to any and all portions of this file
+ * that are not between comment pairs USER CODE BEGIN and
+ * USER CODE END. Other portions of this file, whether
+ * inserted by the user or by software development tools
+ * are owned by their respective copyright owners.
+ *
+ * COPYRIGHT(c) 2018 STMicroelectronics
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   1. Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *   3. Neither the name of STMicroelectronics nor the names of its contributors
+ *      may be used to endorse or promote products derived from this software
+ *      without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -84,10 +84,10 @@
 
 I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
-VL53L1_Dev_t                   devCenter;
-VL53L1_Dev_t                   devLeft;
-VL53L1_Dev_t                   devRight;
-VL53L1_DEV                     Dev = &devCenter;
+VL53L1_Dev_t devCenter;
+VL53L1_Dev_t devLeft;
+VL53L1_Dev_t devRight;
+VL53L1_DEV Dev = &devCenter;
 int status;
 volatile int IntCount;
 #define isAutonomousExample 1  /* Allow to select either autonomous ranging or fast ranging example */
@@ -104,6 +104,8 @@ extern void motor_init(void);
 extern bool BSP_MotorControl_SetMaxSpeed(uint8_t deviceId, uint16_t newMaxSpeed);
 extern bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed);
 
+float MeasureSensor(uint8_t ToFSensor);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -111,101 +113,100 @@ extern bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-		if (GPIO_Pin==VL53L1X_INT_Pin)
-		{
-			IntCount++;
-		}
+	if (GPIO_Pin == VL53L1X_INT_Pin) {
+		IntCount++;
+	}
 }
 
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	/* USER CODE BEGIN 1 */
 
-  uint16_t wordData;
-  uint8_t ToFSensor = 1; // 0=Left, 1=Center(default), 2=Right
-  static VL53L1_RangingMeasurementData_t RangingData;
-  uint8_t newI2C = 0x52;
+	uint16_t wordData;
+	uint8_t ToFSensor = 1; // 0=Left, 1=Center(default), 2=Right
+	static VL53L1_RangingMeasurementData_t RangingData;
+	uint8_t newI2C = 0x52;
 
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+	/* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_USART2_UART_Init();
-  MX_I2C1_Init();
-  MX_TIM2_Init();
-  MX_TIM3_Init();
-  MX_ADC1_Init();
-  MX_USART6_UART_Init();
-  /* USER CODE BEGIN 2 */
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_DMA_Init();
+	MX_USART2_UART_Init();
+	MX_I2C1_Init();
+	MX_TIM2_Init();
+	MX_TIM3_Init();
+	MX_ADC1_Init();
+	MX_USART6_UART_Init();
+	/* USER CODE BEGIN 2 */
 
-  XNUCLEO53L1A1_Init();
+	XNUCLEO53L1A1_Init();
 
-  setvbuf(stdin, NULL, _IONBF, 0);
-  setvbuf(stdout, NULL, _IONBF, 0);
-  setvbuf(stderr, NULL, _IONBF, 0);
+	setvbuf(stdin, NULL, _IONBF, 0);
+	setvbuf(stdout, NULL, _IONBF, 0);
+	setvbuf(stderr, NULL, _IONBF, 0);
 
-  printf("\r\nConsole ready ... \r\n");
+	printf("\r\nConsole ready ... \r\n");
 
-  uint8_t *readline = malloc(100 * sizeof(uint8_t));
+	uint8_t *readline = malloc(100 * sizeof(uint8_t));
 
-  motor_init();
+	motor_init();
 
-  /* USER CODE END 2 */
+	/* USER CODE END 2 */
 
 /* An example here below shows how to manage multi-sensor operation.
-In this example the sensors range sequentially. Several sensors range simultanously is also possible */
+   In this example the sensors range sequentially. Several sensors range simultanously is also possible */
 
 /* Reset the 3 ToF sensors on the expansion board */
-	for (ToFSensor=0;ToFSensor<3;ToFSensor++){
+	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 		status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
 	}
 
 /* Bring the sensors out of the reset stage one by one and set the new I2C address */
-	for (ToFSensor=0;ToFSensor<3;ToFSensor++){
-		switch(ToFSensor){
-			case 0:
-				Dev=&devLeft;
-				break;
-			case 1:
-				Dev=&devCenter;
-				break;
-			case 2:
-				Dev=&devRight;
-				break;
+	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+		switch (ToFSensor) {
+		case 0:
+			Dev = &devLeft;
+			break;
+		case 1:
+			Dev = &devCenter;
+			break;
+		case 2:
+			Dev = &devRight;
+			break;
 		}
 		status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
 		Dev->comms_speed_khz = 400;
 		Dev->I2cHandle = &hi2c1;
 		Dev->comms_type = 1;
-		Dev->I2cDevAddr=0x52; /* default ToF sensor I2C address*/
+		Dev->I2cDevAddr = 0x52; /* default ToF sensor I2C address*/
 		VL53L1_RdWord(Dev, 0x010F, &wordData);
 		printf("VL53L1X: %02X\n\r", wordData);
-		newI2C = Dev->I2cDevAddr + (ToFSensor+1)*2;
+		newI2C = Dev->I2cDevAddr + (ToFSensor + 1) * 2;
 		status = VL53L1_SetDeviceAddress(Dev, newI2C);
-		Dev->I2cDevAddr=newI2C;
+		Dev->I2cDevAddr = newI2C;
 		VL53L1_RdWord(Dev, 0x010F, &wordData);
 		printf("VL53L1X: %02X\n\r", wordData);
 
@@ -222,64 +223,108 @@ In this example the sensors range sequentially. Several sensors range simultanou
 	float dist_back = 0;
 	float dist_forw = 0;
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-
-		for (ToFSensor=0;ToFSensor<3;ToFSensor++){
-			switch(ToFSensor){
-				case 0:
-					Dev=&devLeft;
-					break;
-				case 1:
-					Dev=&devCenter;
-					break;
-				case 2:
-					Dev=&devRight;
-					break;
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
+	while (1) {
+		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+			switch (ToFSensor) {
+			case 0:
+				Dev = &devLeft;
+				break;
+			case 1:
+				Dev = &devCenter;
+				break;
+			case 2:
+				Dev = &devRight;
+				break;
 			}
 			status = VL53L1_StartMeasurement(Dev);
-		  status = VL53L1_WaitMeasurementDataReady(Dev);
-			if(!status)
-			{
+			status = VL53L1_WaitMeasurementDataReady(Dev);
+			if (!status) {
 				status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
-				if(status==0){
-					printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor,RangingData.RangeStatus,RangingData.RangeMilliMeter,
-									(RangingData.SignalRateRtnMegaCps/65536.0),RangingData.AmbientRateRtnMegaCps/65336.0);
+				if (status == 0) {
+					printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
+					       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
 
-				if (ToFSensor == 0) {
-					dist_back = RangingData.RangeMilliMeter;
-				} else if (ToFSensor == 2)
-					dist_forw = RangingData.RangeMilliMeter;
+					if (ToFSensor == 0) {
+						dist_back = RangingData.RangeMilliMeter;
+					} else if (ToFSensor == 2)
+						dist_forw = RangingData.RangeMilliMeter;
 				}
 				status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
 			}
 		}
 
-		if ((dist_forw > dist_back) && (dist_forw > 200)) {
-			BSP_MotorControl_SetMaxSpeed(0, 20);
-			BSP_MotorControl_Run(0, BACKWARD);
+		if ((dist_forw > dist_back) && (dist_forw > 500)) {
 
-			BSP_MotorControl_SetMaxSpeed(1, 20);
-			BSP_MotorControl_Run(1, FORWARD);
+			while(dist_forw > 400) {
 
-			HAL_Delay(500);
+				BSP_MotorControl_SetMaxSpeed(0,30);
+				BSP_MotorControl_Run(0, BACKWARD);
 
-		} else if ((dist_back > dist_forw) && (dist_back > 200)) {
-			BSP_MotorControl_SetMaxSpeed(0, 20);
-			BSP_MotorControl_Run(0, FORWARD);
+				BSP_MotorControl_SetMaxSpeed(1, 30);
+				BSP_MotorControl_Run(1, FORWARD);
 
-			BSP_MotorControl_SetMaxSpeed(1, 20);
-			BSP_MotorControl_Run(1, BACKWARD);
+				dist_forw = MeasureSensor(2);
+			}
 
-			HAL_Delay(500);
+			// Stop motors
+			BSP_MotorControl_SetMaxSpeed(0, 0);
+			BSP_MotorControl_SetMaxSpeed(1, 0);
+
+			HAL_Delay(2000);
+
+		} else if ((dist_back > dist_forw) && (dist_back > 500)) {
+
+			while(dist_back > 400) {
+
+				BSP_MotorControl_SetMaxSpeed(0, 30);
+				BSP_MotorControl_Run(0, FORWARD);
+
+				BSP_MotorControl_SetMaxSpeed(1, 30);
+				BSP_MotorControl_Run(1, BACKWARD);
+
+				dist_back = MeasureSensor(0);
+
+			}
+
+			// Stop motors
+			BSP_MotorControl_SetMaxSpeed(0, 0);
+			BSP_MotorControl_SetMaxSpeed(1, 0);
+
+			HAL_Delay(2000);
 		}
 
-//		// Stop motors
-//		BSP_MotorControl_SetMaxSpeed(0, 0);
-//		BSP_MotorControl_SetMaxSpeed(1, 0);
-//		HAL_Delay(5000);
+
+		// Turn
+		while((dist_forw < 1000)) {
+
+			BSP_MotorControl_SetMaxSpeed(0, 30);
+			BSP_MotorControl_Run(0, BACKWARD);
+
+			BSP_MotorControl_SetMaxSpeed(1, 30);
+			BSP_MotorControl_Run(1, BACKWARD);
+
+			dist_forw = MeasureSensor(2);
+			dist_back = MeasureSensor(0);
+
+		}
+
+		// Turn
+		while((dist_back < 1000)) {
+
+			BSP_MotorControl_SetMaxSpeed(0, 30);
+			BSP_MotorControl_Run(0, BACKWARD);
+
+			BSP_MotorControl_SetMaxSpeed(1, 30);
+			BSP_MotorControl_Run(1, BACKWARD);
+
+			dist_forw = MeasureSensor(2);
+			dist_back = MeasureSensor(0);
+
+		}
+
+
 //
 //	  // fgets(readline,100,stdin);
 //	  // printf("OK -> %s",readline);
@@ -309,53 +354,83 @@ In this example the sensors range sequentially. Several sensors range simultanou
 		BSP_MotorControl_SetMaxSpeed(0, 0);
 		BSP_MotorControl_SetMaxSpeed(1, 0);
 
-    /* USER CODE END WHILE */
+		/* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
+		/* USER CODE BEGIN 3 */
+	}
+	/* USER CODE END 3 */
+}
+
+float MeasureSensor(uint8_t ToFSensor) {
+
+	static VL53L1_RangingMeasurementData_t RangingData;
+
+	switch (ToFSensor) {
+	case 0:
+		Dev = &devLeft;
+		break;
+	case 1:
+		Dev = &devCenter;
+		break;
+	case 2:
+		Dev = &devRight;
+		break;
+	}
+
+	status = VL53L1_StartMeasurement(Dev);
+	status = VL53L1_WaitMeasurementDataReady(Dev);
+	if (!status) {
+		status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
+		if (status == 0) {
+			printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
+			       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
+
+		status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
+
+	return RangingData.RangeMilliMeter;
+
+		}
+	}
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
-  /**Configure the main internal regulator output voltage 
-  */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-  /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 336;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+	/**Configure the main internal regulator output voltage
+	 */
+	__HAL_RCC_PWR_CLK_ENABLE();
+	__HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+	/**Initializes the CPU, AHB and APB busses clocks
+	 */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLM = 8;
+	RCC_OscInitStruct.PLL.PLLN = 336;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
+	RCC_OscInitStruct.PLL.PLLQ = 7;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+		Error_Handler();
+	}
+	/**Initializes the CPU, AHB and APB busses clocks
+	 */
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+				      | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
+		Error_Handler();
+	}
 }
 
 /* USER CODE BEGIN 4 */
@@ -363,31 +438,31 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
 
-  /* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+{
+	/* USER CODE BEGIN 6 */
+	/* User can add his own implementation to report the file name and line number,
+	   tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	/* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
 

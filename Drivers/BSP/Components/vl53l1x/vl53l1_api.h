@@ -1,65 +1,65 @@
 
 /*
-* Copyright (c) 2017, STMicroelectronics - All Rights Reserved
-*
-* This file is part of VL53L1 Core and is dual licensed,
-* either 'STMicroelectronics
-* Proprietary license'
-* or 'BSD 3-clause "New" or "Revised" License' , at your option.
-*
-********************************************************************************
-*
-* 'STMicroelectronics Proprietary license'
-*
-********************************************************************************
-*
-* License terms: STMicroelectronics Proprietary in accordance with licensing
-* terms at www.st.com/sla0081
-*
-* STMicroelectronics confidential
-* Reproduction and Communication of this document is strictly prohibited unless
-* specifically authorized in writing by STMicroelectronics.
-*
-*
-********************************************************************************
-*
-* Alternatively, VL53L1 Core may be distributed under the terms of
-* 'BSD 3-clause "New" or "Revised" License', in which case the following
-* provisions apply instead of the ones mentioned above :
-*
-********************************************************************************
-*
-* License terms: BSD 3-clause "New" or "Revised" License.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
-*
-* 1. Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* 2. Redistributions in binary form must reproduce the above copyright notice,
-* this list of conditions and the following disclaimer in the documentation
-* and/or other materials provided with the distribution.
-*
-* 3. Neither the name of the copyright holder nor the names of its contributors
-* may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-*
-********************************************************************************
-*
-*/
+ * Copyright (c) 2017, STMicroelectronics - All Rights Reserved
+ *
+ * This file is part of VL53L1 Core and is dual licensed,
+ * either 'STMicroelectronics
+ * Proprietary license'
+ * or 'BSD 3-clause "New" or "Revised" License' , at your option.
+ *
+ ********************************************************************************
+ *
+ * 'STMicroelectronics Proprietary license'
+ *
+ ********************************************************************************
+ *
+ * License terms: STMicroelectronics Proprietary in accordance with licensing
+ * terms at www.st.com/sla0081
+ *
+ * STMicroelectronics confidential
+ * Reproduction and Communication of this document is strictly prohibited unless
+ * specifically authorized in writing by STMicroelectronics.
+ *
+ *
+ ********************************************************************************
+ *
+ * Alternatively, VL53L1 Core may be distributed under the terms of
+ * 'BSD 3-clause "New" or "Revised" License', in which case the following
+ * provisions apply instead of the ones mentioned above :
+ *
+ ********************************************************************************
+ *
+ * License terms: BSD 3-clause "New" or "Revised" License.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
+ ********************************************************************************
+ *
+ */
 
 #ifndef _VL53L1_API_H_
 #define _VL53L1_API_H_
@@ -73,13 +73,13 @@ extern "C"
 #endif
 
 #if !defined(VL53L1DevDataGet)
-#warning "Usage of PALDevDataGet is deprecated define VL53L1DevDataGet instead\
+#warning "Usage of PALDevDataGet is deprecated define VL53L1DevDataGet instead \
 	in your vl53l1_platform_user_data.h file"
 #define VL53L1DevDataGet(Dev, field) (Dev->Data.field)
 #endif
 
 #if !defined(VL53L1DevDataSet)
-#warning "Usage of PALDevDataSet is deprecated define VL53L1DevDataSet instead\
+#warning "Usage of PALDevDataSet is deprecated define VL53L1DevDataSet instead \
 	in your vl53l1_platform_user_data.h file"
 #define VL53L1DevDataSet(Dev, field, data) ((Dev->Data.field) = (data))
 #endif
@@ -118,7 +118,7 @@ VL53L1_Error VL53L1_GetVersion(VL53L1_Version_t *pVersion);
  * @return  "Other error code"    See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetProductRevision(VL53L1_DEV Dev,
-	uint8_t *pProductRevisionMajor, uint8_t *pProductRevisionMinor);
+				       uint8_t *pProductRevisionMajor, uint8_t *pProductRevisionMinor);
 
 /**
  * @brief Reads the Device information for given Device
@@ -132,7 +132,7 @@ VL53L1_Error VL53L1_GetProductRevision(VL53L1_DEV Dev,
  * @return  "Other error code"  See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetDeviceInfo(VL53L1_DEV Dev,
-	VL53L1_DeviceInfo_t *pVL53L1_DeviceInfo);
+				  VL53L1_DeviceInfo_t *pVL53L1_DeviceInfo);
 
 /**
  * @brief Human readable Range Status string for a given RangeStatus
@@ -147,7 +147,7 @@ VL53L1_Error VL53L1_GetDeviceInfo(VL53L1_DEV Dev,
  * @return  "Other error code"  See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetRangeStatusString(uint8_t RangeStatus,
-	char *pRangeStatusString);
+					 char *pRangeStatusString);
 
 /**
  * @brief Human readable error string for driver error status
@@ -161,7 +161,7 @@ VL53L1_Error VL53L1_GetRangeStatusString(uint8_t RangeStatus,
  * @return  "Other error code" See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetPalErrorString(VL53L1_Error PalErrorCode,
-	char *pPalErrorString);
+				      char *pPalErrorString);
 
 /**
  * @brief Human readable driver State string
@@ -175,7 +175,7 @@ VL53L1_Error VL53L1_GetPalErrorString(VL53L1_Error PalErrorCode,
  * @return  "Other error code"    See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetPalStateString(VL53L1_State PalStateCode,
-	char *pPalStateString);
+				      char *pPalStateString);
 
 /**
  * @brief Reads the internal state of the driver for a given Device
@@ -189,7 +189,7 @@ VL53L1_Error VL53L1_GetPalStateString(VL53L1_State PalStateCode,
  * @return  "Other error code"    See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetPalState(VL53L1_DEV Dev,
-	VL53L1_State *pPalState);
+				VL53L1_State *pPalState);
 
 
 
@@ -219,7 +219,7 @@ VL53L1_Error VL53L1_GetPalState(VL53L1_DEV Dev,
  * @return  "Other error code"    See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetDeviceAddress(VL53L1_DEV Dev,
-	uint8_t DeviceAddress);
+				     uint8_t DeviceAddress);
 
 /**
  *
@@ -307,7 +307,7 @@ VL53L1_Error VL53L1_WaitDeviceBooted(VL53L1_DEV Dev);
  *                                          not in the supported list
  */
 VL53L1_Error VL53L1_SetPresetMode(VL53L1_DEV Dev,
-		VL53L1_PresetModes PresetMode);
+				  VL53L1_PresetModes PresetMode);
 
 /**
  * @brief  Get current Preset Mode
@@ -324,7 +324,7 @@ VL53L1_Error VL53L1_SetPresetMode(VL53L1_DEV Dev,
  * DeviceMode is not in the supported list
  */
 VL53L1_Error VL53L1_GetPresetMode(VL53L1_DEV Dev,
-		VL53L1_PresetModes *pPresetMode);
+				  VL53L1_PresetModes *pPresetMode);
 
 
 /**
@@ -349,7 +349,7 @@ VL53L1_Error VL53L1_GetPresetMode(VL53L1_DEV Dev,
  * @return  "Other error code"              See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetDistanceMode(VL53L1_DEV Dev,
-		VL53L1_DistanceModes DistanceMode);
+				    VL53L1_DistanceModes DistanceMode);
 
 /**
  * @brief  Get the distance mode
@@ -362,7 +362,7 @@ VL53L1_Error VL53L1_SetDistanceMode(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetDistanceMode(VL53L1_DEV Dev,
-		VL53L1_DistanceModes *pDistanceMode);
+				    VL53L1_DistanceModes *pDistanceMode);
 
 
 
@@ -469,14 +469,14 @@ VL53L1_Error VL53L1_GetNumberOfLimitCheck(
  * The limit check is identified with the LimitCheckId.
  *
  * @param   LimitCheckId                  Limit Check ID
- (0<= LimitCheckId < VL53L1_GetNumberOfLimitCheck() ).
+   (0<= LimitCheckId < VL53L1_GetNumberOfLimitCheck() ).
  * @param   pLimitCheckString             Pointer to the description string of
  * the given check limit. Shall be defined as char buf[VL53L1_MAX_STRING_LENGTH]
  * @return  VL53L1_ERROR_NONE            Success
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetLimitCheckInfo(uint16_t LimitCheckId,
-	char *pLimitCheckString);
+				      char *pLimitCheckString);
 
 /**
  * @brief  Return a the Status of the specified check limit
@@ -488,9 +488,9 @@ VL53L1_Error VL53L1_GetLimitCheckInfo(uint16_t LimitCheckId,
  *
  * @param   Dev                           Device Handle
  * @param   LimitCheckId                  Limit Check ID
- (0<= LimitCheckId < VL53L1_GetNumberOfLimitCheck() ).
+   (0<= LimitCheckId < VL53L1_GetNumberOfLimitCheck() ).
  * @param   pLimitCheckStatus             Pointer to the
- Limit Check Status of the given check limit.
+   Limit Check Status of the given check limit.
  * LimitCheckStatus :
  * 0 the check is not fail or not enabled
  * 1 the check if fail
@@ -509,7 +509,7 @@ VL53L1_Error VL53L1_GetLimitCheckInfo(uint16_t LimitCheckId,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetLimitCheckStatus(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, uint8_t *pLimitCheckStatus);
+					uint16_t LimitCheckId, uint8_t *pLimitCheckStatus);
 
 /**
  * @brief  Enable/Disable a specific limit check
@@ -532,7 +532,7 @@ VL53L1_Error VL53L1_GetLimitCheckStatus(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetLimitCheckEnable(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, uint8_t LimitCheckEnable);
+					uint16_t LimitCheckId, uint8_t LimitCheckEnable);
 
 /**
  * @brief  Get specific limit check enable state
@@ -556,7 +556,7 @@ VL53L1_Error VL53L1_SetLimitCheckEnable(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetLimitCheckEnable(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, uint8_t *pLimitCheckEnable);
+					uint16_t LimitCheckId, uint8_t *pLimitCheckEnable);
 
 /**
  * @brief  Set a specific limit check value
@@ -579,7 +579,7 @@ VL53L1_Error VL53L1_GetLimitCheckEnable(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetLimitCheckValue(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, FixPoint1616_t LimitCheckValue);
+				       uint16_t LimitCheckId, FixPoint1616_t LimitCheckValue);
 
 /**
  * @brief  Get a specific limit check value
@@ -603,7 +603,7 @@ VL53L1_Error VL53L1_SetLimitCheckValue(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetLimitCheckValue(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, FixPoint1616_t *pLimitCheckValue);
+				       uint16_t LimitCheckId, FixPoint1616_t *pLimitCheckValue);
 
 /**
  * @brief  Get the current value of the signal used for the limit check
@@ -623,7 +623,7 @@ VL53L1_Error VL53L1_GetLimitCheckValue(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetLimitCheckCurrent(VL53L1_DEV Dev,
-	uint16_t LimitCheckId, FixPoint1616_t *pLimitCheckCurrent);
+					 uint16_t LimitCheckId, FixPoint1616_t *pLimitCheckCurrent);
 
 /** @} VL53L1_limitcheck_group */
 
@@ -649,7 +649,7 @@ VL53L1_Error VL53L1_GetLimitCheckCurrent(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetUserROI(VL53L1_DEV Dev,
-		VL53L1_UserRoi_t *pUserROi);
+			       VL53L1_UserRoi_t *pUserROi);
 
 /**
  * @brief Get the ROI managed by the Device
@@ -663,7 +663,7 @@ VL53L1_Error VL53L1_SetUserROI(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetUserROI(VL53L1_DEV Dev,
-		VL53L1_UserRoi_t *pUserROi);
+			       VL53L1_UserRoi_t *pUserROi);
 
 /** @} VL53L1_ROI_group */
 
@@ -689,7 +689,7 @@ VL53L1_Error VL53L1_GetUserROI(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetNumberOfSequenceSteps(VL53L1_DEV Dev,
-	uint8_t *pNumberOfSequenceSteps);
+					     uint8_t *pNumberOfSequenceSteps);
 
 /**
  * @brief Gets the name of a given sequence step.
@@ -729,7 +729,7 @@ VL53L1_Error VL53L1_GetSequenceStepsInfo(
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetSequenceStepEnable(VL53L1_DEV Dev,
-	VL53L1_SequenceStepId SequenceStepId, uint8_t SequenceStepEnabled);
+					  VL53L1_SequenceStepId SequenceStepId, uint8_t SequenceStepEnabled);
 
 /**
  * @brief Gets the (on/off) state of a requested sequence step.
@@ -749,7 +749,7 @@ VL53L1_Error VL53L1_SetSequenceStepEnable(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetSequenceStepEnable(VL53L1_DEV Dev,
-	VL53L1_SequenceStepId SequenceStepId, uint8_t *pSequenceStepEnabled);
+					  VL53L1_SequenceStepId SequenceStepId, uint8_t *pSequenceStepEnabled);
 
 
 /** @} VL53L1_sequencestep_group */
@@ -830,7 +830,7 @@ VL53L1_Error VL53L1_ClearInterruptAndStartMeasurement(VL53L1_DEV Dev);
  * @return  "Other error code"     See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetMeasurementDataReady(VL53L1_DEV Dev,
-	uint8_t *pMeasurementDataReady);
+					    uint8_t *pMeasurementDataReady);
 
 /**
  * @brief Wait for measurement data ready.
@@ -873,7 +873,7 @@ VL53L1_Error VL53L1_WaitMeasurementDataReady(VL53L1_DEV Dev);
  * @return  "Other error code"       See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetRangingMeasurementData(VL53L1_DEV Dev,
-	VL53L1_RangingMeasurementData_t *pRangingMeasurementData);
+					      VL53L1_RangingMeasurementData_t *pRangingMeasurementData);
 
 
 
@@ -903,7 +903,7 @@ VL53L1_Error VL53L1_GetRangingMeasurementData(VL53L1_DEV Dev,
  * @return  "Other error code"       See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetTuningParameter(VL53L1_DEV Dev,
-		uint16_t TuningParameterId, int32_t TuningParameterValue);
+				       uint16_t TuningParameterId, int32_t TuningParameterValue);
 
 /**
  * @brief Get Tuning Parameter value for a given parameter ID
@@ -922,7 +922,7 @@ VL53L1_Error VL53L1_SetTuningParameter(VL53L1_DEV Dev,
  * @return  "Other error code"       See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetTuningParameter(VL53L1_DEV Dev,
-		uint16_t TuningParameterId, int32_t *pTuningParameterValue);
+				       uint16_t TuningParameterId, int32_t *pTuningParameterValue);
 
 /**
  * @brief Performs Reference Spad Management
@@ -951,9 +951,9 @@ VL53L1_Error VL53L1_PerformRefSpadManagement(VL53L1_DEV Dev);
  *  to be set 0 = disabled or 1 = enabled.
  * @return  VL53L1_ERROR_NONE        Success
  * @return  "Other error code"       See ::VL53L1_Error
-*/
+ */
 VL53L1_Error VL53L1_SetXTalkCompensationEnable(VL53L1_DEV Dev,
-uint8_t XTalkCompensationEnable);
+					       uint8_t XTalkCompensationEnable);
 
 /**
  * @brief Get Cross talk compensation rate enable
@@ -969,7 +969,7 @@ uint8_t XTalkCompensationEnable);
  * @return  "Other error code"       See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetXTalkCompensationEnable(VL53L1_DEV Dev,
-	uint8_t *pXTalkCompensationEnable);
+					       uint8_t *pXTalkCompensationEnable);
 
 /**
  * @brief Perform XTalk Calibration
@@ -996,7 +996,7 @@ VL53L1_Error VL53L1_GetXTalkCompensationEnable(VL53L1_DEV Dev,
  * @return  "Other error code"   See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_PerformSingleTargetXTalkCalibration(VL53L1_DEV Dev,
-		int32_t CalDistanceMilliMeter);
+							int32_t CalDistanceMilliMeter);
 
 
 /**
@@ -1016,7 +1016,7 @@ VL53L1_Error VL53L1_PerformSingleTargetXTalkCalibration(VL53L1_DEV Dev,
  * @return  "Other error code"        See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetOffsetCalibrationMode(VL53L1_DEV Dev,
-		VL53L1_OffsetCalibrationModes OffsetCalibrationMode);
+					     VL53L1_OffsetCalibrationModes OffsetCalibrationMode);
 
 
 
@@ -1040,7 +1040,7 @@ VL53L1_Error VL53L1_SetOffsetCalibrationMode(VL53L1_DEV Dev,
  * @return  "Other error code"   See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_PerformOffsetCalibration(VL53L1_DEV Dev,
-	int32_t CalDistanceMilliMeter);
+					     int32_t CalDistanceMilliMeter);
 
 /**
  * @brief Perform Offset simple Calibration
@@ -1067,7 +1067,7 @@ VL53L1_Error VL53L1_PerformOffsetCalibration(VL53L1_DEV Dev,
  * @return  "Other error code"   See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_PerformOffsetSimpleCalibration(VL53L1_DEV Dev,
-		int32_t CalDistanceMilliMeter);
+						   int32_t CalDistanceMilliMeter);
 
 /**
  * @brief Sets the Calibration Data.
@@ -1087,7 +1087,7 @@ VL53L1_Error VL53L1_PerformOffsetSimpleCalibration(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_SetCalibrationData(VL53L1_DEV Dev,
-		VL53L1_CalibrationData_t *pCalibrationData);
+				       VL53L1_CalibrationData_t *pCalibrationData);
 
 /**
  * @brief Gets the Calibration Data.
@@ -1106,7 +1106,7 @@ VL53L1_Error VL53L1_SetCalibrationData(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetCalibrationData(VL53L1_DEV Dev,
-		VL53L1_CalibrationData_t  *pCalibrationData);
+				       VL53L1_CalibrationData_t  *pCalibrationData);
 
 /**
  * @brief Gets the optical center.
@@ -1126,8 +1126,8 @@ VL53L1_Error VL53L1_GetCalibrationData(VL53L1_DEV Dev,
  * @return  "Other error code"           See ::VL53L1_Error
  */
 VL53L1_Error VL53L1_GetOpticalCenter(VL53L1_DEV Dev,
-		FixPoint1616_t *pOpticalCenterX,
-		FixPoint1616_t *pOpticalCenterY);
+				     FixPoint1616_t *pOpticalCenterX,
+				     FixPoint1616_t *pOpticalCenterY);
 
 /** @} VL53L1_Calibration_group */
 
@@ -1138,25 +1138,25 @@ VL53L1_Error VL53L1_GetOpticalCenter(VL53L1_DEV Dev,
  */
 
 /**
-* @brief Configure the interrupt config, from the given structure
-*
-* @param[in]    Dev     : Device Handle
-* @param[in]    pConfig : pointer to configuration structure
-*/
+ * @brief Configure the interrupt config, from the given structure
+ *
+ * @param[in]    Dev     : Device Handle
+ * @param[in]    pConfig : pointer to configuration structure
+ */
 
 VL53L1_Error VL53L1_SetThresholdConfig(VL53L1_DEV Dev,
-		VL53L1_DetectionConfig_t *pConfig);
+				       VL53L1_DetectionConfig_t *pConfig);
 
 /**
-* @brief Retrieves the interrupt config structure currently programmed
-*                             into the API
-*
-* @param[in]    Dev     : Device Handle
-* @param[out]   pConfig : pointer to configuration structure
-*/
+ * @brief Retrieves the interrupt config structure currently programmed
+ *                             into the API
+ *
+ * @param[in]    Dev     : Device Handle
+ * @param[out]   pConfig : pointer to configuration structure
+ */
 
 VL53L1_Error VL53L1_GetThresholdConfig(VL53L1_DEV Dev,
-		VL53L1_DetectionConfig_t *pConfig);
+				       VL53L1_DetectionConfig_t *pConfig);
 
 
 /** @} VL53L1_Thresholds_group */

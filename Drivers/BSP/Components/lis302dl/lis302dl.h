@@ -1,101 +1,98 @@
 /**
-  ******************************************************************************
-  * @file    lis302dl.h
-  * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    03-August-2015
-  * @brief   This file contains all the functions prototypes for the lis302dl.c
-  *          firmware driver.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */ 
+ ******************************************************************************
+ * @file    lis302dl.h
+ * @author  MCD Application Team
+ * @version V2.0.0
+ * @date    03-August-2015
+ * @brief   This file contains all the functions prototypes for the lis302dl.c
+ *          firmware driver.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   1. Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *   3. Neither the name of STMicroelectronics nor the names of its contributors
+ *      may be used to endorse or promote products derived from this software
+ *      without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ ******************************************************************************
+ */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __LIS302DL_H
 #define __LIS302DL_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "../Common/accelero.h"
 
 /** @addtogroup BSP
-  * @{
-  */ 
+ * @{
+ */
 
 /** @addtogroup Components
-  * @{
-  */ 
+ * @{
+ */
 
 /** @addtogroup LIS302DL
-  * @{
-  */
-  
+ * @{
+ */
+
 
 /** @defgroup LIS302DL_Exported_Types
-  * @{
-  */	
+ * @{
+ */
 /* LIS302DL struct */
-typedef struct
-{
-  uint8_t Power_Mode;                         /* Power-down/Active Mode */
-  uint8_t Output_DataRate;                    /* OUT data rate 100 Hz / 400 Hz */
-  uint8_t Axes_Enable;                        /* Axes enable */
-  uint8_t Full_Scale;                         /* Full scale */
-  uint8_t Self_Test;                          /* Self test */
+typedef struct {
+	uint8_t Power_Mode;                   /* Power-down/Active Mode */
+	uint8_t Output_DataRate;              /* OUT data rate 100 Hz / 400 Hz */
+	uint8_t Axes_Enable;                  /* Axes enable */
+	uint8_t Full_Scale;                   /* Full scale */
+	uint8_t Self_Test;                    /* Self test */
 }LIS302DL_InitTypeDef;
 
 /* Interrupt struct */
-typedef struct
-{
-  uint8_t Latch_Request;                      /* Latch interrupt request into CLICK_SRC register*/
-  uint8_t SingleClick_Axes;                   /* Single Click Axes Interrupts */
-  uint8_t DoubleClick_Axes;                   /* Double Click Axes Interrupts */ 
-}LIS302DL_InterruptConfigTypeDef;  
+typedef struct {
+	uint8_t Latch_Request;                /* Latch interrupt request into CLICK_SRC register*/
+	uint8_t SingleClick_Axes;             /* Single Click Axes Interrupts */
+	uint8_t DoubleClick_Axes;             /* Double Click Axes Interrupts */
+}LIS302DL_InterruptConfigTypeDef;
 
 /* High Pass Filter struct */
-typedef struct
-{
-  uint8_t HighPassFilter_Data_Selection;      /* Internal filter bypassed or data from internal filter send to output register*/
-  uint8_t HighPassFilter_CutOff_Frequency;    /* High pass filter cut-off frequency */
-  uint8_t HighPassFilter_Interrupt;           /* High pass filter enabled for Freefall/WakeUp #1 or #2 */ 
-}LIS302DL_FilterConfigTypeDef;  
-   
+typedef struct {
+	uint8_t HighPassFilter_Data_Selection; /* Internal filter bypassed or data from internal filter send to output register*/
+	uint8_t HighPassFilter_CutOff_Frequency; /* High pass filter cut-off frequency */
+	uint8_t HighPassFilter_Interrupt;     /* High pass filter enabled for Freefall/WakeUp #1 or #2 */
+}LIS302DL_FilterConfigTypeDef;
+
 /**
-  * @}
-  */
-  
+ * @}
+ */
+
 /** @defgroup LIS302DL_Exported_Constants
-  * @{
-  */
+ * @{
+ */
 
 /******************************************************************************/
 /*************************** START REGISTER MAPPING  **************************/
@@ -143,11 +140,11 @@ typedef struct
 *  CTRL_REG2 Regsiter: Control Register 2
 *  Read Write register
 *  Default value: 0x00
-*  7 SIM: SPI Serial Interface Mode Selection. 
+*  7 SIM: SPI Serial Interface Mode Selection.
 *         0 - 4 wire interface
 *         1 - 3 wire interface
 *  6 BOOT: Reboot memory content
-*          0 - normal mode 
+*          0 - normal mode
 *          1 - reboot memory content
 *  5 Reserved
 *  4 FDS: Filtered data selection.
@@ -201,7 +198,7 @@ typedef struct
 #define LIS302DL_CTRL_REG3_ADDR              0x22
 
 /*******************************************************************************
-*  HP_FILTER_RESET Register: Dummy register. Reading at this address zeroes 
+*  HP_FILTER_RESET Register: Dummy register. Reading at this address zeroes
 *  instantaneously the content of the internal high pass filter. If the high pass
 *  filter is enabled all three axes are instantaneously set to 0g.
 *  This allows to overcome the settling time of the high pass filter.
@@ -217,7 +214,7 @@ typedef struct
 *           0: no overrun has occurred
 *           1: new data has overwritten the previous one before it was read
 *  6 ZOR: Z axis data overrun.
-*         0: no overrun has occurred 
+*         0: no overrun has occurred
 *         1: new data for Z-axis has overwritten the previous one before it was read
 *  5 yOR: y axis data overrun.
 *         0: no overrun has occurred
@@ -268,9 +265,9 @@ typedef struct
 *  FF_WW_CFG_1 Register: Configuration register for Interrupt 1 source.
 *  Read write register
 *  Default value: 0x00
-*  7 AOI: AND/OR combination of Interrupt events. 
+*  7 AOI: AND/OR combination of Interrupt events.
 *         0: OR combination of interrupt events
-*         1: AND combination of interrupt events 
+*         1: AND combination of interrupt events
 *  6 LIR: Latch/not latch interrupt request
 *         0: interrupt request not latched
 *         1: interrupt request latched
@@ -283,7 +280,7 @@ typedef struct
 *  3 YHIE: Enable interrupt generation on Y high event.
 *          0: disable interrupt request
 *          1: enable interrupt request on measured accel. value higher than preset threshold
-*  2 YLIE: Enable interrupt generation on Y low event. 
+*  2 YLIE: Enable interrupt generation on Y low event.
 *          0: disable interrupt request
 *          1: enable interrupt request on measured accel. value lower than preset threshold
 *  1 XHIE: Enable interrupt generation on X high event.
@@ -306,21 +303,21 @@ typedef struct
 *  6 IA: Interrupt active.
 *        0: no interrupt has been generated
 *        1: one or more interrupts have been generated
-*  5 ZH: Z high. 
+*  5 ZH: Z high.
 *        0: no interrupt
-*        1: ZH event has occurred 
+*        1: ZH event has occurred
 *  4 ZL: Z low.
 *        0: no interrupt
 *        1: ZL event has occurred
 *  3 YH: Y high.
 *        0: no interrupt
-*        1: YH event has occurred 
+*        1: YH event has occurred
 *  2 YL: Y low.
 *        0: no interrupt
 *        1: YL event has occurred
 *  1 YH: X high.
 *        0: no interrupt
-*        1: XH event has occurred 
+*        1: XH event has occurred
 *  0 YL: X low.
 *        0: no interrupt
 *        1: XL event has occurred
@@ -339,10 +336,10 @@ typedef struct
 #define LIS302DL_FF_WU_THS1_REG_ADDR          0x32
 
 /*******************************************************************************
-*  FF_WU_DURATION_1 Register: duration Register
-*  Read Write register
-*  Default value: 0x00
-*  7:0 D7-D0 Duration value. (Duration steps and maximum values depend on the ODR chosen)
+ *  FF_WU_DURATION_1 Register: duration Register
+ *  Read Write register
+ *  Default value: 0x00
+ *  7:0 D7-D0 Duration value. (Duration steps and maximum values depend on the ODR chosen)
  ******************************************************************************/
 #define LIS302DL_FF_WU_DURATION1_REG_ADDR     0x33
 
@@ -350,9 +347,9 @@ typedef struct
 *  FF_WW_CFG_2 Register: Configuration register for Interrupt 2 source.
 *  Read write register
 *  Default value: 0x00
-*  7 AOI: AND/OR combination of Interrupt events. 
+*  7 AOI: AND/OR combination of Interrupt events.
 *         0: OR combination of interrupt events
-*         1: AND combination of interrupt events 
+*         1: AND combination of interrupt events
 *  6 LIR: Latch/not latch interrupt request
 *         0: interrupt request not latched
 *         1: interrupt request latched
@@ -365,7 +362,7 @@ typedef struct
 *  3 YHIE: Enable interrupt generation on Y high event.
 *          0: disable interrupt request
 *          1: enable interrupt request on measured accel. value higher than preset threshold
-*  2 YLIE: Enable interrupt generation on Y low event. 
+*  2 YLIE: Enable interrupt generation on Y low event.
 *          0: disable interrupt request
 *          1: enable interrupt request on measured accel. value lower than preset threshold
 *  1 XHIE: Enable interrupt generation on X high event.
@@ -388,21 +385,21 @@ typedef struct
 *  6 IA: Interrupt active.
 *        0: no interrupt has been generated
 *        1: one or more interrupts have been generated
-*  5 ZH: Z high. 
+*  5 ZH: Z high.
 *        0: no interrupt
-*        1: ZH event has occurred 
+*        1: ZH event has occurred
 *  4 ZL: Z low.
 *        0: no interrupt
 *        1: ZL event has occurred
 *  3 YH: Y high.
 *        0: no interrupt
-*        1: YH event has occurred 
+*        1: YH event has occurred
 *  2 YL: Y low.
 *        0: no interrupt
 *        1: YL event has occurred
 *  1 YH: X high.
 *        0: no interrupt
-*        1: XH event has occurred 
+*        1: XH event has occurred
 *  0 YL: X low.
 *        0: no interrupt
 *        1: XL event has occurred
@@ -421,10 +418,10 @@ typedef struct
 #define LIS302DL_FF_WU_THS2_REG_ADDR          0x36
 
 /*******************************************************************************
-*  FF_WU_DURATION_2 Register: duration Register
-*  Read Write register
-*  Default value: 0x00
-*  7:0 D7-D0 Duration value. (Duration steps and maximum values depend on the ODR chosen)
+ *  FF_WU_DURATION_2 Register: duration Register
+ *  Read Write register
+ *  Default value: 0x00
+ *  7:0 D7-D0 Duration value. (Duration steps and maximum values depend on the ODR chosen)
  ******************************************************************************/
 #define LIS302DL_FF_WU_DURATION2_REG_ADDR     0x37
 
@@ -454,36 +451,36 @@ typedef struct
 *  0 Single_y: Enable interrupt generation on single click event on X axis.
 *              0: disable interrupt request
 *              1: enable interrupt request
- ******************************************************************************/
+******************************************************************************/
 #define LIS302DL_CLICK_CFG_REG_ADDR     0x38
 
 /******************************************************************************
-*  CLICK_SRC Register: click status Register
-*  Read only register
-*  Default value: 0x00
-*  7 Reserved
-*  6 IA: Interrupt active.
-*        0: no interrupt has been generated
-*        1: one or more interrupts have been generated
-*  5 Double_Z: Double click on Z axis event.
-*        0: no interrupt
-*        1: Double Z event has occurred 
-*  4 Single_Z: Z low.
-*        0: no interrupt
-*        1: Single Z event has occurred 
-*  3 Double_Y: Y high.
-*        0: no interrupt
-*        1: Double Y event has occurred 
-*  2 Single_Y: Y low.
-*        0: no interrupt
-*        1: Single Y event has occurred 
-*  1 Double_X: X high.
-*        0: no interrupt
-*        1: Double X event has occurred 
-*  0 Single_X: X low.
-*        0: no interrupt
-*        1: Single X event has occurred 
-*******************************************************************************/
+ *  CLICK_SRC Register: click status Register
+ *  Read only register
+ *  Default value: 0x00
+ *  7 Reserved
+ *  6 IA: Interrupt active.
+ *        0: no interrupt has been generated
+ *        1: one or more interrupts have been generated
+ *  5 Double_Z: Double click on Z axis event.
+ *        0: no interrupt
+ *        1: Double Z event has occurred
+ *  4 Single_Z: Z low.
+ *        0: no interrupt
+ *        1: Single Z event has occurred
+ *  3 Double_Y: Y high.
+ *        0: no interrupt
+ *        1: Double Y event has occurred
+ *  2 Single_Y: Y low.
+ *        0: no interrupt
+ *        1: Single Y event has occurred
+ *  1 Double_X: X high.
+ *        0: no interrupt
+ *        1: Double X event has occurred
+ *  0 Single_X: X low.
+ *        0: no interrupt
+ *        1: Single X event has occurred
+ *******************************************************************************/
 #define LIS302DL_CLICK_SRC_REG_ADDR        0x39
 
 /*******************************************************************************
@@ -536,143 +533,143 @@ typedef struct
 #define LIS302DL_SENSITIVITY_2_3G                         18  /* 18 mg/digit*/
 #define LIS302DL_SENSITIVITY_9_2G                         72  /* 72 mg/digit*/
 
-/** @defgroup Data_Rate_selection                 
-  * @{
-  */
+/** @defgroup Data_Rate_selection
+ * @{
+ */
 #define LIS302DL_DATARATE_100                             ((uint8_t)0x00)
 #define LIS302DL_DATARATE_400                             ((uint8_t)0x80)
 /**
-  * @}
-  */
-  
-/** @defgroup Power_Mode_selection 
-  * @{
-  */
+ * @}
+ */
+
+/** @defgroup Power_Mode_selection
+ * @{
+ */
 #define LIS302DL_LOWPOWERMODE_POWERDOWN                   ((uint8_t)0x00)
 #define LIS302DL_LOWPOWERMODE_ACTIVE                      ((uint8_t)0x40)
 /**
-  * @}
-  */
-  
-/** @defgroup Full_Scale_selection 
-  * @{
-  */
+ * @}
+ */
+
+/** @defgroup Full_Scale_selection
+ * @{
+ */
 #define LIS302DL_FULLSCALE_2_3                            ((uint8_t)0x00)
 #define LIS302DL_FULLSCALE_9_2                            ((uint8_t)0x20)
 /**
-  * @}
-  */
-  
-/** @defgroup Self_Test_selection 
-  * @{
-  */
+ * @}
+ */
+
+/** @defgroup Self_Test_selection
+ * @{
+ */
 #define LIS302DL_SELFTEST_NORMAL                          ((uint8_t)0x00)
 #define LIS302DL_SELFTEST_P                               ((uint8_t)0x10)
 #define LIS302DL_SELFTEST_M                               ((uint8_t)0x08)
 /**
-  * @}
-  */  
+ * @}
+ */
 
-/** @defgroup Direction_XYZ_selection 
-  * @{
-  */
+/** @defgroup Direction_XYZ_selection
+ * @{
+ */
 #define LIS302DL_X_ENABLE                                 ((uint8_t)0x01)
 #define LIS302DL_Y_ENABLE                                 ((uint8_t)0x02)
 #define LIS302DL_Z_ENABLE                                 ((uint8_t)0x04)
 #define LIS302DL_XYZ_ENABLE                               ((uint8_t)0x07)
 /**
-  * @}
-  */
- 
- /** @defgroup SPI_Serial_Interface_Mode_selection 
-  * @{
-  */
+ * @}
+ */
+
+/** @defgroup SPI_Serial_Interface_Mode_selection
+ * @{
+ */
 #define LIS302DL_SERIALINTERFACE_4WIRE                    ((uint8_t)0x00)
 #define LIS302DL_SERIALINTERFACE_3WIRE                    ((uint8_t)0x80)
 /**
-  * @}
-  */ 
+ * @}
+ */
 
- /** @defgroup Boot_Mode_selection 
-  * @{
-  */
+/** @defgroup Boot_Mode_selection
+ * @{
+ */
 #define LIS302DL_BOOT_NORMALMODE                          ((uint8_t)0x00)
 #define LIS302DL_BOOT_REBOOTMEMORY                        ((uint8_t)0x40)
 /**
-  * @}
-  */   
+ * @}
+ */
 
- /** @defgroup Filtered_Data_Selection_Mode_selection 
-  * @{
-  */
+/** @defgroup Filtered_Data_Selection_Mode_selection
+ * @{
+ */
 #define LIS302DL_FILTEREDDATASELECTION_BYPASSED           ((uint8_t)0x00)
 #define LIS302DL_FILTEREDDATASELECTION_OUTPUTREGISTER     ((uint8_t)0x20)
 /**
-  * @}
-  */ 
-  
- /** @defgroup High_Pass_Filter_Interrupt_selection 
-  * @{
-  */  
+ * @}
+ */
+
+/** @defgroup High_Pass_Filter_Interrupt_selection
+ * @{
+ */
 #define LIS302DL_HIGHPASSFILTERINTERRUPT_OFF              ((uint8_t)0x00)
 #define LIS302DL_HIGHPASSFILTERINTERRUPT_1                ((uint8_t)0x04)
 #define LIS302DL_HIGHPASSFILTERINTERRUPT_2                ((uint8_t)0x08)
 #define LIS302DL_HIGHPASSFILTERINTERRUPT_1_2              ((uint8_t)0x0C)
 /**
-  * @}
-  */ 
-  
- /** @defgroup High_Pass_Filter_selection 
-  * @{
-  */
+ * @}
+ */
+
+/** @defgroup High_Pass_Filter_selection
+ * @{
+ */
 #define LIS302DL_HIGHPASSFILTER_LEVEL_0                   ((uint8_t)0x00)
 #define LIS302DL_HIGHPASSFILTER_LEVEL_1                   ((uint8_t)0x01)
 #define LIS302DL_HIGHPASSFILTER_LEVEL_2                   ((uint8_t)0x02)
 #define LIS302DL_HIGHPASSFILTER_LEVEL_3                   ((uint8_t)0x03)
 /**
-  * @}
-  */
+ * @}
+ */
 
-/** @defgroup latch_Interrupt_Request_selection 
-  * @{
-  */
+/** @defgroup latch_Interrupt_Request_selection
+ * @{
+ */
 #define LIS302DL_INTERRUPTREQUEST_NOTLATCHED              ((uint8_t)0x00)
 #define LIS302DL_INTERRUPTREQUEST_LATCHED                 ((uint8_t)0x40)
 /**
-  * @}
-  */
+ * @}
+ */
 
-/** @defgroup Click_Interrupt_XYZ_selection 
-  * @{
-  */
+/** @defgroup Click_Interrupt_XYZ_selection
+ * @{
+ */
 #define LIS302DL_CLICKINTERRUPT_XYZ_DISABLE               ((uint8_t)0x00)
 #define LIS302DL_CLICKINTERRUPT_X_ENABLE                  ((uint8_t)0x01)
 #define LIS302DL_CLICKINTERRUPT_Y_ENABLE                  ((uint8_t)0x04)
 #define LIS302DL_CLICKINTERRUPT_Z_ENABLE                  ((uint8_t)0x10)
 #define LIS302DL_CLICKINTERRUPT_XYZ_ENABLE                ((uint8_t)0x15)
 /**
-  * @}
-  */
+ * @}
+ */
 
-/** @defgroup Double_Click_Interrupt_XYZ_selection 
-  * @{
-  */
+/** @defgroup Double_Click_Interrupt_XYZ_selection
+ * @{
+ */
 #define LIS302DL_DOUBLECLICKINTERRUPT_XYZ_DISABLE         ((uint8_t)0x00)
 #define LIS302DL_DOUBLECLICKINTERRUPT_X_ENABLE            ((uint8_t)0x02)
 #define LIS302DL_DOUBLECLICKINTERRUPT_Y_ENABLE            ((uint8_t)0x08)
 #define LIS302DL_DOUBLECLICKINTERRUPT_Z_ENABLE            ((uint8_t)0x20)
 #define LIS302DL_DOUBLECLICKINTERRUPT_XYZ_ENABLE          ((uint8_t)0x2A)
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */  
+ * @}
+ */
 
 /** @defgroup LIS302DL_Exported_Functions
-  * @{
-  */ 
+ * @{
+ */
 void    LIS302DL_Init(uint16_t InitStruct);
 void    LIS302DL_DeInit(void);
 uint8_t LIS302DL_ReadID(void);
@@ -702,19 +699,19 @@ void    ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToR
 #endif /* __LIS302DL_H */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */ 
+ * @}
+ */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

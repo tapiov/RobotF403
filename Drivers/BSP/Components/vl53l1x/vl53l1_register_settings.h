@@ -1,64 +1,64 @@
 /*
-* Copyright (c) 2017, STMicroelectronics - All Rights Reserved
-*
-* This file is part of VL53L1 Core and is dual licensed,
-* either 'STMicroelectronics
-* Proprietary license'
-* or 'BSD 3-clause "New" or "Revised" License' , at your option.
-*
-********************************************************************************
-*
-* 'STMicroelectronics Proprietary license'
-*
-********************************************************************************
-*
-* License terms: STMicroelectronics Proprietary in accordance with licensing
-* terms at www.st.com/sla0081
-*
-* STMicroelectronics confidential
-* Reproduction and Communication of this document is strictly prohibited unless
-* specifically authorized in writing by STMicroelectronics.
-*
-*
-********************************************************************************
-*
-* Alternatively, VL53L1 Core may be distributed under the terms of
-* 'BSD 3-clause "New" or "Revised" License', in which case the following
-* provisions apply instead of the ones mentioned above :
-*
-********************************************************************************
-*
-* License terms: BSD 3-clause "New" or "Revised" License.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
-*
-* 1. Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* 2. Redistributions in binary form must reproduce the above copyright notice,
-* this list of conditions and the following disclaimer in the documentation
-* and/or other materials provided with the distribution.
-*
-* 3. Neither the name of the copyright holder nor the names of its contributors
-* may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-*
-********************************************************************************
-*
-*/
+ * Copyright (c) 2017, STMicroelectronics - All Rights Reserved
+ *
+ * This file is part of VL53L1 Core and is dual licensed,
+ * either 'STMicroelectronics
+ * Proprietary license'
+ * or 'BSD 3-clause "New" or "Revised" License' , at your option.
+ *
+ ********************************************************************************
+ *
+ * 'STMicroelectronics Proprietary license'
+ *
+ ********************************************************************************
+ *
+ * License terms: STMicroelectronics Proprietary in accordance with licensing
+ * terms at www.st.com/sla0081
+ *
+ * STMicroelectronics confidential
+ * Reproduction and Communication of this document is strictly prohibited unless
+ * specifically authorized in writing by STMicroelectronics.
+ *
+ *
+ ********************************************************************************
+ *
+ * Alternatively, VL53L1 Core may be distributed under the terms of
+ * 'BSD 3-clause "New" or "Revised" License', in which case the following
+ * provisions apply instead of the ones mentioned above :
+ *
+ ********************************************************************************
+ *
+ * License terms: BSD 3-clause "New" or "Revised" License.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
+ ********************************************************************************
+ *
+ */
 
 /**
  * @file vl53l1_register_settings.h
@@ -108,12 +108,12 @@
  */
 
 /*
-#define VL53L1_DEVICEMEASUREMENTMODE_STOP               0x00
-#define VL53L1_DEVICEMEASUREMENTMODE_SINGLESHOT         0x10
-#define VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK         0x20
-#define VL53L1_DEVICEMEASUREMENTMODE_TIMED              0x40
-#define VL53L1_DEVICEMEASUREMENTMODE_ABORT              0x80
-*/
+ #define VL53L1_DEVICEMEASUREMENTMODE_STOP               0x00
+ #define VL53L1_DEVICEMEASUREMENTMODE_SINGLESHOT         0x10
+ #define VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK         0x20
+ #define VL53L1_DEVICEMEASUREMENTMODE_TIMED              0x40
+ #define VL53L1_DEVICEMEASUREMENTMODE_ABORT              0x80
+ */
 #define VL53L1_DEVICEMEASUREMENTMODE_MODE_MASK          0xF0
 #define VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK          0x0F
 
@@ -122,7 +122,7 @@
 /** @} end of VL53L1_DeviceMeasurementMode_group */
 
 #define VL53L1_EWOK_I2C_DEV_ADDR_DEFAULT                0x29
-	/*!< Device default 7-bit I2C address */
+/*!< Device default 7-bit I2C address */
 #define VL53L1_OSC_FREQUENCY                            0x00
 #define VL53L1_OSC_TRIM_DEFAULT                         0x00
 #define VL53L1_OSC_FREQ_SET_DEFAULT                     0x00
@@ -153,7 +153,7 @@
 #define VL53L1_CLEAR_ERROR_INT                          0x02
 
 /* Sequence Config */
-#define VL53L1_SEQUENCE_VHV_EN						    0x01
+#define VL53L1_SEQUENCE_VHV_EN                                              0x01
 #define VL53L1_SEQUENCE_PHASECAL_EN                     0x02
 #define VL53L1_SEQUENCE_REFERENCE_PHASE_EN              0x04
 #define VL53L1_SEQUENCE_DSS1_EN                         0x08

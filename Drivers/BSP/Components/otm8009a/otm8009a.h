@@ -1,74 +1,74 @@
 /**
-  ******************************************************************************
-  * @file    otm8009a.h
-  * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
-  * @brief   This file contains all the constants parameters for the OTM8009A
-  *          which is the LCD Driver for KoD KM-040TMP-02-0621 (WVGA)
-  *          DSI LCD Display.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    otm8009a.h
+ * @author  MCD Application Team
+ * @version V1.0.2
+ * @date    27-January-2017
+ * @brief   This file contains all the constants parameters for the OTM8009A
+ *          which is the LCD Driver for KoD KM-040TMP-02-0621 (WVGA)
+ *          DSI LCD Display.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   1. Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *   3. Neither the name of STMicroelectronics nor the names of its contributors
+ *      may be used to endorse or promote products derived from this software
+ *      without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ ******************************************************************************
+ */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __OTM8009A_H
 #define __OTM8009A_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 /** @addtogroup BSP
-  * @{
-  */
+ * @{
+ */
 
 /** @addtogroup Components
-  * @{
-  */
+ * @{
+ */
 
 /** @addtogroup otm8009a
-  * @{
-  */
+ * @{
+ */
 
 /** @addtogroup OTM8009A_Exported_Variables
-  * @{
-  */
+ * @{
+ */
 
-#if defined ( __GNUC__ )
+#if defined (__GNUC__)
 #ifndef __weak
 #define __weak __attribute__((weak))
 #endif /* __weak */
 #endif /* __GNUC__ */
-      
+
 /**
  *  @brief LCD_OrientationTypeDef
  *  Possible values of Display Orientation
@@ -84,8 +84,8 @@
 #define OTM8009A_FORMAT_RBG565    ((uint32_t)0x02) /* Pixel format chosen is RGB565 : 16 bpp */
 
 /**
-  * @brief  otm8009a_480x800 Size
-  */
+ * @brief  otm8009a_480x800 Size
+ */
 
 /* Width and Height in Portrait mode */
 #define  OTM8009A_480X800_WIDTH             ((uint16_t)480)     /* LCD PIXEL WIDTH   */
@@ -96,8 +96,8 @@
 #define  OTM8009A_800X480_HEIGHT            ((uint16_t)480)     /* LCD PIXEL HEIGHT  */
 
 /**
-  * @brief  OTM8009A_480X800 Timing parameters for Portrait orientation mode
-  */
+ * @brief  OTM8009A_480X800 Timing parameters for Portrait orientation mode
+ */
 #define  OTM8009A_480X800_HSYNC             ((uint16_t)2)      /* Horizontal synchronization */
 #define  OTM8009A_480X800_HBP               ((uint16_t)34)     /* Horizontal back porch      */
 #define  OTM8009A_480X800_HFP               ((uint16_t)34)     /* Horizontal front porch     */
@@ -106,9 +106,9 @@
 #define  OTM8009A_480X800_VFP               ((uint16_t)16)      /* Vertical front porch       */
 
 /**
-  * @brief  OTM8009A_800X480 Timing parameters for Landscape orientation mode
-  *         Same values as for Portrait mode in fact.
-  */
+ * @brief  OTM8009A_800X480 Timing parameters for Landscape orientation mode
+ *         Same values as for Portrait mode in fact.
+ */
 #define  OTM8009A_800X480_HSYNC             OTM8009A_480X800_VSYNC  /* Horizontal synchronization */
 #define  OTM8009A_800X480_HBP               OTM8009A_480X800_VBP    /* Horizontal back porch      */
 #define  OTM8009A_800X480_HFP               OTM8009A_480X800_VFP    /* Horizontal front porch     */
@@ -175,50 +175,50 @@
 #define  OTM8009A_CMD_WRCABCMB              0x5E  /* Write CABC Minimum Brightness command     */
 
 /**
-  * @brief  OTM8009A_480X800 frequency divider
-  */
+ * @brief  OTM8009A_480X800 frequency divider
+ */
 #define OTM8009A_480X800_FREQUENCY_DIVIDER  2   /* LCD Frequency divider      */
 
 /**
-  * @}
-  */
-   
+ * @}
+ */
+
 /* Exported macro ------------------------------------------------------------*/
-   
+
 /** @defgroup OTM8009A_Exported_Macros OTM8009A Exported Macros
-  * @{
-  */ 
+ * @{
+ */
 
 /**
-  * @}
-  */ 
+ * @}
+ */
 
 /* Exported functions --------------------------------------------------------*/
-  
+
 /** @addtogroup OTM8009A_Exported_Functions
-  * @{
-  */
+ * @{
+ */
 void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams);
 uint8_t OTM8009A_Init(uint32_t ColorCoding, uint32_t orientation);
 void OTM8009A_IO_Delay(uint32_t Delay);
 /**
-  * @}
-  */
+ * @}
+ */
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __OTM8009A_480X800_H */
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

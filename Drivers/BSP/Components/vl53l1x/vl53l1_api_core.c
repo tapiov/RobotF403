@@ -1,64 +1,64 @@
 /*
-* Copyright (c) 2017, STMicroelectronics - All Rights Reserved
-*
-* This file is part of VL53L1 Core and is dual licensed,
-* either 'STMicroelectronics
-* Proprietary license'
-* or 'BSD 3-clause "New" or "Revised" License' , at your option.
-*
-********************************************************************************
-*
-* 'STMicroelectronics Proprietary license'
-*
-********************************************************************************
-*
-* License terms: STMicroelectronics Proprietary in accordance with licensing
-* terms at www.st.com/sla0081
-*
-* STMicroelectronics confidential
-* Reproduction and Communication of this document is strictly prohibited unless
-* specifically authorized in writing by STMicroelectronics.
-*
-*
-********************************************************************************
-*
-* Alternatively, VL53L1 Core may be distributed under the terms of
-* 'BSD 3-clause "New" or "Revised" License', in which case the following
-* provisions apply instead of the ones mentioned above :
-*
-********************************************************************************
-*
-* License terms: BSD 3-clause "New" or "Revised" License.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
-*
-* 1. Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* 2. Redistributions in binary form must reproduce the above copyright notice,
-* this list of conditions and the following disclaimer in the documentation
-* and/or other materials provided with the distribution.
-*
-* 3. Neither the name of the copyright holder nor the names of its contributors
-* may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-*
-********************************************************************************
-*
-*/
+ * Copyright (c) 2017, STMicroelectronics - All Rights Reserved
+ *
+ * This file is part of VL53L1 Core and is dual licensed,
+ * either 'STMicroelectronics
+ * Proprietary license'
+ * or 'BSD 3-clause "New" or "Revised" License' , at your option.
+ *
+ ********************************************************************************
+ *
+ * 'STMicroelectronics Proprietary license'
+ *
+ ********************************************************************************
+ *
+ * License terms: STMicroelectronics Proprietary in accordance with licensing
+ * terms at www.st.com/sla0081
+ *
+ * STMicroelectronics confidential
+ * Reproduction and Communication of this document is strictly prohibited unless
+ * specifically authorized in writing by STMicroelectronics.
+ *
+ *
+ ********************************************************************************
+ *
+ * Alternatively, VL53L1 Core may be distributed under the terms of
+ * 'BSD 3-clause "New" or "Revised" License', in which case the following
+ * provisions apply instead of the ones mentioned above :
+ *
+ ********************************************************************************
+ *
+ * License terms: BSD 3-clause "New" or "Revised" License.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
+ ********************************************************************************
+ *
+ */
 
 /**
  * @file  vl53l1_api_core.c
@@ -86,22 +86,22 @@
 #endif
 
 #define LOG_FUNCTION_START(fmt, ...) \
-	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ##__VA_ARGS__)
+	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ## __VA_ARGS__)
 #define LOG_FUNCTION_END(status, ...) \
-	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ##__VA_ARGS__)
+	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ## __VA_ARGS__)
 #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_CORE, status, \
-	fmt, ##__VA_ARGS__)
+			      fmt, ## __VA_ARGS__)
 
 #define trace_print(level, ...) \
 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_CORE, \
-	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+			 level, VL53L1_TRACE_FUNCTION_NONE, ## __VA_ARGS__)
 
 #define VL53L1_MAX_I2C_XFER_SIZE 256
 
 #ifdef VL53L1_DEBUG
 VL53L1_Error VL53L1_get_version(
-	VL53L1_DEV           Dev,
+	VL53L1_DEV Dev,
 	VL53L1_ll_version_t *pdata)
 {
 	/*
@@ -119,14 +119,14 @@ VL53L1_Error VL53L1_get_version(
 }
 
 VL53L1_Error VL53L1_get_device_firmware_version(
-	VL53L1_DEV        Dev,
+	VL53L1_DEV Dev,
 	uint16_t         *pfw_version)
 {
 	/*
 	 * Read Firmware version from device
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	LOG_FUNCTION_START("");
 
@@ -135,9 +135,9 @@ VL53L1_Error VL53L1_get_device_firmware_version(
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_RdWord(
-				Dev,
-				VL53L1_MCU_GENERAL_PURPOSE__GP_0,
-				pfw_version);
+			Dev,
+			VL53L1_MCU_GENERAL_PURPOSE__GP_0,
+			pfw_version);
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_enable_firmware(Dev);
@@ -150,41 +150,41 @@ VL53L1_Error VL53L1_get_device_firmware_version(
 
 
 VL53L1_Error VL53L1_data_init(
-	VL53L1_DEV        Dev,
-	uint8_t           read_p2p_data)
+	VL53L1_DEV Dev,
+	uint8_t read_p2p_data)
 {
 	/*
 	 * Initialise pdev data structure
 	 */
 
-	VL53L1_Error status       = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t    *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	VL53L1_init_ll_driver_state(
-			Dev,
-			VL53L1_DEVICESTATE_UNKNOWN);
+		Dev,
+		VL53L1_DEVICESTATE_UNKNOWN);
 
-	pdev->wait_method             = VL53L1_WAIT_METHOD_BLOCKING;
-	pdev->preset_mode             = VL53L1_DEVICEPRESETMODE_STANDARD_RANGING;
-	pdev->measurement_mode        = VL53L1_DEVICEMEASUREMENTMODE_STOP;
+	pdev->wait_method = VL53L1_WAIT_METHOD_BLOCKING;
+	pdev->preset_mode = VL53L1_DEVICEPRESETMODE_STANDARD_RANGING;
+	pdev->measurement_mode = VL53L1_DEVICEMEASUREMENTMODE_STOP;
 
 	pdev->offset_calibration_mode =
 		VL53L1_OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD;
-	pdev->offset_correction_mode  =
+	pdev->offset_correction_mode =
 		VL53L1_OFFSETCORRECTIONMODE__MM1_MM2_OFFSETS;
 
-	pdev->phasecal_config_timeout_us  =  1000;
-	pdev->mm_config_timeout_us        =  2000;
-	pdev->range_config_timeout_us     = 13000;
-	pdev->inter_measurement_period_ms =   100;
+	pdev->phasecal_config_timeout_us = 1000;
+	pdev->mm_config_timeout_us = 2000;
+	pdev->range_config_timeout_us = 13000;
+	pdev->inter_measurement_period_ms = 100;
 	pdev->dss_config__target_total_rate_mcps = 0x0A00;
-	pdev->debug_mode                  =  0x00;
+	pdev->debug_mode = 0x00;
 
 	/* initialise gain calibration values to tuning parameter values */
 
 	pdev->gain_cal.standard_ranging_gain_factor =
-			VL53L1_TUNINGPARM_LITE_RANGING_GAIN_FACTOR_DEFAULT;
+		VL53L1_TUNINGPARM_LITE_RANGING_GAIN_FACTOR_DEFAULT;
 
 	/*
 	 * Initialise version structure
@@ -200,7 +200,7 @@ VL53L1_Error VL53L1_data_init(
 	 */
 
 	if (read_p2p_data > 0 && status == VL53L1_ERROR_NONE) /*lint !e774 always true*/
-			status = VL53L1_read_p2p_data(Dev);
+		status = VL53L1_read_p2p_data(Dev);
 
 	/* Initialise Ref SPAD Char configuration structure */
 #ifndef VL53L1_NOCALIB
@@ -229,7 +229,7 @@ VL53L1_Error VL53L1_data_init(
 #ifndef VL53L1_NOCALIB
 	status =
 		VL53L1_init_offset_cal_config_struct(
-		    &(pdev->offsetcal_cfg));
+			&(pdev->offsetcal_cfg));
 #endif
 
 	/* Initialise Tuning Parameter structure
@@ -240,7 +240,7 @@ VL53L1_Error VL53L1_data_init(
 			&(pdev->tuning_parms));
 
 	status = VL53L1_set_vhv_loopbound(Dev,
-		VL53L1_TUNINGPARM_VHV_LOOPBOUND_DEFAULT);
+					  VL53L1_TUNINGPARM_VHV_LOOPBOUND_DEFAULT);
 
 	/*
 	 * Initialise default settings - much happen *after*
@@ -249,22 +249,21 @@ VL53L1_Error VL53L1_data_init(
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_set_preset_mode(
-						Dev,
-						pdev->preset_mode,
-						pdev->dss_config__target_total_rate_mcps,  /* 9.7 format 20Mcps */
-						pdev->phasecal_config_timeout_us,
-						pdev->mm_config_timeout_us,
-						pdev->range_config_timeout_us,
-						pdev->inter_measurement_period_ms);
+			Dev,
+			pdev->preset_mode,
+			pdev->dss_config__target_total_rate_mcps,                          /* 9.7 format 20Mcps */
+			pdev->phasecal_config_timeout_us,
+			pdev->mm_config_timeout_us,
+			pdev->range_config_timeout_us,
+			pdev->inter_measurement_period_ms);
 
 	/* Initial Low Power Auto Mode data structures */
 	/* Added for Patch_LowPowerAutoMode */
 	VL53L1_low_power_auto_data_init(
-			Dev
-			);
+		Dev
+		);
 
 #ifdef VL53L1_LOG_ENABLE
-
 	/* Prints out the initial calibration data for debug */
 
 	VL53L1_print_static_nvm_managed(
@@ -301,7 +300,6 @@ VL53L1_Error VL53L1_data_init(
 		&(pdev->cal_peak_rate_map),
 		"data_init():pdev->lldata.cal_peak_rate_map.",
 		VL53L1_TRACE_MODULE_DATA_INIT);
-
 #endif
 
 	LOG_FUNCTION_END(status);
@@ -311,9 +309,8 @@ VL53L1_Error VL53L1_data_init(
 
 
 VL53L1_Error VL53L1_read_p2p_data(
-	VL53L1_DEV        Dev)
+	VL53L1_DEV Dev)
 {
-
 	/*
 	 *  For C-API one time initialization only reads device
 	 *  G02 registers containing data copied from NVM
@@ -322,32 +319,31 @@ VL53L1_Error VL53L1_read_p2p_data(
 	 *  fast oscillator freq, max trim and laser safety info
 	 */
 
-	VL53L1_Error status       = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_get_static_nvm_managed(
-						Dev,
-						&(pdev->stat_nvm));
+			Dev,
+			&(pdev->stat_nvm));
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_get_customer_nvm_managed(
-						Dev,
-						&(pdev->customer));
+			Dev,
+			&(pdev->customer));
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		status = VL53L1_get_nvm_copy_data(
-						Dev,
-						&(pdev->nvm_copy_data));
+			Dev,
+			&(pdev->nvm_copy_data));
 
 		/* copy Return Good SPADs to buffer */
 		if (status == VL53L1_ERROR_NONE)
 			VL53L1_copy_rtn_good_spads_to_buffer(
-					&(pdev->nvm_copy_data),
-					&(pdev->rtn_good_spads[0]));
+				&(pdev->nvm_copy_data),
+				&(pdev->rtn_good_spads[0]));
 	}
 
 	/*
@@ -390,11 +386,11 @@ VL53L1_Error VL53L1_read_p2p_data(
 	 */
 
 	if (pdev->optical_centre.x_centre == 0 &&
-		pdev->optical_centre.y_centre == 0) {
+	    pdev->optical_centre.y_centre == 0) {
 		pdev->optical_centre.x_centre =
-				pdev->mm_roi.x_centre << 4;
+			pdev->mm_roi.x_centre << 4;
 		pdev->optical_centre.y_centre =
-				pdev->mm_roi.y_centre << 4;
+			pdev->mm_roi.y_centre << 4;
 	}
 
 	LOG_FUNCTION_END(status);
@@ -404,23 +400,23 @@ VL53L1_Error VL53L1_read_p2p_data(
 
 
 VL53L1_Error VL53L1_software_reset(
-	VL53L1_DEV    Dev)
+	VL53L1_DEV Dev)
 {
 	/**
 	 * Sets and clears the software reset register VL53L1_SOFT_RESET.
 	 * and waits for the firmware to boot
 	 */
 
-	VL53L1_Error status       = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	LOG_FUNCTION_START("");
 
 	/* apply reset - note despite the name soft reset is active low! */
 	if (status == VL53L1_ERROR_NONE) /*lint !e774 always true*/
 		status = VL53L1_WrByte(
-						Dev,
-						VL53L1_SOFT_RESET,
-						0x00);
+			Dev,
+			VL53L1_SOFT_RESET,
+			0x00);
 
 	/* wait for a while before releasing the reset */
 	if (status == VL53L1_ERROR_NONE)
@@ -432,9 +428,9 @@ VL53L1_Error VL53L1_software_reset(
 	/* release reset */
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_WrByte(
-						Dev,
-						VL53L1_SOFT_RESET,
-						0x01);
+			Dev,
+			VL53L1_SOFT_RESET,
+			0x01);
 
 	/* wait for firmware boot to complete */
 	if (status == VL53L1_ERROR_NONE)
@@ -447,14 +443,14 @@ VL53L1_Error VL53L1_software_reset(
 
 
 VL53L1_Error VL53L1_set_part_to_part_data(
-	VL53L1_DEV                            Dev,
+	VL53L1_DEV Dev,
 	VL53L1_calibration_data_t            *pcal_data)
 {
 	/**
 	 * Uses memcpy to copy input data to pdev->customer
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	uint32_t tempu32;
@@ -462,12 +458,11 @@ VL53L1_Error VL53L1_set_part_to_part_data(
 	LOG_FUNCTION_START("");
 
 	if (pcal_data->struct_version !=
-		VL53L1_LL_CALIBRATION_DATA_STRUCT_VERSION) {
+	    VL53L1_LL_CALIBRATION_DATA_STRUCT_VERSION) {
 		status = VL53L1_ERROR_INVALID_PARAMS;
 	}
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		/* memcpy(DEST, SRC, N)  */
 		memcpy(
 			&(pdev->customer),
@@ -516,7 +511,7 @@ VL53L1_Error VL53L1_set_part_to_part_data(
 			tempu32 = VL53L1_calc_crosstalk_plane_offset_with_margin(
 				pdev->xtalk_cfg.algo__crosstalk_compensation_plane_offset_kcps,
 				pdev->xtalk_cfg.lite_mode_crosstalk_margin_kcps);
-			if (tempu32 > 0xFFFF) {	/* clip to 16 bits */
+			if (tempu32 > 0xFFFF) { /* clip to 16 bits */
 				tempu32 = 0xFFFF;
 			}
 			pdev->customer.algo__crosstalk_compensation_plane_offset_kcps =
@@ -531,20 +526,20 @@ VL53L1_Error VL53L1_set_part_to_part_data(
 
 
 VL53L1_Error VL53L1_get_part_to_part_data(
-	VL53L1_DEV                      Dev,
+	VL53L1_DEV Dev,
 	VL53L1_calibration_data_t      *pcal_data)
 {
 	/**
 	 * Uses memcpy to copy pdev->customer to output data
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	pcal_data->struct_version =
-			VL53L1_LL_CALIBRATION_DATA_STRUCT_VERSION;
+		VL53L1_LL_CALIBRATION_DATA_STRUCT_VERSION;
 
 	/* memcpy(DEST, SRC, N)  */
 	memcpy(
@@ -598,14 +593,14 @@ VL53L1_Error VL53L1_get_part_to_part_data(
 
 
 VL53L1_Error VL53L1_set_inter_measurement_period_ms(
-	VL53L1_DEV              Dev,
-	uint32_t                inter_measurement_period_ms)
+	VL53L1_DEV Dev,
+	uint32_t inter_measurement_period_ms)
 {
 	/**
 	 * Convenience function for setting the inter measurement period
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
@@ -627,14 +622,14 @@ VL53L1_Error VL53L1_set_inter_measurement_period_ms(
 
 
 VL53L1_Error VL53L1_get_inter_measurement_period_ms(
-	VL53L1_DEV              Dev,
+	VL53L1_DEV Dev,
 	uint32_t               *pinter_measurement_period_ms)
 {
 	/**
 	 * Convenience function for getting the inter measurement period
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
@@ -655,19 +650,19 @@ VL53L1_Error VL53L1_get_inter_measurement_period_ms(
 
 
 VL53L1_Error VL53L1_set_timeouts_us(
-	VL53L1_DEV          Dev,
-	uint32_t            phasecal_config_timeout_us,
-	uint32_t            mm_config_timeout_us,
-	uint32_t            range_config_timeout_us)
+	VL53L1_DEV Dev,
+	uint32_t phasecal_config_timeout_us,
+	uint32_t mm_config_timeout_us,
+	uint32_t range_config_timeout_us)
 {
 	/**
 	 * Convenience function for setting the MM and range
 	 * timeouts
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
@@ -675,10 +670,9 @@ VL53L1_Error VL53L1_set_timeouts_us(
 		status = VL53L1_ERROR_DIVISION_BY_ZERO;
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		pdev->phasecal_config_timeout_us = phasecal_config_timeout_us;
-		pdev->mm_config_timeout_us       = mm_config_timeout_us;
-		pdev->range_config_timeout_us    = range_config_timeout_us;
+		pdev->mm_config_timeout_us = mm_config_timeout_us;
+		pdev->range_config_timeout_us = range_config_timeout_us;
 
 		status =
 			VL53L1_calc_timeout_register_values(
@@ -697,22 +691,22 @@ VL53L1_Error VL53L1_set_timeouts_us(
 
 
 VL53L1_Error VL53L1_get_timeouts_us(
-	VL53L1_DEV           Dev,
+	VL53L1_DEV Dev,
 	uint32_t            *pphasecal_config_timeout_us,
 	uint32_t            *pmm_config_timeout_us,
-	uint32_t			*prange_config_timeout_us)
+	uint32_t                        *prange_config_timeout_us)
 {
 	/**
 	 * Convenience function for getting the MM and range
 	 * timeouts
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 
-	uint32_t  macro_period_us = 0;
-	uint16_t  timeout_encoded = 0;
+	uint32_t macro_period_us = 0;
+	uint16_t timeout_encoded = 0;
 
 	LOG_FUNCTION_START("");
 
@@ -720,7 +714,6 @@ VL53L1_Error VL53L1_get_timeouts_us(
 		status = VL53L1_ERROR_DIVISION_BY_ZERO;
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		/* Update Macro Period for Range A VCSEL Period */
 		macro_period_us =
 			VL53L1_calc_macro_period_us(
@@ -739,7 +732,7 @@ VL53L1_Error VL53L1_get_timeouts_us(
 		timeout_encoded =
 			(uint16_t)pdev->tim_cfg.mm_config__timeout_macrop_a_hi;
 		timeout_encoded = (timeout_encoded << 8) +
-			(uint16_t)pdev->tim_cfg.mm_config__timeout_macrop_a_lo;
+				  (uint16_t)pdev->tim_cfg.mm_config__timeout_macrop_a_lo;
 
 		*pmm_config_timeout_us =
 			VL53L1_calc_decoded_timeout_us(
@@ -751,7 +744,7 @@ VL53L1_Error VL53L1_get_timeouts_us(
 		timeout_encoded =
 			(uint16_t)pdev->tim_cfg.range_config__timeout_macrop_a_hi;
 		timeout_encoded = (timeout_encoded << 8) +
-			(uint16_t)pdev->tim_cfg.range_config__timeout_macrop_a_lo;
+				  (uint16_t)pdev->tim_cfg.range_config__timeout_macrop_a_lo;
 
 		*prange_config_timeout_us =
 			VL53L1_calc_decoded_timeout_us(
@@ -759,9 +752,8 @@ VL53L1_Error VL53L1_get_timeouts_us(
 				macro_period_us);
 
 		pdev->phasecal_config_timeout_us = *pphasecal_config_timeout_us;
-		pdev->mm_config_timeout_us       = *pmm_config_timeout_us;
-		pdev->range_config_timeout_us    = *prange_config_timeout_us;
-
+		pdev->mm_config_timeout_us = *pmm_config_timeout_us;
+		pdev->range_config_timeout_us = *prange_config_timeout_us;
 	}
 
 	LOG_FUNCTION_END(status);
@@ -771,85 +763,80 @@ VL53L1_Error VL53L1_get_timeouts_us(
 
 
 VL53L1_Error VL53L1_set_calibration_repeat_period(
-	VL53L1_DEV          Dev,
-	uint16_t            cal_config__repeat_period)
+	VL53L1_DEV Dev,
+	uint16_t cal_config__repeat_period)
 {
 	/**
 	 * Convenience function for setting calibration repeat period
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	pdev->gen_cfg.cal_config__repeat_rate = cal_config__repeat_period;
 
 	return status;
-
 }
 
 
 VL53L1_Error VL53L1_get_calibration_repeat_period(
-	VL53L1_DEV          Dev,
+	VL53L1_DEV Dev,
 	uint16_t           *pcal_config__repeat_period)
 {
 	/**
 	 * Convenience function for getting calibration repeat period
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	*pcal_config__repeat_period = pdev->gen_cfg.cal_config__repeat_rate;
 
 	return status;
-
 }
 
 
 VL53L1_Error VL53L1_set_sequence_config_bit(
-	VL53L1_DEV                    Dev,
-	VL53L1_DeviceSequenceConfig   bit_id,
-	uint8_t                       value)
+	VL53L1_DEV Dev,
+	VL53L1_DeviceSequenceConfig bit_id,
+	uint8_t value)
 {
 	/**
 	 * Convenience function for setting sequence
 	 * config enable bits
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
-	uint8_t  bit_mask        = 0x01;
-	uint8_t  clr_mask        = 0xFF  - bit_mask;
-	uint8_t  bit_value       = value & bit_mask;
+	uint8_t bit_mask = 0x01;
+	uint8_t clr_mask = 0xFF - bit_mask;
+	uint8_t bit_value = value & bit_mask;
 
 	if (bit_id <= VL53L1_DEVICESEQUENCECONFIG_RANGE) {
-
 		if (bit_id > 0) {
-			bit_mask  = 0x01 << bit_id;
+			bit_mask = 0x01 << bit_id;
 			bit_value = bit_value << bit_id;
-			clr_mask  = 0xFF  - bit_mask;
+			clr_mask = 0xFF - bit_mask;
 		}
 
 		pdev->dyn_cfg.system__sequence_config = \
 			(pdev->dyn_cfg.system__sequence_config & clr_mask) | \
 			bit_value;
-
 	} else {
 		status = VL53L1_ERROR_INVALID_PARAMS;
 	}
 
 	return status;
-
 }
 
 
 VL53L1_Error VL53L1_get_sequence_config_bit(
-	VL53L1_DEV                    Dev,
-	VL53L1_DeviceSequenceConfig   bit_id,
+	VL53L1_DEV Dev,
+	VL53L1_DeviceSequenceConfig bit_id,
 	uint8_t                      *pvalue)
 {
 	/**
@@ -857,25 +844,23 @@ VL53L1_Error VL53L1_get_sequence_config_bit(
 	 * config enable bits
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
-	uint8_t  bit_mask        = 0x01;
+	uint8_t bit_mask = 0x01;
 
 	if (bit_id <= VL53L1_DEVICESEQUENCECONFIG_RANGE) {
-
 		if (bit_id > 0) {
-			bit_mask  = 0x01 << bit_id;
+			bit_mask = 0x01 << bit_id;
 		}
 
 		*pvalue =
 			pdev->dyn_cfg.system__sequence_config & bit_mask;
 
 		if (bit_id > 0) {
-			*pvalue  = *pvalue >> bit_id;
+			*pvalue = *pvalue >> bit_id;
 		}
-
 	} else {
 		status = VL53L1_ERROR_INVALID_PARAMS;
 	}
@@ -885,52 +870,51 @@ VL53L1_Error VL53L1_get_sequence_config_bit(
 
 
 VL53L1_Error VL53L1_set_interrupt_polarity(
-	VL53L1_DEV                      Dev,
-	VL53L1_DeviceInterruptPolarity  interrupt_polarity)
+	VL53L1_DEV Dev,
+	VL53L1_DeviceInterruptPolarity interrupt_polarity)
 {
 	/**
 	 * Convenience function for setting interrupt polarity
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	pdev->stat_cfg.gpio_hv_mux__ctrl = \
-			(pdev->stat_cfg.gpio_hv_mux__ctrl & \
-			 VL53L1_DEVICEINTERRUPTPOLARITY_CLEAR_MASK) | \
-			(interrupt_polarity & \
-			 VL53L1_DEVICEINTERRUPTPOLARITY_BIT_MASK);
+		(pdev->stat_cfg.gpio_hv_mux__ctrl & \
+		 VL53L1_DEVICEINTERRUPTPOLARITY_CLEAR_MASK) | \
+		(interrupt_polarity & \
+		 VL53L1_DEVICEINTERRUPTPOLARITY_BIT_MASK);
 
 	return status;
-
 }
 
 
 #ifndef VL53L1_NOCALIB
 VL53L1_Error VL53L1_set_refspadchar_config_struct(
-	VL53L1_DEV                     Dev,
+	VL53L1_DEV Dev,
 	VL53L1_refspadchar_config_t   *pdata)
 {
 	/*
 	 * Allows user config of Ref SPAD Char data structure
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	pdev->refspadchar.device_test_mode = pdata->device_test_mode;
-	pdev->refspadchar.vcsel_period     = pdata->vcsel_period;
-	pdev->refspadchar.timeout_us       = pdata->timeout_us;
-	pdev->refspadchar.target_count_rate_mcps    =
-			pdata->target_count_rate_mcps;
+	pdev->refspadchar.vcsel_period = pdata->vcsel_period;
+	pdev->refspadchar.timeout_us = pdata->timeout_us;
+	pdev->refspadchar.target_count_rate_mcps =
+		pdata->target_count_rate_mcps;
 	pdev->refspadchar.min_count_rate_limit_mcps =
-			pdata->min_count_rate_limit_mcps;
+		pdata->min_count_rate_limit_mcps;
 	pdev->refspadchar.max_count_rate_limit_mcps =
-			pdata->max_count_rate_limit_mcps;
+		pdata->max_count_rate_limit_mcps;
 
 	LOG_FUNCTION_END(status);
 
@@ -940,27 +924,27 @@ VL53L1_Error VL53L1_set_refspadchar_config_struct(
 
 #ifndef VL53L1_NOCALIB
 VL53L1_Error VL53L1_get_refspadchar_config_struct(
-	VL53L1_DEV                     Dev,
+	VL53L1_DEV Dev,
 	VL53L1_refspadchar_config_t   *pdata)
 {
 	/*
 	 * Allows user config of Ref SPAD Char data structure
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
-	pdata->device_test_mode       = pdev->refspadchar.device_test_mode;
-	pdata->vcsel_period           = pdev->refspadchar.vcsel_period;
-	pdata->timeout_us             = pdev->refspadchar.timeout_us;
+	pdata->device_test_mode = pdev->refspadchar.device_test_mode;
+	pdata->vcsel_period = pdev->refspadchar.vcsel_period;
+	pdata->timeout_us = pdev->refspadchar.timeout_us;
 	pdata->target_count_rate_mcps = pdev->refspadchar.target_count_rate_mcps;
 	pdata->min_count_rate_limit_mcps =
-			pdev->refspadchar.min_count_rate_limit_mcps;
+		pdev->refspadchar.min_count_rate_limit_mcps;
 	pdata->max_count_rate_limit_mcps =
-			pdev->refspadchar.max_count_rate_limit_mcps;
+		pdev->refspadchar.max_count_rate_limit_mcps;
 
 	LOG_FUNCTION_END(status);
 
@@ -970,15 +954,15 @@ VL53L1_Error VL53L1_get_refspadchar_config_struct(
 
 
 VL53L1_Error VL53L1_set_range_ignore_threshold(
-	VL53L1_DEV              Dev,
-	uint8_t                 range_ignore_thresh_mult,
-	uint16_t                range_ignore_threshold_mcps)
+	VL53L1_DEV Dev,
+	uint8_t range_ignore_thresh_mult,
+	uint16_t range_ignore_threshold_mcps)
 {
 	/**
 	 * Convenience function for setting Range Ignore Threshold
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -989,11 +973,10 @@ VL53L1_Error VL53L1_set_range_ignore_threshold(
 		range_ignore_thresh_mult;
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_get_range_ignore_threshold(
-	VL53L1_DEV              Dev,
+	VL53L1_DEV Dev,
 	uint8_t                *prange_ignore_thresh_mult,
 	uint16_t               *prange_ignore_threshold_mcps_internal,
 	uint16_t               *prange_ignore_threshold_mcps_current)
@@ -1007,12 +990,12 @@ VL53L1_Error VL53L1_get_range_ignore_threshold(
 	 *
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	*prange_ignore_thresh_mult =
-	    pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult;
+		pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult;
 
 	*prange_ignore_threshold_mcps_current =
 		pdev->stat_cfg.algo__range_ignore_threshold_mcps;
@@ -1021,41 +1004,39 @@ VL53L1_Error VL53L1_get_range_ignore_threshold(
 		pdev->xtalk_cfg.crosstalk_range_ignore_threshold_rate_mcps;
 
 	return status;
-
 }
 
 
 
 VL53L1_Error VL53L1_get_interrupt_polarity(
-	VL53L1_DEV                       Dev,
+	VL53L1_DEV Dev,
 	VL53L1_DeviceInterruptPolarity  *pinterrupt_polarity)
 {
 	/**
 	 * Convenience function for getting interrupt polarity
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	*pinterrupt_polarity = \
 		pdev->stat_cfg.gpio_hv_mux__ctrl & \
-		VL53L1_DEVICEINTERRUPTPOLARITY_BIT_MASK ;
+		VL53L1_DEVICEINTERRUPTPOLARITY_BIT_MASK;
 
 	return status;
-
 }
 
 
 VL53L1_Error VL53L1_set_user_zone(
-	VL53L1_DEV              Dev,
+	VL53L1_DEV Dev,
 	VL53L1_user_zone_t     *puser_zone)
 {
 	/**
 	 * Convenience function for setting the user ROI
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
@@ -1081,23 +1062,23 @@ VL53L1_Error VL53L1_set_user_zone(
 
 
 VL53L1_Error VL53L1_get_user_zone(
-	VL53L1_DEV              Dev,
+	VL53L1_DEV Dev,
 	VL53L1_user_zone_t     *puser_zone)
 {
 	/**
 	 * Convenience function for getting the user ROI
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	/* convert SPAD number into (row,col) location*/
 	VL53L1_decode_row_col(
-			pdev->dyn_cfg.roi_config__user_roi_centre_spad,
-			&(puser_zone->y_centre),
-			&(puser_zone->x_centre));
+		pdev->dyn_cfg.roi_config__user_roi_centre_spad,
+		&(puser_zone->y_centre),
+		&(puser_zone->x_centre));
 
 	/* extract x and y sizes */
 	VL53L1_decode_zone_size(
@@ -1113,27 +1094,27 @@ VL53L1_Error VL53L1_get_user_zone(
 
 
 VL53L1_Error VL53L1_get_mode_mitigation_roi(
-	VL53L1_DEV              Dev,
+	VL53L1_DEV Dev,
 	VL53L1_user_zone_t     *pmm_roi)
 {
 	/**
 	 * Convenience function for getting the mode mitigation ROI
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
-	uint8_t  x       = 0;
-	uint8_t  y       = 0;
-	uint8_t  xy_size = 0;
+	uint8_t x = 0;
+	uint8_t y = 0;
+	uint8_t xy_size = 0;
 
 	LOG_FUNCTION_START("");
 
 	/* convert SPAD number into (row,col) location */
 	VL53L1_decode_row_col(
-			pdev->nvm_copy_data.roi_config__mode_roi_centre_spad,
-			&y,
-			&x);
+		pdev->nvm_copy_data.roi_config__mode_roi_centre_spad,
+		&y,
+		&x);
 
 	pmm_roi->x_centre = x;
 	pmm_roi->y_centre = y;
@@ -1149,7 +1130,7 @@ VL53L1_Error VL53L1_get_mode_mitigation_roi(
 	xy_size = pdev->nvm_copy_data.roi_config__mode_roi_xy_size;
 
 	pmm_roi->height = xy_size >> 4;
-	pmm_roi->width  = xy_size & 0x0F;
+	pmm_roi->width = xy_size & 0x0F;
 
 	LOG_FUNCTION_END(status);
 
@@ -1157,21 +1138,20 @@ VL53L1_Error VL53L1_get_mode_mitigation_roi(
 }
 
 VL53L1_Error VL53L1_get_preset_mode_timing_cfg(
-	VL53L1_DEV                   Dev,
-	VL53L1_DevicePresetModes     device_preset_mode,
+	VL53L1_DEV Dev,
+	VL53L1_DevicePresetModes device_preset_mode,
 	uint16_t                    *pdss_config__target_total_rate_mcps,
 	uint32_t                    *pphasecal_config_timeout_us,
 	uint32_t                    *pmm_config_timeout_us,
 	uint32_t                    *prange_config_timeout_us)
 {
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 
 	switch (device_preset_mode) {
-
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING:
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_SHORT_RANGE:
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_LONG_RANGE:
@@ -1179,46 +1159,45 @@ VL53L1_Error VL53L1_get_preset_mode_timing_cfg(
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_MM2_CAL:
 	case VL53L1_DEVICEPRESETMODE_OLT:
 		*pdss_config__target_total_rate_mcps =
-				pdev->tuning_parms.tp_dss_target_lite_mcps;
+			pdev->tuning_parms.tp_dss_target_lite_mcps;
 		*pphasecal_config_timeout_us =
-				pdev->tuning_parms.tp_phasecal_timeout_lite_us;
+			pdev->tuning_parms.tp_phasecal_timeout_lite_us;
 		*pmm_config_timeout_us =
-				pdev->tuning_parms.tp_mm_timeout_lite_us;
+			pdev->tuning_parms.tp_mm_timeout_lite_us;
 		*prange_config_timeout_us =
-				pdev->tuning_parms.tp_range_timeout_lite_us;
-	break;
+			pdev->tuning_parms.tp_range_timeout_lite_us;
+		break;
 
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING:
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING_SHORT_RANGE:
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING_LONG_RANGE:
 	case VL53L1_DEVICEPRESETMODE_SINGLESHOT_RANGING:
 		*pdss_config__target_total_rate_mcps =
-				pdev->tuning_parms.tp_dss_target_timed_mcps;
+			pdev->tuning_parms.tp_dss_target_timed_mcps;
 		*pphasecal_config_timeout_us =
-				pdev->tuning_parms.tp_phasecal_timeout_timed_us;
+			pdev->tuning_parms.tp_phasecal_timeout_timed_us;
 		*pmm_config_timeout_us =
-				pdev->tuning_parms.tp_mm_timeout_timed_us;
+			pdev->tuning_parms.tp_mm_timeout_timed_us;
 		*prange_config_timeout_us =
-				pdev->tuning_parms.tp_range_timeout_timed_us;
-	break;
+			pdev->tuning_parms.tp_range_timeout_timed_us;
+		break;
 
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_SHORT_RANGE:
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_MEDIUM_RANGE:
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_LONG_RANGE:
 		*pdss_config__target_total_rate_mcps =
-				pdev->tuning_parms.tp_dss_target_timed_mcps;
+			pdev->tuning_parms.tp_dss_target_timed_mcps;
 		*pphasecal_config_timeout_us =
-				pdev->tuning_parms.tp_phasecal_timeout_timed_us;
+			pdev->tuning_parms.tp_phasecal_timeout_timed_us;
 		*pmm_config_timeout_us =
-				pdev->tuning_parms.tp_mm_timeout_lpa_us;
+			pdev->tuning_parms.tp_mm_timeout_lpa_us;
 		*prange_config_timeout_us =
-				pdev->tuning_parms.tp_range_timeout_lpa_us;
-	break;
+			pdev->tuning_parms.tp_range_timeout_lpa_us;
+		break;
 
 	default:
 		status = VL53L1_ERROR_INVALID_PARAMS;
 		break;
-
 	}
 
 	LOG_FUNCTION_END(status);
@@ -1228,200 +1207,196 @@ VL53L1_Error VL53L1_get_preset_mode_timing_cfg(
 
 
 VL53L1_Error VL53L1_set_preset_mode(
-	VL53L1_DEV                   Dev,
-	VL53L1_DevicePresetModes     device_preset_mode,
-	uint16_t                     dss_config__target_total_rate_mcps,
-	uint32_t                     phasecal_config_timeout_us,
-	uint32_t                     mm_config_timeout_us,
-	uint32_t                     range_config_timeout_us,
-	uint32_t                     inter_measurement_period_ms)
+	VL53L1_DEV Dev,
+	VL53L1_DevicePresetModes device_preset_mode,
+	uint16_t dss_config__target_total_rate_mcps,
+	uint32_t phasecal_config_timeout_us,
+	uint32_t mm_config_timeout_us,
+	uint32_t range_config_timeout_us,
+	uint32_t inter_measurement_period_ms)
 {
 	/**
 	 * Initializes static and dynamic data structures for
 	 * the provided preset mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 
-	VL53L1_static_config_t        *pstatic       = &(pdev->stat_cfg);
-	VL53L1_general_config_t       *pgeneral      = &(pdev->gen_cfg);
-	VL53L1_timing_config_t        *ptiming       = &(pdev->tim_cfg);
-	VL53L1_dynamic_config_t       *pdynamic      = &(pdev->dyn_cfg);
-	VL53L1_system_control_t       *psystem       = &(pdev->sys_ctrl);
+	VL53L1_static_config_t        *pstatic = &(pdev->stat_cfg);
+	VL53L1_general_config_t       *pgeneral = &(pdev->gen_cfg);
+	VL53L1_timing_config_t        *ptiming = &(pdev->tim_cfg);
+	VL53L1_dynamic_config_t       *pdynamic = &(pdev->dyn_cfg);
+	VL53L1_system_control_t       *psystem = &(pdev->sys_ctrl);
 	VL53L1_tuning_parm_storage_t  *ptuning_parms = &(pdev->tuning_parms);
-	VL53L1_low_power_auto_data_t  *plpadata      =
-					&(pdev->low_power_auto_data);
+	VL53L1_low_power_auto_data_t  *plpadata =
+		&(pdev->low_power_auto_data);
 
 	LOG_FUNCTION_START("");
 
 	/* save input settings */
-	pdev->preset_mode                 = device_preset_mode;
-	pdev->mm_config_timeout_us        = mm_config_timeout_us;
-	pdev->range_config_timeout_us     = range_config_timeout_us;
+	pdev->preset_mode = device_preset_mode;
+	pdev->mm_config_timeout_us = mm_config_timeout_us;
+	pdev->range_config_timeout_us = range_config_timeout_us;
 	pdev->inter_measurement_period_ms = inter_measurement_period_ms;
 
 	/* Reset LL Driver state variables */
 
 	VL53L1_init_ll_driver_state(
-			Dev,
-			VL53L1_DEVICESTATE_SW_STANDBY);
+		Dev,
+		VL53L1_DEVICESTATE_SW_STANDBY);
 
 	/* apply selected preset */
 
 	switch (device_preset_mode) {
-
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING:
 		status = VL53L1_preset_mode_standard_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_SHORT_RANGE:
 		status = VL53L1_preset_mode_standard_ranging_short_range(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_LONG_RANGE:
 		status = VL53L1_preset_mode_standard_ranging_long_range(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 #ifndef VL53L1_NOCALIB
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_MM1_CAL:
 		status = VL53L1_preset_mode_standard_ranging_mm1_cal(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_MM2_CAL:
 		status = VL53L1_preset_mode_standard_ranging_mm2_cal(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 #endif
 
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING:
 		status = VL53L1_preset_mode_timed_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING_SHORT_RANGE:
 		status = VL53L1_preset_mode_timed_ranging_short_range(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_TIMED_RANGING_LONG_RANGE:
 		status = VL53L1_preset_mode_timed_ranging_long_range(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_OLT:
 		status = VL53L1_preset_mode_olt(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_SINGLESHOT_RANGING:
 		status = VL53L1_preset_mode_singleshot_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_SHORT_RANGE:
 		status = VL53L1_preset_mode_low_power_auto_short_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms,
-					plpadata);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms,
+			plpadata);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_MEDIUM_RANGE:
 		status = VL53L1_preset_mode_low_power_auto_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms,
-					plpadata);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms,
+			plpadata);
 		break;
 
 	case VL53L1_DEVICEPRESETMODE_LOWPOWERAUTO_LONG_RANGE:
 		status = VL53L1_preset_mode_low_power_auto_long_ranging(
-					pstatic,
-					pgeneral,
-					ptiming,
-					pdynamic,
-					psystem,
-					ptuning_parms,
-					plpadata);
+			pstatic,
+			pgeneral,
+			ptiming,
+			pdynamic,
+			psystem,
+			ptuning_parms,
+			plpadata);
 		break;
 
 	default:
 		status = VL53L1_ERROR_INVALID_PARAMS;
 		break;
-
 	}
 
 	/* update DSS target */
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		pstatic->dss_config__target_total_rate_mcps =
-				dss_config__target_total_rate_mcps;
-		pdev->dss_config__target_total_rate_mcps    =
-				dss_config__target_total_rate_mcps;
-
+			dss_config__target_total_rate_mcps;
+		pdev->dss_config__target_total_rate_mcps =
+			dss_config__target_total_rate_mcps;
 	}
 
 	/*
@@ -1450,7 +1425,7 @@ VL53L1_Error VL53L1_set_preset_mode(
 
 
 VL53L1_Error  VL53L1_enable_xtalk_compensation(
-	VL53L1_DEV                 Dev)
+	VL53L1_DEV Dev)
 {
 	/**
 	 * Currently a very simple function to copy
@@ -1506,11 +1481,10 @@ VL53L1_Error  VL53L1_enable_xtalk_compensation(
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 void VL53L1_get_xtalk_compensation_enable(
-	VL53L1_DEV    Dev,
+	VL53L1_DEV Dev,
 	uint8_t       *pcrosstalk_compensation_enable)
 {
 	/**
@@ -1532,20 +1506,18 @@ void VL53L1_get_xtalk_compensation_enable(
 
 	*pcrosstalk_compensation_enable =
 		pdev->xtalk_cfg.global_crosstalk_compensation_enable;
-
 }
 
 
 VL53L1_Error VL53L1_get_lite_xtalk_margin_kcps(
-	VL53L1_DEV                          Dev,
+	VL53L1_DEV Dev,
 	int16_t                           *pxtalk_margin)
 {
-
 	/*
 	 * Gets the Xtalk Margin Factor  in Kcps (fixed point 9.7)
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -1556,19 +1528,17 @@ VL53L1_Error VL53L1_get_lite_xtalk_margin_kcps(
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_set_lite_xtalk_margin_kcps(
-	VL53L1_DEV                     Dev,
-	int16_t                        xtalk_margin)
+	VL53L1_DEV Dev,
+	int16_t xtalk_margin)
 {
-
 	/*
 	 * Sets the offset calibration mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -1583,14 +1553,13 @@ VL53L1_Error VL53L1_set_lite_xtalk_margin_kcps(
 
 
 VL53L1_Error VL53L1_restore_xtalk_nvm_default(
-	VL53L1_DEV                     Dev)
+	VL53L1_DEV Dev)
 {
-
 	/*
 	 * Returns xtalk rate values to defaults as extracted from device NVM
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -1609,7 +1578,7 @@ VL53L1_Error VL53L1_restore_xtalk_nvm_default(
 }
 
 VL53L1_Error  VL53L1_disable_xtalk_compensation(
-	VL53L1_DEV                 Dev)
+	VL53L1_DEV Dev)
 {
 	/**
 	 * Currently a very simple function to clear
@@ -1655,47 +1624,43 @@ VL53L1_Error  VL53L1_disable_xtalk_compensation(
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_get_lite_sigma_threshold(
-	VL53L1_DEV                          Dev,
+	VL53L1_DEV Dev,
 	uint16_t                           *plite_sigma)
 {
-
 	/*
 	 * Gets the Sigma Threshold value for Lite Mode
 	 *
 	 * (fixed point 14.2)
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	*plite_sigma =
-			pdev->tim_cfg.range_config__sigma_thresh;
+		pdev->tim_cfg.range_config__sigma_thresh;
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_set_lite_sigma_threshold(
-	VL53L1_DEV                          Dev,
-	uint16_t                           lite_sigma)
+	VL53L1_DEV Dev,
+	uint16_t lite_sigma)
 {
-
 	/*
 	 * Sets the Sigma threshold value for Lite mode
 	 *
 	 * (fixed point 14.2)
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -1706,47 +1671,43 @@ VL53L1_Error VL53L1_set_lite_sigma_threshold(
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_get_lite_min_count_rate(
-	VL53L1_DEV                          Dev,
+	VL53L1_DEV Dev,
 	uint16_t                           *plite_mincountrate)
 {
-
 	/*
 	 * Gets the Min Count Rate value for Lite Mode
 	 *
 	 * (fixed point 9.7 Mcps)
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	*plite_mincountrate =
-			pdev->tim_cfg.range_config__min_count_rate_rtn_limit_mcps;
+		pdev->tim_cfg.range_config__min_count_rate_rtn_limit_mcps;
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_set_lite_min_count_rate(
-	VL53L1_DEV                          Dev,
-	uint16_t                            lite_mincountrate)
+	VL53L1_DEV Dev,
+	uint16_t lite_mincountrate)
 {
-
 	/*
 	 * Sets the Min COunt Rate value for Lite mode
 	 *
 	 * (fixed point 19.7Mcps)
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -1758,40 +1719,36 @@ VL53L1_Error VL53L1_set_lite_min_count_rate(
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 VL53L1_Error VL53L1_get_vhv_loopbound(
-	VL53L1_DEV                   Dev,
+	VL53L1_DEV Dev,
 	uint8_t                     *pvhv_loopbound)
 {
-
 	/*
 	 * Gets the VHV Loop bound parm
 	 * - extracts only bits 7:2 from internal stat nvm parm
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
-	*pvhv_loopbound = pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound / 4 ;
+	*pvhv_loopbound = pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound / 4;
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 
 
 VL53L1_Error VL53L1_set_vhv_loopbound(
-	VL53L1_DEV                   Dev,
-	uint8_t                      vhv_loopbound)
+	VL53L1_DEV Dev,
+	uint8_t vhv_loopbound)
 {
-
 	/*
 	 * Sets the VHV Loop bound parm
 	 * - sets only bits 7:2
@@ -1801,95 +1758,90 @@ VL53L1_Error VL53L1_set_vhv_loopbound(
 	 * configuration.
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound =
-			(pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound & 0x03) +
-			(vhv_loopbound * 4);
+		(pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound & 0x03) +
+		(vhv_loopbound * 4);
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 
 
 VL53L1_Error VL53L1_get_vhv_config(
-	VL53L1_DEV                   Dev,
+	VL53L1_DEV Dev,
 	uint8_t                     *pvhv_init_en,
 	uint8_t                     *pvhv_init_value)
 {
-
 	/*
 	 * Gets the VHV config init data
 	 */
 
 	/*!<
-		info: \n
-			- msb =  7
-			- lsb =  0
-			- i2c_size =  1
+	        info: \n
+	                - msb =  7
+	                - lsb =  0
+	                - i2c_size =  1
 
-		fields: \n
-			-   [7] = vhv0_init_enable
-			- [5:0] = vhv0_init_value
-	*/
+	        fields: \n
+	                -   [7] = vhv0_init_enable
+	                - [5:0] = vhv0_init_value
+	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
-	*pvhv_init_en    = (pdev->stat_nvm.vhv_config__init & 0x80) >> 7;
+	*pvhv_init_en = (pdev->stat_nvm.vhv_config__init & 0x80) >> 7;
 	*pvhv_init_value =
-			(pdev->stat_nvm.vhv_config__init & 0x7F);
+		(pdev->stat_nvm.vhv_config__init & 0x7F);
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 
 
 VL53L1_Error VL53L1_set_vhv_config(
-	VL53L1_DEV                   Dev,
-	uint8_t                      vhv_init_en,
-	uint8_t                      vhv_init_value)
+	VL53L1_DEV Dev,
+	uint8_t vhv_init_en,
+	uint8_t vhv_init_value)
 {
-
 	/*
 	 * Sets the VHV Config init
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	pdev->stat_nvm.vhv_config__init =
-		((vhv_init_en   & 0x01) << 7) +
+		((vhv_init_en & 0x01) << 7) +
 		(vhv_init_value & 0x7F);
 
 	LOG_FUNCTION_END(status);
 
 	return status;
-
 }
 
 
 
 VL53L1_Error VL53L1_init_and_start_range(
-	VL53L1_DEV                     Dev,
-	uint8_t                        measurement_mode,
-	VL53L1_DeviceConfigLevel       device_config_level)
+	VL53L1_DEV Dev,
+	uint8_t measurement_mode,
+	VL53L1_DeviceConfigLevel device_config_level)
 {
 	/*
 	 * Builds and sends a single I2C multiple byte transaction to
@@ -1908,21 +1860,21 @@ VL53L1_Error VL53L1_init_and_start_range(
 
 	uint8_t buffer[VL53L1_MAX_I2C_XFER_SIZE];
 
-	VL53L1_static_nvm_managed_t   *pstatic_nvm   = &(pdev->stat_nvm);
+	VL53L1_static_nvm_managed_t   *pstatic_nvm = &(pdev->stat_nvm);
 	VL53L1_customer_nvm_managed_t *pcustomer_nvm = &(pdev->customer);
-	VL53L1_static_config_t        *pstatic       = &(pdev->stat_cfg);
-	VL53L1_general_config_t       *pgeneral      = &(pdev->gen_cfg);
-	VL53L1_timing_config_t        *ptiming       = &(pdev->tim_cfg);
-	VL53L1_dynamic_config_t       *pdynamic      = &(pdev->dyn_cfg);
-	VL53L1_system_control_t       *psystem       = &(pdev->sys_ctrl);
+	VL53L1_static_config_t        *pstatic = &(pdev->stat_cfg);
+	VL53L1_general_config_t       *pgeneral = &(pdev->gen_cfg);
+	VL53L1_timing_config_t        *ptiming = &(pdev->tim_cfg);
+	VL53L1_dynamic_config_t       *pdynamic = &(pdev->dyn_cfg);
+	VL53L1_system_control_t       *psystem = &(pdev->sys_ctrl);
 
-	VL53L1_ll_driver_state_t  *pstate   = &(pdev->ll_state);
+	VL53L1_ll_driver_state_t  *pstate = &(pdev->ll_state);
 
-	uint8_t  *pbuffer                   = &buffer[0];
-	uint16_t i                          = 0;
-	uint16_t i2c_index                  = 0;
-	uint16_t i2c_buffer_offset_bytes    = 0;
-	uint16_t i2c_buffer_size_bytes      = 0;
+	uint8_t  *pbuffer = &buffer[0];
+	uint16_t i = 0;
+	uint16_t i2c_index = 0;
+	uint16_t i2c_buffer_offset_bytes = 0;
+	uint16_t i2c_buffer_size_bytes = 0;
 
 	LOG_FUNCTION_START("");
 
@@ -1933,7 +1885,7 @@ VL53L1_Error VL53L1_init_and_start_range(
 
 	psystem->system__mode_start =
 		(psystem->system__mode_start &
-		VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK) |
+		 VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK) |
 		measurement_mode;
 
 	/* copy in rit from xtalk config */
@@ -1952,7 +1904,7 @@ VL53L1_Error VL53L1_init_and_start_range(
 
 	/* For Presence. Override threshold config */
 	if ((pdev->low_power_auto_data.is_low_power_auto_mode == 1) &&
-		(pdev->low_power_auto_data.low_power_auto_range_count == 0)) {
+	    (pdev->low_power_auto_data.low_power_auto_range_count == 0)) {
 		/* save interrupt config */
 		pdev->low_power_auto_data.saved_interrupt_config =
 			pdev->gen_cfg.system__interrupt_config_gpio;
@@ -1960,8 +1912,8 @@ VL53L1_Error VL53L1_init_and_start_range(
 		pdev->gen_cfg.system__interrupt_config_gpio = 1 << 5;
 		/* check MM1/MM2 disabled? */
 		if ((pdev->dyn_cfg.system__sequence_config & (
-			VL53L1_SEQUENCE_MM1_EN | VL53L1_SEQUENCE_MM2_EN)) ==
-				0x0) {
+			     VL53L1_SEQUENCE_MM1_EN | VL53L1_SEQUENCE_MM2_EN)) ==
+		    0x0) {
 			pdev->customer.algo__part_to_part_range_offset_mm =
 				pdev->customer.mm_config__outer_offset_mm * 4;
 		} else {
@@ -1970,14 +1922,14 @@ VL53L1_Error VL53L1_init_and_start_range(
 
 		/* make sure config gets written out */
 		if (device_config_level <
-				VL53L1_DEVICECONFIGLEVEL_CUSTOMER_ONWARDS) {
+		    VL53L1_DEVICECONFIGLEVEL_CUSTOMER_ONWARDS) {
 			device_config_level =
 				VL53L1_DEVICECONFIGLEVEL_CUSTOMER_ONWARDS;
 		}
 	}
 
 	if ((pdev->low_power_auto_data.is_low_power_auto_mode == 1) &&
-		(pdev->low_power_auto_data.low_power_auto_range_count == 1)) {
+	    (pdev->low_power_auto_data.low_power_auto_range_count == 1)) {
 		/* restore interrupt config */
 		pdev->gen_cfg.system__interrupt_config_gpio =
 			pdev->low_power_auto_data.saved_interrupt_config;
@@ -2019,22 +1971,21 @@ VL53L1_Error VL53L1_init_and_start_range(
 	/* I2C Buffer size */
 
 	i2c_buffer_size_bytes = \
-			(VL53L1_SYSTEM_CONTROL_I2C_INDEX +
-			 VL53L1_SYSTEM_CONTROL_I2C_SIZE_BYTES) -
-			 i2c_index;
+		(VL53L1_SYSTEM_CONTROL_I2C_INDEX +
+		 VL53L1_SYSTEM_CONTROL_I2C_SIZE_BYTES) -
+		i2c_index;
 
 	/* Initialize buffer */
 
 	pbuffer = &buffer[0];
-	for (i = 0 ; i < i2c_buffer_size_bytes ; i++) {
+	for (i = 0; i < i2c_buffer_size_bytes; i++) {
 		*pbuffer++ = 0;
 	}
 
 	/* Build I2C buffer */
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_FULL &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes = \
 			VL53L1_STATIC_NVM_MANAGED_I2C_INDEX - i2c_index;
 
@@ -2046,8 +1997,7 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_CUSTOMER_ONWARDS &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes = \
 			VL53L1_CUSTOMER_NVM_MANAGED_I2C_INDEX - i2c_index;
 
@@ -2059,8 +2009,7 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_STATIC_ONWARDS &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes = \
 			VL53L1_STATIC_CONFIG_I2C_INDEX - i2c_index;
 
@@ -2072,10 +2021,9 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_GENERAL_ONWARDS &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes =
-				VL53L1_GENERAL_CONFIG_I2C_INDEX - i2c_index;
+			VL53L1_GENERAL_CONFIG_I2C_INDEX - i2c_index;
 
 		status =
 			VL53L1_i2c_encode_general_config(
@@ -2085,10 +2033,9 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_TIMING_ONWARDS &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes = \
-				VL53L1_TIMING_CONFIG_I2C_INDEX - i2c_index;
+			VL53L1_TIMING_CONFIG_I2C_INDEX - i2c_index;
 
 		status =
 			VL53L1_i2c_encode_timing_config(
@@ -2098,18 +2045,17 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (device_config_level >= VL53L1_DEVICECONFIGLEVEL_DYNAMIC_ONWARDS &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes = \
 			VL53L1_DYNAMIC_CONFIG_I2C_INDEX - i2c_index;
 
 		/* If in back to back mode, use GPH ID from cfg_state */
 		if ((psystem->system__mode_start &
-			VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK) ==
-			VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK) {
+		     VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK) ==
+		    VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK) {
 			pdynamic->system__grouped_parameter_hold_0 = pstate->cfg_gph_id | 0x01;
 			pdynamic->system__grouped_parameter_hold_1 = pstate->cfg_gph_id | 0x01;
-			pdynamic->system__grouped_parameter_hold   = pstate->cfg_gph_id;
+			pdynamic->system__grouped_parameter_hold = pstate->cfg_gph_id;
 		}
 		status =
 			VL53L1_i2c_encode_dynamic_config(
@@ -2119,9 +2065,8 @@ VL53L1_Error VL53L1_init_and_start_range(
 	}
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		i2c_buffer_offset_bytes = \
-				VL53L1_SYSTEM_CONTROL_I2C_INDEX - i2c_index;
+			VL53L1_SYSTEM_CONTROL_I2C_INDEX - i2c_index;
 
 		status =
 			VL53L1_i2c_encode_system_control(
@@ -2157,7 +2102,7 @@ VL53L1_Error VL53L1_init_and_start_range(
 
 
 VL53L1_Error VL53L1_stop_range(
-	VL53L1_DEV     Dev)
+	VL53L1_DEV Dev)
 {
 	/*
 	 * Stops any in process range using the ABORT command
@@ -2167,26 +2112,26 @@ VL53L1_Error VL53L1_stop_range(
 	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	/* Merge ABORT mode with mode_start */
 
 	pdev->sys_ctrl.system__mode_start =
-			(pdev->sys_ctrl.system__mode_start & VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK) |
-			 VL53L1_DEVICEMEASUREMENTMODE_ABORT;
+		(pdev->sys_ctrl.system__mode_start & VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK) |
+		VL53L1_DEVICEMEASUREMENTMODE_ABORT;
 
 	status = VL53L1_set_system_control(
-				Dev,
-				&pdev->sys_ctrl);
+		Dev,
+		&pdev->sys_ctrl);
 
 	/* Abort bit is auto clear so clear register group structure to match */
 	pdev->sys_ctrl.system__mode_start =
-			(pdev->sys_ctrl.system__mode_start & VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK);
+		(pdev->sys_ctrl.system__mode_start & VL53L1_DEVICEMEASUREMENTMODE_STOP_MASK);
 
 	/* reset zone dynamic info */
 	VL53L1_init_ll_driver_state(
-			Dev,
-			VL53L1_DEVICESTATE_SW_STANDBY);
+		Dev,
+		VL53L1_DEVICESTATE_SW_STANDBY);
 
 	/* reset low power auto */
 	if (pdev->low_power_auto_data.is_low_power_auto_mode == 1)
@@ -2197,8 +2142,8 @@ VL53L1_Error VL53L1_stop_range(
 
 
 VL53L1_Error VL53L1_get_measurement_results(
-	VL53L1_DEV                     Dev,
-	VL53L1_DeviceResultsLevel      device_results_level)
+	VL53L1_DEV Dev,
+	VL53L1_DeviceResultsLevel device_results_level)
 {
 	/*
 	 * Read via a single I2C multiple byte transaction all
@@ -2211,12 +2156,12 @@ VL53L1_Error VL53L1_get_measurement_results(
 	uint8_t buffer[VL53L1_MAX_I2C_XFER_SIZE];
 
 	VL53L1_system_results_t   *psystem_results = &(pdev->sys_results);
-	VL53L1_core_results_t     *pcore_results   = &(pdev->core_results);
-	VL53L1_debug_results_t    *pdebug_results  = &(pdev->dbg_results);
+	VL53L1_core_results_t     *pcore_results = &(pdev->core_results);
+	VL53L1_debug_results_t    *pdebug_results = &(pdev->dbg_results);
 
-	uint16_t i2c_index               = VL53L1_SYSTEM_RESULTS_I2C_INDEX;
+	uint16_t i2c_index = VL53L1_SYSTEM_RESULTS_I2C_INDEX;
 	uint16_t i2c_buffer_offset_bytes = 0;
-	uint16_t i2c_buffer_size_bytes   = 0;
+	uint16_t i2c_buffer_size_bytes = 0;
 
 	LOG_FUNCTION_START("");
 
@@ -2225,19 +2170,19 @@ VL53L1_Error VL53L1_get_measurement_results(
 	switch (device_results_level) {
 	case VL53L1_DEVICERESULTSLEVEL_FULL:
 		i2c_buffer_size_bytes =
-				(VL53L1_DEBUG_RESULTS_I2C_INDEX +
-				VL53L1_DEBUG_RESULTS_I2C_SIZE_BYTES) -
-				i2c_index;
+			(VL53L1_DEBUG_RESULTS_I2C_INDEX +
+			 VL53L1_DEBUG_RESULTS_I2C_SIZE_BYTES) -
+			i2c_index;
 		break;
 	case VL53L1_DEVICERESULTSLEVEL_UPTO_CORE:
 		i2c_buffer_size_bytes =
-				(VL53L1_CORE_RESULTS_I2C_INDEX +
-				VL53L1_CORE_RESULTS_I2C_SIZE_BYTES) -
-				i2c_index;
+			(VL53L1_CORE_RESULTS_I2C_INDEX +
+			 VL53L1_CORE_RESULTS_I2C_SIZE_BYTES) -
+			i2c_index;
 		break;
 	default:
 		i2c_buffer_size_bytes =
-				VL53L1_SYSTEM_RESULTS_I2C_SIZE_BYTES;
+			VL53L1_SYSTEM_RESULTS_I2C_SIZE_BYTES;
 		break;
 	}
 
@@ -2254,10 +2199,9 @@ VL53L1_Error VL53L1_get_measurement_results(
 	/* Decode  I2C buffer */
 
 	if (device_results_level >= VL53L1_DEVICERESULTSLEVEL_FULL &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes =
-				VL53L1_DEBUG_RESULTS_I2C_INDEX - i2c_index;
+			VL53L1_DEBUG_RESULTS_I2C_INDEX - i2c_index;
 
 		status =
 			VL53L1_i2c_decode_debug_results(
@@ -2267,10 +2211,9 @@ VL53L1_Error VL53L1_get_measurement_results(
 	}
 
 	if (device_results_level >= VL53L1_DEVICERESULTSLEVEL_UPTO_CORE &&
-		status == VL53L1_ERROR_NONE) {
-
+	    status == VL53L1_ERROR_NONE) {
 		i2c_buffer_offset_bytes =
-				VL53L1_CORE_RESULTS_I2C_INDEX - i2c_index;
+			VL53L1_CORE_RESULTS_I2C_INDEX - i2c_index;
 
 		status =
 			VL53L1_i2c_decode_core_results(
@@ -2280,7 +2223,6 @@ VL53L1_Error VL53L1_get_measurement_results(
 	}
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		i2c_buffer_offset_bytes = 0;
 		status =
 			VL53L1_i2c_decode_system_results(
@@ -2296,8 +2238,8 @@ VL53L1_Error VL53L1_get_measurement_results(
 
 
 VL53L1_Error VL53L1_get_device_results(
-	VL53L1_DEV                    Dev,
-	VL53L1_DeviceResultsLevel     device_results_level,
+	VL53L1_DEV Dev,
+	VL53L1_DeviceResultsLevel device_results_level,
 	VL53L1_range_results_t       *prange_results)
 {
 	/*
@@ -2313,9 +2255,9 @@ VL53L1_Error VL53L1_get_device_results(
 	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev =
-			VL53L1DevStructGetLLDriverHandle(Dev);
+		VL53L1DevStructGetLLDriverHandle(Dev);
 	VL53L1_LLDriverResults_t *pres =
-			VL53L1DevStructGetLLResultsHandle(Dev);
+		VL53L1DevStructGetLLResultsHandle(Dev);
 
 	VL53L1_range_results_t   *presults = &(pres->range_results);
 
@@ -2325,15 +2267,15 @@ VL53L1_Error VL53L1_get_device_results(
 
 	if (status == VL53L1_ERROR_NONE) /*lint !e774 always true*/
 		status = VL53L1_get_measurement_results(
-						Dev,
-						device_results_level);
+			Dev,
+			device_results_level);
 
 	if (status == VL53L1_ERROR_NONE)
 		VL53L1_copy_sys_and_core_results_to_range_results(
-				(int32_t)pdev->gain_cal.standard_ranging_gain_factor,
-				&(pdev->sys_results),
-				&(pdev->core_results),
-				presults);
+			(int32_t)pdev->gain_cal.standard_ranging_gain_factor,
+			&(pdev->sys_results),
+			&(pdev->core_results),
+			presults);
 
 	/* Start Patch_LowPowerAutoMode */
 	/* process results from first range of low power auto */
@@ -2341,29 +2283,28 @@ VL53L1_Error VL53L1_get_device_results(
 		/* change to manual calibrations. Only needed on the
 		 * first range out  */
 		if ((status == VL53L1_ERROR_NONE) &&
-			(pdev->low_power_auto_data.low_power_auto_range_count == 0)) {
+		    (pdev->low_power_auto_data.low_power_auto_range_count == 0)) {
 			status = VL53L1_low_power_auto_setup_manual_calibration(
-					Dev);
+				Dev);
 			pdev->low_power_auto_data.low_power_auto_range_count = 1;
 		} else if ((status == VL53L1_ERROR_NONE) &&
-			(pdev->low_power_auto_data.low_power_auto_range_count == 1)) {
+			   (pdev->low_power_auto_data.low_power_auto_range_count == 1)) {
 			pdev->low_power_auto_data.low_power_auto_range_count = 2;
 		}
 
 		/* perform DSS calculation. This can be performed every range */
 		if ((pdev->low_power_auto_data.low_power_auto_range_count != 0xFF) &&
-			(status == VL53L1_ERROR_NONE)) {
+		    (status == VL53L1_ERROR_NONE)) {
 			status = VL53L1_low_power_auto_update_DSS(
-					Dev);
+				Dev);
 		}
-
 	}
 	/* End Patch_LowPowerAutoMode */
 
 	/* copy current state into results */
 
 	presults->cfg_device_state = pdev->ll_state.cfg_device_state;
-	presults->rd_device_state  = pdev->ll_state.rd_device_state;
+	presults->rd_device_state = pdev->ll_state.rd_device_state;
 
 	/* copy internal structure to supplied output pointer */
 
@@ -2395,10 +2336,9 @@ VL53L1_Error VL53L1_get_device_results(
 
 
 VL53L1_Error VL53L1_clear_interrupt_and_enable_next_range(
-	VL53L1_DEV        Dev,
-	uint8_t           measurement_mode)
+	VL53L1_DEV Dev,
+	uint8_t measurement_mode)
 {
-
 	/*
 	 * Enable next range by sending handshake which
 	 * clears the interrupt
@@ -2419,9 +2359,9 @@ VL53L1_Error VL53L1_clear_interrupt_and_enable_next_range(
 
 	if (status == VL53L1_ERROR_NONE) /*lint !e774 always true*/
 		status = VL53L1_init_and_start_range(
-					Dev,
-					measurement_mode,
-					VL53L1_DEVICECONFIGLEVEL_GENERAL_ONWARDS);
+			Dev,
+			measurement_mode,
+			VL53L1_DEVICECONFIGLEVEL_GENERAL_ONWARDS);
 
 	LOG_FUNCTION_END(status);
 
@@ -2430,12 +2370,12 @@ VL53L1_Error VL53L1_clear_interrupt_and_enable_next_range(
 
 
 void VL53L1_copy_sys_and_core_results_to_range_results(
-	int32_t                           gain_factor,
+	int32_t gain_factor,
 	VL53L1_system_results_t          *psys,
 	VL53L1_core_results_t            *pcore,
 	VL53L1_range_results_t           *presults)
 {
-	uint8_t  i = 0;
+	uint8_t i = 0;
 
 	VL53L1_range_data_t *pdata;
 	int32_t range_mm = 0;
@@ -2445,26 +2385,24 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
 
 	/* copy results */
 
-	presults->stream_count    = psys->result__stream_count;
+	presults->stream_count = psys->result__stream_count;
 
 	pdata = &(presults->data[0]);
 
-	for (i = 0 ; i < 2 ; i++) {
-
-		pdata->range_id     = i;
-		pdata->time_stamp   = 0;
+	for (i = 0; i < 2; i++) {
+		pdata->range_id = i;
+		pdata->time_stamp = 0;
 
 		if ((psys->result__stream_count == 0) &&
-			((psys->result__range_status & VL53L1_RANGE_STATUS__RANGE_STATUS_MASK) ==
-			VL53L1_DEVICEERROR_RANGECOMPLETE)) {
+		    ((psys->result__range_status & VL53L1_RANGE_STATUS__RANGE_STATUS_MASK) ==
+		     VL53L1_DEVICEERROR_RANGECOMPLETE)) {
 			pdata->range_status = VL53L1_DEVICEERROR_RANGECOMPLETE_NO_WRAP_CHECK;
 		} else {
 			pdata->range_status =
-					psys->result__range_status & VL53L1_RANGE_STATUS__RANGE_STATUS_MASK;
+				psys->result__range_status & VL53L1_RANGE_STATUS__RANGE_STATUS_MASK;
 		}
 
 		switch (i) {
-
 		case 0:
 
 			if (psys->result__report_status == VL53L1_DEVICEREPORTSTATUS_MM1)
@@ -2472,7 +2410,7 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
 					psys->result__mm_inner_actual_effective_spads_sd0;
 			else if (psys->result__report_status == VL53L1_DEVICEREPORTSTATUS_MM2)
 				pdata->actual_effective_spads =
-						psys->result__mm_outer_actual_effective_spads_sd0;
+					psys->result__mm_outer_actual_effective_spads_sd0;
 			else
 				pdata->actual_effective_spads =
 					psys->result__dss_actual_effective_spads_sd0;
@@ -2557,7 +2495,7 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
 				pcore->result_core__ranging_total_events_sd1;
 			pdata->signal_total_events =
 				pcore->result_core__signal_total_events_sd1;
-			pdata->total_periods_elapsed  =
+			pdata->total_periods_elapsed =
 				pcore->result_core__total_periods_elapsed_sd1;
 			pdata->ambient_window_events =
 				pcore->result_core__ambient_window_events_sd1;
@@ -2581,8 +2519,7 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
 	 */
 
 	switch (psys->result__range_status &
-			VL53L1_RANGE_STATUS__RANGE_STATUS_MASK) {
-
+		VL53L1_RANGE_STATUS__RANGE_STATUS_MASK) {
 	case VL53L1_DEVICEERROR_VCSELCONTINUITYTESTFAILURE:
 	case VL53L1_DEVICEERROR_VCSELWATCHDOGTESTFAILURE:
 	case VL53L1_DEVICEERROR_NOVHVVALUEFOUND:
@@ -2590,11 +2527,10 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
 	case VL53L1_DEVICEERROR_MULTCLIPFAIL:
 
 		presults->device_status = (psys->result__range_status &
-				VL53L1_RANGE_STATUS__RANGE_STATUS_MASK);
+					   VL53L1_RANGE_STATUS__RANGE_STATUS_MASK);
 
 		presults->data[0].range_status = VL53L1_DEVICEERROR_NOUPDATE;
-	break;
-
+		break;
 	}
 
 	LOG_FUNCTION_END(0);
@@ -2605,19 +2541,19 @@ void VL53L1_copy_sys_and_core_results_to_range_results(
  */
 
 VL53L1_Error VL53L1_set_GPIO_interrupt_config(
-	VL53L1_DEV                      Dev,
-	VL53L1_GPIO_Interrupt_Mode	intr_mode_distance,
-	VL53L1_GPIO_Interrupt_Mode	intr_mode_rate,
-	uint8_t				intr_new_measure_ready,
-	uint8_t				intr_no_target,
-	uint8_t				intr_combined_mode,
-	uint16_t			thresh_distance_high,
-	uint16_t			thresh_distance_low,
-	uint16_t			thresh_rate_high,
-	uint16_t			thresh_rate_low
+	VL53L1_DEV Dev,
+	VL53L1_GPIO_Interrupt_Mode intr_mode_distance,
+	VL53L1_GPIO_Interrupt_Mode intr_mode_rate,
+	uint8_t intr_new_measure_ready,
+	uint8_t intr_no_target,
+	uint8_t intr_combined_mode,
+	uint16_t thresh_distance_high,
+	uint16_t thresh_distance_low,
+	uint16_t thresh_rate_high,
+	uint16_t thresh_rate_low
 	)
 {
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 	VL53L1_GPIO_interrupt_config_t *pintconf = &(pdev->gpio_interrupt_config);
@@ -2642,8 +2578,8 @@ VL53L1_Error VL53L1_set_GPIO_interrupt_config(
 
 	/* set thresholds */
 	status = VL53L1_set_GPIO_thresholds_from_struct(
-			Dev,
-			pintconf);
+		Dev,
+		pintconf);
 
 	LOG_FUNCTION_END(status);
 	return status;
@@ -2654,17 +2590,17 @@ VL53L1_Error VL53L1_set_GPIO_interrupt_config(
  */
 
 VL53L1_Error VL53L1_set_GPIO_interrupt_config_struct(
-	VL53L1_DEV                      Dev,
-	VL53L1_GPIO_interrupt_config_t	intconf)
+	VL53L1_DEV Dev,
+	VL53L1_GPIO_interrupt_config_t intconf)
 {
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 	VL53L1_GPIO_interrupt_config_t *pintconf = &(pdev->gpio_interrupt_config);
 
 	LOG_FUNCTION_START("");
 
-	 /* using memcpy(dst, src, size in bytes) */
+	/* using memcpy(dst, src, size in bytes) */
 	memcpy(pintconf, &(intconf), sizeof(VL53L1_GPIO_interrupt_config_t));
 
 	/* encoded interrupt config */
@@ -2673,8 +2609,8 @@ VL53L1_Error VL53L1_set_GPIO_interrupt_config_struct(
 
 	/* set thresholds */
 	status = VL53L1_set_GPIO_thresholds_from_struct(
-			Dev,
-			pintconf);
+		Dev,
+		pintconf);
 
 	LOG_FUNCTION_END(status);
 	return status;
@@ -2685,10 +2621,10 @@ VL53L1_Error VL53L1_set_GPIO_interrupt_config_struct(
  */
 
 VL53L1_Error VL53L1_get_GPIO_interrupt_config(
-	VL53L1_DEV                      Dev,
-	VL53L1_GPIO_interrupt_config_t	*pintconf)
+	VL53L1_DEV Dev,
+	VL53L1_GPIO_interrupt_config_t  *pintconf)
 {
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2699,7 +2635,7 @@ VL53L1_Error VL53L1_get_GPIO_interrupt_config(
 	 * This makes sure the structure is in line with the register
 	 */
 	pdev->gpio_interrupt_config = VL53L1_decode_GPIO_interrupt_config(
-			pdev->gen_cfg.system__interrupt_config_gpio);
+		pdev->gen_cfg.system__interrupt_config_gpio);
 
 	/*
 	 * Readout the system thresholds
@@ -2714,13 +2650,12 @@ VL53L1_Error VL53L1_get_GPIO_interrupt_config(
 	pdev->gpio_interrupt_config.threshold_rate_low =
 		pdev->gen_cfg.system__thresh_rate_low;
 
-	if (pintconf == &(pdev->gpio_interrupt_config))	{
+	if (pintconf == &(pdev->gpio_interrupt_config)) {
 		/* Cowardly refusing to copy the same memory locations */
 	} else {
-
 		/* using memcpy(dst, src, size in bytes) */
 		memcpy(pintconf, &(pdev->gpio_interrupt_config),
-				sizeof(VL53L1_GPIO_interrupt_config_t));
+		       sizeof(VL53L1_GPIO_interrupt_config_t));
 	}
 
 	LOG_FUNCTION_END(status);
@@ -2728,15 +2663,14 @@ VL53L1_Error VL53L1_get_GPIO_interrupt_config(
 }
 
 VL53L1_Error VL53L1_set_offset_calibration_mode(
-	VL53L1_DEV                     Dev,
-	VL53L1_OffsetCalibrationMode   offset_cal_mode)
+	VL53L1_DEV Dev,
+	VL53L1_OffsetCalibrationMode offset_cal_mode)
 {
-
 	/*
 	 * Sets the offset calibration mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2751,15 +2685,14 @@ VL53L1_Error VL53L1_set_offset_calibration_mode(
 
 
 VL53L1_Error VL53L1_get_offset_calibration_mode(
-	VL53L1_DEV                     Dev,
+	VL53L1_DEV Dev,
 	VL53L1_OffsetCalibrationMode  *poffset_cal_mode)
 {
-
 	/*
 	 * Gets the offset calibration mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2774,15 +2707,14 @@ VL53L1_Error VL53L1_get_offset_calibration_mode(
 
 
 VL53L1_Error VL53L1_set_offset_correction_mode(
-	VL53L1_DEV                     Dev,
-	VL53L1_OffsetCorrectionMode    offset_cor_mode)
+	VL53L1_DEV Dev,
+	VL53L1_OffsetCorrectionMode offset_cor_mode)
 {
-
 	/*
 	 * Sets the offset correction mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2797,15 +2729,14 @@ VL53L1_Error VL53L1_set_offset_correction_mode(
 
 
 VL53L1_Error VL53L1_get_offset_correction_mode(
-	VL53L1_DEV                     Dev,
+	VL53L1_DEV Dev,
 	VL53L1_OffsetCorrectionMode   *poffset_cor_mode)
 {
-
 	/*
 	 * Gets the offset correction mode
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2822,14 +2753,14 @@ VL53L1_Error VL53L1_get_offset_correction_mode(
 /* Start Patch_AddedTuningParms_11761 */
 #ifdef VL53L1_DEBUG
 VL53L1_Error VL53L1_get_tuning_debug_data(
-	VL53L1_DEV                            Dev,
+	VL53L1_DEV Dev,
 	VL53L1_tuning_parameters_t           *ptun_data)
 {
 	/*
 	 * Helper function to extract all tuning parm values
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
@@ -2879,7 +2810,7 @@ VL53L1_Error VL53L1_get_tuning_debug_data(
 		pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult;
 
 	ptun_data->vl53l1_tuningparm_lite_seed_config =
-		pdev->tuning_parms.tp_lite_seed_cfg ;
+		pdev->tuning_parms.tp_lite_seed_cfg;
 
 	ptun_data->vl53l1_tuningparm_lite_quantifier =
 		pdev->tuning_parms.tp_lite_quantifier;
@@ -3002,260 +2933,257 @@ VL53L1_Error VL53L1_get_tuning_debug_data(
 #endif
 
 VL53L1_Error VL53L1_get_tuning_parm(
-	VL53L1_DEV                     Dev,
-	VL53L1_TuningParms             tuning_parm_key,
+	VL53L1_DEV Dev,
+	VL53L1_TuningParms tuning_parm_key,
 	int32_t                       *ptuning_parm_value)
 {
-
 	/*
 	 * Gets the requested tuning parm value
 	 * - Large case statement for returns
 	 * - if key does not match, INVALID parm error returned
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	switch (tuning_parm_key) {
-
 	case VL53L1_TUNINGPARM_VERSION:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_tuning_parm_version;
-	break;
+			(int32_t)pdev->tuning_parms.tp_tuning_parm_version;
+		break;
 	case VL53L1_TUNINGPARM_KEY_TABLE_VERSION:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_tuning_parm_key_table_version;
-	break;
+			(int32_t)pdev->tuning_parms.tp_tuning_parm_key_table_version;
+		break;
 	case VL53L1_TUNINGPARM_LLD_VERSION:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_tuning_parm_lld_version;
-	break;
+			(int32_t)pdev->tuning_parms.tp_tuning_parm_lld_version;
+		break;
 	case VL53L1_TUNINGPARM_CONSISTENCY_LITE_PHASE_TOLERANCE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_consistency_lite_phase_tolerance;
-	break;
+			(int32_t)pdev->tuning_parms.tp_consistency_lite_phase_tolerance;
+		break;
 	case VL53L1_TUNINGPARM_PHASECAL_TARGET:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_phasecal_target;
-	break;
+			(int32_t)pdev->tuning_parms.tp_phasecal_target;
+		break;
 	case VL53L1_TUNINGPARM_LITE_CAL_REPEAT_RATE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_cal_repeat_rate;
-	break;
+			(int32_t)pdev->tuning_parms.tp_cal_repeat_rate;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RANGING_GAIN_FACTOR:
 		*ptuning_parm_value =
-				(int32_t)pdev->gain_cal.standard_ranging_gain_factor;
-	break;
+			(int32_t)pdev->gain_cal.standard_ranging_gain_factor;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MIN_CLIP_MM:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_min_clip;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_min_clip;
+		break;
 	case VL53L1_TUNINGPARM_LITE_LONG_SIGMA_THRESH_MM:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_long_sigma_thresh_mm;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_long_sigma_thresh_mm;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MED_SIGMA_THRESH_MM:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_med_sigma_thresh_mm;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_med_sigma_thresh_mm;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SHORT_SIGMA_THRESH_MM:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_short_sigma_thresh_mm;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_short_sigma_thresh_mm;
+		break;
 	case VL53L1_TUNINGPARM_LITE_LONG_MIN_COUNT_RATE_RTN_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_long_min_count_rate_rtn_mcps;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_long_min_count_rate_rtn_mcps;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MED_MIN_COUNT_RATE_RTN_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_med_min_count_rate_rtn_mcps;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_med_min_count_rate_rtn_mcps;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SHORT_MIN_COUNT_RATE_RTN_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_short_min_count_rate_rtn_mcps;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_short_min_count_rate_rtn_mcps;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_EST_PULSE_WIDTH:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_sigma_est_pulse_width_ns;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_sigma_est_pulse_width_ns;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_EST_AMB_WIDTH_NS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_sigma_est_amb_width_ns;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_sigma_est_amb_width_ns;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_REF_MM:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_sigma_ref_mm;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_sigma_ref_mm;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RIT_MULT:
 		*ptuning_parm_value =
-				(int32_t)pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult;
-	break;
+			(int32_t)pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SEED_CONFIG:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_seed_cfg ;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_seed_cfg;
+		break;
 	case VL53L1_TUNINGPARM_LITE_QUANTIFIER:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_quantifier;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_quantifier;
+		break;
 	case VL53L1_TUNINGPARM_LITE_FIRST_ORDER_SELECT:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_lite_first_order_select;
-	break;
+			(int32_t)pdev->tuning_parms.tp_lite_first_order_select;
+		break;
 	case VL53L1_TUNINGPARM_LITE_XTALK_MARGIN_KCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->xtalk_cfg.lite_mode_crosstalk_margin_kcps;
-	break;
+			(int32_t)pdev->xtalk_cfg.lite_mode_crosstalk_margin_kcps;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_LONG_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_long;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_long;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_MED_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_med;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_med;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_SHORT_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_short;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_rtn_lite_short;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_LONG_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_long;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_long;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_MED_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_med;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_med;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_SHORT_RANGE:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_short;
-	break;
+			(int32_t)pdev->tuning_parms.tp_init_phase_ref_lite_short;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_SEED_CONFIG:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_timed_seed_cfg;
-	break;
+			(int32_t)pdev->tuning_parms.tp_timed_seed_cfg;
+		break;
 	case VL53L1_TUNINGPARM_VHV_LOOPBOUND:
 		*ptuning_parm_value =
-				(int32_t)pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound;
-	break;
+			(int32_t)pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_DEVICE_TEST_MODE:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.device_test_mode;
-	break;
+			(int32_t)pdev->refspadchar.device_test_mode;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_VCSEL_PERIOD:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.vcsel_period;
-	break;
+			(int32_t)pdev->refspadchar.vcsel_period;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_PHASECAL_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.timeout_us;
-	break;
+			(int32_t)pdev->refspadchar.timeout_us;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_TARGET_COUNT_RATE_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.target_count_rate_mcps;
-	break;
+			(int32_t)pdev->refspadchar.target_count_rate_mcps;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_MIN_COUNTRATE_LIMIT_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.min_count_rate_limit_mcps;
-	break;
+			(int32_t)pdev->refspadchar.min_count_rate_limit_mcps;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_MAX_COUNTRATE_LIMIT_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->refspadchar.max_count_rate_limit_mcps;
-	break;
+			(int32_t)pdev->refspadchar.max_count_rate_limit_mcps;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_DSS_RATE_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.dss_config__target_total_rate_mcps;;
-	break;
+			(int32_t)pdev->offsetcal_cfg.dss_config__target_total_rate_mcps;;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_PHASECAL_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.phasecal_config_timeout_us;
-	break;
+			(int32_t)pdev->offsetcal_cfg.phasecal_config_timeout_us;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.mm_config_timeout_us;
-	break;
+			(int32_t)pdev->offsetcal_cfg.mm_config_timeout_us;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_RANGE_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.range_config_timeout_us;
-	break;
+			(int32_t)pdev->offsetcal_cfg.range_config_timeout_us;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_PRE_SAMPLES:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.pre_num_of_samples;
-	break;
+			(int32_t)pdev->offsetcal_cfg.pre_num_of_samples;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM1_SAMPLES:
 		*ptuning_parm_value =
 			(int32_t)pdev->offsetcal_cfg.mm1_num_of_samples;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM2_SAMPLES:
 		*ptuning_parm_value =
-				(int32_t)pdev->offsetcal_cfg.mm2_num_of_samples;
-	break;
+			(int32_t)pdev->offsetcal_cfg.mm2_num_of_samples;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_VCSEL_PERIOD:
 		*ptuning_parm_value =
-				(int32_t)pdev->ssc_cfg.vcsel_period;
-	break;
+			(int32_t)pdev->ssc_cfg.vcsel_period;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_VCSEL_START:
 		*ptuning_parm_value =
-				(int32_t)pdev->ssc_cfg.vcsel_start;
-	break;
+			(int32_t)pdev->ssc_cfg.vcsel_start;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_RATE_LIMIT_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->ssc_cfg.rate_limit_mcps;
-	break;
+			(int32_t)pdev->ssc_cfg.rate_limit_mcps;
+		break;
 	case VL53L1_TUNINGPARM_LITE_DSS_CONFIG_TARGET_TOTAL_RATE_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_dss_target_lite_mcps;
-	break;
+			(int32_t)pdev->tuning_parms.tp_dss_target_lite_mcps;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_DSS_CONFIG_TARGET_TOTAL_RATE_MCPS:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_dss_target_timed_mcps;
-	break;
+			(int32_t)pdev->tuning_parms.tp_dss_target_timed_mcps;
+		break;
 	case VL53L1_TUNINGPARM_LITE_PHASECAL_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_phasecal_timeout_lite_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_phasecal_timeout_lite_us;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_PHASECAL_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_phasecal_timeout_timed_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_phasecal_timeout_timed_us;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MM_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_mm_timeout_lite_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_mm_timeout_lite_us;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_MM_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_mm_timeout_timed_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_mm_timeout_timed_us;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RANGE_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_range_timeout_lite_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_range_timeout_lite_us;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_RANGE_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_range_timeout_timed_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_range_timeout_timed_us;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_VHV_LOOP_BOUND:
 		*ptuning_parm_value =
-				(int32_t)pdev->low_power_auto_data.vhv_loop_bound;
-	break;
+			(int32_t)pdev->low_power_auto_data.vhv_loop_bound;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_MM_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_mm_timeout_lpa_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_mm_timeout_lpa_us;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_RANGE_CONFIG_TIMEOUT_US:
 		*ptuning_parm_value =
-				(int32_t)pdev->tuning_parms.tp_range_timeout_lpa_us;
-	break;
+			(int32_t)pdev->tuning_parms.tp_range_timeout_lpa_us;
+		break;
 
 
 	default:
 		*ptuning_parm_value = 0x7FFFFFFF;
 		status = VL53L1_ERROR_INVALID_PARAMS;
-	break;
-
+		break;
 	}
 
 	LOG_FUNCTION_END(status);
@@ -3264,32 +3192,30 @@ VL53L1_Error VL53L1_get_tuning_parm(
 }
 
 VL53L1_Error VL53L1_set_tuning_parm(
-	VL53L1_DEV            Dev,
-	VL53L1_TuningParms    tuning_parm_key,
-	int32_t               tuning_parm_value)
+	VL53L1_DEV Dev,
+	VL53L1_TuningParms tuning_parm_key,
+	int32_t tuning_parm_value)
 {
-
 	/*
 	 * Sets the requested tuning parm value
 	 * - Large case statement for set value
 	 * - if key does not match, INVALID parm error returned
 	 */
 
-	VL53L1_Error  status = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
 	LOG_FUNCTION_START("");
 
 	switch (tuning_parm_key) {
-
 	case VL53L1_TUNINGPARM_VERSION:
 		pdev->tuning_parms.tp_tuning_parm_version =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_KEY_TABLE_VERSION:
 		pdev->tuning_parms.tp_tuning_parm_key_table_version =
-					(uint16_t)tuning_parm_value;
+			(uint16_t)tuning_parm_value;
 
 		/* Perform Key Table Check
 		 *
@@ -3300,236 +3226,235 @@ VL53L1_Error VL53L1_set_tuning_parm(
 		 */
 
 		if ((uint16_t)tuning_parm_value
-				!= VL53L1_TUNINGPARM_KEY_TABLE_VERSION_DEFAULT) {
+		    != VL53L1_TUNINGPARM_KEY_TABLE_VERSION_DEFAULT) {
 			status = VL53L1_ERROR_TUNING_PARM_KEY_MISMATCH;
 		}
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LLD_VERSION:
 		pdev->tuning_parms.tp_tuning_parm_lld_version =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_CONSISTENCY_LITE_PHASE_TOLERANCE:
 		pdev->tuning_parms.tp_consistency_lite_phase_tolerance =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_PHASECAL_TARGET:
 		pdev->tuning_parms.tp_phasecal_target =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_CAL_REPEAT_RATE:
 		pdev->tuning_parms.tp_cal_repeat_rate =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RANGING_GAIN_FACTOR:
 		pdev->gain_cal.standard_ranging_gain_factor =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MIN_CLIP_MM:
 		pdev->tuning_parms.tp_lite_min_clip =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_LONG_SIGMA_THRESH_MM:
 		pdev->tuning_parms.tp_lite_long_sigma_thresh_mm =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MED_SIGMA_THRESH_MM:
 		pdev->tuning_parms.tp_lite_med_sigma_thresh_mm =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SHORT_SIGMA_THRESH_MM:
 		pdev->tuning_parms.tp_lite_short_sigma_thresh_mm =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_LONG_MIN_COUNT_RATE_RTN_MCPS:
 		pdev->tuning_parms.tp_lite_long_min_count_rate_rtn_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MED_MIN_COUNT_RATE_RTN_MCPS:
 		pdev->tuning_parms.tp_lite_med_min_count_rate_rtn_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SHORT_MIN_COUNT_RATE_RTN_MCPS:
 		pdev->tuning_parms.tp_lite_short_min_count_rate_rtn_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_EST_PULSE_WIDTH:
 		pdev->tuning_parms.tp_lite_sigma_est_pulse_width_ns =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_EST_AMB_WIDTH_NS:
 		pdev->tuning_parms.tp_lite_sigma_est_amb_width_ns =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SIGMA_REF_MM:
 		pdev->tuning_parms.tp_lite_sigma_ref_mm =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RIT_MULT:
 		pdev->xtalk_cfg.crosstalk_range_ignore_threshold_mult =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_SEED_CONFIG:
 		pdev->tuning_parms.tp_lite_seed_cfg =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_QUANTIFIER:
 		pdev->tuning_parms.tp_lite_quantifier =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_FIRST_ORDER_SELECT:
 		pdev->tuning_parms.tp_lite_first_order_select =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_XTALK_MARGIN_KCPS:
 		pdev->xtalk_cfg.lite_mode_crosstalk_margin_kcps =
-				(int16_t)tuning_parm_value;
-	break;
+			(int16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_LONG_RANGE:
 		pdev->tuning_parms.tp_init_phase_rtn_lite_long =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_MED_RANGE:
 		pdev->tuning_parms.tp_init_phase_rtn_lite_med =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_RTN_LITE_SHORT_RANGE:
 		pdev->tuning_parms.tp_init_phase_rtn_lite_short =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_LONG_RANGE:
 		pdev->tuning_parms.tp_init_phase_ref_lite_long =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_MED_RANGE:
 		pdev->tuning_parms.tp_init_phase_ref_lite_med =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_INITIAL_PHASE_REF_LITE_SHORT_RANGE:
 		pdev->tuning_parms.tp_init_phase_ref_lite_short =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_SEED_CONFIG:
 		pdev->tuning_parms.tp_timed_seed_cfg =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_VHV_LOOPBOUND:
 		pdev->stat_nvm.vhv_config__timeout_macrop_loop_bound =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_DEVICE_TEST_MODE:
 		pdev->refspadchar.device_test_mode =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_VCSEL_PERIOD:
 		pdev->refspadchar.vcsel_period =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_PHASECAL_TIMEOUT_US:
 		pdev->refspadchar.timeout_us =
-				(uint32_t)tuning_parm_value;
-	break;
+			(uint32_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_TARGET_COUNT_RATE_MCPS:
 		pdev->refspadchar.target_count_rate_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_MIN_COUNTRATE_LIMIT_MCPS:
 		pdev->refspadchar.min_count_rate_limit_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_REFSPADCHAR_MAX_COUNTRATE_LIMIT_MCPS:
 		pdev->refspadchar.max_count_rate_limit_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_DSS_RATE_MCPS:
 		pdev->offsetcal_cfg.dss_config__target_total_rate_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_PHASECAL_TIMEOUT_US:
 		pdev->offsetcal_cfg.phasecal_config_timeout_us =
-				(uint32_t)tuning_parm_value;
-	break;
+			(uint32_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM_TIMEOUT_US:
 		pdev->offsetcal_cfg.mm_config_timeout_us =
-				(uint32_t)tuning_parm_value;
-	break;
+			(uint32_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_RANGE_TIMEOUT_US:
 		pdev->offsetcal_cfg.range_config_timeout_us =
-				(uint32_t)tuning_parm_value;
-	break;
+			(uint32_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_PRE_SAMPLES:
 		pdev->offsetcal_cfg.pre_num_of_samples =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM1_SAMPLES:
 		pdev->offsetcal_cfg.mm1_num_of_samples =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_OFFSET_CAL_MM2_SAMPLES:
 		pdev->offsetcal_cfg.mm2_num_of_samples =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_VCSEL_PERIOD:
 		pdev->ssc_cfg.vcsel_period =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_VCSEL_START:
 		pdev->ssc_cfg.vcsel_start =
-				(uint8_t)tuning_parm_value;
-	break;
+			(uint8_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_SPADMAP_RATE_LIMIT_MCPS:
 		pdev->ssc_cfg.rate_limit_mcps =
-				(uint16_t)tuning_parm_value;
-	break;
+			(uint16_t)tuning_parm_value;
+		break;
 	case VL53L1_TUNINGPARM_LITE_DSS_CONFIG_TARGET_TOTAL_RATE_MCPS:
 		pdev->tuning_parms.tp_dss_target_lite_mcps =
 			(uint16_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_DSS_CONFIG_TARGET_TOTAL_RATE_MCPS:
 		pdev->tuning_parms.tp_dss_target_timed_mcps =
 			(uint16_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LITE_PHASECAL_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_phasecal_timeout_lite_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_PHASECAL_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_phasecal_timeout_timed_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LITE_MM_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_mm_timeout_lite_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_MM_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_mm_timeout_timed_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LITE_RANGE_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_range_timeout_lite_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_TIMED_RANGE_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_range_timeout_timed_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_VHV_LOOP_BOUND:
 		pdev->low_power_auto_data.vhv_loop_bound =
 			(uint8_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_MM_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_mm_timeout_lpa_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 	case VL53L1_TUNINGPARM_LOWPOWERAUTO_RANGE_CONFIG_TIMEOUT_US:
 		pdev->tuning_parms.tp_range_timeout_lpa_us =
 			(uint32_t)tuning_parm_value;
-	break;
+		break;
 
 
 	default:
 		status = VL53L1_ERROR_INVALID_PARAMS;
-	break;
-
+		break;
 	}
 
 	LOG_FUNCTION_END(status);

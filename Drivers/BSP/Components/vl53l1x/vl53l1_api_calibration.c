@@ -1,64 +1,64 @@
 /*
-* Copyright (c) 2017, STMicroelectronics - All Rights Reserved
-*
-* This file is part of VL53L1 Core and is dual licensed,
-* either 'STMicroelectronics
-* Proprietary license'
-* or 'BSD 3-clause "New" or "Revised" License' , at your option.
-*
-********************************************************************************
-*
-* 'STMicroelectronics Proprietary license'
-*
-********************************************************************************
-*
-* License terms: STMicroelectronics Proprietary in accordance with licensing
-* terms at www.st.com/sla0081
-*
-* STMicroelectronics confidential
-* Reproduction and Communication of this document is strictly prohibited unless
-* specifically authorized in writing by STMicroelectronics.
-*
-*
-********************************************************************************
-*
-* Alternatively, VL53L1 Core may be distributed under the terms of
-* 'BSD 3-clause "New" or "Revised" License', in which case the following
-* provisions apply instead of the ones mentioned above :
-*
-********************************************************************************
-*
-* License terms: BSD 3-clause "New" or "Revised" License.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following conditions are met:
-*
-* 1. Redistributions of source code must retain the above copyright notice, this
-* list of conditions and the following disclaimer.
-*
-* 2. Redistributions in binary form must reproduce the above copyright notice,
-* this list of conditions and the following disclaimer in the documentation
-* and/or other materials provided with the distribution.
-*
-* 3. Neither the name of the copyright holder nor the names of its contributors
-* may be used to endorse or promote products derived from this software
-* without specific prior written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
-*
-********************************************************************************
-*
-*/
+ * Copyright (c) 2017, STMicroelectronics - All Rights Reserved
+ *
+ * This file is part of VL53L1 Core and is dual licensed,
+ * either 'STMicroelectronics
+ * Proprietary license'
+ * or 'BSD 3-clause "New" or "Revised" License' , at your option.
+ *
+ ********************************************************************************
+ *
+ * 'STMicroelectronics Proprietary license'
+ *
+ ********************************************************************************
+ *
+ * License terms: STMicroelectronics Proprietary in accordance with licensing
+ * terms at www.st.com/sla0081
+ *
+ * STMicroelectronics confidential
+ * Reproduction and Communication of this document is strictly prohibited unless
+ * specifically authorized in writing by STMicroelectronics.
+ *
+ *
+ ********************************************************************************
+ *
+ * Alternatively, VL53L1 Core may be distributed under the terms of
+ * 'BSD 3-clause "New" or "Revised" License', in which case the following
+ * provisions apply instead of the ones mentioned above :
+ *
+ ********************************************************************************
+ *
+ * License terms: BSD 3-clause "New" or "Revised" License.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ *
+ * 3. Neither the name of the copyright holder nor the names of its contributors
+ * may be used to endorse or promote products derived from this software
+ * without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
+ ********************************************************************************
+ *
+ */
 
 /**
  * @file  vl53l1_api_core.c
@@ -88,21 +88,21 @@
 #endif
 
 #define LOG_FUNCTION_START(fmt, ...) \
-	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ##__VA_ARGS__)
+	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ## __VA_ARGS__)
 #define LOG_FUNCTION_END(status, ...) \
-	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ##__VA_ARGS__)
+	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ## __VA_ARGS__)
 #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_CORE, status, \
-		fmt, ##__VA_ARGS__)
+			      fmt, ## __VA_ARGS__)
 
 #define trace_print(level, ...) \
 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_CORE, \
-	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+			 level, VL53L1_TRACE_FUNCTION_NONE, ## __VA_ARGS__)
 
 
 #ifndef VL53L1_NOCALIB
 VL53L1_Error VL53L1_run_ref_spad_char(
-	VL53L1_DEV        Dev,
+	VL53L1_DEV Dev,
 	VL53L1_Error     *pcal_status)
 {
 	/*
@@ -114,7 +114,7 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 
 	uint8_t comms_buffer[6];
 
-	VL53L1_refspadchar_config_t *prefspadchar  = &(pdev->refspadchar);
+	VL53L1_refspadchar_config_t *prefspadchar = &(pdev->refspadchar);
 
 	LOG_FUNCTION_START("");
 
@@ -146,8 +146,8 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_run_device_test(
-					Dev,
-					prefspadchar->device_test_mode);
+			Dev,
+			prefspadchar->device_test_mode);
 
 	/*
 	 * Read results
@@ -163,9 +163,9 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 
 	if (status == VL53L1_ERROR_NONE) {
 		pdev->dbg_results.ref_spad_char_result__num_actual_ref_spads =
-				comms_buffer[0];
+			comms_buffer[0];
 		pdev->dbg_results.ref_spad_char_result__ref_location =
-				comms_buffer[1];
+			comms_buffer[1];
 	}
 
 	/*
@@ -182,9 +182,9 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 
 	if (status == VL53L1_ERROR_NONE) {
 		pdev->customer.ref_spad_man__num_requested_ref_spads =
-				comms_buffer[0];
+			comms_buffer[0];
 		pdev->customer.ref_spad_man__ref_location =
-				comms_buffer[1];
+			comms_buffer[1];
 	}
 
 	/* After Ref Spad Char the final set of good SPAD enables
@@ -218,17 +218,17 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 
 	if (status == VL53L1_ERROR_NONE) {
 		pdev->customer.global_config__spad_enables_ref_0 =
-				comms_buffer[0];
+			comms_buffer[0];
 		pdev->customer.global_config__spad_enables_ref_1 =
-				comms_buffer[1];
+			comms_buffer[1];
 		pdev->customer.global_config__spad_enables_ref_2 =
-				comms_buffer[2];
+			comms_buffer[2];
 		pdev->customer.global_config__spad_enables_ref_3 =
-				comms_buffer[3];
+			comms_buffer[3];
 		pdev->customer.global_config__spad_enables_ref_4 =
-				comms_buffer[4];
+			comms_buffer[4];
 		pdev->customer.global_config__spad_enables_ref_5 =
-				comms_buffer[5];
+			comms_buffer[5];
 	}
 
 #ifdef VL53L1_LOG_ENABLE
@@ -241,9 +241,7 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 #endif
 
 	if (status == VL53L1_ERROR_NONE) {
-
 		switch (pdev->sys_results.result__range_status) {
-
 		case VL53L1_DEVICEERROR_REFSPADCHARNOTENOUGHDPADS:
 			status = VL53L1_WARNING_REF_SPAD_CHAR_NOT_ENOUGH_SPADS;
 			break;
@@ -288,8 +286,8 @@ VL53L1_Error VL53L1_run_ref_spad_char(
 }
 
 VL53L1_Error VL53L1_run_offset_calibration(
-	VL53L1_DEV	                  Dev,
-	int16_t                       cal_distance_mm,
+	VL53L1_DEV Dev,
+	int16_t cal_distance_mm,
 	VL53L1_Error                 *pcal_status)
 {
 	/*
@@ -315,20 +313,20 @@ VL53L1_Error VL53L1_run_offset_calibration(
 	 *
 	 */
 
-	VL53L1_Error status        = VL53L1_ERROR_NONE;
+	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev =
 		VL53L1DevStructGetLLDriverHandle(Dev);
 
 	VL53L1_DevicePresetModes device_preset_modes[VL53L1_MAX_OFFSET_RANGE_RESULTS];
 
-	VL53L1_range_results_t      range_results;
+	VL53L1_range_results_t range_results;
 	VL53L1_range_results_t     *prange_results = &range_results;
 	VL53L1_range_data_t        *prange_data = NULL;
-	VL53L1_offset_range_data_t *poffset     = NULL;
+	VL53L1_offset_range_data_t *poffset = NULL;
 
-	uint8_t  i                      = 0;
-	uint8_t  m                      = 0;
-	uint8_t  measurement_mode       =
+	uint8_t i = 0;
+	uint8_t m = 0;
+	uint8_t measurement_mode =
 		VL53L1_DEVICEMEASUREMENTMODE_BACKTOBACK;
 	uint16_t manual_effective_spads =
 		pdev->gen_cfg.dss_config__manual_effective_spads_select;
@@ -340,7 +338,6 @@ VL53L1_Error VL53L1_run_offset_calibration(
 	/* select requested offset calibration mode */
 
 	switch (pdev->offset_calibration_mode) {
-
 	default:
 		device_preset_modes[0] =
 			VL53L1_DEVICEPRESETMODE_STANDARD_RANGING;
@@ -348,7 +345,7 @@ VL53L1_Error VL53L1_run_offset_calibration(
 			VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_MM1_CAL;
 		device_preset_modes[2] =
 			VL53L1_DEVICEPRESETMODE_STANDARD_RANGING_MM2_CAL;
-	break;
+		break;
 	}
 
 	/* initialise num_of_samples */
@@ -361,46 +358,43 @@ VL53L1_Error VL53L1_run_offset_calibration(
 	/* force all offsets to zero */
 
 	switch (pdev->offset_calibration_mode) {
-
 	case VL53L1_OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD_PRE_RANGE_ONLY:
 		/* only run pre range */
-		pdev->offset_results.active_results  = 1;
+		pdev->offset_results.active_results = 1;
 
-	break;
+		break;
 
 	default:
 
-		pdev->customer.mm_config__inner_offset_mm  = 0;
-		pdev->customer.mm_config__outer_offset_mm  = 0;
-		pdev->offset_results.active_results  =
+		pdev->customer.mm_config__inner_offset_mm = 0;
+		pdev->customer.mm_config__outer_offset_mm = 0;
+		pdev->offset_results.active_results =
 			VL53L1_MAX_OFFSET_RANGE_RESULTS;
 
-	break;
+		break;
 	}
 
 	pdev->customer.algo__part_to_part_range_offset_mm = 0;
 
 	/* initialise offset range results */
 
-	pdev->offset_results.max_results           = VL53L1_MAX_OFFSET_RANGE_RESULTS;
-	pdev->offset_results.cal_distance_mm       = cal_distance_mm;
+	pdev->offset_results.max_results = VL53L1_MAX_OFFSET_RANGE_RESULTS;
+	pdev->offset_results.cal_distance_mm = cal_distance_mm;
 
-	for (m = 0 ; m <  VL53L1_MAX_OFFSET_RANGE_RESULTS; m++) {
-
+	for (m = 0; m < VL53L1_MAX_OFFSET_RANGE_RESULTS; m++) {
 		poffset = &(pdev->offset_results.data[m]);
-		poffset->preset_mode         = 0;
-		poffset->no_of_samples       = 0;
-		poffset->effective_spads     = 0;
-		poffset->peak_rate_mcps      = 0;
-		poffset->sigma_mm            = 0;
-		poffset->median_range_mm     = 0;
+		poffset->preset_mode = 0;
+		poffset->no_of_samples = 0;
+		poffset->effective_spads = 0;
+		poffset->peak_rate_mcps = 0;
+		poffset->sigma_mm = 0;
+		poffset->median_range_mm = 0;
 	}
 
-	for (m = 0 ; m < pdev->offset_results.active_results ; m++) {
-
+	for (m = 0; m < pdev->offset_results.active_results; m++) {
 		poffset = &(pdev->offset_results.data[m]);
 
-		poffset->preset_mode         = device_preset_modes[m];
+		poffset->preset_mode = device_preset_modes[m];
 
 		/* Apply preset mode */
 
@@ -418,7 +412,7 @@ VL53L1_Error VL53L1_run_offset_calibration(
 					100);
 
 		pdev->gen_cfg.dss_config__manual_effective_spads_select =
-				manual_effective_spads;
+			manual_effective_spads;
 
 		/* Initialise device and start range */
 
@@ -429,8 +423,7 @@ VL53L1_Error VL53L1_run_offset_calibration(
 					measurement_mode,
 					VL53L1_DEVICECONFIGLEVEL_CUSTOMER_ONWARDS);
 
-		for (i = 0 ; i <= (num_of_samples[m]+2) ; i++) {
-
+		for (i = 0; i <= (num_of_samples[m] + 2); i++) {
 			/* Wait for range completion */
 
 			if (status == VL53L1_ERROR_NONE)
@@ -457,19 +450,17 @@ VL53L1_Error VL53L1_run_offset_calibration(
 			 * accummulate range results if range is successful
 			 */
 
-			prange_data  = &(prange_results->data[0]);
+			prange_data = &(prange_results->data[0]);
 
-			if (prange_results->stream_count   > 1) {
-
+			if (prange_results->stream_count > 1) {
 				if (prange_data->range_status ==
-						VL53L1_DEVICEERROR_RANGECOMPLETE) {
-
+				    VL53L1_DEVICEERROR_RANGECOMPLETE) {
 					poffset->no_of_samples++;
 					poffset->effective_spads +=
 						(uint32_t)prange_data->actual_effective_spads;
-					poffset->peak_rate_mcps  +=
+					poffset->peak_rate_mcps +=
 						(uint32_t)prange_data->peak_signal_count_rate_mcps;
-					poffset->sigma_mm        +=
+					poffset->sigma_mm +=
 						(uint32_t)prange_data->sigma_mm;
 					poffset->median_range_mm +=
 						(int32_t)prange_data->median_range_mm;
@@ -519,25 +510,24 @@ VL53L1_Error VL53L1_run_offset_calibration(
 
 		/* generate average values */
 		if (poffset->no_of_samples > 0) {
-
-			poffset->effective_spads += (poffset->no_of_samples/2);
+			poffset->effective_spads += (poffset->no_of_samples / 2);
 			poffset->effective_spads /= poffset->no_of_samples;
 
-			poffset->peak_rate_mcps  += (poffset->no_of_samples/2);
-			poffset->peak_rate_mcps  /= poffset->no_of_samples;
+			poffset->peak_rate_mcps += (poffset->no_of_samples / 2);
+			poffset->peak_rate_mcps /= poffset->no_of_samples;
 
-			poffset->sigma_mm        += (poffset->no_of_samples/2);
-			poffset->sigma_mm        /= poffset->no_of_samples;
+			poffset->sigma_mm += (poffset->no_of_samples / 2);
+			poffset->sigma_mm /= poffset->no_of_samples;
 
-			poffset->median_range_mm += (poffset->no_of_samples/2);
+			poffset->median_range_mm += (poffset->no_of_samples / 2);
 			poffset->median_range_mm /= poffset->no_of_samples;
 
-			poffset->range_mm_offset  =  (int32_t)cal_distance_mm;
+			poffset->range_mm_offset = (int32_t)cal_distance_mm;
 			poffset->range_mm_offset -= poffset->median_range_mm;
 
 			/* remember the number of SPADs for standard ranging */
 			if (poffset->preset_mode ==
-				VL53L1_DEVICEPRESETMODE_STANDARD_RANGING)
+			    VL53L1_DEVICEPRESETMODE_STANDARD_RANGING)
 				manual_effective_spads =
 					(uint16_t)poffset->effective_spads;
 		}
@@ -546,7 +536,6 @@ VL53L1_Error VL53L1_run_offset_calibration(
 	/* Calculate offsets */
 
 	switch (pdev->offset_calibration_mode) {
-
 	case VL53L1_OFFSETCALIBRATIONMODE__MM1_MM2__STANDARD_PRE_RANGE_ONLY:
 
 		/* copy offsets to customer data structure */
@@ -554,7 +543,7 @@ VL53L1_Error VL53L1_run_offset_calibration(
 			(int16_t)pdev->offset_results.data[0].range_mm_offset;
 		pdev->customer.mm_config__outer_offset_mm +=
 			(int16_t)pdev->offset_results.data[0].range_mm_offset;
-	break;
+		break;
 
 	default:
 		/* copy offsets to customer data structure */
@@ -593,12 +582,10 @@ VL53L1_Error VL53L1_run_offset_calibration(
 	 *  Check the peak rates, sigma, min spads for each stage
 	 */
 
-	for (m = 0 ; m < pdev->offset_results.active_results ; m++) {
-
+	for (m = 0; m < pdev->offset_results.active_results; m++) {
 		poffset = &(pdev->offset_results.data[m]);
 
 		if (status == VL53L1_ERROR_NONE) {
-
 			pdev->offset_results.cal_report = m;
 
 			if (poffset->no_of_samples < num_of_samples[m])
@@ -609,15 +596,15 @@ VL53L1_Error VL53L1_run_offset_calibration(
 			 * for the MM1 and MM2 stages
 			 */
 			if (m == 0 && poffset->sigma_mm >
-				((uint32_t)VL53L1_OFFSET_CAL_MAX_SIGMA_MM<<5))
+			    ((uint32_t)VL53L1_OFFSET_CAL_MAX_SIGMA_MM << 5))
 				status = VL53L1_WARNING_OFFSET_CAL_SIGMA_TOO_HIGH;
 
 			if (poffset->peak_rate_mcps >
-				VL53L1_OFFSET_CAL_MAX_PRE_PEAK_RATE_MCPS)
+			    VL53L1_OFFSET_CAL_MAX_PRE_PEAK_RATE_MCPS)
 				status = VL53L1_WARNING_OFFSET_CAL_RATE_TOO_HIGH;
 
 			if (poffset->dss_config__manual_effective_spads_select <
-				VL53L1_OFFSET_CAL_MIN_EFFECTIVE_SPADS)
+			    VL53L1_OFFSET_CAL_MIN_EFFECTIVE_SPADS)
 				status = VL53L1_WARNING_OFFSET_CAL_SPAD_COUNT_TOO_LOW;
 
 			if (poffset->dss_config__manual_effective_spads_select == 0)
@@ -658,7 +645,6 @@ VL53L1_Error VL53L1_run_offset_calibration(
 		status);
 
 #ifdef VL53L1_LOG_ENABLE
-
 	/* Prints out the offset calibration data for debug */
 
 	VL53L1_print_customer_nvm_managed(
@@ -685,16 +671,15 @@ VL53L1_Error VL53L1_run_offset_calibration(
 
 #ifndef VL53L1_NOCALIB
 VL53L1_Error VL53L1_run_spad_rate_map(
-	VL53L1_DEV                 Dev,
-	VL53L1_DeviceTestMode      device_test_mode,
-	VL53L1_DeviceSscArray      array_select,
-	uint32_t                   ssc_config_timeout_us,
-    VL53L1_spad_rate_data_t   *pspad_rate_data)
+	VL53L1_DEV Dev,
+	VL53L1_DeviceTestMode device_test_mode,
+	VL53L1_DeviceSscArray array_select,
+	uint32_t ssc_config_timeout_us,
+	VL53L1_spad_rate_data_t   *pspad_rate_data)
 {
-
-    /**
-     *  Runs SPAD Rate Map
-     */
+	/**
+	 *  Runs SPAD Rate Map
+	 */
 
 	VL53L1_Error status = VL53L1_ERROR_NONE;
 
@@ -715,7 +700,7 @@ VL53L1_Error VL53L1_run_spad_rate_map(
 
 	if (status == VL53L1_ERROR_NONE) {
 		pdev->ssc_cfg.array_select = array_select;
-		pdev->ssc_cfg.timeout_us   = ssc_config_timeout_us;
+		pdev->ssc_cfg.timeout_us = ssc_config_timeout_us;
 		status =
 			VL53L1_set_ssc_config(
 				Dev,
@@ -737,14 +722,14 @@ VL53L1_Error VL53L1_run_spad_rate_map(
 	 * Read Rate Data from Patch Ram
 	 */
 
-    if (status == VL53L1_ERROR_NONE)
+	if (status == VL53L1_ERROR_NONE)
 		status =
 			VL53L1_get_spad_rate_data(
 				Dev,
 				pspad_rate_data);
 
 	if (device_test_mode == VL53L1_DEVICETESTMODE_LCR_VCSEL_ON)
-		pspad_rate_data->fractional_bits =  7;
+		pspad_rate_data->fractional_bits = 7;
 	else
 		pspad_rate_data->fractional_bits = 15;
 
@@ -754,9 +739,9 @@ VL53L1_Error VL53L1_run_spad_rate_map(
 		status = VL53L1_disable_powerforce(Dev);
 
 #ifdef VL53L1_LOG_ENABLE
-    /* Print return rate data and map */
+	/* Print return rate data and map */
 
-    if (status == VL53L1_ERROR_NONE) {
+	if (status == VL53L1_ERROR_NONE) {
 		VL53L1_print_spad_rate_data(
 			pspad_rate_data,
 			"run_spad_rate_map():",
@@ -765,7 +750,7 @@ VL53L1_Error VL53L1_run_spad_rate_map(
 			pspad_rate_data,
 			"run_spad_rate_map():",
 			VL53L1_TRACE_MODULE_SPAD_RATE_MAP);
-    }
+	}
 #endif
 
 	LOG_FUNCTION_END(status);
@@ -777,8 +762,8 @@ VL53L1_Error VL53L1_run_spad_rate_map(
 
 #ifndef VL53L1_NOCALIB
 VL53L1_Error VL53L1_run_device_test(
-	VL53L1_DEV             Dev,
-	VL53L1_DeviceTestMode  device_test_mode)
+	VL53L1_DEV Dev,
+	VL53L1_DeviceTestMode device_test_mode)
 {
 	/*
 	 *  Runs the selected Device Test Mode
@@ -787,8 +772,8 @@ VL53L1_Error VL53L1_run_device_test(
 	VL53L1_Error status = VL53L1_ERROR_NONE;
 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
 
-	uint8_t      comms_buffer[2];
-	uint8_t      gpio_hv_mux__ctrl = 0;
+	uint8_t comms_buffer[2];
+	uint8_t gpio_hv_mux__ctrl = 0;
 
 	LOG_FUNCTION_START("");
 
@@ -811,8 +796,8 @@ VL53L1_Error VL53L1_run_device_test(
 	 */
 	if (status == VL53L1_ERROR_NONE)
 		status = VL53L1_start_test(
-					Dev,
-					device_test_mode);
+			Dev,
+			device_test_mode);
 
 	/*
 	 * Wait for test completion
@@ -832,7 +817,7 @@ VL53L1_Error VL53L1_run_device_test(
 				2);
 
 	if (status == VL53L1_ERROR_NONE) {
-		pdev->sys_results.result__range_status  = comms_buffer[0];
+		pdev->sys_results.result__range_status = comms_buffer[0];
 		pdev->sys_results.result__report_status = comms_buffer[1];
 	}
 

@@ -1,40 +1,40 @@
 /**
-  ******************************************************************************
-  * @file    ft6x06.h
-  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    03-May-2016
-  * @brief   This file contains all the functions prototypes for the
-  *          ft6x06.c IO expander driver.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    ft6x06.h
+ * @author  MCD Application Team
+ * @version V1.0.1
+ * @date    03-May-2016
+ * @brief   This file contains all the functions prototypes for the
+ *          ft6x06.c IO expander driver.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *   1. Redistributions of source code must retain the above copyright notice,
+ *      this list of conditions and the following disclaimer.
+ *   2. Redistributions in binary form must reproduce the above copyright notice,
+ *      this list of conditions and the following disclaimer in the documentation
+ *      and/or other materials provided with the distribution.
+ *   3. Neither the name of STMicroelectronics nor the names of its contributors
+ *      may be used to endorse or promote products derived from this software
+ *      without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ ******************************************************************************
+ */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __FT6X06_H
@@ -49,11 +49,11 @@ extern "C" {
   #define TS_MULTI_TOUCH_SUPPORTED 0
 #endif
 
-/* Set Auto-calibration as non supported */  
+/* Set Auto-calibration as non supported */
 #ifndef TS_AUTO_CALIBRATION_SUPPORTED
   #define TS_AUTO_CALIBRATION_SUPPORTED 0
 #endif
-  
+
 /* Includes ------------------------------------------------------------------*/
 #include "../Common/ts.h"
 
@@ -62,78 +62,76 @@ extern "C" {
 /** @typedef ft6x06_handle_TypeDef
  *  ft6x06 Handle definition.
  */
-typedef struct
-{
-  uint8_t i2cInitialized;
+typedef struct {
+	uint8_t i2cInitialized;
 
-  /* field holding the current number of simultaneous active touches */
-  uint8_t currActiveTouchNb;
+	/* field holding the current number of simultaneous active touches */
+	uint8_t currActiveTouchNb;
 
-  /* field holding the touch index currently managed */
-  uint8_t currActiveTouchIdx;
-
+	/* field holding the touch index currently managed */
+	uint8_t currActiveTouchIdx;
 } ft6x06_handle_TypeDef;
 
-  /** @addtogroup BSP
-   * @{
-   */
+/** @addtogroup BSP
+ * @{
+ */
 
-  /** @addtogroup Component
-   * @{
-   */
+/** @addtogroup Component
+ * @{
+ */
 
-  /** @defgroup FT6X06
-   * @{
-   */
+/** @defgroup FT6X06
+ * @{
+ */
 
-  /* Exported types ------------------------------------------------------------*/
+/* Exported types ------------------------------------------------------------*/
 
-  /** @defgroup FT6X06_Exported_Types
-   * @{
-   */
+/** @defgroup FT6X06_Exported_Types
+ * @{
+ */
 
-  /* Exported constants --------------------------------------------------------*/
+/* Exported constants --------------------------------------------------------*/
 
-  /** @defgroup FT6X06_Exported_Constants
-   * @{
-   */
+/** @defgroup FT6X06_Exported_Constants
+ * @{
+ */
 
-  /* Maximum border values of the touchscreen pad */
+/* Maximum border values of the touchscreen pad */
 #define  FT_6206_MAX_WIDTH              ((uint16_t)800)     /* Touchscreen pad max width   */
 #define  FT_6206_MAX_HEIGHT             ((uint16_t)480)     /* Touchscreen pad max height  */
 
-  /* Touchscreen pad max width and height values for FT6x36 Touch*/
-#define  FT_6206_MAX_WIDTH_HEIGHT       ((uint16_t)240)     
+/* Touchscreen pad max width and height values for FT6x36 Touch*/
+#define  FT_6206_MAX_WIDTH_HEIGHT       ((uint16_t)240)
 
-  /* Possible values of driver functions return status */
+/* Possible values of driver functions return status */
 #define FT6206_STATUS_OK                0
 #define FT6206_STATUS_NOT_OK            1
 
-  /* Possible values of global variable 'TS_I2C_Initialized' */
+/* Possible values of global variable 'TS_I2C_Initialized' */
 #define FT6206_I2C_NOT_INITIALIZED      0
 #define FT6206_I2C_INITIALIZED          1
 
-  /* Max detectable simultaneous touches */
+/* Max detectable simultaneous touches */
 #define FT6206_MAX_DETECTABLE_TOUCH     2
 
-  /**
-   * @brief : Definitions for FT6206 I2C register addresses on 8 bit
-   **/
+/**
+ * @brief : Definitions for FT6206 I2C register addresses on 8 bit
+ **/
 
-  /* Current mode register of the FT6206 (R/W) */
+/* Current mode register of the FT6206 (R/W) */
 #define FT6206_DEV_MODE_REG             0x00
 
-  /* Possible values of FT6206_DEV_MODE_REG */
+/* Possible values of FT6206_DEV_MODE_REG */
 #define FT6206_DEV_MODE_WORKING         0x00
 #define FT6206_DEV_MODE_FACTORY         0x04
 
 #define FT6206_DEV_MODE_MASK            0x7
 #define FT6206_DEV_MODE_SHIFT           4
 
-  /* Gesture ID register */
+/* Gesture ID register */
 #define FT6206_GEST_ID_REG              0x01
 
-  /* Possible values of FT6206_GEST_ID_REG */
+/* Possible values of FT6206_GEST_ID_REG */
 #define FT6206_GEST_ID_NO_GESTURE       0x00
 #define FT6206_GEST_ID_MOVE_UP          0x10
 #define FT6206_GEST_ID_MOVE_RIGHT       0x14
@@ -142,14 +140,14 @@ typedef struct
 #define FT6206_GEST_ID_ZOOM_IN          0x48
 #define FT6206_GEST_ID_ZOOM_OUT         0x49
 
-  /* Touch Data Status register : gives number of active touch points (0..2) */
+/* Touch Data Status register : gives number of active touch points (0..2) */
 #define FT6206_TD_STAT_REG              0x02
 
-  /* Values related to FT6206_TD_STAT_REG */
+/* Values related to FT6206_TD_STAT_REG */
 #define FT6206_TD_STAT_MASK             0x0F
 #define FT6206_TD_STAT_SHIFT            0x00
 
-  /* Values Pn_XH and Pn_YH related */
+/* Values Pn_XH and Pn_YH related */
 #define FT6206_TOUCH_EVT_FLAG_PRESS_DOWN 0x00
 #define FT6206_TOUCH_EVT_FLAG_LIFT_UP    0x01
 #define FT6206_TOUCH_EVT_FLAG_CONTACT    0x02
@@ -161,7 +159,7 @@ typedef struct
 #define FT6206_MSB_MASK                 0x0F
 #define FT6206_MSB_SHIFT                0
 
-  /* Values Pn_XL and Pn_YL related */
+/* Values Pn_XL and Pn_YL related */
 #define FT6206_LSB_MASK                 0xFF
 #define FT6206_LSB_SHIFT                0
 
@@ -170,17 +168,17 @@ typedef struct
 #define FT6206_P1_YH_REG                0x05
 #define FT6206_P1_YL_REG                0x06
 
-  /* Touch Pressure register value (R) */
+/* Touch Pressure register value (R) */
 #define FT6206_P1_WEIGHT_REG            0x07
 
-  /* Values Pn_WEIGHT related  */
+/* Values Pn_WEIGHT related  */
 #define FT6206_TOUCH_WEIGHT_MASK        0xFF
 #define FT6206_TOUCH_WEIGHT_SHIFT       0
 
-  /* Touch area register */
+/* Touch area register */
 #define FT6206_P1_MISC_REG              0x08
 
-  /* Values related to FT6206_Pn_MISC_REG */
+/* Values related to FT6206_Pn_MISC_REG */
 #define FT6206_TOUCH_AREA_MASK         (0x04 << 4)
 #define FT6206_TOUCH_AREA_SHIFT        0x04
 
@@ -191,111 +189,111 @@ typedef struct
 #define FT6206_P2_WEIGHT_REG           0x0D
 #define FT6206_P2_MISC_REG             0x0E
 
-  /* Threshold for touch detection */
+/* Threshold for touch detection */
 #define FT6206_TH_GROUP_REG            0x80
 
-  /* Values FT6206_TH_GROUP_REG : threshold related  */
+/* Values FT6206_TH_GROUP_REG : threshold related  */
 #define FT6206_THRESHOLD_MASK          0xFF
 #define FT6206_THRESHOLD_SHIFT         0
 
-  /* Filter function coefficients */
+/* Filter function coefficients */
 #define FT6206_TH_DIFF_REG             0x85
 
-  /* Control register */
+/* Control register */
 #define FT6206_CTRL_REG                0x86
 
-  /* Values related to FT6206_CTRL_REG */
+/* Values related to FT6206_CTRL_REG */
 
-  /* Will keep the Active mode when there is no touching */
+/* Will keep the Active mode when there is no touching */
 #define FT6206_CTRL_KEEP_ACTIVE_MODE    0x00
 
-  /* Switching from Active mode to Monitor mode automatically when there is no touching */
+/* Switching from Active mode to Monitor mode automatically when there is no touching */
 #define FT6206_CTRL_KEEP_AUTO_SWITCH_MONITOR_MODE  0x01
 
-  /* The time period of switching from Active mode to Monitor mode when there is no touching */
+/* The time period of switching from Active mode to Monitor mode when there is no touching */
 #define FT6206_TIMEENTERMONITOR_REG     0x87
 
-  /* Report rate in Active mode */
+/* Report rate in Active mode */
 #define FT6206_PERIODACTIVE_REG         0x88
 
-  /* Report rate in Monitor mode */
+/* Report rate in Monitor mode */
 #define FT6206_PERIODMONITOR_REG        0x89
 
-  /* The value of the minimum allowed angle while Rotating gesture mode */
+/* The value of the minimum allowed angle while Rotating gesture mode */
 #define FT6206_RADIAN_VALUE_REG         0x91
 
-  /* Maximum offset while Moving Left and Moving Right gesture */
+/* Maximum offset while Moving Left and Moving Right gesture */
 #define FT6206_OFFSET_LEFT_RIGHT_REG    0x92
 
-  /* Maximum offset while Moving Up and Moving Down gesture */
+/* Maximum offset while Moving Up and Moving Down gesture */
 #define FT6206_OFFSET_UP_DOWN_REG       0x93
 
-  /* Minimum distance while Moving Left and Moving Right gesture */
+/* Minimum distance while Moving Left and Moving Right gesture */
 #define FT6206_DISTANCE_LEFT_RIGHT_REG  0x94
 
-  /* Minimum distance while Moving Up and Moving Down gesture */
+/* Minimum distance while Moving Up and Moving Down gesture */
 #define FT6206_DISTANCE_UP_DOWN_REG     0x95
 
-  /* Maximum distance while Zoom In and Zoom Out gesture */
+/* Maximum distance while Zoom In and Zoom Out gesture */
 #define FT6206_DISTANCE_ZOOM_REG        0x96
 
-  /* High 8-bit of LIB Version info */
+/* High 8-bit of LIB Version info */
 #define FT6206_LIB_VER_H_REG            0xA1
 
-  /* Low 8-bit of LIB Version info */
+/* Low 8-bit of LIB Version info */
 #define FT6206_LIB_VER_L_REG            0xA2
 
-  /* Chip Selecting */
+/* Chip Selecting */
 #define FT6206_CIPHER_REG               0xA3
 
-  /* Interrupt mode register (used when in interrupt mode) */
+/* Interrupt mode register (used when in interrupt mode) */
 #define FT6206_GMODE_REG                0xA4
 
 #define FT6206_G_MODE_INTERRUPT_MASK    0x03
 #define FT6206_G_MODE_INTERRUPT_SHIFT   0x00
 
-  /* Possible values of FT6206_GMODE_REG */
+/* Possible values of FT6206_GMODE_REG */
 #define FT6206_G_MODE_INTERRUPT_POLLING 0x00
 #define FT6206_G_MODE_INTERRUPT_TRIGGER 0x01
 
-  /* Current power mode the FT6206 system is in (R) */
+/* Current power mode the FT6206 system is in (R) */
 #define FT6206_PWR_MODE_REG             0xA5
 
-  /* FT6206 firmware version */
+/* FT6206 firmware version */
 #define FT6206_FIRMID_REG               0xA6
 
-  /* FT6206 Chip identification register */
+/* FT6206 Chip identification register */
 #define FT6206_CHIP_ID_REG              0xA8
 
-  /*  Possible values of FT6206_CHIP_ID_REG */
+/*  Possible values of FT6206_CHIP_ID_REG */
 #define FT6206_ID_VALUE                 0x11
 #define FT6x36_ID_VALUE                 0xCD
 
-  /* Release code version */
+/* Release code version */
 #define FT6206_RELEASE_CODE_ID_REG      0xAF
 
-  /* Current operating mode the FT6206 system is in (R) */
+/* Current operating mode the FT6206 system is in (R) */
 #define FT6206_STATE_REG                0xBC
 
-  /**
-   * @}
-   */
+/**
+ * @}
+ */
 
-  /* Exported macro ------------------------------------------------------------*/
+/* Exported macro ------------------------------------------------------------*/
 
-  /** @defgroup ft6x06_Exported_Macros
-   * @{
-   */
+/** @defgroup ft6x06_Exported_Macros
+ * @{
+ */
 
-  /* Exported functions --------------------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
 
-  /** @defgroup ft6x06_Exported_Functions
-   * @{
-   */
+/** @defgroup ft6x06_Exported_Functions
+ * @{
+ */
 
-  /**
-   * @brief ft6x06 Control functions
-   */
+/**
+ * @brief ft6x06 Control functions
+ */
 
 
 /**
@@ -371,7 +369,7 @@ void ft6x06_TS_DisableIT(uint16_t DeviceAddr);
  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
  * @retval TS interrupts status
  */
-uint8_t ft6x06_TS_ITStatus (uint16_t DeviceAddr);
+uint8_t ft6x06_TS_ITStatus(uint16_t DeviceAddr);
 
 /**
  * @brief  Clear IT status in FT6206 interrupt status clear registers
@@ -379,7 +377,7 @@ uint8_t ft6x06_TS_ITStatus (uint16_t DeviceAddr);
  * @param  DeviceAddr: Device address on communication Bus (I2C slave address of FT6206).
  * @retval TS interrupts status
  */
-void ft6x06_TS_ClearIT (uint16_t DeviceAddr);
+void ft6x06_TS_ClearIT(uint16_t DeviceAddr);
 
 /**** NEW FEATURES enabled when Multi-touch support is enabled ****/
 
@@ -408,11 +406,11 @@ void ft6x06_TS_GetGestureID(uint16_t DeviceAddr, uint32_t * pGestureId);
 
  * @retval None.
  */
-void ft6x06_TS_GetTouchInfo(uint16_t   DeviceAddr,
-                            uint32_t   touchIdx,
-                            uint32_t * pWeight,
-                            uint32_t * pArea,
-                            uint32_t * pEvent);
+void ft6x06_TS_GetTouchInfo(uint16_t DeviceAddr,
+			    uint32_t touchIdx,
+			    uint32_t * pWeight,
+			    uint32_t * pArea,
+			    uint32_t * pEvent);
 
 #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
 
@@ -429,23 +427,23 @@ extern uint8_t  TS_IO_Read(uint8_t Addr, uint8_t Reg);
 extern uint16_t TS_IO_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
 extern void     TS_IO_Delay(uint32_t Delay);
 
-  /**
-   * @}
-   */
+/**
+ * @}
+ */
 
-  /* Imported global variables --------------------------------------------------------*/
+/* Imported global variables --------------------------------------------------------*/
 
-  /** @defgroup ft6x06_Imported_Globals
-   * @{
-   */
+/** @defgroup ft6x06_Imported_Globals
+ * @{
+ */
 
 
 /* Touch screen driver structure */
 extern TS_DrvTypeDef ft6x06_ts_drv;
 
-  /**
-   * @}
-   */
+/**
+ * @}
+ */
 
 #ifdef __cplusplus
 }

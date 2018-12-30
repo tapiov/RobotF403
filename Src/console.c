@@ -40,7 +40,7 @@
  *
  ******************************************************************************
  */
- 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -63,21 +63,21 @@ extern UART_HandleTypeDef huart6;
  */
 int cuiGetInteger(const char* message)
 {
-  int ret, value;
-  char buf[32];
-  do{
-    printf("%s",message);
-    fflush(stdout);
-    ret = scanf("%u", &value);
-    if(ret != 1){
-      /* In case of non-matching characters, eat stdin as IAR and
-       * TrueStudio won't flush it as Keil does */
-      scanf("%s", buf);
-      printf("\r\nPlease insert a valid integer number\r\n");
-    }
-  }while(ret != 1);
+	int ret, value;
+	char buf[32];
+	do {
+		printf("%s", message);
+		fflush(stdout);
+		ret = scanf("%u", &value);
+		if (ret != 1) {
+			/* In case of non-matching characters, eat stdin as IAR and
+			 * TrueStudio won't flush it as Keil does */
+			scanf("%s", buf);
+			printf("\r\nPlease insert a valid integer number\r\n");
+		}
+	} while (ret != 1);
 
-  return value;
+	return value;
 }
 
 /** @brief Sends a character to serial port
@@ -86,7 +86,6 @@ int cuiGetInteger(const char* message)
  */
 int uartSendChar(int ch)
 {
-
 	while ((uart2TXReady == 0) | (uart6TXReady == 0)) {
 		;
 	}
@@ -110,21 +109,21 @@ int uartSendChar(int ch)
  */
 int uartReceiveChar(void)
 {
-  uint8_t ch;
-  
+	uint8_t ch;
+
 	while (uartRXReady == 0) {
 		;
 	}
 
-  uartRXReady = 0;
+	uartRXReady = 0;
 
-  HAL_UART_Receive_DMA(&huart6, &ch, 1);
+	HAL_UART_Receive_DMA(&huart6, &ch, 1);
 
-  while (uartRXReady == 0) {
-	 ;
-  }
+	while (uartRXReady == 0) {
+		;
+	}
 
-  return ch;
+	return ch;
 }
 
 /** @brief putchar call for standard output implementation
@@ -133,9 +132,9 @@ int uartReceiveChar(void)
  */
 int __io_putchar(int ch)
 {
-  uartSendChar(ch);
+	uartSendChar(ch);
 
-  return 0;
+	return 0;
 }
 
 /** @brief getchar call for standard input implementation
@@ -144,37 +143,35 @@ int __io_putchar(int ch)
  */
 int __io_getchar(void)
 {
-  return uartReceiveChar();
+	return uartReceiveChar();
 }
 
 /**
-  * @brief  Tx Transfer completed callback
-  * @param  UartHandle: UART handle.
-  * @note   This example shows a simple way to report end of DMA Tx transfer, and
-  *         you can add your own implementation.
-  * @retval None
-  */
+ * @brief  Tx Transfer completed callback
+ * @param  UartHandle: UART handle.
+ * @note   This example shows a simple way to report end of DMA Tx transfer, and
+ *         you can add your own implementation.
+ * @retval None
+ */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+	/* Set transmission flag: trasfer complete*/
 
-  if (UartHandle->Instance == USART2) uart2TXReady = 1;
-  if (UartHandle->Instance == USART6) uart6TXReady = 1;
-
+	if (UartHandle->Instance == USART2) uart2TXReady = 1;
+	if (UartHandle->Instance == USART6) uart6TXReady = 1;
 }
 
 /**
-  * @brief  Rx Transfer completed callback
-  * @param  UartHandle: UART handle
-  * @note   This example shows a simple way to report end of DMA Rx transfer, and
-  *         you can add your own implementation.
-  * @retval None
-  */
+ * @brief  Rx Transfer completed callback
+ * @param  UartHandle: UART handle
+ * @note   This example shows a simple way to report end of DMA Rx transfer, and
+ *         you can add your own implementation.
+ * @retval None
+ */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
-  uartRXReady = 1;
-
+	/* Set transmission flag: trasfer complete*/
+	uartRXReady = 1;
 }
 
 /******************* (C) COPYRIGHT 2015 STMicroelectronics *****END OF FILE****/
