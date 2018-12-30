@@ -34,6 +34,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-IHMxx"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/l6206"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/vl53l1x"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-53L1A1"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1670122205" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined"/>
 								<option id="com.atollic.truestudio.as.general.otherflags.51384659" name="Other options" superClass="com.atollic.truestudio.as.general.otherflags" value="" valueType="string"/>
@@ -54,6 +56,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-IHMxx"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/l6206"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/vl53l1x"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-53L1A1"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1670122205" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__weak=__attribute__((weak))"/>
@@ -122,10 +126,10 @@
 						</tool>
 					</fileInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
+						<entry excluding="main-vl53l1.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -166,6 +170,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-IHMxx"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/l6206"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/vl53l1x"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-53L1A1"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1670122205" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined"/>
 								<option id="com.atollic.truestudio.as.general.otherflags.51384659" name="Other options" superClass="com.atollic.truestudio.as.general.otherflags" value="" valueType="string"/>
@@ -186,6 +192,8 @@
 									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-IHMxx"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/Common"/>
 									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/l6206"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/Components/vl53l1x"/>
+									<listOptionValue builtIn="false" value="../Drivers/BSP/X-NUCLEO-53L1A1"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1670122205" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__weak=__attribute__((weak))"/>
@@ -254,10 +262,10 @@
 						</tool>
 					</fileInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
+						<entry excluding="main-vl53l1.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

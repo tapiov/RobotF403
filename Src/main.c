@@ -50,6 +50,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "stm32xxx_hal.h"
+
+#include "vl53l1_api.h"
+#include "X-NUCLEO-53L1A1.h"
+
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -77,6 +82,17 @@
 
 /* USER CODE BEGIN PV */
 
+I2C_HandleTypeDef hi2c1;
+UART_HandleTypeDef huart2;
+VL53L1_Dev_t                   devCenter;
+VL53L1_Dev_t                   devLeft;
+VL53L1_Dev_t                   devRight;
+VL53L1_DEV                     Dev = &devCenter;
+int status;
+volatile int IntCount;
+#define isAutonomousExample 1  /* Allow to select either autonomous ranging or fast ranging example */
+#define isInterrupt 0 /* If isInterrupt = 1 then device working in interrupt mode, else device working in polling mode */
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -87,12 +103,19 @@ void SystemClock_Config(void);
 extern void motor_init(void);
 extern bool BSP_MotorControl_SetMaxSpeed(uint8_t deviceId, uint16_t newMaxSpeed);
 extern bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed);
-extern
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+		if (GPIO_Pin==VL53L1X_INT_Pin)
+		{
+			IntCount++;
+		}
+}
 
 /* USER CODE END 0 */
 
@@ -103,6 +126,11 @@ extern
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+
+  uint16_t wordData;
+  uint8_t ToFSensor = 1; // 0=Left, 1=Center(default), 2=Right
+  static VL53L1_RangingMeasurementData_t RangingData;
+  uint8_t newI2C = 0x52;
 
   /* USER CODE END 1 */
 
@@ -133,6 +161,8 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  XNUCLEO53L1A1_Init();
+
   setvbuf(stdin, NULL, _IONBF, 0);
   setvbuf(stdout, NULL, _IONBF, 0);
   setvbuf(stderr, NULL, _IONBF, 0);
@@ -145,35 +175,136 @@ int main(void)
 
   /* USER CODE END 2 */
 
+/* An example here below shows how to manage multi-sensor operation.
+In this example the sensors range sequentially. Several sensors range simultanously is also possible */
+
+/* Reset the 3 ToF sensors on the expansion board */
+	for (ToFSensor=0;ToFSensor<3;ToFSensor++){
+		status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
+	}
+
+/* Bring the sensors out of the reset stage one by one and set the new I2C address */
+	for (ToFSensor=0;ToFSensor<3;ToFSensor++){
+		switch(ToFSensor){
+			case 0:
+				Dev=&devLeft;
+				break;
+			case 1:
+				Dev=&devCenter;
+				break;
+			case 2:
+				Dev=&devRight;
+				break;
+		}
+		status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
+		Dev->comms_speed_khz = 400;
+		Dev->I2cHandle = &hi2c1;
+		Dev->comms_type = 1;
+		Dev->I2cDevAddr=0x52; /* default ToF sensor I2C address*/
+		VL53L1_RdWord(Dev, 0x010F, &wordData);
+		printf("VL53L1X: %02X\n\r", wordData);
+		newI2C = Dev->I2cDevAddr + (ToFSensor+1)*2;
+		status = VL53L1_SetDeviceAddress(Dev, newI2C);
+		Dev->I2cDevAddr=newI2C;
+		VL53L1_RdWord(Dev, 0x010F, &wordData);
+		printf("VL53L1X: %02X\n\r", wordData);
+
+		/* Device Initialization and setting */
+		status = VL53L1_WaitDeviceBooted(Dev);
+		status = VL53L1_DataInit(Dev);
+		status = VL53L1_StaticInit(Dev);
+		status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
+		status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
+		status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
+	}
+
+
+	float dist_back = 0;
+	float dist_forw = 0;
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
 
-	  fgets(readline,100,stdin);
-	  printf("OK -> %s",readline);
+		for (ToFSensor=0;ToFSensor<3;ToFSensor++){
+			switch(ToFSensor){
+				case 0:
+					Dev=&devLeft;
+					break;
+				case 1:
+					Dev=&devCenter;
+					break;
+				case 2:
+					Dev=&devRight;
+					break;
+			}
+			status = VL53L1_StartMeasurement(Dev);
+		  status = VL53L1_WaitMeasurementDataReady(Dev);
+			if(!status)
+			{
+				status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
+				if(status==0){
+					printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor,RangingData.RangeStatus,RangingData.RangeMilliMeter,
+									(RangingData.SignalRateRtnMegaCps/65536.0),RangingData.AmbientRateRtnMegaCps/65336.0);
 
-	  if ((strncmp(readline, "f",1) == 0)) {
+				if (ToFSensor == 0) {
+					dist_back = RangingData.RangeMilliMeter;
+				} else if (ToFSensor == 2)
+					dist_forw = RangingData.RangeMilliMeter;
+				}
+				status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
+			}
+		}
+
+		if ((dist_forw > dist_back) && (dist_forw > 200)) {
 			BSP_MotorControl_SetMaxSpeed(0, 20);
 			BSP_MotorControl_Run(0, BACKWARD);
 
 			BSP_MotorControl_SetMaxSpeed(1, 20);
 			BSP_MotorControl_Run(1, FORWARD);
 
-			HAL_Delay(1000);
+			HAL_Delay(500);
 
-	  } else if ((strncmp(readline,"b",1) == 0)) {
+		} else if ((dist_back > dist_forw) && (dist_back > 200)) {
 			BSP_MotorControl_SetMaxSpeed(0, 20);
 			BSP_MotorControl_Run(0, FORWARD);
 
 			BSP_MotorControl_SetMaxSpeed(1, 20);
 			BSP_MotorControl_Run(1, BACKWARD);
 
-			HAL_Delay(1000);
+			HAL_Delay(500);
+		}
 
-	  } else {
-		  printf("NOK -> %s",readline);
-	  }
+//		// Stop motors
+//		BSP_MotorControl_SetMaxSpeed(0, 0);
+//		BSP_MotorControl_SetMaxSpeed(1, 0);
+//		HAL_Delay(5000);
+//
+//	  // fgets(readline,100,stdin);
+//	  // printf("OK -> %s",readline);
+//
+//	  if ((strncmp(readline, "f",1) == 0)) {
+//			BSP_MotorControl_SetMaxSpeed(0, 20);
+//			BSP_MotorControl_Run(0, BACKWARD);
+//
+//			BSP_MotorControl_SetMaxSpeed(1, 20);
+//			BSP_MotorControl_Run(1, FORWARD);
+//
+//			HAL_Delay(1000);
+//
+//	  } else if ((strncmp(readline,"b",1) == 0)) {
+//			BSP_MotorControl_SetMaxSpeed(0, 20);
+//			BSP_MotorControl_Run(0, FORWARD);
+//
+//			BSP_MotorControl_SetMaxSpeed(1, 20);
+//			BSP_MotorControl_Run(1, BACKWARD);
+//
+//			HAL_Delay(1000);
+//
+//	  } else {
+//		  printf("NOK -> %s",readline);
+//	  }
 
 		BSP_MotorControl_SetMaxSpeed(0, 0);
 		BSP_MotorControl_SetMaxSpeed(1, 0);
