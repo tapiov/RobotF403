@@ -198,7 +198,7 @@ int main(void)
 				Dev = &devRight;
 				break;
 			}
-<<<<<<< Updated upstream
+
 			status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
 			Dev->comms_speed_khz = 400;
 			Dev->I2cHandle = &hi2c1;
@@ -219,23 +219,6 @@ int main(void)
 			status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
 			status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
 			status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
-=======
-			status = VL53L1_StartMeasurement(Dev);
-			status = VL53L1_WaitMeasurementDataReady(Dev);
-			if (!status) {
-				status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
-				if (status == 0) {
-					printf("%d,%d,%d,%.2f,%.2f\n\r", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
-					       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
-
-					if (ToFSensor == 0) {
-						dist_back = RangingData.RangeMilliMeter;
-					} else if (ToFSensor == 2)
-						dist_forw = RangingData.RangeMilliMeter;
-				}
-				status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
-			}
->>>>>>> Stashed changes
 		}
 
 	/* USER CODE END 2 */
@@ -247,14 +230,22 @@ int main(void)
 	VL53L1_RangingMeasurementData_t RangeDataN;
 
 	while (1) {
+
 		RangeData = MeasureSensors();
+
+		// Timestamp, 10 numbers
+		printf("%-10lu ", HAL_GetTick());
 
 		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 
 			RangeDataN = (*(RangeData+ToFSensor));
 
-			printf("%6d %6d %6d %6.2f,%6.2f ", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
-					(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
+			if (RangeDataN.RangeStatus == 0) {
+				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
+						(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
+			} else
+				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, 0, 0.0, 0.0);
+
 		}
 
 		printf("\n\r");
@@ -297,17 +288,7 @@ VL53L1_RangingMeasurementData_t* MeasureSensors(void) {
 
 	uint8_t ToFSensor;
 
-<<<<<<< Updated upstream
 	static VL53L1_RangingMeasurementData_t RangeData[3];
-=======
-	status = VL53L1_StartMeasurement(Dev);
-	status = VL53L1_WaitMeasurementDataReady(Dev);
-	if (!status) {
-		status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
-		if (status == 0) {
-			printf("%d,%d,%d,%.2f,%.2f\n\r", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
-			       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
->>>>>>> Stashed changes
 
 	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 		switch (ToFSensor) {
@@ -322,7 +303,6 @@ VL53L1_RangingMeasurementData_t* MeasureSensors(void) {
 			break;
 		}
 
-<<<<<<< Updated upstream
 		status = VL53L1_StartMeasurement(Dev);
 		status = VL53L1_WaitMeasurementDataReady(Dev);
 		if (!status) {
@@ -330,20 +310,13 @@ VL53L1_RangingMeasurementData_t* MeasureSensors(void) {
 
 			RangeData[ToFSensor] = RangingData;
 
-=======
->>>>>>> Stashed changes
-		}
-
 		status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
 
+		}
+
 	}
-<<<<<<< Updated upstream
 
 	return RangeData;
-
-=======
-	return RangingData.RangeMilliMeter;
->>>>>>> Stashed changes
 }
 
 /**
