@@ -104,7 +104,7 @@ extern void motor_init(void);
 extern bool BSP_MotorControl_SetMaxSpeed(uint8_t deviceId, uint16_t newMaxSpeed);
 extern bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed);
 
-float MeasureSensor(uint8_t ToFSensor);
+VL53L1_RangingMeasurementData_t* MeasureSensors(void);
 
 /* USER CODE END PFP */
 
@@ -162,6 +162,8 @@ int main(void)
 	MX_USART6_UART_Init();
 	/* USER CODE BEGIN 2 */
 
+	printf("\r\nConsole ready ... \r\n");
+
 	XNUCLEO53L1A1_Init();
 
 	setvbuf(stdin, NULL, _IONBF, 0);
@@ -171,61 +173,19 @@ int main(void)
 	printf("\r\nConsole ready ... \r\n");
 
 	uint8_t *readline = malloc(100 * sizeof(uint8_t));
+	VL53L1_RangingMeasurementData_t *RangeData;
 
 	motor_init();
 
-	/* USER CODE END 2 */
+	/* An example here below shows how to manage multi-sensor operation.
+	   In this example the sensors range sequentially. Several sensors range simultanously is also possible */
 
-/* An example here below shows how to manage multi-sensor operation.
-   In this example the sensors range sequentially. Several sensors range simultanously is also possible */
-
-/* Reset the 3 ToF sensors on the expansion board */
-	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
-		status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
-	}
-
-/* Bring the sensors out of the reset stage one by one and set the new I2C address */
-	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
-		switch (ToFSensor) {
-		case 0:
-			Dev = &devLeft;
-			break;
-		case 1:
-			Dev = &devCenter;
-			break;
-		case 2:
-			Dev = &devRight;
-			break;
+	/* Reset the 3 ToF sensors on the expansion board */
+		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+			status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
 		}
-		status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
-		Dev->comms_speed_khz = 400;
-		Dev->I2cHandle = &hi2c1;
-		Dev->comms_type = 1;
-		Dev->I2cDevAddr = 0x52; /* default ToF sensor I2C address*/
-		VL53L1_RdWord(Dev, 0x010F, &wordData);
-		printf("VL53L1X: %02X\n\r", wordData);
-		newI2C = Dev->I2cDevAddr + (ToFSensor + 1) * 2;
-		status = VL53L1_SetDeviceAddress(Dev, newI2C);
-		Dev->I2cDevAddr = newI2C;
-		VL53L1_RdWord(Dev, 0x010F, &wordData);
-		printf("VL53L1X: %02X\n\r", wordData);
 
-		/* Device Initialization and setting */
-		status = VL53L1_WaitDeviceBooted(Dev);
-		status = VL53L1_DataInit(Dev);
-		status = VL53L1_StaticInit(Dev);
-		status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
-		status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
-		status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
-	}
-
-
-	float dist_back = 0;
-	float dist_forw = 0;
-
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
-	while (1) {
+	/* Bring the sensors out of the reset stage one by one and set the new I2C address */
 		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 			switch (ToFSensor) {
 			case 0:
@@ -238,94 +198,49 @@ int main(void)
 				Dev = &devRight;
 				break;
 			}
-			status = VL53L1_StartMeasurement(Dev);
-			status = VL53L1_WaitMeasurementDataReady(Dev);
-			if (!status) {
-				status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
-				if (status == 0) {
-					printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
-					       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
+			status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
+			Dev->comms_speed_khz = 400;
+			Dev->I2cHandle = &hi2c1;
+			Dev->comms_type = 1;
+			Dev->I2cDevAddr = 0x52; /* default ToF sensor I2C address*/
+			VL53L1_RdWord(Dev, 0x010F, &wordData);
+			printf("VL53L1X: %02X\n\r", wordData);
+			newI2C = Dev->I2cDevAddr + (ToFSensor + 1) * 2;
+			status = VL53L1_SetDeviceAddress(Dev, newI2C);
+			Dev->I2cDevAddr = newI2C;
+			VL53L1_RdWord(Dev, 0x010F, &wordData);
+			printf("VL53L1X: %02X\n\r", wordData);
 
-					if (ToFSensor == 0) {
-						dist_back = RangingData.RangeMilliMeter;
-					} else if (ToFSensor == 2)
-						dist_forw = RangingData.RangeMilliMeter;
-				}
-				status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
-			}
+			/* Device Initialization and setting */
+			status = VL53L1_WaitDeviceBooted(Dev);
+			status = VL53L1_DataInit(Dev);
+			status = VL53L1_StaticInit(Dev);
+			status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
+			status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
+			status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
 		}
 
-		if ((dist_forw > dist_back) && (dist_forw > 500)) {
+	/* USER CODE END 2 */
 
-			while(dist_forw > 400) {
 
-				BSP_MotorControl_SetMaxSpeed(0,30);
-				BSP_MotorControl_Run(0, BACKWARD);
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
 
-				BSP_MotorControl_SetMaxSpeed(1, 30);
-				BSP_MotorControl_Run(1, FORWARD);
+	VL53L1_RangingMeasurementData_t RangeDataN;
 
-				dist_forw = MeasureSensor(2);
-			}
+	while (1) {
+		RangeData = MeasureSensors();
 
-			// Stop motors
-			BSP_MotorControl_SetMaxSpeed(0, 0);
-			BSP_MotorControl_SetMaxSpeed(1, 0);
+		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 
-			HAL_Delay(2000);
+			RangeDataN = (*(RangeData+ToFSensor));
 
-		} else if ((dist_back > dist_forw) && (dist_back > 500)) {
-
-			while(dist_back > 400) {
-
-				BSP_MotorControl_SetMaxSpeed(0, 30);
-				BSP_MotorControl_Run(0, FORWARD);
-
-				BSP_MotorControl_SetMaxSpeed(1, 30);
-				BSP_MotorControl_Run(1, BACKWARD);
-
-				dist_back = MeasureSensor(0);
-
-			}
-
-			// Stop motors
-			BSP_MotorControl_SetMaxSpeed(0, 0);
-			BSP_MotorControl_SetMaxSpeed(1, 0);
-
-			HAL_Delay(2000);
+			printf("%6d %6d %6d %6.2f,%6.2f ", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
+					(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
 		}
 
+		printf("\n\r");
 
-		// Turn
-		while((dist_forw < 1000)) {
-
-			BSP_MotorControl_SetMaxSpeed(0, 30);
-			BSP_MotorControl_Run(0, BACKWARD);
-
-			BSP_MotorControl_SetMaxSpeed(1, 30);
-			BSP_MotorControl_Run(1, BACKWARD);
-
-			dist_forw = MeasureSensor(2);
-			dist_back = MeasureSensor(0);
-
-		}
-
-		// Turn
-		while((dist_back < 1000)) {
-
-			BSP_MotorControl_SetMaxSpeed(0, 30);
-			BSP_MotorControl_Run(0, BACKWARD);
-
-			BSP_MotorControl_SetMaxSpeed(1, 30);
-			BSP_MotorControl_Run(1, BACKWARD);
-
-			dist_forw = MeasureSensor(2);
-			dist_back = MeasureSensor(0);
-
-		}
-
-
-//
 //	  // fgets(readline,100,stdin);
 //	  // printf("OK -> %s",readline);
 //
@@ -351,9 +266,6 @@ int main(void)
 //		  printf("NOK -> %s",readline);
 //	  }
 
-		BSP_MotorControl_SetMaxSpeed(0, 0);
-		BSP_MotorControl_SetMaxSpeed(1, 0);
-
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -361,36 +273,42 @@ int main(void)
 	/* USER CODE END 3 */
 }
 
-float MeasureSensor(uint8_t ToFSensor) {
+VL53L1_RangingMeasurementData_t* MeasureSensors(void) {
 
 	static VL53L1_RangingMeasurementData_t RangingData;
 
-	switch (ToFSensor) {
-	case 0:
-		Dev = &devLeft;
-		break;
-	case 1:
-		Dev = &devCenter;
-		break;
-	case 2:
-		Dev = &devRight;
-		break;
-	}
+	uint8_t ToFSensor;
 
-	status = VL53L1_StartMeasurement(Dev);
-	status = VL53L1_WaitMeasurementDataReady(Dev);
-	if (!status) {
-		status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
-		if (status == 0) {
-			printf("%d,%d,%d,%.2f,%.2f\n", ToFSensor, RangingData.RangeStatus, RangingData.RangeMilliMeter,
-			       (RangingData.SignalRateRtnMegaCps / 65536.0), RangingData.AmbientRateRtnMegaCps / 65336.0);
+	static VL53L1_RangingMeasurementData_t RangeData[3];
+
+	for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+		switch (ToFSensor) {
+		case 0:
+			Dev = &devLeft;
+			break;
+		case 1:
+			Dev = &devCenter;
+			break;
+		case 2:
+			Dev = &devRight;
+			break;
+		}
+
+		status = VL53L1_StartMeasurement(Dev);
+		status = VL53L1_WaitMeasurementDataReady(Dev);
+		if (!status) {
+			status = VL53L1_GetRangingMeasurementData(Dev, &RangingData);
+
+			RangeData[ToFSensor] = RangingData;
+
+		}
 
 		status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
 
-	return RangingData.RangeMilliMeter;
-
-		}
 	}
+
+	return RangeData;
+
 }
 
 /**

@@ -90,11 +90,11 @@ int uartSendChar(int ch)
 		;
 	}
 
-	uart2TXReady = 0;
+	uart2TXReady = 1;
 	uart6TXReady = 0;
 
 	HAL_UART_Transmit_DMA(&huart6, (uint8_t *)&ch, 1);
-	HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&ch, 1);
+	// HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&ch, 1);
 
 	while ((uart2TXReady == 0) | (uart6TXReady == 0)) {
 		;
