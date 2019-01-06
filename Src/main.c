@@ -231,49 +231,58 @@ int main(void)
 
 	while (1) {
 
-		RangeData = MeasureSensors();
+	  fgets(readline,100,stdin);
+	  printf("OK -> %s",readline);
 
-		// Timestamp, 10 numbers
-		printf("%-10lu ", HAL_GetTick());
+	  if ((strncmp(readline, "f",1) == 0)) {
+			BSP_MotorControl_SetMaxSpeed(0, 20);
+			BSP_MotorControl_Run(0, BACKWARD);
 
-		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+			BSP_MotorControl_SetMaxSpeed(1, 20);
+			BSP_MotorControl_Run(1, FORWARD);
 
-			RangeDataN = (*(RangeData+ToFSensor));
+			HAL_Delay(1000);
 
-			if (RangeDataN.RangeStatus == 0) {
-				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
-						(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
-			} else
-				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, 0, 0.0, 0.0);
+	  } else if ((strncmp(readline,"b",1) == 0)) {
+			BSP_MotorControl_SetMaxSpeed(0, 20);
+			BSP_MotorControl_Run(0, FORWARD);
 
-		}
+			BSP_MotorControl_SetMaxSpeed(1, 20);
+			BSP_MotorControl_Run(1, BACKWARD);
 
-		printf("\n\r");
+			HAL_Delay(1000);
 
-//	  // fgets(readline,100,stdin);
-//	  // printf("OK -> %s",readline);
-//
-//	  if ((strncmp(readline, "f",1) == 0)) {
-//			BSP_MotorControl_SetMaxSpeed(0, 20);
-//			BSP_MotorControl_Run(0, BACKWARD);
-//
-//			BSP_MotorControl_SetMaxSpeed(1, 20);
-//			BSP_MotorControl_Run(1, FORWARD);
-//
-//			HAL_Delay(1000);
-//
-//	  } else if ((strncmp(readline,"b",1) == 0)) {
-//			BSP_MotorControl_SetMaxSpeed(0, 20);
-//			BSP_MotorControl_Run(0, FORWARD);
-//
-//			BSP_MotorControl_SetMaxSpeed(1, 20);
-//			BSP_MotorControl_Run(1, BACKWARD);
-//
-//			HAL_Delay(1000);
-//
-//	  } else {
-//		  printf("NOK -> %s",readline);
-//	  }
+	  } else if ((strncmp(readline,"r",1) == 0)) {
+
+		  	RangeData = MeasureSensors();
+
+			// Timestamp, 10 numbers
+			printf("R,%lu,", HAL_GetTick());
+
+			for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+
+				RangeDataN = (*(RangeData+ToFSensor));
+
+				if (RangeDataN.RangeStatus == 0) {
+					printf("%d,%d,%d,%0.2f,%0.2f", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
+							(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
+				} else
+					printf("%d,%d,d,%0.2f,%0.2f", ToFSensor, RangeDataN.RangeStatus, 0, 0.0, 0.0);
+
+			}
+
+			printf("\n");
+
+	  } else {
+		  printf("NOK -> %s",readline);
+	  }
+
+		BSP_MotorControl_SetMaxSpeed(0, 0);
+		BSP_MotorControl_Run(0, FORWARD);
+
+		BSP_MotorControl_SetMaxSpeed(1, 0);
+		BSP_MotorControl_Run(1, BACKWARD);
+
 
 		/* USER CODE END WHILE */
 
