@@ -198,6 +198,7 @@ int main(void)
 				Dev = &devRight;
 				break;
 			}
+
 			status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
 			Dev->comms_speed_khz = 400;
 			Dev->I2cHandle = &hi2c1;
@@ -229,14 +230,22 @@ int main(void)
 	VL53L1_RangingMeasurementData_t RangeDataN;
 
 	while (1) {
+
 		RangeData = MeasureSensors();
+
+		// Timestamp, 10 numbers
+		printf("%-10lu ", HAL_GetTick());
 
 		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
 
 			RangeDataN = (*(RangeData+ToFSensor));
 
-			printf("%6d %6d %6d %6.2f,%6.2f ", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
-					(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
+			if (RangeDataN.RangeStatus == 0) {
+				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
+						(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
+			} else
+				printf("%-6d|%-6d|%-6d|%-6.2f|%-6.2f|", ToFSensor, RangeDataN.RangeStatus, 0, 0.0, 0.0);
+
 		}
 
 		printf("\n\r");
@@ -301,14 +310,13 @@ VL53L1_RangingMeasurementData_t* MeasureSensors(void) {
 
 			RangeData[ToFSensor] = RangingData;
 
-		}
-
 		status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
+
+		}
 
 	}
 
 	return RangeData;
-
 }
 
 /**
