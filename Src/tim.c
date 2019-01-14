@@ -44,6 +44,7 @@
 
 /* USER CODE END 0 */
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
@@ -154,8 +155,17 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 		/* USER CODE BEGIN TIM3_MspInit 1 */
 
 		/* USER CODE END TIM3_MspInit 1 */
-	}
+	} else if (tim_baseHandle->Instance == TIM_ALGO)
+	  {
+	    /* Peripheral clock enable */
+	    TIM_ALGO_CLK_ENABLE();
+
+	    /* System interrupt init*/
+	    HAL_NVIC_SetPriority(TIM_ALGO_IRQn, 0x0F, 0);
+	    HAL_NVIC_EnableIRQ(TIM_ALGO_IRQn);
+	  }
 }
+
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
 {
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -227,7 +237,13 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 		/* USER CODE BEGIN TIM3_MspDeInit 1 */
 
 		/* USER CODE END TIM3_MspDeInit 1 */
-	}
+	} else if (tim_baseHandle->Instance == TIM_ALGO)
+	  {
+	    /* Peripheral clock disable */
+	    TIM_ALGO_CLK_DISABLE();
+	    /* Peripheral interrupt DeInit*/
+	    HAL_NVIC_DisableIRQ(TIM_ALGO_IRQn);
+	  }
 }
 
 /* USER CODE BEGIN 1 */

@@ -92,6 +92,12 @@ void MX_GPIO_Init(void)
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	/* Initialize LED */
+	BSP_LED_Init(LED2);
+
+	/* Initialize push button */
+	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 }
 
 /* USER CODE BEGIN 2 */

@@ -36,6 +36,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+#include "MotionFX_Manager.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -62,6 +64,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
+void TIM_ALGO_IRQHandler(void);
 
 /* USER CODE END PFP */
 
@@ -218,6 +221,21 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
+
+/**
+ * @brief  This function handles TIM_ALGO global interrupt.
+ * @param  None
+ * @retval None
+ */
+void TIM_ALGO_IRQHandler(void)
+{
+  HAL_TIM_IRQHandler(&AlgoTimHandle);
+}
+
+void EXTI15_10_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(KEY_BUTTON_PIN);
+}
 
 /**
  * @brief This function handles DMA1 stream0 global interrupt.

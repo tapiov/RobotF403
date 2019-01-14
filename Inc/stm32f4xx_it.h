@@ -54,6 +54,8 @@ extern "C" {
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 
+extern TIM_HandleTypeDef AlgoTimHandle;
+
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/

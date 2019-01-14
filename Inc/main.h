@@ -50,6 +50,16 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
+#include "cube_hal.h"
+#ifdef USE_IKS01A2
+#include "nucleo_f401re_bus.h"
+#include "nucleo_f401re_errno.h"
+#include "iks01a2_env_sensors.h"
+#include "iks01a2_env_sensors_ex.h"
+#include "iks01a2_motion_sensors.h"
+#include "iks01a2_motion_sensors_ex.h"
+#endif
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -128,6 +138,32 @@ void Error_Handler(void);
 #define TCK_GPIO_Port GPIOA
 #define SWO_Pin GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
+
+// From IKS01A2 main.h
+#define STORE_CALIB_FLASH
+
+/* Definition for TIMx clock resources : Timer used for algorithm */
+#define TIM_ALGO                          TIM5
+#define TIM_ALGO_CLK_ENABLE               __TIM5_CLK_ENABLE
+#define TIM_ALGO_CLK_DISABLE              __TIM5_CLK_DISABLE
+
+/* Definition for TIMx's NVIC */
+#define TIM_ALGO_IRQn                     TIM5_IRQn
+#define TIM_ALGO_IRQHandler               TIM5_IRQHandler
+
+/* Enable sensor masks */
+#define PRESSURE_SENSOR                         0x00000001U
+#define TEMPERATURE_SENSOR                      0x00000002U
+#define HUMIDITY_SENSOR                         0x00000004U
+#define UV_SENSOR                               0x00000008U /* for future use */
+#define ACCELEROMETER_SENSOR                    0x00000010U
+#define GYROSCOPE_SENSOR                        0x00000020U
+#define MAGNETIC_SENSOR                         0x00000040U
+
+/* Exported functions --------------------------------------------------------*/
+void Error_Handler(void);
+void RTC_DateRegulate(uint8_t y, uint8_t m, uint8_t d, uint8_t dw);
+void RTC_TimeRegulate(uint8_t hh, uint8_t mm, uint8_t ss);
 
 /* USER CODE BEGIN Private defines */
 

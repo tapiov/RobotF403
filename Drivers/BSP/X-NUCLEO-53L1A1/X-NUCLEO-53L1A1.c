@@ -230,12 +230,24 @@ static void _I2cFailRecover()
 
 	// Enable I/O
 	__GPIOB_CLK_ENABLE();
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+//	GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+//	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+//	GPIO_InitStruct.Pull = GPIO_PULLUP;
+//	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+	/**I2C1 GPIO Configuration
+	   PB8     ------> I2C1_SCL
+	   PB9     ------> I2C1_SDA
+	 */
 	GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
 	//TODO we could do this faster by not using HAL delay 1ms for clk timing
 	do {
 		for (i = 0; i < 10; i++) {
