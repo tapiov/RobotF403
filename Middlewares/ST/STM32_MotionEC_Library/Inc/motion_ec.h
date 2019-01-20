@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    motion_ec.h
   * @author  MEMS Application Team
-  * @version V1.0.0
-  * @date    01-May-2017
+  * @version V1.1.0
+  * @date    01-September-2018
   * @brief   Header for motion_ec module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2018 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -60,21 +60,20 @@ extern "C"
   */
 
 /* Exported types ------------------------------------------------------------*/
-
 typedef struct
 {
-  float Acc[3];        /* Accelerometer Data [g] */
-  float Mag[3];        /* Magnetometer Data [uT / 50] */
-  float DTime;         /* Delta-time [s] */
+  float acc[3];        /* Accelerometer data [g] */
+  float mag[3];        /* Magnetometer data [uT / 50] */
+  float deltatime_s;   /* Time between 2 library calls in [s] */
 } MEC_input_t;
 
 typedef struct
 {
-  float Quaternion[4]; /* Quaternion [x, y, z, w] */
-  float Euler[3];      /* Yaw, Pitch, Roll [deg] */
-  float IGyro[3];      /* Virtual Gyroscope [dps] */
-  float Gravity[3];    /* Gravity [g] */
-  float Linear[3];     /* Linear acceleration [g] */
+  float quaternion[4]; /* Quaternion [x, y, z, w] */
+  float euler[3];      /* Yaw, Pitch, Roll [deg] */
+  float i_gyro[3];     /* Virtual gyroscope [dps] */
+  float gravity[3];    /* Gravity [g] */
+  float linear[3];     /* Linear acceleration [g] */
 } MEC_output_t;
 
 typedef enum
@@ -87,7 +86,6 @@ typedef enum
   * @}
   */
 
-/* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 
@@ -115,70 +113,70 @@ void MotionEC_Run(MEC_input_t *data_in, MEC_output_t *data_out);
 /**
   * @brief  Get enable/disable state of the Euler angles calculation
   * @param  state  Current enable/disable state
-  * @retval none
+  * @retval None
   */
 void MotionEC_GetOrientationEnable(MEC_state_t *state);
 
 /**
   * @brief  Set enable/disable state of the Euler angles calculation
   * @param  state  New enable/disable state to be set
-  * @retval none
+  * @retval None
   */
 void MotionEC_SetOrientationEnable(MEC_state_t state);
 
 /**
   * @brief  Get enable/disable state of the virtual gyroscope calculation
   * @param  state  Current enable/disable state
-  * @retval none
+  * @retval None
   */
 void MotionEC_GetVirtualGyroEnable(MEC_state_t *state);
 
 /**
   * @brief  Set enable/disable state of the virtual gyroscope calculation
   * @param  state  New enable/disable state to be set
-  * @retval none
+  * @retval None
   */
 void MotionEC_SetVirtualGyroEnable(MEC_state_t state);
 
 /**
   * @brief  Get enable/disable state of the gravity vector calculation
   * @param  state  Current enable/disable state
-  * @retval none
+  * @retval None
   */
 void MotionEC_GetGravityEnable(MEC_state_t *state);
 
 /**
   * @brief  Set enable/disable state of the gravity vector calculation
   * @param  state  New enable/disable state to be set
-  * @retval none
+  * @retval None
   */
 void MotionEC_SetGravityEnable(MEC_state_t state);
 
 /**
   * @brief  Get enable/disable state of the linear acceleration calculation
   * @param  state  Current enable/disable state
-  * @retval none
+  * @retval None
   */
 void MotionEC_GetLinearAccEnable(MEC_state_t *state);
 
 /**
   * @brief  Set enable/disable state of the linear acceleration calculation
   * @param  state  New enable/disable state to be set
-  * @retval none
+  * @retval None
   */
 void MotionEC_SetLinearAccEnable(MEC_state_t state);
 
 /**
   * @brief  Set sampling frequency (modify filtering parameters)
   * @param  freq  New sensors sampling frequency [Hz]
-  * @retval none
+  * @retval None
   */
 void MotionEC_SetFrequency(float freq);
 
 /**
   * @brief  Get the library version
-  * @param  version  Pointer to an array of 35 char
-  * @retval Length of the version string
+  * @param  version  pointer to an array of 35 char
+  * @retval Number of characters in the version string
   */
 uint8_t MotionEC_GetLibVersion(char *version);
 

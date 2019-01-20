@@ -60,6 +60,8 @@ void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+extern void I2cFailRecover();
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

@@ -61,6 +61,7 @@
 
 #include "motor_control.h"
 
+#include "app_mems-library.h"
 #include "DemoSerial.h"
 #include "MotionFX_Manager.h"
 
@@ -224,8 +225,13 @@ int main(void)
 	MX_ADC1_Init();
 	MX_USART6_UART_Init();
 	MX_CRC_Init();
+	MX_I2C1_Init();
 
 	__HAL_RCC_CRC_CLK_ENABLE();
+
+	// HAL_I2C_StateTypeDef I2CState = HAL_I2C_GetState(&hi2c1):
+
+	// printf("\r\n 1 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
 
 	/* USER CODE BEGIN 2 */
 
@@ -235,13 +241,34 @@ int main(void)
 
 	printf("\r\nInitializing sensors ... \r\n");
 
-	XNUCLEO53L1A1_Init();
+	// XNUCLEO53L1A1_Init();
+
+	// printf("\r\n 2 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
+
+	uint8_t *pData;
+
+	// HAL_I2C_Mem_Read(&hi2c1, 0xD7, (uint16_t) 0x0F, I2C_MEMADD_SIZE_8BIT, pData, 1, 1000);
+
+	// LSM6DSL_WHO_AM_I
+
+	/* Timer for algorithm synchronization initialization */
+	MX_TIM_ALGO_Init();
+
+	// I2cFailRecover();
 
 	/* Initialize (disabled) Sensors */
 	Init_Sensors();
 
+	// printf("\r\n 2.5 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
+
+	MX_X_CUBE_MEMS1_Init();
+
+	// printf("\r\n 3 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
+
 	/* Sensor Fusion API initialization function */
 	MotionFX_manager_init();
+
+	// printf("\r\n 4 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
 
 	/* OPTIONAL */
 	/* Get library version */
@@ -250,9 +277,6 @@ int main(void)
 	/* RTC Initialization */
 	RTC_Config();
 	RTC_TimeStampConfig();
-
-	/* Timer for algorithm synchronization initialization */
-	MX_TIM_ALGO_Init();
 
 	/* LED Blink */
 	BSP_LED_On(LED2);
@@ -289,49 +313,51 @@ int main(void)
 		MagCalStatus = 1;
 	}
 
-	/* An example here below shows how to manage multi-sensor operation.
-	   In this example the sensors range sequentially. Several sensors range simultanously is also possible */
+	// printf("\r\n 5 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
 
-	/* Reset the 3 ToF sensors on the expansion board */
-		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
-			status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
-		}
-
-	/* Bring the sensors out of the reset stage one by one and set the new I2C address */
-		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
-			switch (ToFSensor) {
-			case 0:
-				Dev = &devLeft;
-				break;
-			case 1:
-				Dev = &devCenter;
-				break;
-			case 2:
-				Dev = &devRight;
-				break;
-			}
-
-			status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
-			Dev->comms_speed_khz = 400;
-			Dev->I2cHandle = &hi2c1;
-			Dev->comms_type = 1;
-			Dev->I2cDevAddr = 0x52; /* default ToF sensor I2C address*/
-			VL53L1_RdWord(Dev, 0x010F, &wordData);
-			printf("VL53L1X: %02X\n\r", wordData);
-			newI2C = Dev->I2cDevAddr + (ToFSensor + 1) * 2;
-			status = VL53L1_SetDeviceAddress(Dev, newI2C);
-			Dev->I2cDevAddr = newI2C;
-			VL53L1_RdWord(Dev, 0x010F, &wordData);
-			printf("VL53L1X: %02X\n\r", wordData);
-
-			/* Device Initialization and setting */
-			status = VL53L1_WaitDeviceBooted(Dev);
-			status = VL53L1_DataInit(Dev);
-			status = VL53L1_StaticInit(Dev);
-			status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
-			status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
-			status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
-		}
+//	/* An example here below shows how to manage multi-sensor operation.
+//	   In this example the sensors range sequentially. Several sensors range simultanously is also possible */
+//
+//	/* Reset the 3 ToF sensors on the expansion board */
+//		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+//			status = XNUCLEO53L1A1_ResetId(ToFSensor, 0);
+//		}
+//
+//	/* Bring the sensors out of the reset stage one by one and set the new I2C address */
+//		for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+//			switch (ToFSensor) {
+//			case 0:
+//				Dev = &devLeft;
+//				break;
+//			case 1:
+//				Dev = &devCenter;
+//				break;
+//			case 2:
+//				Dev = &devRight;
+//				break;
+//			}
+//
+//			status = XNUCLEO53L1A1_ResetId(ToFSensor, 1);
+//			Dev->comms_speed_khz = 400;
+//			Dev->I2cHandle = &hi2c1;
+//			Dev->comms_type = 1;
+//			Dev->I2cDevAddr = 0x52; /* default ToF sensor I2C address*/
+//			VL53L1_RdWord(Dev, 0x010F, &wordData);
+//			printf("VL53L1X: %02X\n\r", wordData);
+//			newI2C = Dev->I2cDevAddr + (ToFSensor + 1) * 2;
+//			status = VL53L1_SetDeviceAddress(Dev, newI2C);
+//			Dev->I2cDevAddr = newI2C;
+//			VL53L1_RdWord(Dev, 0x010F, &wordData);
+//			printf("VL53L1X: %02X\n\r", wordData);
+//
+//			/* Device Initialization and setting */
+//			status = VL53L1_WaitDeviceBooted(Dev);
+//			status = VL53L1_DataInit(Dev);
+//			status = VL53L1_StaticInit(Dev);
+//			status = VL53L1_SetDistanceMode(Dev, VL53L1_DISTANCEMODE_LONG);
+//			status = VL53L1_SetMeasurementTimingBudgetMicroSeconds(Dev, 50000);
+//			status = VL53L1_SetInterMeasurementPeriodMilliSeconds(Dev, 100);
+//		}
 
 		printf("\r\nSensors initialized \r\n");
 
@@ -345,6 +371,7 @@ int main(void)
 
 	/* USER CODE END 2 */
 
+		// printf("\r\n 6 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
@@ -353,6 +380,8 @@ int main(void)
 	VL53L1_RangingMeasurementData_t *RangeData;
 
 	VL53L1_RangingMeasurementData_t RangeDataN;
+
+	// I2cFailRecover();
 
 	while (1) {
 
@@ -379,26 +408,30 @@ int main(void)
 
 	  //} else if ((strncmp(readline,"r",1) == 0)) {
 
-		  	RangeData = MeasureSensors();
+		  	// RangeData = MeasureSensors();
 
-//			// Timestamp, 10 numbers
+			// Timestamp, 10 numbers
 //			printf("R,%lu,", HAL_GetTick());
 //
-//			for (ToFSensor = 0; ToFSensor < 3; ToFSensor++) {
+//			for (ToFSensor = 0; ToFSensor < 3; ToFSensor=ToFSensor + 2) {
 //
 //				RangeDataN = (*(RangeData+ToFSensor));
 //
 //				if (RangeDataN.RangeStatus == 0) {
-//					printf("%d,%d,%d,%0.2f,%0.2f", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
+//					printf("TOFS = %d STAT = %d RNG = %d SGN = %0.2f AMB = %0.2f", ToFSensor, RangeDataN.RangeStatus, RangeDataN.RangeMilliMeter,
 //							(RangeDataN.SignalRateRtnMegaCps / 65536.0), (RangeDataN.AmbientRateRtnMegaCps) / 65336.0);
 //				} else
-//					printf("%d,%d,d,%0.2f,%0.2f", ToFSensor, RangeDataN.RangeStatus, 0, 0.0, 0.0);
+//					printf("%d %d 0 0.0 0.0", ToFSensor, RangeDataN.RangeStatus);
 //
 //			}
 //
 //			printf("\n");
 
 	  //} else if ((strncmp(readline,"s",1) == 0)) {
+
+		  	 // printf("\r\n 7 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
+
+		  		MX_X_CUBE_MEMS1_Process();
 
 		     /* Acquire data from enabled sensors and fill Msg stream */
 		      RTC_Handler(&msg_dat);
@@ -408,6 +441,8 @@ int main(void)
 		      Humidity_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
 		      Temperature_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
 		      Pressure_Sensor_Handler(&msg_dat, IKS01A2_LPS22HB_0);
+
+		      // printf("\r\n 8 HAL_I2C_STATE = %u \r\n",(HAL_I2C_GetState(&hi2c1)));
 
 		      /* Sensor Fusion specific part */
 		      data_out = FX_Data_Handler(&msg_dat);
@@ -433,6 +468,10 @@ int main(void)
 					  data_out.linear_acceleration_9X[0],data_out.linear_acceleration_9X[1],
 					  data_out.linear_acceleration_9X[2],
 					  data_out.heading_9X,data_out.headingErr_9X);
+
+		      printf("ROT XYZ: %lu %lu %lu ACC XYZ: %lu %lu %lu \r\n",
+		      		    		  GyrValue.x,GyrValue.y,GyrValue.z,
+								  AccValue.x,AccValue.y,AccValue.z);
 	  //} else {
 	  //	  printf("NOK -> %s",readline);
 	  // }
@@ -787,7 +826,15 @@ static void Accelero_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
   if ((SensorsEnabled & ACCELEROMETER_SENSOR) == ACCELEROMETER_SENSOR)
   {
-    (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, &AccValue);
+
+	  uint8_t *pData = malloc(6*sizeof(uint8_t));
+
+	  HAL_I2C_Mem_Read(&hi2c1, 0xD7, (uint16_t) 0x28, I2C_MEMADD_SIZE_8BIT, pData, 6, 1000);
+
+
+	  printf("%d %d %d %d %d %d", *pData, *(pData+1), *(pData+1), *(pData+3), *(pData+3), *(pData+4), *(pData+5));
+
+	  (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, &AccValue);
     Serialize_s32(&Msg->Data[19], (int32_t)AccValue.x, 4);
     Serialize_s32(&Msg->Data[23], (int32_t)AccValue.y, 4);
     Serialize_s32(&Msg->Data[27], (int32_t)AccValue.z, 4);
@@ -805,6 +852,9 @@ static void Gyro_Sensor_Handler(TMsg *Msg, uint32_t Instance)
   if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR)
   {
     (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_GYRO, &GyrValue);
+
+
+
     Serialize_s32(&Msg->Data[31], GyrValue.x, 4);
     Serialize_s32(&Msg->Data[35], GyrValue.y, 4);
     Serialize_s32(&Msg->Data[39], GyrValue.z, 4);

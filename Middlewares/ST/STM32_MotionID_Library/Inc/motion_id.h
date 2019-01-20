@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    motion_id.h
   * @author  MEMS Application Team
-  * @version V2.0.0
-  * @date    01-May-2017
+  * @version V2.1.0
+  * @date    01-September-2018
   * @brief   Header for motion_id module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2018 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -58,7 +58,9 @@ extern "C"
 /** @defgroup MOTION_ID_Exported_Types MOTION_ID_Exported_Types
   * @{
   */
+
 /* Exported types ------------------------------------------------------------*/
+
 typedef struct
 {
   float AccX; /* Acceleration in X axis in [g] */
@@ -90,8 +92,8 @@ typedef enum
 /* Exported macro ------------------------------------------------------------*/
 
 /** @defgroup MOTION_ID_Exported_Functions MOTION_ID_Exported_Functions
- * @{
- */
+  * @{
+  */
 
 /* Exported functions ------------------------------------------------------- */
 
@@ -104,9 +106,9 @@ void MotionID_Initialize(void);
 
 /**
   * @brief  Run Intensity Detection algorithm
-  * @param  data_in: Structure containing input data
-  * @param  data_out: Intensity Detection algorithm result
-  * @retval  None
+  * @param  data_in  Structure containing input data
+  * @param  data_out  Intensity Detection algorithm result
+  * @retval None
   */
 void MotionID_Update(MID_input_t *data_in, MID_output_t *data_out);
 
@@ -119,7 +121,7 @@ void MotionID_ResetLib(void);
 
 /**
   * @brief  Get the library version
-  * @param  version: pointer to an array of 35 char
+  * @param  version  pointer to an array of 35 char
   * @retval Number of characters in the version string
   */
 uint8_t MotionID_GetLibVersion(char *version);

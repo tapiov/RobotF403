@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    motion_tl.h
   * @author  MEMS Application Team
-  * @version V1.0.0
-  * @date    01-September-2017
-  * @brief   Header for motion_gr module
+  * @version V1.1.0
+  * @date    01-September-2018
+  * @brief   Header for motion_tl module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2018 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -32,7 +32,7 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ********************************************************************************
+  ******************************************************************************
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -40,7 +40,8 @@
 #define _MOTION_TL_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -55,13 +56,11 @@ extern "C" {
   */
 
 /** @defgroup MOTION_TL_Exported_Types MOTION_TL_Exported_Types
- * @{
- */
-
-/* Exported constants --------------------------------------------------------*/
+  * @{
+  */
 
 /* Exported types ------------------------------------------------------------*/
- typedef struct
+typedef struct
 {
   float acc_x;        /* Acceleration in X axis in [g] */
   float acc_y;        /* Acceleration in Y axis in [g] */
@@ -111,68 +110,69 @@ typedef enum
 /* Exported macro ------------------------------------------------------------*/
 
 /** @defgroup MOTION_TL_Exported_Functions MOTION_TL_Exported_Functions
- * @{
- */
+  * @{
+  */
 
 /* Exported functions ------------------------------------------------------- */
 
 /**
- * @brief  Initialize the MotionTL engine
- * @param  none
- * @retval none
- */
+  * @brief  Initialize the MotionTL engine
+  * @param  None
+  * @retval None
+  */
 void MotionTL_Initialize(void);
 
 /**
- * @brief  Set the MotionTL accelerometer data orientation
- * @param  *acc_orientation: reference system of the accelerometer raw data (for instance: south west up became "swu", north east up became "ned")
- * @retval none
- */
+  * @brief  Set the MotionTL accelerometer data orientation
+  * @param  acc_orientation  reference system of the accelerometer raw data
+  * (for instance: south west up became "swu", north east up became "ned")
+  * @retval None
+  */
 void MotionTL_SetOrientation_Acc(const char *acc_orientation);
 
 /**
- * @brief  Run tilt algorithm
- * @param  data_in  Pointer to accaleration in [g]
- * @retval none
- */
+  * @brief  Run tilt algorithm
+  * @param  data_in  Pointer to acceleration in [g]
+  * @retval None
+  */
 void MotionTL_Update(MTL_input_t *data_in);
 
 /**
- * @brief  Get angles
- * @param  data_out  Pointer to MTL_output_t structure
- * @param  angle_mode  Switch mode to return desired angles
- * @retval none
- */
+  * @brief  Get angles
+  * @param  data_out  Pointer to MTL_output_t structure
+  * @param  angle_mode  Switch mode to return desired angles
+  * @retval None
+  */
 void MotionTL_GetAngles(MTL_output_t *data_out, MTL_angle_mode_t angle_mode);
 
 /**
- * @brief  Get the library version
- * @param  version  Pointer to an array of 35 char
- * @retval Number of characters in the version string
- */
+  * @brief  Get the library version
+  * @param  version  pointer to an array of 35 char
+  * @retval Number of characters in the version string
+  */
 uint8_t MotionTL_GetLibVersion(char *version);
 
 /**
- * @brief  Calibrate accelerometer in specific position
- * @param  cal_data  Pointer to 2D array of calibration data cal_data[num_records][3]
- * @param  num_records  Number of calibration data records (3 axes per each record)
- * @param  cal_position  Calibration position the data belong to
- * @retval none
- */
+  * @brief  Calibrate accelerometer in specific position
+  * @param  cal_data  Pointer to 2D array of calibration data cal_data[num_records][3]
+  * @param  num_records  Number of calibration data records (3 axes per each record)
+  * @param  cal_position  Calibration position the data belong to
+  * @retval None
+  */
 void MotionTL_CalibratePosition(float cal_data[][3], uint32_t num_records, MTL_cal_position_t cal_position);
 
 /**
- * @brief  Get accelerometer calibration values
- * @param  acc_cal  Pointer to calibration values structure
- * @retval Enum with calibration result
- */
+  * @brief  Get accelerometer calibration values
+  * @param  acc_cal  Pointer to calibration values structure
+  * @retval Enum with calibration result
+  */
 MTL_cal_result_t MotionTL_GetCalValues(MTL_acc_cal_t *acc_cal);
 
 /**
- * @brief  Set accelerometer calibration values
- * @param  acc_cal  Pointer to calibration values structure
- * @retval Enum with calibration result
- */
+  * @brief  Set accelerometer calibration values
+  * @param  acc_cal  Pointer to calibration values structure
+  * @retval Enum with calibration result
+  */
 MTL_cal_result_t MotionTL_SetCalValues(MTL_acc_cal_t *acc_cal);
 
 /**

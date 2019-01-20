@@ -86,24 +86,31 @@ int cuiGetInteger(const char* message)
  */
 int uartSendChar(int ch)
 {
-	while ((uart2TXReady == 0) | (uart6TXReady == 0)) {
-		;
-	}
+//	while ((uart2TXReady == 0) | (uart6TXReady == 0)) {
+//		;
+//	}
+
+//	while ((uart2TXReady == 0)) {
+//		;
+//	}
+
 
 	uart2TXReady = 0;
 	uart6TXReady = 0;
 
-	HAL_UART_Transmit_DMA(&huart6, (uint8_t *)&ch, 1);
+//	HAL_UART_Transmit_DMA(&huart6, (uint8_t *)&ch, 1);
 
-	while (uart6TXReady == 0) {
-		;
-	}
+//	while (uart6TXReady == 0) {
+//		;
+//	}
 
-	HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&ch, 1);
+	// HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&ch, 1);
 
-	while (uart2TXReady == 0) {
-		;
-	}
+	HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1,100);
+
+//	while (uart2TXReady == 0) {
+//		;
+//	}
 
 	return ch;
 }

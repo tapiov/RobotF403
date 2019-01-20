@@ -52,7 +52,7 @@ DMA_HandleTypeDef hdma_i2c1_tx;
 void MX_I2C1_Init(void)
 {
 	hi2c1.Instance = I2C1;
-	hi2c1.Init.ClockSpeed = 100000;
+	hi2c1.Init.ClockSpeed = 400000;
 	hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
 	hi2c1.Init.OwnAddress1 = 0;
 	hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
@@ -163,6 +163,70 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+void I2cFailRecover()
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+	int i, nRetry = 0;
+
+
+	// We can't assume bus state based on SDA and SCL state (we may be in a data or NAK bit so SCL=SDA=1)
+	// by setting SDA high and toggling SCL at least 10 time we ensure whatever agent and state
+	// all agent should end up seeing a "stop" and bus get back to an known idle i2c  bus state
+
+	// Enable I/O
+	__GPIOB_CLK_ENABLE();
+//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+//	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
+//	GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+//	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+//	GPIO_InitStruct.Pull = GPIO_PULLUP;
+//	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+	/**I2C1 GPIO Configuration
+	   PB8     ------> I2C1_SCL
+	   PB9     ------> I2C1_SDA
+	 */
+	GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+	//TODO we could do this faster by not using HAL delay 1ms for clk timing
+	do {
+		for (i = 0; i < 10; i++) {
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
+			HAL_Delay(1);
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
+			HAL_Delay(1);
+		}
+//        if( HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9) == 0 ){
+//            static int RetryRecover;
+//            RetryRecover++;
+//        }
+	} while (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9) == 0 && nRetry++ < 7);
+
+	if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_9) == 0) {
+		__GPIOA_CLK_ENABLE();
+		//We are still in bad i2c state warm user by blinking led but stay here
+		GPIO_InitStruct.Pin = GPIO_PIN_5;
+		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+		do {
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+			HAL_Delay(33);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_Delay(33);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+			HAL_Delay(33);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+			HAL_Delay(33 * 20);
+		} while (1);
+	}
+}
 
 /* USER CODE END 1 */
 
