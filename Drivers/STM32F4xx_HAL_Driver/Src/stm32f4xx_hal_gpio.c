@@ -387,7 +387,7 @@ GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
 	if ((GPIOx->IDR & GPIO_Pin) != (uint32_t)GPIO_PIN_RESET) {
 		bitstatus = GPIO_PIN_SET;
-	}else  {
+	}else {
 		bitstatus = GPIO_PIN_RESET;
 	}
 	return bitstatus;
@@ -418,7 +418,7 @@ void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 
 	if (PinState != GPIO_PIN_RESET) {
 		GPIOx->BSRR = GPIO_Pin;
-	}else  {
+	}else {
 		GPIOx->BSRR = (uint32_t)GPIO_Pin << 16U;
 	}
 }
@@ -469,7 +469,7 @@ HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 
 	if ((GPIOx->LCKR & GPIO_LCKR_LCKK) != RESET) {
 		return HAL_OK;
-	}else  {
+	}else {
 		return HAL_ERROR;
 	}
 }

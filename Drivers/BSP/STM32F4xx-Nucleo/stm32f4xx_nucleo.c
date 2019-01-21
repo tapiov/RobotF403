@@ -491,7 +491,7 @@ void SD_IO_CSState(uint8_t val)
 {
 	if (val == 1) {
 		SD_CS_HIGH();
-	}else  {
+	}else {
 		SD_CS_LOW();
 	}
 }
@@ -609,7 +609,7 @@ void LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size)
 		/* Only 1 byte to be sent to LCD - general interface can be used */
 		/* Send Data */
 		SPIx_Write(*pData);
-	}else  {
+	}else {
 		/* Several data should be sent in a raw */
 		/* Direct SPI accesses for optimization */
 		for (counter = Size; counter != 0; counter--) {
@@ -798,7 +798,7 @@ JOYState_TypeDef BSP_JOY_GetState(void)
 		state = JOY_DOWN;
 	}else if ((keyconvertedvalue > 3680) && (keyconvertedvalue < 3760)) {
 		state = JOY_LEFT;
-	}else  {
+	}else {
 		state = JOY_NONE;
 	}
 

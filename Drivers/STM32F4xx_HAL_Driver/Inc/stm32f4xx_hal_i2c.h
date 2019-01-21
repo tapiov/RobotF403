@@ -120,9 +120,9 @@ typedef enum {
 	HAL_I2C_STATE_BUSY_RX           = 0x22U,/*!< Data Reception process is ongoing         */
 	HAL_I2C_STATE_LISTEN            = 0x28U,/*!< Address Listen Mode is ongoing            */
 	HAL_I2C_STATE_BUSY_TX_LISTEN    = 0x29U,/*!< Address Listen Mode and Data Transmission
-	                                          process is ongoing                         */
+	                                           process is ongoing                         */
 	HAL_I2C_STATE_BUSY_RX_LISTEN    = 0x2AU,/*!< Address Listen Mode and Data Reception
-	                                          process is ongoing                         */
+	                                           process is ongoing                         */
 	HAL_I2C_STATE_ABORT             = 0x60U,/*!< Abort user request ongoing                */
 	HAL_I2C_STATE_TIMEOUT           = 0xA0U,/*!< Timeout state                             */
 	HAL_I2C_STATE_ERROR             = 0xE0U/*!< Error                                     */

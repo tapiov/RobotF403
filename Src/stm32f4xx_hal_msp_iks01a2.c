@@ -68,65 +68,58 @@ int UseLSI = 0;
  */
 void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 {
-  RCC_OscInitTypeDef        RCC_OscInitStruct;
-  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+	RCC_OscInitTypeDef RCC_OscInitStruct;
+	RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
 
-  /*##-1- Enables the PWR Clock and Enables access to the backup domain ###################################*/
-  /* To change the source clock of the RTC feature (LSE, LSI), You have to:
-     - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
-     - Enable write access using HAL_PWR_EnableBkUpAccess() function before to
-       configure the RTC clock source (to be done once after reset).
-     - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and
-       __HAL_RCC_BACKUPRESET_RELEASE().
-     - Configure the needed RTC clock source */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  HAL_PWR_EnableBkUpAccess();
+	/*##-1- Enables the PWR Clock and Enables access to the backup domain ###################################*/
+	/* To change the source clock of the RTC feature (LSE, LSI), You have to:
+	   - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
+	   - Enable write access using HAL_PWR_EnableBkUpAccess() function before to
+	     configure the RTC clock source (to be done once after reset).
+	   - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and
+	     __HAL_RCC_BACKUPRESET_RELEASE().
+	   - Configure the needed RTC clock source */
+	__HAL_RCC_PWR_CLK_ENABLE();
+	HAL_PWR_EnableBkUpAccess();
 
-  /*##-2- Configue LSE/LSI as RTC clock soucre ###############################*/
-  if (UseLSI == 0)
-  {
-    RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-    RCC_OscInitStruct.LSEState = RCC_LSE_ON;
-    RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-    {
-      Error_Handler();
-    }
+	/*##-2- Configue LSE/LSI as RTC clock soucre ###############################*/
+	if (UseLSI == 0) {
+		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
+		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+		RCC_OscInitStruct.LSEState = RCC_LSE_ON;
+		RCC_OscInitStruct.LSIState = RCC_LSI_OFF;
+		if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+			Error_Handler();
+		}
 
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-    {
-      Error_Handler();
-    }
-  }
-  else
-  {
-    RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-    RCC_OscInitStruct.LSIState = RCC_LSI_ON;
-    RCC_OscInitStruct.LSEState = RCC_LSE_OFF;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-    {
-      Error_Handler();
-    }
+		PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+		PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+		if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
+			Error_Handler();
+		}
+	}else  {
+		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
+		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+		RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+		RCC_OscInitStruct.LSEState = RCC_LSE_OFF;
+		if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+			Error_Handler();
+		}
 
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
-    PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-    {
-      Error_Handler();
-    }
-  }
+		PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+		PeriphClkInitStruct.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+		if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
+			Error_Handler();
+		}
+	}
 
-  /*##-2- Enable RTC peripheral Clocks #######################################*/
-  /* Enable RTC Clock */
-  __HAL_RCC_RTC_ENABLE();
+	/*##-2- Enable RTC peripheral Clocks #######################################*/
+	/* Enable RTC Clock */
+	__HAL_RCC_RTC_ENABLE();
 
-  /*##-4- Configure the NVIC for RTC Alarm ###################################*/
-  HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0x0F, 0);
-  HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
+	/*##-4- Configure the NVIC for RTC Alarm ###################################*/
+	HAL_NVIC_SetPriority(RTC_Alarm_IRQn, 0x0F, 0);
+	HAL_NVIC_EnableIRQ(RTC_Alarm_IRQn);
 }
 
 /**
@@ -138,8 +131,8 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
  */
 void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
 {
-  /*##-1- Reset peripherals ##################################################*/
-  __HAL_RCC_RTC_DISABLE();
+	/*##-1- Reset peripherals ##################################################*/
+	__HAL_RCC_RTC_DISABLE();
 }
 
 /**
@@ -191,11 +184,10 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
  */
 void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
 {
-  if (hcrc->Instance == CRC)
-  {
-    /* Peripheral clock enable */
-    __HAL_RCC_CRC_CLK_ENABLE();
-  }
+	if (hcrc->Instance == CRC) {
+		/* Peripheral clock enable */
+		__HAL_RCC_CRC_CLK_ENABLE();
+	}
 }
 
 /**
@@ -207,11 +199,10 @@ void HAL_CRC_MspInit(CRC_HandleTypeDef *hcrc)
  */
 void HAL_CRC_MspDeInit(CRC_HandleTypeDef *hcrc)
 {
-  if (hcrc->Instance == CRC)
-  {
-    /* Peripheral clock disable */
-    __HAL_RCC_CRC_CLK_DISABLE();
-  }
+	if (hcrc->Instance == CRC) {
+		/* Peripheral clock disable */
+		__HAL_RCC_CRC_CLK_DISABLE();
+	}
 }
 
 /**

@@ -68,107 +68,97 @@ typedef int32_t (*LSM6DSL_GetTick_Func)(void);
 typedef int32_t (*LSM6DSL_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*LSM6DSL_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
-typedef enum
-{
-  LSM6DSL_INT1_PIN,
-  LSM6DSL_INT2_PIN,
+typedef enum {
+	LSM6DSL_INT1_PIN,
+	LSM6DSL_INT2_PIN,
 } LSM6DSL_SensorIntPin_t;
 
-typedef struct
-{
-  LSM6DSL_Init_Func          Init;
-  LSM6DSL_DeInit_Func        DeInit;
-  uint32_t                   BusType; /*0 means I2C, 1 means SPI 4-Wires, 2 means SPI-3-Wires */
-  uint8_t                    Address;
-  LSM6DSL_WriteReg_Func      WriteReg;
-  LSM6DSL_ReadReg_Func       ReadReg;
-  LSM6DSL_GetTick_Func       GetTick;
+typedef struct {
+	LSM6DSL_Init_Func Init;
+	LSM6DSL_DeInit_Func DeInit;
+	uint32_t BusType;             /*0 means I2C, 1 means SPI 4-Wires, 2 means SPI-3-Wires */
+	uint8_t Address;
+	LSM6DSL_WriteReg_Func WriteReg;
+	LSM6DSL_ReadReg_Func ReadReg;
+	LSM6DSL_GetTick_Func GetTick;
 } LSM6DSL_IO_t;
 
 
-typedef struct
-{
-  int16_t x;
-  int16_t y;
-  int16_t z;
+typedef struct {
+	int16_t x;
+	int16_t y;
+	int16_t z;
 } LSM6DSL_AxesRaw_t;
 
-typedef struct
-{
-  int32_t x;
-  int32_t y;
-  int32_t z;
+typedef struct {
+	int32_t x;
+	int32_t y;
+	int32_t z;
 } LSM6DSL_Axes_t;
 
-typedef struct
-{
-  unsigned int FreeFallStatus : 1;
-  unsigned int TapStatus : 1;
-  unsigned int DoubleTapStatus : 1;
-  unsigned int WakeUpStatus : 1;
-  unsigned int StepStatus : 1;
-  unsigned int TiltStatus : 1;
-  unsigned int D6DOrientationStatus : 1;
-  unsigned int SleepStatus : 1;
+typedef struct {
+	unsigned int FreeFallStatus : 1;
+	unsigned int TapStatus : 1;
+	unsigned int DoubleTapStatus : 1;
+	unsigned int WakeUpStatus : 1;
+	unsigned int StepStatus : 1;
+	unsigned int TiltStatus : 1;
+	unsigned int D6DOrientationStatus : 1;
+	unsigned int SleepStatus : 1;
 } LSM6DSL_Event_Status_t;
 
-typedef struct
-{
-  LSM6DSL_IO_t        IO;
-  lsm6dsl_ctx_t       Ctx;
-  uint8_t             is_initialized;
-  uint8_t             acc_is_enabled;
-  uint8_t             gyro_is_enabled;
-  lsm6dsl_odr_xl_t    acc_odr;
-  lsm6dsl_odr_g_t     gyro_odr;
+typedef struct {
+	LSM6DSL_IO_t IO;
+	lsm6dsl_ctx_t Ctx;
+	uint8_t is_initialized;
+	uint8_t acc_is_enabled;
+	uint8_t gyro_is_enabled;
+	lsm6dsl_odr_xl_t acc_odr;
+	lsm6dsl_odr_g_t gyro_odr;
 } LSM6DSL_Object_t;
 
-typedef struct
-{
-  uint8_t   Acc;
-  uint8_t   Gyro;
-  uint8_t   Magneto;
-  uint8_t   LowPower;
-  uint32_t  GyroMaxFS;
-  uint32_t  AccMaxFS;
-  uint32_t  MagMaxFS;
-  float     GyroMaxOdr;
-  float     AccMaxOdr;
-  float     MagMaxOdr;
+typedef struct {
+	uint8_t Acc;
+	uint8_t Gyro;
+	uint8_t Magneto;
+	uint8_t LowPower;
+	uint32_t GyroMaxFS;
+	uint32_t AccMaxFS;
+	uint32_t MagMaxFS;
+	float GyroMaxOdr;
+	float AccMaxOdr;
+	float MagMaxOdr;
 } LSM6DSL_Capabilities_t;
 
-typedef struct
-{
-  int32_t (*Init)(LSM6DSL_Object_t *);
-  int32_t (*DeInit)(LSM6DSL_Object_t *);
-  int32_t (*ReadID)(LSM6DSL_Object_t *, uint8_t *);
-  int32_t (*GetCapabilities)(LSM6DSL_Object_t *, LSM6DSL_Capabilities_t *);
+typedef struct {
+	int32_t (*Init)(LSM6DSL_Object_t *);
+	int32_t (*DeInit)(LSM6DSL_Object_t *);
+	int32_t (*ReadID)(LSM6DSL_Object_t *, uint8_t *);
+	int32_t (*GetCapabilities)(LSM6DSL_Object_t *, LSM6DSL_Capabilities_t *);
 } LSM6DSL_CommonDrv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LSM6DSL_Object_t *);
-  int32_t (*Disable)(LSM6DSL_Object_t *);
-  int32_t (*GetSensitivity)(LSM6DSL_Object_t *, float *);
-  int32_t (*GetOutputDataRate)(LSM6DSL_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LSM6DSL_Object_t *, float);
-  int32_t (*GetFullScale)(LSM6DSL_Object_t *, int32_t *);
-  int32_t (*SetFullScale)(LSM6DSL_Object_t *, int32_t);
-  int32_t (*GetAxes)(LSM6DSL_Object_t *, LSM6DSL_Axes_t *);
-  int32_t (*GetAxesRaw)(LSM6DSL_Object_t *, LSM6DSL_AxesRaw_t *);
+typedef struct {
+	int32_t (*Enable)(LSM6DSL_Object_t *);
+	int32_t (*Disable)(LSM6DSL_Object_t *);
+	int32_t (*GetSensitivity)(LSM6DSL_Object_t *, float *);
+	int32_t (*GetOutputDataRate)(LSM6DSL_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LSM6DSL_Object_t *, float);
+	int32_t (*GetFullScale)(LSM6DSL_Object_t *, int32_t *);
+	int32_t (*SetFullScale)(LSM6DSL_Object_t *, int32_t);
+	int32_t (*GetAxes)(LSM6DSL_Object_t *, LSM6DSL_Axes_t *);
+	int32_t (*GetAxesRaw)(LSM6DSL_Object_t *, LSM6DSL_AxesRaw_t *);
 } LSM6DSL_ACC_Drv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LSM6DSL_Object_t *);
-  int32_t (*Disable)(LSM6DSL_Object_t *);
-  int32_t (*GetSensitivity)(LSM6DSL_Object_t *, float *);
-  int32_t (*GetOutputDataRate)(LSM6DSL_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LSM6DSL_Object_t *, float);
-  int32_t (*GetFullScale)(LSM6DSL_Object_t *, int32_t *);
-  int32_t (*SetFullScale)(LSM6DSL_Object_t *, int32_t);
-  int32_t (*GetAxes)(LSM6DSL_Object_t *, LSM6DSL_Axes_t *);
-  int32_t (*GetAxesRaw)(LSM6DSL_Object_t *, LSM6DSL_AxesRaw_t *);
+typedef struct {
+	int32_t (*Enable)(LSM6DSL_Object_t *);
+	int32_t (*Disable)(LSM6DSL_Object_t *);
+	int32_t (*GetSensitivity)(LSM6DSL_Object_t *, float *);
+	int32_t (*GetOutputDataRate)(LSM6DSL_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LSM6DSL_Object_t *, float);
+	int32_t (*GetFullScale)(LSM6DSL_Object_t *, int32_t *);
+	int32_t (*SetFullScale)(LSM6DSL_Object_t *, int32_t);
+	int32_t (*GetAxes)(LSM6DSL_Object_t *, LSM6DSL_Axes_t *);
+	int32_t (*GetAxesRaw)(LSM6DSL_Object_t *, LSM6DSL_AxesRaw_t *);
 } LSM6DSL_GYRO_Drv_t;
 
 /**

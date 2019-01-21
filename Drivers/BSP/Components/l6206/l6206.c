@@ -287,7 +287,7 @@ void L6206_DisableBridge(uint8_t bridgeId)
 		if (bridgeId == BRIDGE_A) {
 			L6206_Board_DisableBridge(BRIDGE_B);
 			devicePrm.bridgeEnabled[BRIDGE_B] = FALSE;
-		}else  {
+		}else {
 			L6206_Board_DisableBridge(BRIDGE_A);
 			devicePrm.bridgeEnabled[BRIDGE_A] = FALSE;
 		}
@@ -310,11 +310,11 @@ void L6206_EnableBridge(uint8_t bridgeId)
 		if (bridgeId == BRIDGE_A) {
 			L6206_Board_EnableBridge(BRIDGE_B, 1);
 			devicePrm.bridgeEnabled[BRIDGE_B] = TRUE;
-		}else  {
+		}else {
 			L6206_Board_EnableBridge(BRIDGE_A, 1);
 			devicePrm.bridgeEnabled[BRIDGE_A] = TRUE;
 		}
-	}else  {
+	}else {
 		L6206_Board_EnableBridge(bridgeId, 1);
 	}
 }
@@ -335,7 +335,7 @@ void L6206_Init(void* init)
 		/* Set context variables to the predefined values from l6206_target_config.h */
 		/* Set GPIO according to these values */
 		L6206_SetDeviceParamsToPredefinedValues();
-	}else  {
+	}else {
 		L6206_SetDeviceParamsToGivenValues((L6206_InitTypeDef*)init);
 	}
 
@@ -382,7 +382,7 @@ motorState_t L6206_GetDeviceState(uint8_t motorId)
 
 	if (motorId > l6206ArrayNbMaxMotorsByConfig[devicePrm.config]) {
 		L6206_ErrorHandler(L6206_ERROR_1);
-	}else  {
+	}else {
 		state = devicePrm.motionState[motorId];
 	}
 	return(state);
@@ -407,7 +407,7 @@ uint16_t L6206_GetMaxSpeed(uint8_t motorId)
 	uint16_t speed = 0;
 	if (motorId > l6206ArrayNbMaxMotorsByConfig[devicePrm.config]) {
 		L6206_ErrorHandler(L6206_ERROR_1);
-	}else  {
+	}else {
 		speed = devicePrm.speed[motorId];
 	}
 	return(speed);
@@ -446,7 +446,7 @@ void L6206_HardHiz(uint8_t motorId)
 {
 	if (motorId > l6206ArrayNbMaxMotorsByConfig[devicePrm.config]) {
 		L6206_ErrorHandler(L6206_ERROR_1);
-	}else  {
+	}else {
 		/* Get bridge Id of the corresponding motor */
 		uint8_t bridgeId = L6206_GetBridgeIdUsedByMotorId(motorId);
 
@@ -581,7 +581,7 @@ void L6206_Run(uint8_t motorId, motorDir_t direction)
 			L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], (100 - devicePrm.speed[motorId]));
 			bridgeInput = L6206_GetSecondBridgeInputUsedByMotorId(motorId);
 			L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], 100);
-		}else  {
+		}else {
 			/* for unidirectionnal motor */
 			L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], devicePrm.speed[motorId]);
 		}
@@ -666,7 +666,7 @@ bool L6206_SetMaxSpeed(uint8_t motorId, uint16_t newMaxSpeed)
 
 	if (motorId > l6206ArrayNbMaxMotorsByConfig[devicePrm.config]) {
 		L6206_ErrorHandler(L6206_ERROR_1);
-	}else  {
+	}else {
 		devicePrm.speed[motorId] = newMaxSpeed;
 		if (devicePrm.motionState[motorId] != INACTIVE) {
 			uint8_t bridgeInput;
@@ -678,7 +678,7 @@ bool L6206_SetMaxSpeed(uint8_t motorId, uint16_t newMaxSpeed)
 			if (L6206_IsBidirectionnalMotor(motorId)) {
 				/* for bidirectionnal motor */
 				L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], (100 - devicePrm.speed[motorId]));
-			}else  {
+			}else {
 				/* for unidirectionnal motor */
 				L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], devicePrm.speed[motorId]);
 			}
@@ -716,11 +716,11 @@ void L6206_SetBridgeInputPwmFreq(uint8_t bridgeId, uint32_t newFreq)
 				if (bridgeInput != L6206_GetSecondBridgeInputUsedByMotorId(motorId)) {
 					/* Set PWM frequency for bidirectionnal motor of the first bridge*/
 					L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], (100 - devicePrm.speed[motorId]));
-				}else  {
+				}else {
 					/* Set PWM frequency for bidirectionnal motor of the second bridge */
 					L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], 100);
 				}
-			}else  {
+			}else {
 				/* Set PWM frequency  for unidirectionnal motor */
 				L6206_Board_PwmSetFreq(bridgeInput, devicePrm.pwmFreq[bridgeInput], devicePrm.speed[motorId]);
 			}
@@ -741,7 +741,7 @@ bool L6206_SetNbDevices(uint8_t nbDevices)
 {
 	if (nbDevices <= MAX_NUMBER_OF_DEVICES) {
 		return TRUE;
-	}else  {
+	}else {
 		return FALSE;
 	}
 }
@@ -760,7 +760,7 @@ void L6206_ErrorHandler(uint16_t error)
 {
 	if (errorHandlerCallback != 0) {
 		(void)errorHandlerCallback(error);
-	}else  {
+	}else {
 		while (1) {
 			/* Infinite loop */
 		}
@@ -807,7 +807,7 @@ uint8_t L6206_GetBridgeIdUsedByMotorId(uint8_t motorId)
 	case PARALLELING_IN1A_IN2A__IN1B_IN2B__1_UNDIR_MOTOR_BRIDGE_A__1_UNDIR_MOTOR_BRIDGE_B:
 		if (motorId == 0) {
 			bridgeId = 0;
-		}else  {
+		}else {
 			bridgeId = 1;
 		}
 		break;
@@ -816,7 +816,7 @@ uint8_t L6206_GetBridgeIdUsedByMotorId(uint8_t motorId)
 	case PARALLELING_IN1B_IN2B__2_UNDIR_MOTOR_BRIDGE_A__1_UNDIR_MOTOR_BRIDGE_B:
 		if (motorId < 2) {
 			bridgeId = 0;
-		}else  {
+		}else {
 			bridgeId = 1;
 		}
 		break;
@@ -847,7 +847,7 @@ uint8_t L6206_GetMotorIdUsingbridgeInput(uint8_t bridgeInput)
 	case PARALLELING_IN1A_IN2A__IN1B_IN2B__1_UNDIR_MOTOR_BRIDGE_A__1_UNDIR_MOTOR_BRIDGE_B:
 		if (bridgeInput >= INPUT_1B) {
 			motorId = 1;
-		}else  {
+		}else {
 			motorId = 0;
 		}
 		break;
@@ -857,7 +857,7 @@ uint8_t L6206_GetMotorIdUsingbridgeInput(uint8_t bridgeInput)
 			motorId = 2;
 		}else if (bridgeInput == INPUT_1B) {
 			motorId = 1;
-		}else  {
+		}else {
 			motorId = 0;
 		}
 		break;
@@ -867,7 +867,7 @@ uint8_t L6206_GetMotorIdUsingbridgeInput(uint8_t bridgeInput)
 			motorId = 2;
 		}else if (bridgeInput == INPUT_2A) {
 			motorId = 1;
-		}else  {
+		}else {
 			motorId = 0;
 		}
 		break;
@@ -878,14 +878,14 @@ uint8_t L6206_GetMotorIdUsingbridgeInput(uint8_t bridgeInput)
 			motorId = 2;
 		}else if (bridgeInput == INPUT_2A) {
 			motorId = 1;
-		}else  {
+		}else {
 			motorId = 0;
 		}
 		break;
 	case PARALLELING_IN1A_IN1B__IN2A_IN2B__1_UNDIR_MOTOR_BRIDGE_1A__1_UNDIR_MOTOR_BRIDGE_2A:
 		if ((bridgeInput == INPUT_2A) || (bridgeInput == INPUT_2B)) {
 			motorId = 1;
-		}else  {
+		}else {
 			motorId = 0;
 		}
 		break;
@@ -912,13 +912,13 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_1A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2A;
 			}
-		}else  {
+		}else {
 			if (devicePrm.direction[1] == FORWARD) {
 				bridgeInput = INPUT_1B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2B;
 			}
 		}
@@ -927,12 +927,12 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_1A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2A;
 			}
 		}else if (motorId == 1) {
 			bridgeInput = INPUT_1B;
-		}else  {
+		}else {
 			bridgeInput = INPUT_2B;
 		}
 		break;
@@ -941,10 +941,10 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 			bridgeInput = INPUT_1A;
 		}else if (motorId == 1) {
 			bridgeInput = INPUT_2A;
-		}else  {
+		}else {
 			if (devicePrm.direction[2] == FORWARD) {
 				bridgeInput = INPUT_1B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2B;
 			}
 		}
@@ -956,17 +956,17 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 			bridgeInput = INPUT_2A;
 		}else if (motorId == 2) {
 			bridgeInput = INPUT_1B;
-		}else  {
+		}else {
 			bridgeInput = INPUT_2B;
 		}
 		break;
 	case PARALLELING_IN1A_IN2A__1_UNDIR_MOTOR_BRIDGE_A__1_BIDIR_MOTOR_BRIDGE_B:
 		if (motorId == 0) {
 			bridgeInput = INPUT_1A;
-		}else  {
+		}else {
 			if (devicePrm.direction[1] == FORWARD) {
 				bridgeInput = INPUT_1B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2B;
 			}
 		}
@@ -976,7 +976,7 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 			bridgeInput = INPUT_1A;
 		}else if (motorId == 1) {
 			bridgeInput = INPUT_1B;
-		}else  {
+		}else {
 			bridgeInput = INPUT_2B;
 		}
 		break;
@@ -984,10 +984,10 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_1A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_2A;
 			}
-		}else  {
+		}else {
 			bridgeInput = INPUT_1B;
 		}
 		break;
@@ -996,35 +996,35 @@ uint8_t L6206_GetBridgeInputUsedByMotorId(uint8_t motorId)
 			bridgeInput = INPUT_1A;
 		}else if (motorId == 1) {
 			bridgeInput = INPUT_2A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_1B;
 		}
 		break;
 	case PARALLELING_IN1A_IN2A__IN1B_IN2B__1_UNDIR_MOTOR_BRIDGE_A__1_UNDIR_MOTOR_BRIDGE_B:
 		if (motorId == 0) {
 			bridgeInput = INPUT_1A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_1B;
 		}
 		break;
 	case PARALLELING_IN1A_IN2A__IN1B_IN2B__1_BIDIR_MOTOR:
 		if (devicePrm.direction[0] == FORWARD) {
 			bridgeInput = INPUT_1A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_1B;
 		}
 		break;
 	case PARALLELING_IN1A_IN1B__IN2A_IN2B__1_UNDIR_MOTOR_BRIDGE_1A__1_UNDIR_MOTOR_BRIDGE_2A:
 		if (motorId == 0) {
 			bridgeInput = INPUT_1A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_2A;
 		}
 		break;
 	case PARALLELING_IN1A_IN1B__IN2A_IN2B__1_BIDIR_MOTOR:
 		if (devicePrm.direction[0] == FORWARD) {
 			bridgeInput = INPUT_1A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_2A;
 		}
 		break;
@@ -1050,13 +1050,13 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_2A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1A;
 			}
-		}else  {
+		}else {
 			if (devicePrm.direction[1] == FORWARD) {
 				bridgeInput = INPUT_2B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1B;
 			}
 		}
@@ -1065,7 +1065,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_2A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1A;
 			}
 		}
@@ -1074,7 +1074,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 2) {
 			if (devicePrm.direction[2] == FORWARD) {
 				bridgeInput = INPUT_2B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1B;
 			}
 		}
@@ -1084,7 +1084,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 1) {
 			if (devicePrm.direction[1] == FORWARD) {
 				bridgeInput = INPUT_2B;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1B;
 			}
 		}
@@ -1094,7 +1094,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 		if (motorId == 0) {
 			if (devicePrm.direction[0] == FORWARD) {
 				bridgeInput = INPUT_2A;
-			}else  {
+			}else {
 				bridgeInput = INPUT_1A;
 			}
 		}
@@ -1102,7 +1102,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 	case PARALLELING_IN1A_IN2A__IN1B_IN2B__1_BIDIR_MOTOR:
 		if (devicePrm.direction[0] == FORWARD) {
 			bridgeInput = INPUT_1B;
-		}else  {
+		}else {
 			bridgeInput = INPUT_1A;
 		}
 		break;
@@ -1110,7 +1110,7 @@ uint8_t L6206_GetSecondBridgeInputUsedByMotorId(uint8_t motorId)
 	case PARALLELING_IN1A_IN1B__IN2A_IN2B__1_BIDIR_MOTOR:
 		if (devicePrm.direction[0] == FORWARD) {
 			bridgeInput = INPUT_2A;
-		}else  {
+		}else {
 			bridgeInput = INPUT_1A;
 		}
 		break;

@@ -443,7 +443,7 @@ void AutonomousLowPowerRangingTest(void)
 				status = VL53L1_ClearInterruptAndStartMeasurement(Dev);
 			}
 		} while (1);
-	}else  {
+	}else {
 		do { // polling mode
 			status = VL53L1_WaitMeasurementDataReady(Dev);
 			if (!status) {

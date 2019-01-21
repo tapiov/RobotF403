@@ -289,7 +289,7 @@ void ST7789H2_SetOrientation(uint32_t orientation)
 		ST7789H2_WriteReg(ST7789H2_VSCSAD, parameter, 2);
 
 		parameter[0] = 0xC0;
-	}else  {
+	}else {
 		parameter[0] = 0x60;
 	}
 	ST7789H2_WriteReg(ST7789H2_NORMAL_DISPLAY, parameter, 1);
@@ -477,25 +477,25 @@ void ST7789H2_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uin
 {
 	if (Xpos < ST7789H2_LCD_PIXEL_WIDTH) {
 		WindowsXstart = Xpos;
-	}else  {
+	}else {
 		WindowsXstart = 0;
 	}
 
 	if (Ypos < ST7789H2_LCD_PIXEL_HEIGHT) {
 		WindowsYstart = Ypos;
-	}else  {
+	}else {
 		WindowsYstart = 0;
 	}
 
 	if (Width + Xpos <= ST7789H2_LCD_PIXEL_WIDTH) {
 		WindowsXend = Width + Xpos - 1;
-	}else  {
+	}else {
 		WindowsXend = ST7789H2_LCD_PIXEL_WIDTH - 1;
 	}
 
 	if (Height + Ypos <= ST7789H2_LCD_PIXEL_HEIGHT) {
 		WindowsYend = Height + Ypos - 1;
-	}else  {
+	}else {
 		WindowsYend = ST7789H2_LCD_PIXEL_HEIGHT - 1;
 	}
 }

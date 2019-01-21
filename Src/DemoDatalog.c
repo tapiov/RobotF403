@@ -62,88 +62,71 @@ static uint32_t GetBank(uint32_t Address);
  */
 void SaveCalibrationToMemory(uint16_t DataSize, uint32_t *Data)
 {
-  uint32_t address = FLASH_ADDRESS;
-  uint32_t nword;
+	uint32_t address = FLASH_ADDRESS;
+	uint32_t nword;
 
-  /* Reset Before The data in Memory */
-  ResetCalibrationInMemory();
+	/* Reset Before The data in Memory */
+	ResetCalibrationInMemory();
 
-  /* Unlock the Flash to enable the flash control register access */
-  (void)HAL_FLASH_Unlock();
+	/* Unlock the Flash to enable the flash control register access */
+	(void)HAL_FLASH_Unlock();
 
 #if (defined (USE_STM32F4XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR |
-                         FLASH_FLAG_PGSERR);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR |
+			       FLASH_FLAG_PGSERR);
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR | FLASH_FLAG_RDERR |
-                         FLASH_FLAG_WRPERR | FLASH_FLAG_FWWERR | FLASH_FLAG_NOTZEROERR);
-
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR | FLASH_FLAG_RDERR |
+			       FLASH_FLAG_WRPERR | FLASH_FLAG_FWWERR | FLASH_FLAG_NOTZEROERR);
 #elif (defined (USE_STM32L1XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR |
-                         FLASH_FLAG_OPTVERRUSR | FLASH_FLAG_WRPERR);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR |
+			       FLASH_FLAG_OPTVERRUSR | FLASH_FLAG_WRPERR);
 #elif (defined (USE_STM32L4XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_ALL_ERRORS);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_ALL_ERRORS);
 #else
 #error Not supported platform
 #endif
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L0XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-  uint32_t word;
+	uint32_t word;
 
-  for (nword = 0; nword < DataSize; nword++)
-  {
-    word = *(Data + nword);
+	for (nword = 0; nword < DataSize; nword++) {
+		word = *(Data + nword);
 
-    if (HAL_FLASH_Program(TYPEPROGRAM_WORD, address, word) == HAL_OK)
-    {
-      address += 4;
-    }
-    else
-    {
-      /* Error occurred while writing data in Flash memory */
-      Error_Handler();
-    }
-  }
-
+		if (HAL_FLASH_Program(TYPEPROGRAM_WORD, address, word) == HAL_OK) {
+			address += 4;
+		}else  {
+			/* Error occurred while writing data in Flash memory */
+			Error_Handler();
+		}
+	}
 #elif (defined (USE_STM32L4XX_NUCLEO))
-  uint64_t lword, hword;
+	uint64_t lword, hword;
 
-  for (nword = 0; nword < DataSize; nword += 2U)
-  {
-    lword = *(Data + nword); /* MISRA C-2012 rule 18.4 violation for purpose */
+	for (nword = 0; nword < DataSize; nword += 2U) {
+		lword = *(Data + nword); /* MISRA C-2012 rule 18.4 violation for purpose */
 
-    if ((nword + 1U) < DataSize)
-    {
-      hword = (uint64_t)(*(Data + nword + 1)) << 32; /* MISRA C-2012 rule 18.4 violation for purpose */
-    }
-    else
-    {
-      hword = 0;
-    }
+		if ((nword + 1U) < DataSize) {
+			hword = (uint64_t)(*(Data + nword + 1)) << 32; /* MISRA C-2012 rule 18.4 violation for purpose */
+		}else  {
+			hword = 0;
+		}
 
-    if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address, hword | lword) == HAL_OK)
-    {
-      address += 8U;
-    }
-    else
-    {
-      /* Error occurred while writing data in Flash memory */
-      Error_Handler();
-    }
-  }
-
+		if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address, hword | lword) == HAL_OK) {
+			address += 8U;
+		}else  {
+			/* Error occurred while writing data in Flash memory */
+			Error_Handler();
+		}
+	}
 #else
 #error Not supported platform
 #endif
 
-  /* Lock the Flash to disable the flash control register access */
-  (void)HAL_FLASH_Lock();
+	/* Lock the Flash to disable the flash control register access */
+	(void)HAL_FLASH_Lock();
 }
 
 /**
@@ -153,35 +136,30 @@ void SaveCalibrationToMemory(uint16_t DataSize, uint32_t *Data)
  */
 void RecallCalibrationFromMemory(uint16_t DataSize, uint32_t *Data)
 {
-  uint32_t address = FLASH_ADDRESS;
+	uint32_t address = FLASH_ADDRESS;
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L0XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-  while (address < (FLASH_ADDRESS + DataSize * 4))
-  {
-    *(Data) = *(__IO uint32_t *)address;
-    Data += 1;
-    address += 4;
-  }
-
+	while (address < (FLASH_ADDRESS + DataSize * 4)) {
+		*(Data) = *(__IO uint32_t *)address;
+		Data += 1;
+		address += 4;
+	}
 #elif (defined (USE_STM32L4XX_NUCLEO))
-  uint32_t *dataMem = Data;
-  uint64_t dword;
+	uint32_t *dataMem = Data;
+	uint64_t dword;
 
-  while (address < (FLASH_ADDRESS + (uint32_t)DataSize * 4U))
-  {
-    dword = (*(__IO uint64_t *)address);
-    *(Data) = (uint32_t)(dword & 0x00000000FFFFFFFFU);
-    Data += 1; /* MISRA C-2012 rule 18.4 violation for purpose */
+	while (address < (FLASH_ADDRESS + (uint32_t)DataSize * 4U)) {
+		dword = (*(__IO uint64_t *)address);
+		*(Data) = (uint32_t)(dword & 0x00000000FFFFFFFFU);
+		Data += 1; /* MISRA C-2012 rule 18.4 violation for purpose */
 
-    if (Data < (dataMem + DataSize)) /* MISRA C-2012 rule 18.4 violation for purpose */
-    {
-      *(Data) = (uint32_t)((dword & 0xFFFFFFFF00000000U) >> 32);
-      Data += 1; /* MISRA C-2012 rule 18.4 violation for purpose */
-    }
+		if (Data < (dataMem + DataSize)) { /* MISRA C-2012 rule 18.4 violation for purpose */
+			*(Data) = (uint32_t)((dword & 0xFFFFFFFF00000000U) >> 32);
+			Data += 1; /* MISRA C-2012 rule 18.4 violation for purpose */
+		}
 
-    address += 8U;
-  }
-
+		address += 8U;
+	}
 #else
 #error Not supported platform
 #endif
@@ -194,67 +172,58 @@ void RecallCalibrationFromMemory(uint16_t DataSize, uint32_t *Data)
  */
 void ResetCalibrationInMemory(void)
 {
-  FLASH_EraseInitTypeDef EraseInitStruct;
-  uint32_t SectorError = 0;
+	FLASH_EraseInitTypeDef EraseInitStruct;
+	uint32_t SectorError = 0;
 
 #if (defined (USE_STM32F4XX_NUCLEO))
-  EraseInitStruct.TypeErase = TYPEERASE_SECTORS;
-  EraseInitStruct.VoltageRange = VOLTAGE_RANGE_3;
-  EraseInitStruct.Sector = FLASH_SECTOR;
-  EraseInitStruct.NbSectors = 1;
-
+	EraseInitStruct.TypeErase = TYPEERASE_SECTORS;
+	EraseInitStruct.VoltageRange = VOLTAGE_RANGE_3;
+	EraseInitStruct.Sector = FLASH_SECTOR;
+	EraseInitStruct.NbSectors = 1;
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
-  EraseInitStruct.PageAddress = FLASH_ADDRESS;
-  EraseInitStruct.NbPages     = 32; /* page 480 .. 511 */
-
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	EraseInitStruct.PageAddress = FLASH_ADDRESS;
+	EraseInitStruct.NbPages = 32; /* page 480 .. 511 */
 #elif (defined (USE_STM32L1XX_NUCLEO))
-  EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
-  EraseInitStruct.PageAddress = FLASH_ADDRESS;
-  EraseInitStruct.NbPages = 512; /* page 1024 .. 1535 */
-
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	EraseInitStruct.PageAddress = FLASH_ADDRESS;
+	EraseInitStruct.NbPages = 512; /* page 1024 .. 1535 */
 #elif (defined (USE_STM32L4XX_NUCLEO))
-  EraseInitStruct.TypeErase   = FLASH_TYPEERASE_PAGES;
-  EraseInitStruct.Banks       = GetBank(FLASH_ADDRESS);
-  EraseInitStruct.Page        = GetPage(FLASH_ADDRESS);
-  EraseInitStruct.NbPages     = 1;
-
+	EraseInitStruct.TypeErase = FLASH_TYPEERASE_PAGES;
+	EraseInitStruct.Banks = GetBank(FLASH_ADDRESS);
+	EraseInitStruct.Page = GetPage(FLASH_ADDRESS);
+	EraseInitStruct.NbPages = 1;
 #else
 #error Not supported platform
 #endif
 
-  /* Unlock the Flash to enable the flash control register access */
-  (void)HAL_FLASH_Unlock();
+	/* Unlock the Flash to enable the flash control register access */
+	(void)HAL_FLASH_Unlock();
 
 #if (defined (USE_STM32F4XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR |
-                         FLASH_FLAG_PGSERR);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGPERR |
+			       FLASH_FLAG_PGSERR);
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR | FLASH_FLAG_RDERR |
-                         FLASH_FLAG_WRPERR | FLASH_FLAG_FWWERR | FLASH_FLAG_NOTZEROERR);
-
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR | FLASH_FLAG_RDERR |
+			       FLASH_FLAG_WRPERR | FLASH_FLAG_FWWERR | FLASH_FLAG_NOTZEROERR);
 #elif (defined (USE_STM32L1XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR |
-                         FLASH_FLAG_OPTVERRUSR | FLASH_FLAG_WRPERR);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_PGAERR | FLASH_FLAG_SIZERR | FLASH_FLAG_OPTVERR |
+			       FLASH_FLAG_OPTVERRUSR | FLASH_FLAG_WRPERR);
 #elif (defined (USE_STM32L4XX_NUCLEO))
-  /* Clear pending flags (if any) */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_ALL_ERRORS);
-
+	/* Clear pending flags (if any) */
+	__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_ALL_ERRORS);
 #else
 #error Not supported platform
 #endif
 
-  if (HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	if (HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK) {
+		Error_Handler();
+	}
 
-  /* Lock the Flash to disable the flash control register access */
-  (void)HAL_FLASH_Lock();
+	/* Lock the Flash to disable the flash control register access */
+	(void)HAL_FLASH_Lock();
 }
 
 #if (defined (USE_STM32L4XX_NUCLEO))
@@ -265,20 +234,17 @@ void ResetCalibrationInMemory(void)
  */
 static uint32_t GetPage(uint32_t Addr)
 {
-  uint32_t page;
+	uint32_t page;
 
-  if (Addr < (FLASH_BASE + FLASH_BANK_SIZE))
-  {
-    /* Bank 1 */
-    page = (Addr - FLASH_BASE) / FLASH_PAGE_SIZE;
-  }
-  else
-  {
-    /* Bank 2 */
-    page = (Addr - (FLASH_BASE + FLASH_BANK_SIZE)) / FLASH_PAGE_SIZE;
-  }
+	if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
+		/* Bank 1 */
+		page = (Addr - FLASH_BASE) / FLASH_PAGE_SIZE;
+	}else  {
+		/* Bank 2 */
+		page = (Addr - (FLASH_BASE + FLASH_BANK_SIZE)) / FLASH_PAGE_SIZE;
+	}
 
-  return page;
+	return page;
 }
 
 /**
@@ -288,34 +254,25 @@ static uint32_t GetPage(uint32_t Addr)
  */
 static uint32_t GetBank(uint32_t Addr)
 {
-  uint32_t bank;
+	uint32_t bank;
 
-  if (READ_BIT(SYSCFG->MEMRMP, SYSCFG_MEMRMP_FB_MODE) == 0)
-  {
-    /* No Bank swap */
-    if (Addr < (FLASH_BASE + FLASH_BANK_SIZE))
-    {
-      bank = FLASH_BANK_1;
-    }
-    else
-    {
-      bank = FLASH_BANK_2;
-    }
-  }
-  else
-  {
-    /* Bank swap */
-    if (Addr < (FLASH_BASE + FLASH_BANK_SIZE))
-    {
-      bank = FLASH_BANK_2;
-    }
-    else
-    {
-      bank = FLASH_BANK_1;
-    }
-  }
+	if (READ_BIT(SYSCFG->MEMRMP, SYSCFG_MEMRMP_FB_MODE) == 0) {
+		/* No Bank swap */
+		if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
+			bank = FLASH_BANK_1;
+		}else  {
+			bank = FLASH_BANK_2;
+		}
+	}else  {
+		/* Bank swap */
+		if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
+			bank = FLASH_BANK_2;
+		}else  {
+			bank = FLASH_BANK_1;
+		}
+	}
 
-  return bank;
+	return bank;
 }
 #endif /* USE_STM32L4XX_NUCLEO */
 

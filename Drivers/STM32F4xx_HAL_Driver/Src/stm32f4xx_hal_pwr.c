@@ -387,7 +387,7 @@ void HAL_PWR_EnterSLEEPMode(uint32_t Regulator, uint8_t SLEEPEntry)
 	if (SLEEPEntry == PWR_SLEEPENTRY_WFI) {
 		/* Request Wait For Interrupt */
 		__WFI();
-	}else  {
+	}else {
 		/* Request Wait For Event */
 		__SEV();
 		__WFE();
@@ -430,7 +430,7 @@ void HAL_PWR_EnterSTOPMode(uint32_t Regulator, uint8_t STOPEntry)
 	if (STOPEntry == PWR_STOPENTRY_WFI) {
 		/* Request Wait For Interrupt */
 		__WFI();
-	}else  {
+	}else {
 		/* Request Wait For Event */
 		__SEV();
 		__WFE();

@@ -68,72 +68,65 @@ typedef int32_t (*LPS22HB_GetTick_Func)(void);
 typedef int32_t (*LPS22HB_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*LPS22HB_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
-typedef struct
-{
-  LPS22HB_Init_Func          Init;
-  LPS22HB_DeInit_Func        DeInit;
-  uint32_t                   BusType; /*0 means I2C, 1 means SPI 4-Wires, 2 means SPI-3-Wires */
-  uint8_t                    Address;
-  LPS22HB_WriteReg_Func      WriteReg;
-  LPS22HB_ReadReg_Func       ReadReg;
-  LPS22HB_GetTick_Func       GetTick;
+typedef struct {
+	LPS22HB_Init_Func Init;
+	LPS22HB_DeInit_Func DeInit;
+	uint32_t BusType;             /*0 means I2C, 1 means SPI 4-Wires, 2 means SPI-3-Wires */
+	uint8_t Address;
+	LPS22HB_WriteReg_Func WriteReg;
+	LPS22HB_ReadReg_Func ReadReg;
+	LPS22HB_GetTick_Func GetTick;
 } LPS22HB_IO_t;
 
-typedef struct
-{
-  LPS22HB_IO_t        IO;
-  lps22hb_ctx_t       Ctx;
-  uint8_t             is_initialized;
-  uint8_t             press_is_enabled;
-  uint8_t             temp_is_enabled;
-  lps22hb_odr_t       last_odr;
+typedef struct {
+	LPS22HB_IO_t IO;
+	lps22hb_ctx_t Ctx;
+	uint8_t is_initialized;
+	uint8_t press_is_enabled;
+	uint8_t temp_is_enabled;
+	lps22hb_odr_t last_odr;
 } LPS22HB_Object_t;
 
-typedef struct
-{
-  uint8_t Temperature;
-  uint8_t Pressure;
-  uint8_t Humidity;
-  uint8_t LowPower;
-  float   HumMaxOdr;
-  float   TempMaxOdr;
-  float   PressMaxOdr;
+typedef struct {
+	uint8_t Temperature;
+	uint8_t Pressure;
+	uint8_t Humidity;
+	uint8_t LowPower;
+	float HumMaxOdr;
+	float TempMaxOdr;
+	float PressMaxOdr;
 } LPS22HB_Capabilities_t;
 
-typedef struct
-{
-  int32_t (*Init)(LPS22HB_Object_t *);
-  int32_t (*DeInit)(LPS22HB_Object_t *);
-  int32_t (*ReadID)(LPS22HB_Object_t *, uint8_t *);
-  int32_t (*GetCapabilities)(LPS22HB_Object_t *, LPS22HB_Capabilities_t *);
+typedef struct {
+	int32_t (*Init)(LPS22HB_Object_t *);
+	int32_t (*DeInit)(LPS22HB_Object_t *);
+	int32_t (*ReadID)(LPS22HB_Object_t *, uint8_t *);
+	int32_t (*GetCapabilities)(LPS22HB_Object_t *, LPS22HB_Capabilities_t *);
 } LPS22HB_CommonDrv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LPS22HB_Object_t *);
-  int32_t (*Disable)(LPS22HB_Object_t *);
-  int32_t (*GetOutputDataRate)(LPS22HB_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LPS22HB_Object_t *, float);
-  int32_t (*GetTemperature)(LPS22HB_Object_t *, float *);
+typedef struct {
+	int32_t (*Enable)(LPS22HB_Object_t *);
+	int32_t (*Disable)(LPS22HB_Object_t *);
+	int32_t (*GetOutputDataRate)(LPS22HB_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LPS22HB_Object_t *, float);
+	int32_t (*GetTemperature)(LPS22HB_Object_t *, float *);
 } LPS22HB_TEMP_Drv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LPS22HB_Object_t *);
-  int32_t (*Disable)(LPS22HB_Object_t *);
-  int32_t (*GetOutputDataRate)(LPS22HB_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LPS22HB_Object_t *, float);
-  int32_t (*GetPressure)(LPS22HB_Object_t *, float *);
+typedef struct {
+	int32_t (*Enable)(LPS22HB_Object_t *);
+	int32_t (*Disable)(LPS22HB_Object_t *);
+	int32_t (*GetOutputDataRate)(LPS22HB_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LPS22HB_Object_t *, float);
+	int32_t (*GetPressure)(LPS22HB_Object_t *, float *);
 } LPS22HB_PRESS_Drv_t;
 
-typedef enum
-{
-  LPS22HB_FIFO_BYPASS_MODE                    = (uint8_t)0x00,    /*!< The FIFO is disabled and empty. The pressure is read directly*/
-  LPS22HB_FIFO_FIFO_MODE                      = (uint8_t)0x20,    /*!< Stops collecting data when full */
-  LPS22HB_FIFO_STREAM_MODE                    = (uint8_t)0x40,    /*!< Keep the newest measurements in the FIFO*/
-  LPS22HB_FIFO_TRIGGER_STREAMTOFIFO_MODE      = (uint8_t)0x60,    /*!< STREAM MODE until trigger deasserted, then change to FIFO MODE*/
-  LPS22HB_FIFO_TRIGGER_BYPASSTOSTREAM_MODE    = (uint8_t)0x80,    /*!< BYPASS MODE until trigger deasserted, then STREAM MODE*/
-  LPS22HB_FIFO_TRIGGER_BYPASSTOFIFO_MODE      = (uint8_t)0xE0     /*!< BYPASS mode until trigger deasserted, then FIFO MODE*/
+typedef enum {
+	LPS22HB_FIFO_BYPASS_MODE                    = (uint8_t) 0x00,/*!< The FIFO is disabled and empty. The pressure is read directly*/
+	LPS22HB_FIFO_FIFO_MODE                      = (uint8_t) 0x20,/*!< Stops collecting data when full */
+	LPS22HB_FIFO_STREAM_MODE                    = (uint8_t) 0x40,/*!< Keep the newest measurements in the FIFO*/
+	LPS22HB_FIFO_TRIGGER_STREAMTOFIFO_MODE      = (uint8_t) 0x60,/*!< STREAM MODE until trigger deasserted, then change to FIFO MODE*/
+	LPS22HB_FIFO_TRIGGER_BYPASSTOSTREAM_MODE    = (uint8_t) 0x80,/*!< BYPASS MODE until trigger deasserted, then STREAM MODE*/
+	LPS22HB_FIFO_TRIGGER_BYPASSTOFIFO_MODE      = (uint8_t) 0xE0/*!< BYPASS mode until trigger deasserted, then FIFO MODE*/
 } LPS22HB_FifoMode;
 
 /**

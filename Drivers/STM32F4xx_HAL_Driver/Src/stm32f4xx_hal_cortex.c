@@ -343,7 +343,7 @@ void HAL_MPU_ConfigRegion(MPU_Region_InitTypeDef *MPU_Init)
 			    ((uint32_t)MPU_Init->SubRegionDisable << MPU_RASR_SRD_Pos) |
 			    ((uint32_t)MPU_Init->Size << MPU_RASR_SIZE_Pos) |
 			    ((uint32_t)MPU_Init->Enable << MPU_RASR_ENABLE_Pos);
-	}else  {
+	}else {
 		MPU->RBAR = 0x00U;
 		MPU->RASR = 0x00U;
 	}
@@ -470,7 +470,7 @@ void HAL_SYSTICK_CLKSourceConfig(uint32_t CLKSource)
 	assert_param(IS_SYSTICK_CLK_SOURCE(CLKSource));
 	if (CLKSource == SYSTICK_CLKSOURCE_HCLK) {
 		SysTick->CTRL |= SYSTICK_CLKSOURCE_HCLK;
-	}else  {
+	}else {
 		SysTick->CTRL &= ~SYSTICK_CLKSOURCE_HCLK;
 	}
 }

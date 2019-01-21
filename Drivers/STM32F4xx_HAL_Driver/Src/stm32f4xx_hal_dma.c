@@ -424,7 +424,7 @@ HAL_StatusTypeDef HAL_DMA_Start(DMA_HandleTypeDef *hdma, uint32_t SrcAddress, ui
 
 		/* Enable the Peripheral */
 		__HAL_DMA_ENABLE(hdma);
-	}else  {
+	}else {
 		/* Process unlocked */
 		__HAL_UNLOCK(hdma);
 
@@ -479,7 +479,7 @@ HAL_StatusTypeDef HAL_DMA_Start_IT(DMA_HandleTypeDef *hdma, uint32_t SrcAddress,
 
 		/* Enable the Peripheral */
 		__HAL_DMA_ENABLE(hdma);
-	}else  {
+	}else {
 		/* Process unlocked */
 		__HAL_UNLOCK(hdma);
 
@@ -516,7 +516,7 @@ HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma)
 		__HAL_UNLOCK(hdma);
 
 		return HAL_ERROR;
-	}else  {
+	}else {
 		/* Disable all the transfer interrupts */
 		hdma->Instance->CR &= ~(DMA_IT_TC | DMA_IT_TE | DMA_IT_DME);
 		hdma->Instance->FCR &= ~(DMA_IT_FE);
@@ -568,7 +568,7 @@ HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma)
 	if (hdma->State != HAL_DMA_STATE_BUSY) {
 		hdma->ErrorCode = HAL_DMA_ERROR_NO_XFER;
 		return HAL_ERROR;
-	}else  {
+	}else {
 		/* Set Abort State  */
 		hdma->State = HAL_DMA_STATE_ABORT;
 
@@ -617,7 +617,7 @@ HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef *hdma, HAL_DMA_Level
 	if (CompleteLevel == HAL_DMA_FULL_TRANSFER) {
 		/* Transfer Complete flag */
 		mask_cpltlevel = DMA_FLAG_TCIF0_4 << hdma->StreamIndex;
-	}else  {
+	}else {
 		/* Half Transfer Complete flag */
 		mask_cpltlevel = DMA_FLAG_HTIF0_4 << hdma->StreamIndex;
 	}
@@ -696,7 +696,7 @@ HAL_StatusTypeDef HAL_DMA_PollForTransfer(DMA_HandleTypeDef *hdma, HAL_DMA_Level
 		__HAL_UNLOCK(hdma);
 
 		hdma->State = HAL_DMA_STATE_READY;
-	}else  {
+	}else {
 		/* Clear the half transfer and transfer complete flags */
 		regs->IFCR = (DMA_FLAG_HTIF0_4) << hdma->StreamIndex;
 	}
@@ -776,7 +776,7 @@ void HAL_DMA_IRQHandler(DMA_HandleTypeDef *hdma)
 						hdma->XferM1HalfCpltCallback(hdma);
 					}
 				}
-			}else  {
+			}else {
 				/* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */
 				if ((hdma->Instance->CR & DMA_SxCR_CIRC) == RESET) {
 					/* Disable the half transfer interrupt */
@@ -931,7 +931,7 @@ HAL_StatusTypeDef HAL_DMA_RegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Call
 		default:
 			break;
 		}
-	}else  {
+	}else {
 		/* Return error status */
 		status = HAL_ERROR;
 	}
@@ -996,7 +996,7 @@ HAL_StatusTypeDef HAL_DMA_UnRegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Ca
 			status = HAL_ERROR;
 			break;
 		}
-	}else  {
+	}else {
 		status = HAL_ERROR;
 	}
 
@@ -1111,7 +1111,7 @@ static uint32_t DMA_CalcBaseAndBitshift(DMA_HandleTypeDef *hdma)
 	if (stream_number > 3U) {
 		/* return pointer to HISR and HIFCR */
 		hdma->StreamBaseAddress = (((uint32_t)hdma->Instance & (uint32_t)(~0x3FFU)) + 4U);
-	}else  {
+	}else {
 		/* return pointer to LISR and LIFCR */
 		hdma->StreamBaseAddress = ((uint32_t)hdma->Instance & (uint32_t)(~0x3FFU));
 	}

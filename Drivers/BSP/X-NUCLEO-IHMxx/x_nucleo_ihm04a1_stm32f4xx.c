@@ -129,7 +129,7 @@ void L6206_Board_DisableBridge(uint8_t bridgeId)
 	if (bridgeId == 0) {
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PORT;
-	}else  {
+	}else {
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PORT;
 	}
@@ -164,7 +164,7 @@ void L6206_Board_EnableBridge(uint8_t bridgeId, uint8_t addDelay)
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PORT;
 		flagIrqn = EXTI_FLAG_A_IRQn;
-	}else  {
+	}else {
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PORT;
 		flagIrqn = EXTI_FLAG_B_IRQn;
@@ -199,7 +199,7 @@ uint32_t L6206_Board_GetFlagPinState(uint8_t bridgeId)
 	if (bridgeId == 0) {
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_A_PORT;
-	}else  {
+	}else {
 		gpioPin = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PIN;
 		gpioPort = BSP_MOTOR_CONTROL_BOARD_EN_AND_FLAG_B_PORT;
 	}
@@ -395,7 +395,7 @@ void L6206_Board_PwmSetFreq(uint8_t bridgeInput, uint32_t newFreq, uint8_t duty)
 
 	if (duty == 0) {
 		pulse = 0;
-	}else  {
+	}else {
 		if (duty > 100) duty = 100;
 		pulse = (uint32_t)(((uint32_t)period * (uint32_t)duty) / 100) + 1;
 	}

@@ -60,27 +60,26 @@
  */
 int ByteStuffCopyByte(uint8_t *Dest, uint8_t Source)
 {
-  int ret = 2;
+	int ret = 2;
 
-  switch (Source)
-  {
-    case TMsg_EOF:
-      Dest[0] = TMsg_BS;
-      Dest[1] = TMsg_BS_EOF;
-      break;
+	switch (Source) {
+	case TMsg_EOF:
+		Dest[0] = TMsg_BS;
+		Dest[1] = TMsg_BS_EOF;
+		break;
 
-    case TMsg_BS:
-      Dest[0] = TMsg_BS;
-      Dest[1] = TMsg_BS;
-      break;
+	case TMsg_BS:
+		Dest[0] = TMsg_BS;
+		Dest[1] = TMsg_BS;
+		break;
 
-    default:
-      Dest[0] = Source;
-      ret = 1;
-      break;
-  }
+	default:
+		Dest[0] = Source;
+		ret = 1;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -91,16 +90,15 @@ int ByteStuffCopyByte(uint8_t *Dest, uint8_t Source)
  */
 int ByteStuffCopy(uint8_t *Dest, TMsg *Source)
 {
-  uint32_t i;
-  int32_t count = 0;
+	uint32_t i;
+	int32_t count = 0;
 
-  for (i = 0; i < Source->Len; i++)
-  {
-    count += ByteStuffCopyByte(&Dest[count], Source->Data[i]);
-  }
-  Dest[count] = TMsg_EOF;
-  count++;
-  return count;
+	for (i = 0; i < Source->Len; i++) {
+		count += ByteStuffCopyByte(&Dest[count], Source->Data[i]);
+	}
+	Dest[count] = TMsg_EOF;
+	count++;
+	return count;
 }
 
 /**
@@ -111,25 +109,20 @@ int ByteStuffCopy(uint8_t *Dest, TMsg *Source)
  */
 int ReverseByteStuffCopyByte(uint8_t *Source, uint8_t *Dest)
 {
-  if (Source[0] == (uint8_t)TMsg_BS)
-  {
-    if (Source[1] == (uint8_t)TMsg_BS)
-    {
-      *Dest = TMsg_BS;
-      return 2;
-    }
-    if (Source[1] == (uint8_t)TMsg_BS_EOF)
-    {
-      *Dest = TMsg_EOF;
-      return 2;
-    }
-    return 0; // invalide sequence
-  }
-  else
-  {
-    *Dest = Source[0];
-    return 1;
-  }
+	if (Source[0] == (uint8_t)TMsg_BS) {
+		if (Source[1] == (uint8_t)TMsg_BS) {
+			*Dest = TMsg_BS;
+			return 2;
+		}
+		if (Source[1] == (uint8_t)TMsg_BS_EOF) {
+			*Dest = TMsg_EOF;
+			return 2;
+		}
+		return 0; // invalide sequence
+	}else  {
+		*Dest = Source[0];
+		return 1;
+	}
 }
 
 /**
@@ -141,25 +134,20 @@ int ReverseByteStuffCopyByte(uint8_t *Source, uint8_t *Dest)
  */
 int ReverseByteStuffCopyByte2(uint8_t Source0, uint8_t Source1, uint8_t *Dest)
 {
-  if (Source0 == (uint8_t)TMsg_BS)
-  {
-    if (Source1 == (uint8_t)TMsg_BS)
-    {
-      *Dest = TMsg_BS;
-      return 2;
-    }
-    if (Source1 == (uint8_t)TMsg_BS_EOF)
-    {
-      *Dest = TMsg_EOF;
-      return 2;
-    }
-    return 0; // invalid sequence
-  }
-  else
-  {
-    *Dest = Source0;
-    return 1;
-  }
+	if (Source0 == (uint8_t)TMsg_BS) {
+		if (Source1 == (uint8_t)TMsg_BS) {
+			*Dest = TMsg_BS;
+			return 2;
+		}
+		if (Source1 == (uint8_t)TMsg_BS_EOF) {
+			*Dest = TMsg_EOF;
+			return 2;
+		}
+		return 0; // invalid sequence
+	}else  {
+		*Dest = Source0;
+		return 1;
+	}
 }
 
 /**
@@ -170,52 +158,38 @@ int ReverseByteStuffCopyByte2(uint8_t Source0, uint8_t Source1, uint8_t *Dest)
  */
 int ReverseByteStuffCopy(TMsg *Dest, uint8_t *Source)
 {
-  uint32_t count = 0;
-  int32_t state = 0;
+	uint32_t count = 0;
+	int32_t state = 0;
 
-  while ((*Source) != (uint8_t)TMsg_EOF)
-  {
-    if (state == 0)
-    {
-      if ((*Source) == (uint8_t)TMsg_BS)
-      {
-        state = 1;
-      }
-      else
-      {
-        Dest->Data[count] = *Source;
-        count++;
-      }
-    }
-    else
-    {
-      if ((*Source) == (uint8_t)TMsg_BS)
-      {
-        Dest->Data[count] = TMsg_BS;
-        count++;
-      }
-      else
-      {
-        if ((*Source) == (uint8_t)TMsg_BS_EOF)
-        {
-          Dest->Data[count] = TMsg_EOF;
-          count++;
-        }
-        else
-        {
-          return 0; // invalid sequence
-        }
-      }
-      state = 0;
-    }
-    Source++;
-  }
-  if (state != 0)
-  {
-    return 0;
-  }
-  Dest->Len = count;
-  return 1;
+	while ((*Source) != (uint8_t)TMsg_EOF) {
+		if (state == 0) {
+			if ((*Source) == (uint8_t)TMsg_BS) {
+				state = 1;
+			}else  {
+				Dest->Data[count] = *Source;
+				count++;
+			}
+		}else  {
+			if ((*Source) == (uint8_t)TMsg_BS) {
+				Dest->Data[count] = TMsg_BS;
+				count++;
+			}else  {
+				if ((*Source) == (uint8_t)TMsg_BS_EOF) {
+					Dest->Data[count] = TMsg_EOF;
+					count++;
+				}else  {
+					return 0; // invalid sequence
+				}
+			}
+			state = 0;
+		}
+		Source++;
+	}
+	if (state != 0) {
+		return 0;
+	}
+	Dest->Len = count;
+	return 1;
 }
 
 /**
@@ -225,15 +199,14 @@ int ReverseByteStuffCopy(TMsg *Dest, uint8_t *Source)
  */
 void CHK_ComputeAndAdd(TMsg *Msg)
 {
-  uint8_t chk = 0;
-  uint32_t i;
+	uint8_t chk = 0;
+	uint32_t i;
 
-  for (i = 0; i < Msg->Len; i++)
-  {
-    chk -= Msg->Data[i];
-  }
-  Msg->Data[i] = chk;
-  Msg->Len++;
+	for (i = 0; i < Msg->Len; i++) {
+		chk -= Msg->Data[i];
+	}
+	Msg->Data[i] = chk;
+	Msg->Len++;
 }
 
 /**
@@ -243,15 +216,14 @@ void CHK_ComputeAndAdd(TMsg *Msg)
  */
 int CHK_CheckAndRemove(TMsg *Msg)
 {
-  uint8_t chk = 0;
-  uint32_t i;
+	uint8_t chk = 0;
+	uint32_t i;
 
-  for (i = 0; i < Msg->Len; i++)
-  {
-    chk += Msg->Data[i];
-  }
-  Msg->Len--;
-  return (int32_t)(chk == 0U);
+	for (i = 0; i < Msg->Len; i++) {
+		chk += Msg->Data[i];
+	}
+	Msg->Len--;
+	return (int32_t)(chk == 0U);
 }
 
 /**
@@ -263,13 +235,12 @@ int CHK_CheckAndRemove(TMsg *Msg)
  */
 void Serialize(uint8_t *Dest, uint32_t Source, uint32_t Len)
 {
-  uint32_t i;
+	uint32_t i;
 
-  for (i = 0; i < Len; i++)
-  {
-    Dest[i] = (uint8_t)Source & 0xFFU;
-    Source >>= 8;
-  }
+	for (i = 0; i < Len; i++) {
+		Dest[i] = (uint8_t)Source & 0xFFU;
+		Source >>= 8;
+	}
 }
 
 /**
@@ -280,15 +251,14 @@ void Serialize(uint8_t *Dest, uint32_t Source, uint32_t Len)
  */
 uint32_t Deserialize(uint8_t *Source, uint32_t Len)
 {
-  uint32_t app;
+	uint32_t app;
 
-  app = Source[--Len];
-  while (Len > 0U)
-  {
-    app <<= 8;
-    app += Source[--Len];
-  }
-  return app;
+	app = Source[--Len];
+	while (Len > 0U) {
+		app <<= 8;
+		app += Source[--Len];
+	}
+	return app;
 }
 
 /**
@@ -300,16 +270,15 @@ uint32_t Deserialize(uint8_t *Source, uint32_t Len)
  */
 void Serialize_s32(uint8_t *Dest, int32_t Source, uint32_t Len)
 {
-  uint32_t i;
-  uint32_t source_uint32;
+	uint32_t i;
+	uint32_t source_uint32;
 
-  for (i = 0; i < Len; i++)
-  {
-    source_uint32 = (uint32_t)Source;
-    Dest[i] = (uint8_t)(source_uint32 & 0xFFU);
-    source_uint32 >>= 8;
-    Source = (int32_t)source_uint32;
-  }
+	for (i = 0; i < Len; i++) {
+		source_uint32 = (uint32_t)Source;
+		Dest[i] = (uint8_t)(source_uint32 & 0xFFU);
+		source_uint32 >>= 8;
+		Source = (int32_t)source_uint32;
+	}
 }
 
 /**
@@ -320,15 +289,14 @@ void Serialize_s32(uint8_t *Dest, int32_t Source, uint32_t Len)
  */
 int32_t Deserialize_s32(uint8_t *Source, uint32_t Len)
 {
-  uint32_t app;
+	uint32_t app;
 
-  app = (uint32_t)Source[--Len];
-  while (Len > 0U)
-  {
-    app <<= 8;
-    app += (uint32_t)Source[--Len];
-  }
-  return (int32_t)app;
+	app = (uint32_t)Source[--Len];
+	while (Len > 0U) {
+		app <<= 8;
+		app += (uint32_t)Source[--Len];
+	}
+	return (int32_t)app;
 }
 
 /**
@@ -339,7 +307,7 @@ int32_t Deserialize_s32(uint8_t *Source, uint32_t Len)
  */
 void FloatToArray(uint8_t *Dest, float Data)
 {
-  (void)memcpy(Dest, (void *)&Data, 4);
+	(void)memcpy(Dest, (void *)&Data, 4);
 }
 
 /**

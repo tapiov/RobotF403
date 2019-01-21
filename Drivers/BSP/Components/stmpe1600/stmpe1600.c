@@ -280,7 +280,7 @@ void stmpe1600_IO_InitPin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Directio
 	/* Set the Pin direction */
 	if (Direction != STMPE1600_DIRECTION_IN) {
 		tmp |= (uint16_t)IO_Pin;
-	}else  {
+	}else {
 		tmp &= ~(uint16_t)IO_Pin;
 	}
 
@@ -417,7 +417,7 @@ void stmpe1600_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinStat
 	/* Set the pin state */
 	if (PinState != 0) {
 		tmp |= (uint16_t)IO_Pin;
-	}else  {
+	}else {
 		tmp &= ~(uint16_t)IO_Pin;
 	}
 

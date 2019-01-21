@@ -68,69 +68,62 @@ typedef int32_t (*HTS221_GetTick_Func)(void);
 typedef int32_t (*HTS221_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*HTS221_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
-typedef struct
-{
-  HTS221_Init_Func          Init;
-  HTS221_DeInit_Func        DeInit;
-  uint32_t                  BusType; /*0 means I2C, 1 means SPI-3-Wires */
-  uint8_t                   Address;
-  HTS221_WriteReg_Func      WriteReg;
-  HTS221_ReadReg_Func       ReadReg;
-  HTS221_GetTick_Func       GetTick;
+typedef struct {
+	HTS221_Init_Func Init;
+	HTS221_DeInit_Func DeInit;
+	uint32_t BusType;            /*0 means I2C, 1 means SPI-3-Wires */
+	uint8_t Address;
+	HTS221_WriteReg_Func WriteReg;
+	HTS221_ReadReg_Func ReadReg;
+	HTS221_GetTick_Func GetTick;
 } HTS221_IO_t;
 
-typedef struct
-{
-  float x0;
-  float y0;
-  float x1;
-  float y1;
+typedef struct {
+	float x0;
+	float y0;
+	float x1;
+	float y1;
 } lin_t;
 
-typedef struct
-{
-  HTS221_IO_t        IO;
-  hts221_ctx_t       Ctx;
-  uint8_t            is_initialized;
-  uint8_t            hum_is_enabled;
-  uint8_t            temp_is_enabled;
+typedef struct {
+	HTS221_IO_t IO;
+	hts221_ctx_t Ctx;
+	uint8_t is_initialized;
+	uint8_t hum_is_enabled;
+	uint8_t temp_is_enabled;
 } HTS221_Object_t;
 
-typedef struct
-{
-  uint8_t Temperature;
-  uint8_t Pressure;
-  uint8_t Humidity;
-  uint8_t LowPower;
-  float   HumMaxOdr;
-  float   TempMaxOdr;
-  float   PressMaxOdr;
+typedef struct {
+	uint8_t Temperature;
+	uint8_t Pressure;
+	uint8_t Humidity;
+	uint8_t LowPower;
+	float HumMaxOdr;
+	float TempMaxOdr;
+	float PressMaxOdr;
 } HTS221_Capabilities_t;
 
-typedef struct
-{
-  int32_t (*Init)(HTS221_Object_t *);
-  int32_t (*DeInit)(HTS221_Object_t *);
-  int32_t (*ReadID)(HTS221_Object_t *, uint8_t *);
-  int32_t (*GetCapabilities)(HTS221_Object_t *, HTS221_Capabilities_t *);
+typedef struct {
+	int32_t (*Init)(HTS221_Object_t *);
+	int32_t (*DeInit)(HTS221_Object_t *);
+	int32_t (*ReadID)(HTS221_Object_t *, uint8_t *);
+	int32_t (*GetCapabilities)(HTS221_Object_t *, HTS221_Capabilities_t *);
 } HTS221_CommonDrv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(HTS221_Object_t *);
-  int32_t (*Disable)(HTS221_Object_t *);
-  int32_t (*GetOutputDataRate)(HTS221_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(HTS221_Object_t *, float);
-  int32_t (*GetHumidity)(HTS221_Object_t *, float *);
+typedef struct {
+	int32_t (*Enable)(HTS221_Object_t *);
+	int32_t (*Disable)(HTS221_Object_t *);
+	int32_t (*GetOutputDataRate)(HTS221_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(HTS221_Object_t *, float);
+	int32_t (*GetHumidity)(HTS221_Object_t *, float *);
 } HTS221_HUM_Drv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(HTS221_Object_t *);
-  int32_t (*Disable)(HTS221_Object_t *);
-  int32_t (*GetOutputDataRate)(HTS221_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(HTS221_Object_t *, float);
-  int32_t (*GetTemperature)(HTS221_Object_t *, float *);
+typedef struct {
+	int32_t (*Enable)(HTS221_Object_t *);
+	int32_t (*Disable)(HTS221_Object_t *);
+	int32_t (*GetOutputDataRate)(HTS221_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(HTS221_Object_t *, float);
+	int32_t (*GetTemperature)(HTS221_Object_t *, float *);
 } HTS221_TEMP_Drv_t;
 
 /**

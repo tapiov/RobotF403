@@ -125,7 +125,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart(DMA_HandleTypeDef *hdma, uint32_t S
 	if (hdma->Init.Direction == DMA_MEMORY_TO_MEMORY) {
 		hdma->ErrorCode = HAL_DMA_ERROR_NOT_SUPPORTED;
 		status = HAL_ERROR;
-	}else  {
+	}else {
 		/* Process Locked */
 		__HAL_LOCK(hdma);
 
@@ -144,7 +144,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart(DMA_HandleTypeDef *hdma, uint32_t S
 
 			/* Enable the peripheral */
 			__HAL_DMA_ENABLE(hdma);
-		}else  {
+		}else {
 			/* Return error status */
 			status = HAL_BUSY;
 		}
@@ -217,7 +217,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart_IT(DMA_HandleTypeDef *hdma, uint32_
 
 		/* Enable the peripheral */
 		__HAL_DMA_ENABLE(hdma);
-	}else  {
+	}else {
 		/* Process unlocked */
 		__HAL_UNLOCK(hdma);
 
@@ -246,7 +246,7 @@ HAL_StatusTypeDef HAL_DMAEx_ChangeMemory(DMA_HandleTypeDef *hdma, uint32_t Addre
 	if (memory == MEMORY0) {
 		/* change the memory0 address */
 		hdma->Instance->M0AR = Address;
-	}else  {
+	}else {
 		/* change the memory1 address */
 		hdma->Instance->M1AR = Address;
 	}

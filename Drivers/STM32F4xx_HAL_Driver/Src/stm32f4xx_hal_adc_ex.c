@@ -237,7 +237,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart(ADC_HandleTypeDef* hadc)
 				/* Enable the selected ADC software conversion for injected group */
 				hadc->Instance->CR2 |= ADC_CR2_JSWSTART;
 			}
-		}else  {
+		}else {
 			tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
 			tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
 			if ((hadc->Instance == ADC1) && tmp1 && tmp2) {
@@ -326,7 +326,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStart_IT(ADC_HandleTypeDef* hadc)
 				/* Enable the selected ADC software conversion for injected group */
 				hadc->Instance->CR2 |= ADC_CR2_JSWSTART;
 			}
-		}else  {
+		}else {
 			tmp1 = HAL_IS_BIT_CLR(hadc->Instance->CR2, ADC_CR2_JEXTEN);
 			tmp2 = HAL_IS_BIT_CLR(hadc->Instance->CR1, ADC_CR1_JAUTO);
 			if ((hadc->Instance == ADC1) && tmp1 && tmp2) {
@@ -381,7 +381,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop(ADC_HandleTypeDef* hadc)
 					  HAL_ADC_STATE_REG_BUSY | HAL_ADC_STATE_INJ_BUSY,
 					  HAL_ADC_STATE_READY);
 		}
-	}else  {
+	}else {
 		/* Update ADC state machine to error */
 		SET_BIT(hadc->State, HAL_ADC_STATE_ERROR_CONFIG);
 
@@ -496,7 +496,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop_IT(ADC_HandleTypeDef* hadc)
 					  HAL_ADC_STATE_REG_BUSY | HAL_ADC_STATE_INJ_BUSY,
 					  HAL_ADC_STATE_READY);
 		}
-	}else  {
+	}else {
 		/* Update ADC state machine to error */
 		SET_BIT(hadc->State, HAL_ADC_STATE_ERROR_CONFIG);
 
@@ -618,7 +618,7 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t
 		if (HAL_IS_BIT_SET(hadc->State, HAL_ADC_STATE_INJ_BUSY)) {
 			/* Reset ADC error code fields related to conversions on group regular */
 			CLEAR_BIT(hadc->ErrorCode, (HAL_ADC_ERROR_OVR | HAL_ADC_ERROR_DMA));
-		}else  {
+		}else {
 			/* Reset ADC all error code fields */
 			ADC_CLEAR_ERRORCODE(hadc);
 		}
@@ -655,7 +655,7 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t
 		if (hadc->Init.DMAContinuousRequests != DISABLE) {
 			/* Enable the selected ADC DMA request after last transfer */
 			tmpADC_Common->CCR |= ADC_CCR_DDS;
-		}else  {
+		}else {
 			/* Disable the selected ADC EOC rising on each regular channel conversion */
 			tmpADC_Common->CCR &= ~ADC_CCR_DDS;
 		}
@@ -804,7 +804,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
 
 		/* Set the new sample time */
 		hadc->Instance->SMPR1 |= ADC_SMPR1(sConfigInjected->InjectedSamplingTime, sConfigInjected->InjectedChannel);
-	}else  {/* ADC_Channel include in ADC_Channel_[0..9] */
+	}else { /* ADC_Channel include in ADC_Channel_[0..9] */
 		/* Clear the old sample time */
 		hadc->Instance->SMPR2 &= ~ADC_SMPR2(ADC_SMPR2_SMP0, sConfigInjected->InjectedChannel);
 
@@ -837,7 +837,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
 		/* Select external trigger polarity */
 		hadc->Instance->CR2 &= ~(ADC_CR2_JEXTEN);
 		hadc->Instance->CR2 |= sConfigInjected->ExternalTrigInjecConvEdge;
-	}else  {
+	}else {
 		/* Reset the external trigger */
 		hadc->Instance->CR2 &= ~(ADC_CR2_JEXTSEL);
 		hadc->Instance->CR2 &= ~(ADC_CR2_JEXTEN);
@@ -846,7 +846,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
 	if (sConfigInjected->AutoInjectedConv != DISABLE) {
 		/* Enable the selected ADC automatic injected group conversion */
 		hadc->Instance->CR1 |= ADC_CR1_JAUTO;
-	}else  {
+	}else {
 		/* Disable the selected ADC automatic injected group conversion */
 		hadc->Instance->CR1 &= ~(ADC_CR1_JAUTO);
 	}
@@ -854,7 +854,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
 	if (sConfigInjected->InjectedDiscontinuousConvMode != DISABLE) {
 		/* Enable the selected ADC injected discontinuous mode */
 		hadc->Instance->CR1 |= ADC_CR1_JDISCEN;
-	}else  {
+	}else {
 		/* Disable the selected ADC injected discontinuous mode */
 		hadc->Instance->CR1 &= ~(ADC_CR1_JDISCEN);
 	}
@@ -996,7 +996,7 @@ static void ADC_MultiModeDMAConvCplt(DMA_HandleTypeDef *hdma)
 
 		/* Conversion complete callback */
 		HAL_ADC_ConvCpltCallback(hadc);
-	}else  {
+	}else {
 		/* Call DMA error callback */
 		hadc->DMA_Handle->XferErrorCallback(hdma);
 	}

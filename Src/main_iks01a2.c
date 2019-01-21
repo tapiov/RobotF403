@@ -70,7 +70,7 @@
 #define FROM_G_TO_MG                    1000.0f
 #define FROM_MDPS_TO_DPS                0.001f
 #define FROM_DPS_TO_MDPS                1000.0f
-#define FROM_MGAUSS_TO_UT50             (0.1f/50.0f)
+#define FROM_MGAUSS_TO_UT50             (0.1f / 50.0f)
 #define FROM_UT50_TO_MGAUSS             500.0f
 
 /* Extern variables ----------------------------------------------------------*/
@@ -130,138 +130,133 @@ static void Temperature_Sensor_Handler(TMsg *Msg, uint32_t Instance);
 int main(void); /* This "redundant" line is here to fulfil MISRA C-2012 rule 8.4 */
 int main(void)
 {
-  char lib_version[35];
-  int lib_version_len;
-  float ans_float;
-  TMsg msg_dat;
-  TMsg msg_cmd;
+	char lib_version[35];
+	int lib_version_len;
+	float ans_float;
+	TMsg msg_dat;
+	TMsg msg_cmd;
 
-  /* STM32xxxx HAL library initialization:
-  - Configure the Flash prefetch, instruction and Data caches
-  - Configure the Systick to generate an interrupt each 1 msec
-  - Set NVIC Group Priority to 4
-  - Global MSP (MCU Support Package) initialization
-  */
-  (void)HAL_Init();
+	/* STM32xxxx HAL library initialization:
+	   - Configure the Flash prefetch, instruction and Data caches
+	   - Configure the Systick to generate an interrupt each 1 msec
+	   - Set NVIC Group Priority to 4
+	   - Global MSP (MCU Support Package) initialization
+	 */
+	(void)HAL_Init();
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* Configure the SysTick IRQ priority - set the second lowest priority */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E, 0);
+	/* Configure the SysTick IRQ priority - set the second lowest priority */
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0x0E, 0);
 
-  /* Initialize GPIOs */
-  MX_GPIO_Init();
+	/* Initialize GPIOs */
+	MX_GPIO_Init();
 
-  /* Initialize CRC */
-  MX_CRC_Init();
+	/* Initialize CRC */
+	MX_CRC_Init();
 
-  /* Initialize (disabled) Sensors */
-  Init_Sensors();
+	/* Initialize (disabled) Sensors */
+	Init_Sensors();
 
-  /* Sensor Fusion API initialization function */
-  MotionFX_manager_init();
+	/* Sensor Fusion API initialization function */
+	MotionFX_manager_init();
 
-  /* OPTIONAL */
-  /* Get library version */
-  MotionFX_manager_get_version(lib_version, &lib_version_len);
+	/* OPTIONAL */
+	/* Get library version */
+	MotionFX_manager_get_version(lib_version, &lib_version_len);
 
-  /* Initialize Communication Peripheral for data log */
-  USARTConfig();
+	/* Initialize Communication Peripheral for data log */
+	USARTConfig();
 
-  /* RTC Initialization */
-  RTC_Config();
-  RTC_TimeStampConfig();
+	/* RTC Initialization */
+	RTC_Config();
+	RTC_TimeStampConfig();
 
-  /* Timer for algorithm synchronization initialization */
-  MX_TIM_ALGO_Init();
+	/* Timer for algorithm synchronization initialization */
+	MX_TIM_ALGO_Init();
 
-  /* LED Blink */
-  BSP_LED_On(LED2);
-  HAL_Delay(500);
-  BSP_LED_Off(LED2);
+	/* LED Blink */
+	BSP_LED_On(LED2);
+	HAL_Delay(500);
+	BSP_LED_Off(LED2);
 
-  /* Enable magnetometer calibration */
-  MotionFX_manager_MagCal_start(ALGO_PERIOD);
+	/* Enable magnetometer calibration */
+	MotionFX_manager_MagCal_start(ALGO_PERIOD);
 
-  /* Test if calibration data are available */
+	/* Test if calibration data are available */
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-  MFX_MagCal_output_t mag_cal_test;
-  MotionFX_MagCal_getParams(&mag_cal_test);
+	MFX_MagCal_output_t mag_cal_test;
+	MotionFX_MagCal_getParams(&mag_cal_test);
 
-  /* If calibration data are available load HI coeficients */
-  if (mag_cal_test.cal_quality == MFX_MAGCALGOOD)
+	/* If calibration data are available load HI coeficients */
+	if (mag_cal_test.cal_quality == MFX_MAGCALGOOD)
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  MFX_CM0P_MagCal_output_t mag_cal_test;
-  MotionFX_CM0P_MagCal_getParams(&mag_cal_test);
+	MFX_CM0P_MagCal_output_t mag_cal_test;
+	MotionFX_CM0P_MagCal_getParams(&mag_cal_test);
 
-  /* If calibration data are available load HI coeficients */
-  if (mag_cal_test.cal_quality == MFX_CM0P_MAGCALGOOD)
+	/* If calibration data are available load HI coeficients */
+	if (mag_cal_test.cal_quality == MFX_CM0P_MAGCALGOOD)
 #else
 #error Not supported platform
 #endif
-  {
-    ans_float = (mag_cal_test.hi_bias[0] * FROM_UT50_TO_MGAUSS);
-    MagOffset.x = (int32_t)ans_float;
-    ans_float = (mag_cal_test.hi_bias[1] * FROM_UT50_TO_MGAUSS);
-    MagOffset.y = (int32_t)ans_float;
-    ans_float = (mag_cal_test.hi_bias[2] * FROM_UT50_TO_MGAUSS);
-    MagOffset.z = (int32_t)ans_float;
+	{
+		ans_float = (mag_cal_test.hi_bias[0] * FROM_UT50_TO_MGAUSS);
+		MagOffset.x = (int32_t)ans_float;
+		ans_float = (mag_cal_test.hi_bias[1] * FROM_UT50_TO_MGAUSS);
+		MagOffset.y = (int32_t)ans_float;
+		ans_float = (mag_cal_test.hi_bias[2] * FROM_UT50_TO_MGAUSS);
+		MagOffset.z = (int32_t)ans_float;
 
-    MagCalStatus = 1;
-  }
+		MagCalStatus = 1;
+	}
 
-  for (;;)
-  {
-    if (UART_ReceivedMSG((TMsg *)&msg_cmd) != 1)
-    {
-      if (msg_cmd.Data[0] == DEV_ADDR)
-      {
-        (void)HandleMSG((TMsg *)&msg_cmd);
-      }
-    }
+	for (;;) {
+		if (UART_ReceivedMSG((TMsg *)&msg_cmd) != 1) {
+			if (msg_cmd.Data[0] == DEV_ADDR) {
+				(void)HandleMSG((TMsg *)&msg_cmd);
+			}
+		}
 
-    if (MagCalRequest == 1U)
-    {
-      MagCalRequest = 0;
+		if (MagCalRequest == 1U) {
+			MagCalRequest = 0;
 
-      /* Reset magnetometer calibration value*/
-      MagCalStatus = 0;
-      MagOffset.x = 0;
-      MagOffset.y = 0;
-      MagOffset.z = 0;
+			/* Reset magnetometer calibration value*/
+			MagCalStatus = 0;
+			MagOffset.x = 0;
+			MagOffset.y = 0;
+			MagOffset.z = 0;
 
 #if ((defined (MOTION_FX_STORE_CALIB_FLASH)) && ((defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)) || (defined (USE_STM32F4XX_NUCLEO))))
-      /* Reset values in memory */
-      ResetCalibrationInMemory();
+			/* Reset values in memory */
+			ResetCalibrationInMemory();
 #endif
 
-      /* Enable magnetometer calibration */
-      MotionFX_manager_MagCal_start(ALGO_PERIOD);
-    }
+			/* Enable magnetometer calibration */
+			MotionFX_manager_MagCal_start(ALGO_PERIOD);
+		}
 
-    if (SensorReadRequest == 1U)
-    {
-      SensorReadRequest = 0;
+		if (SensorReadRequest == 1U) {
+			SensorReadRequest = 0;
 
-      /* Acquire data from enabled sensors and fill Msg stream */
-      RTC_Handler(&msg_dat);
-      Accelero_Sensor_Handler(&msg_dat, IKS01A2_LSM6DSL_0);
-      Gyro_Sensor_Handler(&msg_dat, IKS01A2_LSM6DSL_0);
-      Magneto_Sensor_Handler(&msg_dat, IKS01A2_LSM303AGR_MAG_0);
-      Humidity_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
-      Temperature_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
-      Pressure_Sensor_Handler(&msg_dat, IKS01A2_LPS22HB_0);
+			/* Acquire data from enabled sensors and fill Msg stream */
+			RTC_Handler(&msg_dat);
+			Accelero_Sensor_Handler(&msg_dat, IKS01A2_LSM6DSL_0);
+			Gyro_Sensor_Handler(&msg_dat, IKS01A2_LSM6DSL_0);
+			Magneto_Sensor_Handler(&msg_dat, IKS01A2_LSM303AGR_MAG_0);
+			Humidity_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
+			Temperature_Sensor_Handler(&msg_dat, IKS01A2_HTS221_0);
+			Pressure_Sensor_Handler(&msg_dat, IKS01A2_LPS22HB_0);
 
-      /* Sensor Fusion specific part */
-      FX_Data_Handler(&msg_dat);
+			/* Sensor Fusion specific part */
+			FX_Data_Handler(&msg_dat);
 
-      /* Send data stream */
-      INIT_STREAMING_HEADER(&msg_dat);
-      msg_dat.Len = STREAMING_MSG_LENGTH;
-      UART_SendMsg(&msg_dat);
-    }
-  }
+			/* Send data stream */
+			INIT_STREAMING_HEADER(&msg_dat);
+			msg_dat.Len = STREAMING_MSG_LENGTH;
+			UART_SendMsg(&msg_dat);
+		}
+	}
 }
 
 /* Private functions ---------------------------------------------------------*/
@@ -272,10 +267,10 @@ int main(void)
  */
 static void Init_Sensors(void)
 {
-  (void)IKS01A2_MOTION_SENSOR_Init(IKS01A2_LSM6DSL_0, MOTION_ACCELERO | MOTION_GYRO);
-  (void)IKS01A2_MOTION_SENSOR_Init(IKS01A2_LSM303AGR_MAG_0, MOTION_MAGNETO);
-  (void)IKS01A2_ENV_SENSOR_Init(IKS01A2_HTS221_0, ENV_TEMPERATURE | ENV_HUMIDITY);
-  (void)IKS01A2_ENV_SENSOR_Init(IKS01A2_LPS22HB_0, ENV_PRESSURE);
+	(void)IKS01A2_MOTION_SENSOR_Init(IKS01A2_LSM6DSL_0, MOTION_ACCELERO | MOTION_GYRO);
+	(void)IKS01A2_MOTION_SENSOR_Init(IKS01A2_LSM303AGR_MAG_0, MOTION_MAGNETO);
+	(void)IKS01A2_ENV_SENSOR_Init(IKS01A2_HTS221_0, ENV_TEMPERATURE | ENV_HUMIDITY);
+	(void)IKS01A2_ENV_SENSOR_Init(IKS01A2_LPS22HB_0, ENV_PRESSURE);
 }
 
 /**
@@ -286,11 +281,11 @@ static void Init_Sensors(void)
  */
 static void MX_GPIO_Init(void)
 {
-  /* Initialize LED */
-  BSP_LED_Init(LED2);
+	/* Initialize LED */
+	BSP_LED_Init(LED2);
 
-  /* Initialize push button */
-  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
+	/* Initialize push button */
+	BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 }
 
 /**
@@ -300,7 +295,7 @@ static void MX_GPIO_Init(void)
  */
 static void MX_CRC_Init(void)
 {
-  __CRC_CLK_ENABLE();
+	__CRC_CLK_ENABLE();
 }
 
 /**
@@ -313,41 +308,37 @@ static void MX_TIM_ALGO_Init(void)
 {
 #if (defined (USE_STM32F4XX_NUCLEO))
 #define CPU_CLOCK  84000000U
-
 #elif (defined (USE_STM32L0XX_NUCLEO))
 #define CPU_CLOCK  32000000U
-
 #elif (defined (USE_STM32L1XX_NUCLEO))
 #define CPU_CLOCK  32000000U
-
 #elif (defined (USE_STM32L4XX_NUCLEO))
 #define CPU_CLOCK  80000000U
-
 #else
 #error Not supported platform
 #endif
 
 #define TIM_CLOCK  2000U
 
-  const uint32_t prescaler = CPU_CLOCK / TIM_CLOCK - 1U;
-  const uint32_t tim_period = TIM_CLOCK / ALGO_FREQ - 1U;
+	const uint32_t prescaler = CPU_CLOCK / TIM_CLOCK - 1U;
+	const uint32_t tim_period = TIM_CLOCK / ALGO_FREQ - 1U;
 
-  TIM_ClockConfigTypeDef s_clock_source_config;
-  TIM_MasterConfigTypeDef s_master_config;
+	TIM_ClockConfigTypeDef s_clock_source_config;
+	TIM_MasterConfigTypeDef s_master_config;
 
-  AlgoTimHandle.Instance           = TIM_ALGO;
-  AlgoTimHandle.Init.Prescaler     = prescaler;
-  AlgoTimHandle.Init.CounterMode   = TIM_COUNTERMODE_UP;
-  AlgoTimHandle.Init.Period        = tim_period;
-  AlgoTimHandle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  (void)HAL_TIM_Base_Init(&AlgoTimHandle);
+	AlgoTimHandle.Instance = TIM_ALGO;
+	AlgoTimHandle.Init.Prescaler = prescaler;
+	AlgoTimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	AlgoTimHandle.Init.Period = tim_period;
+	AlgoTimHandle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	(void)HAL_TIM_Base_Init(&AlgoTimHandle);
 
-  s_clock_source_config.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  (void)HAL_TIM_ConfigClockSource(&AlgoTimHandle, &s_clock_source_config);
+	s_clock_source_config.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+	(void)HAL_TIM_ConfigClockSource(&AlgoTimHandle, &s_clock_source_config);
 
-  s_master_config.MasterOutputTrigger = TIM_TRGO_RESET;
-  s_master_config.MasterSlaveMode     = TIM_MASTERSLAVEMODE_DISABLE;
-  (void)HAL_TIMEx_MasterConfigSynchronization(&AlgoTimHandle, &s_master_config);
+	s_master_config.MasterOutputTrigger = TIM_TRGO_RESET;
+	s_master_config.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	(void)HAL_TIMEx_MasterConfigSynchronization(&AlgoTimHandle, &s_master_config);
 }
 
 /**
@@ -357,27 +348,27 @@ static void MX_TIM_ALGO_Init(void)
  */
 static void RTC_Handler(TMsg *Msg)
 {
-  uint8_t sub_sec;
-  uint32_t ans_uint32;
-  int32_t ans_int32;
-  RTC_DateTypeDef sdatestructureget;
-  RTC_TimeTypeDef stimestructure;
+	uint8_t sub_sec;
+	uint32_t ans_uint32;
+	int32_t ans_int32;
+	RTC_DateTypeDef sdatestructureget;
+	RTC_TimeTypeDef stimestructure;
 
-  (void)HAL_RTC_GetTime(&RtcHandle, &stimestructure, FORMAT_BIN);
-  (void)HAL_RTC_GetDate(&RtcHandle, &sdatestructureget, FORMAT_BIN);
+	(void)HAL_RTC_GetTime(&RtcHandle, &stimestructure, FORMAT_BIN);
+	(void)HAL_RTC_GetDate(&RtcHandle, &sdatestructureget, FORMAT_BIN);
 
-  /* To be MISRA C-2012 compliant the original calculation:
-     sub_sec = ((((((int)RtcSynchPrediv) - ((int)stimestructure.SubSeconds)) * 100) / (RtcSynchPrediv + 1)) & 0xFF);
-     has been split to separate expressions */
-  ans_int32 = (RtcSynchPrediv - (int32_t)stimestructure.SubSeconds) * 100;
-  ans_int32 /= RtcSynchPrediv + 1;
-  ans_uint32 = (uint32_t)ans_int32 & 0xFFU;
-  sub_sec = (uint8_t)ans_uint32;
+	/* To be MISRA C-2012 compliant the original calculation:
+	   sub_sec = ((((((int)RtcSynchPrediv) - ((int)stimestructure.SubSeconds)) * 100) / (RtcSynchPrediv + 1)) & 0xFF);
+	   has been split to separate expressions */
+	ans_int32 = (RtcSynchPrediv - (int32_t)stimestructure.SubSeconds) * 100;
+	ans_int32 /= RtcSynchPrediv + 1;
+	ans_uint32 = (uint32_t)ans_int32 & 0xFFU;
+	sub_sec = (uint8_t)ans_uint32;
 
-  Msg->Data[3] = (uint8_t)stimestructure.Hours;
-  Msg->Data[4] = (uint8_t)stimestructure.Minutes;
-  Msg->Data[5] = (uint8_t)stimestructure.Seconds;
-  Msg->Data[6] = sub_sec;
+	Msg->Data[3] = (uint8_t)stimestructure.Hours;
+	Msg->Data[4] = (uint8_t)stimestructure.Minutes;
+	Msg->Data[5] = (uint8_t)stimestructure.Seconds;
+	Msg->Data[6] = sub_sec;
 }
 
 /**
@@ -388,79 +379,73 @@ static void RTC_Handler(TMsg *Msg)
 static void FX_Data_Handler(TMsg *Msg)
 {
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-  MFX_input_t data_in;
-  MFX_input_t *pdata_in = &data_in;
-  MFX_output_t data_out;
-  MFX_output_t *pdata_out = &data_out;
+	MFX_input_t data_in;
+	MFX_input_t *pdata_in = &data_in;
+	MFX_output_t data_out;
+	MFX_output_t *pdata_out = &data_out;
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  MFX_CM0P_input_t data_in;
-  MFX_CM0P_input_t *pdata_in = &data_in;
-  MFX_CM0P_output_t data_out;
-  MFX_CM0P_output_t *pdata_out = &data_out;
+	MFX_CM0P_input_t data_in;
+	MFX_CM0P_input_t *pdata_in = &data_in;
+	MFX_CM0P_output_t data_out;
+	MFX_CM0P_output_t *pdata_out = &data_out;
 #else
 #error Not supported platform
 #endif
 
-  if ((SensorsEnabled & ACCELEROMETER_SENSOR) == ACCELEROMETER_SENSOR)
-  {
-    if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR)
-    {
-      if ((SensorsEnabled & MAGNETIC_SENSOR) == MAGNETIC_SENSOR)
-      {
-        data_in.gyro[0] = (float)GyrValue.x * FROM_MDPS_TO_DPS;
-        data_in.gyro[1] = (float)GyrValue.y * FROM_MDPS_TO_DPS;
-        data_in.gyro[2] = (float)GyrValue.z * FROM_MDPS_TO_DPS;
+	if ((SensorsEnabled & ACCELEROMETER_SENSOR) == ACCELEROMETER_SENSOR) {
+		if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR) {
+			if ((SensorsEnabled & MAGNETIC_SENSOR) == MAGNETIC_SENSOR) {
+				data_in.gyro[0] = (float)GyrValue.x * FROM_MDPS_TO_DPS;
+				data_in.gyro[1] = (float)GyrValue.y * FROM_MDPS_TO_DPS;
+				data_in.gyro[2] = (float)GyrValue.z * FROM_MDPS_TO_DPS;
 
-        data_in.acc[0] = (float)AccValue.x * FROM_MG_TO_G;
-        data_in.acc[1] = (float)AccValue.y * FROM_MG_TO_G;
-        data_in.acc[2] = (float)AccValue.z * FROM_MG_TO_G;
+				data_in.acc[0] = (float)AccValue.x * FROM_MG_TO_G;
+				data_in.acc[1] = (float)AccValue.y * FROM_MG_TO_G;
+				data_in.acc[2] = (float)AccValue.z * FROM_MG_TO_G;
 
-        data_in.mag[0] = (float)MagValue.x * FROM_MGAUSS_TO_UT50;
-        data_in.mag[1] = (float)MagValue.y * FROM_MGAUSS_TO_UT50;
-        data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50;
+				data_in.mag[0] = (float)MagValue.x * FROM_MGAUSS_TO_UT50;
+				data_in.mag[1] = (float)MagValue.y * FROM_MGAUSS_TO_UT50;
+				data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50;
 
-        /* Run Sensor Fusion algorithm */
-        BSP_LED_On(LED2);
-        MotionFX_manager_run(pdata_in, pdata_out, MOTIONFX_ENGINE_DELTATIME);
-        BSP_LED_Off(LED2);
+				/* Run Sensor Fusion algorithm */
+				BSP_LED_On(LED2);
+				MotionFX_manager_run(pdata_in, pdata_out, MOTIONFX_ENGINE_DELTATIME);
+				BSP_LED_Off(LED2);
 
-        if (Enabled6X == 1U)
-        {
-          (void)memcpy(&Msg->Data[55], (void *)pdata_out->quaternion_6X, 4U * sizeof(float));
-          (void)memcpy(&Msg->Data[71], (void *)pdata_out->rotation_6X, 3U * sizeof(float));
-          (void)memcpy(&Msg->Data[83], (void *)pdata_out->gravity_6X, 3U * sizeof(float));
-          (void)memcpy(&Msg->Data[95], (void *)pdata_out->linear_acceleration_6X, 3U * sizeof(float));
+				if (Enabled6X == 1U) {
+					(void)memcpy(&Msg->Data[55], (void *)pdata_out->quaternion_6X, 4U * sizeof(float));
+					(void)memcpy(&Msg->Data[71], (void *)pdata_out->rotation_6X, 3U * sizeof(float));
+					(void)memcpy(&Msg->Data[83], (void *)pdata_out->gravity_6X, 3U * sizeof(float));
+					(void)memcpy(&Msg->Data[95], (void *)pdata_out->linear_acceleration_6X, 3U * sizeof(float));
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-          (void)memcpy(&Msg->Data[107], (void *) & (pdata_out->heading_6X), sizeof(float));
-          (void)memcpy(&Msg->Data[111], (void *) & (pdata_out->headingErr_6X), sizeof(float));
+					(void)memcpy(&Msg->Data[107], (void *)&(pdata_out->heading_6X), sizeof(float));
+					(void)memcpy(&Msg->Data[111], (void *)&(pdata_out->headingErr_6X), sizeof(float));
 #elif (defined (USE_STM32L0XX_NUCLEO))
-          (void)memset(&Msg->Data[107], 0, sizeof(float));
-          (void)memset(&Msg->Data[111], 0, sizeof(float));
+					(void)memset(&Msg->Data[107], 0, sizeof(float));
+					(void)memset(&Msg->Data[111], 0, sizeof(float));
 #else
 #error Not supported platform
 #endif
-        }
-        else
-        {
-          (void)memcpy(&Msg->Data[55], (void *)pdata_out->quaternion_9X, 4U * sizeof(float));
-          (void)memcpy(&Msg->Data[71], (void *)pdata_out->rotation_9X, 3U * sizeof(float));
-          (void)memcpy(&Msg->Data[83], (void *)pdata_out->gravity_9X, 3U * sizeof(float));
-          (void)memcpy(&Msg->Data[95], (void *)pdata_out->linear_acceleration_9X, 3U * sizeof(float));
+				}else  {
+					(void)memcpy(&Msg->Data[55], (void *)pdata_out->quaternion_9X, 4U * sizeof(float));
+					(void)memcpy(&Msg->Data[71], (void *)pdata_out->rotation_9X, 3U * sizeof(float));
+					(void)memcpy(&Msg->Data[83], (void *)pdata_out->gravity_9X, 3U * sizeof(float));
+					(void)memcpy(&Msg->Data[95], (void *)pdata_out->linear_acceleration_9X, 3U * sizeof(float));
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-          (void)memcpy(&Msg->Data[107], (void *) & (pdata_out->heading_9X), sizeof(float));
-          (void)memcpy(&Msg->Data[111], (void *) & (pdata_out->headingErr_9X), sizeof(float));
+					(void)memcpy(&Msg->Data[107], (void *)&(pdata_out->heading_9X), sizeof(float));
+					(void)memcpy(&Msg->Data[111], (void *)&(pdata_out->headingErr_9X), sizeof(float));
 #elif (defined (USE_STM32L0XX_NUCLEO))
-          (void)memset(&Msg->Data[107], 0, sizeof(float));
-          (void)memset(&Msg->Data[111], 0, sizeof(float));
+					(void)memset(&Msg->Data[107], 0, sizeof(float));
+					(void)memset(&Msg->Data[111], 0, sizeof(float));
 #else
 #error Not supported platform
 #endif
-        }
-      }
-    }
-  }
+				}
+			}
+		}
+	}
 }
 
 /**
@@ -471,13 +456,12 @@ static void FX_Data_Handler(TMsg *Msg)
  */
 static void Accelero_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  if ((SensorsEnabled & ACCELEROMETER_SENSOR) == ACCELEROMETER_SENSOR)
-  {
-    (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, &AccValue);
-    Serialize_s32(&Msg->Data[19], (int32_t)AccValue.x, 4);
-    Serialize_s32(&Msg->Data[23], (int32_t)AccValue.y, 4);
-    Serialize_s32(&Msg->Data[27], (int32_t)AccValue.z, 4);
-  }
+	if ((SensorsEnabled & ACCELEROMETER_SENSOR) == ACCELEROMETER_SENSOR) {
+		(void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, &AccValue);
+		Serialize_s32(&Msg->Data[19], (int32_t)AccValue.x, 4);
+		Serialize_s32(&Msg->Data[23], (int32_t)AccValue.y, 4);
+		Serialize_s32(&Msg->Data[27], (int32_t)AccValue.z, 4);
+	}
 }
 
 /**
@@ -488,13 +472,12 @@ static void Accelero_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void Gyro_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR)
-  {
-    (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_GYRO, &GyrValue);
-    Serialize_s32(&Msg->Data[31], GyrValue.x, 4);
-    Serialize_s32(&Msg->Data[35], GyrValue.y, 4);
-    Serialize_s32(&Msg->Data[39], GyrValue.z, 4);
-  }
+	if ((SensorsEnabled & GYROSCOPE_SENSOR) == GYROSCOPE_SENSOR) {
+		(void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_GYRO, &GyrValue);
+		Serialize_s32(&Msg->Data[31], GyrValue.x, 4);
+		Serialize_s32(&Msg->Data[35], GyrValue.y, 4);
+		Serialize_s32(&Msg->Data[39], GyrValue.z, 4);
+	}
 }
 
 /**
@@ -505,64 +488,62 @@ static void Gyro_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void Magneto_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  float ans_float;
+	float ans_float;
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-  MFX_MagCal_input_t mag_data_in;
-  MFX_MagCal_output_t mag_data_out;
+	MFX_MagCal_input_t mag_data_in;
+	MFX_MagCal_output_t mag_data_out;
 #elif (defined (USE_STM32L0XX_NUCLEO))
-  MFX_CM0P_MagCal_input_t mag_data_in;
-  MFX_CM0P_MagCal_output_t mag_data_out;
+	MFX_CM0P_MagCal_input_t mag_data_in;
+	MFX_CM0P_MagCal_output_t mag_data_out;
 #else
 #error Not supported platform
 #endif
 
-  if ((SensorsEnabled & MAGNETIC_SENSOR) == MAGNETIC_SENSOR)
-  {
-    (void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_MAGNETO, &MagValue);
+	if ((SensorsEnabled & MAGNETIC_SENSOR) == MAGNETIC_SENSOR) {
+		(void)IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_MAGNETO, &MagValue);
 
-    if (MagCalStatus == 0U)
-    {
-      mag_data_in.mag[0] = (float)MagValue.x * FROM_MGAUSS_TO_UT50;
-      mag_data_in.mag[1] = (float)MagValue.y * FROM_MGAUSS_TO_UT50;
-      mag_data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50;
+		if (MagCalStatus == 0U) {
+			mag_data_in.mag[0] = (float)MagValue.x * FROM_MGAUSS_TO_UT50;
+			mag_data_in.mag[1] = (float)MagValue.y * FROM_MGAUSS_TO_UT50;
+			mag_data_in.mag[2] = (float)MagValue.z * FROM_MGAUSS_TO_UT50;
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-      mag_data_in.time_stamp = (int)MagTimeStamp;
-      MagTimeStamp += (uint32_t)ALGO_PERIOD;
+			mag_data_in.time_stamp = (int)MagTimeStamp;
+			MagTimeStamp += (uint32_t)ALGO_PERIOD;
 #endif
 
-      MotionFX_manager_MagCal_run(&mag_data_in, &mag_data_out);
+			MotionFX_manager_MagCal_run(&mag_data_in, &mag_data_out);
 
 #if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-      if (mag_data_out.cal_quality == MFX_MAGCALGOOD)
+			if (mag_data_out.cal_quality == MFX_MAGCALGOOD)
 #elif (defined (USE_STM32L0XX_NUCLEO))
-      if (mag_data_out.cal_quality == MFX_CM0P_MAGCALGOOD)
+			if (mag_data_out.cal_quality == MFX_CM0P_MAGCALGOOD)
 #else
 #error Not supported platform
 #endif
-      {
-        MagCalStatus = 1;
+			{
+				MagCalStatus = 1;
 
-        ans_float = (mag_data_out.hi_bias[0] * FROM_UT50_TO_MGAUSS);
-        MagOffset.x = (int32_t)ans_float;
-        ans_float = (mag_data_out.hi_bias[1] * FROM_UT50_TO_MGAUSS);
-        MagOffset.y = (int32_t)ans_float;
-        ans_float = (mag_data_out.hi_bias[2] * FROM_UT50_TO_MGAUSS);
-        MagOffset.z = (int32_t)ans_float;
+				ans_float = (mag_data_out.hi_bias[0] * FROM_UT50_TO_MGAUSS);
+				MagOffset.x = (int32_t)ans_float;
+				ans_float = (mag_data_out.hi_bias[1] * FROM_UT50_TO_MGAUSS);
+				MagOffset.y = (int32_t)ans_float;
+				ans_float = (mag_data_out.hi_bias[2] * FROM_UT50_TO_MGAUSS);
+				MagOffset.z = (int32_t)ans_float;
 
-        /* Disable magnetometer calibration */
-        MotionFX_manager_MagCal_stop(ALGO_PERIOD);
-      }
-    }
+				/* Disable magnetometer calibration */
+				MotionFX_manager_MagCal_stop(ALGO_PERIOD);
+			}
+		}
 
-    MagValue.x = (int32_t)(MagValue.x - MagOffset.x);
-    MagValue.y = (int32_t)(MagValue.y - MagOffset.y);
-    MagValue.z = (int32_t)(MagValue.z - MagOffset.z);
+		MagValue.x = (int32_t)(MagValue.x - MagOffset.x);
+		MagValue.y = (int32_t)(MagValue.y - MagOffset.y);
+		MagValue.z = (int32_t)(MagValue.z - MagOffset.z);
 
-    Serialize_s32(&Msg->Data[43], MagValue.x, 4);
-    Serialize_s32(&Msg->Data[47], MagValue.y, 4);
-    Serialize_s32(&Msg->Data[51], MagValue.z, 4);
-  }
+		Serialize_s32(&Msg->Data[43], MagValue.x, 4);
+		Serialize_s32(&Msg->Data[47], MagValue.y, 4);
+		Serialize_s32(&Msg->Data[51], MagValue.z, 4);
+	}
 }
 
 /**
@@ -573,13 +554,12 @@ static void Magneto_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void Pressure_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  float press_value;
+	float press_value;
 
-  if ((SensorsEnabled & PRESSURE_SENSOR) == PRESSURE_SENSOR)
-  {
-    (void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_PRESSURE, &press_value);
-    (void)memcpy(&Msg->Data[7], (void *)&press_value, sizeof(float));
-  }
+	if ((SensorsEnabled & PRESSURE_SENSOR) == PRESSURE_SENSOR) {
+		(void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_PRESSURE, &press_value);
+		(void)memcpy(&Msg->Data[7], (void *)&press_value, sizeof(float));
+	}
 }
 
 /**
@@ -590,13 +570,12 @@ static void Pressure_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void Temperature_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  float temp_value;
+	float temp_value;
 
-  if ((SensorsEnabled & TEMPERATURE_SENSOR) == TEMPERATURE_SENSOR)
-  {
-    (void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_TEMPERATURE, &temp_value);
-    (void)memcpy(&Msg->Data[11], (void *)&temp_value, sizeof(float));
-  }
+	if ((SensorsEnabled & TEMPERATURE_SENSOR) == TEMPERATURE_SENSOR) {
+		(void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_TEMPERATURE, &temp_value);
+		(void)memcpy(&Msg->Data[11], (void *)&temp_value, sizeof(float));
+	}
 }
 
 /**
@@ -607,13 +586,12 @@ static void Temperature_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void Humidity_Sensor_Handler(TMsg *Msg, uint32_t Instance)
 {
-  float hum_value;
+	float hum_value;
 
-  if ((SensorsEnabled & HUMIDITY_SENSOR) == HUMIDITY_SENSOR)
-  {
-    (void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_HUMIDITY, &hum_value);
-    (void)memcpy(&Msg->Data[15], (void *)&hum_value, sizeof(float));;
-  }
+	if ((SensorsEnabled & HUMIDITY_SENSOR) == HUMIDITY_SENSOR) {
+		(void)IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_HUMIDITY, &hum_value);
+		(void)memcpy(&Msg->Data[15], (void *)&hum_value, sizeof(float));;
+	}
 }
 
 /**
@@ -623,52 +601,48 @@ static void Humidity_Sensor_Handler(TMsg *Msg, uint32_t Instance)
  */
 static void RTC_Config(void)
 {
-  /*##-1- Configure the RTC peripheral #######################################*/
-  /* Check if LSE can be used */
-  RCC_OscInitTypeDef rcc_osc_init_struct;
+	/*##-1- Configure the RTC peripheral #######################################*/
+	/* Check if LSE can be used */
+	RCC_OscInitTypeDef rcc_osc_init_struct;
 
-  /*##-2- Configure LSE as RTC clock soucre ###################################*/
-  rcc_osc_init_struct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
-  rcc_osc_init_struct.PLL.PLLState = RCC_PLL_NONE;
-  rcc_osc_init_struct.LSEState = RCC_LSE_ON;
-  rcc_osc_init_struct.LSIState = RCC_LSI_OFF;
-  if (HAL_RCC_OscConfig(&rcc_osc_init_struct) != HAL_OK)
-  {
-    /* LSE not available, we use LSI */
-    UseLSI = 1;
-    RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSI;
-    RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV_LSI;
-    RtcSynchPrediv = RTC_SYNCH_PREDIV_LSI;
-  }
-  else
-  {
-    /* We use LSE */
-    UseLSI = 0;
-    RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSE;
-    RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV_LSE;
-    RtcSynchPrediv = RTC_SYNCH_PREDIV_LSE;
-  }
-  RtcHandle.Instance = RTC;
+	/*##-2- Configure LSE as RTC clock soucre ###################################*/
+	rcc_osc_init_struct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
+	rcc_osc_init_struct.PLL.PLLState = RCC_PLL_NONE;
+	rcc_osc_init_struct.LSEState = RCC_LSE_ON;
+	rcc_osc_init_struct.LSIState = RCC_LSI_OFF;
+	if (HAL_RCC_OscConfig(&rcc_osc_init_struct) != HAL_OK) {
+		/* LSE not available, we use LSI */
+		UseLSI = 1;
+		RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSI;
+		RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV_LSI;
+		RtcSynchPrediv = RTC_SYNCH_PREDIV_LSI;
+	}else  {
+		/* We use LSE */
+		UseLSI = 0;
+		RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSE;
+		RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV_LSE;
+		RtcSynchPrediv = RTC_SYNCH_PREDIV_LSE;
+	}
+	RtcHandle.Instance = RTC;
 
-  /* Configure RTC prescaler and RTC data registers */
-  /* RTC configured as follow:
-       - Hour Format    = Format 12
-       - Asynch Prediv  = Value according to source clock
-       - Synch Prediv   = Value according to source clock
-       - OutPut         = Output Disable
-       - OutPutPolarity = High Polarity
-       - OutPutType     = Open Drain
-   */
-  RtcHandle.Init.HourFormat     = RTC_HOURFORMAT_12;
-  RtcHandle.Init.OutPut         = RTC_OUTPUT_DISABLE;
-  RtcHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-  RtcHandle.Init.OutPutType     = RTC_OUTPUT_TYPE_OPENDRAIN;
+	/* Configure RTC prescaler and RTC data registers */
+	/* RTC configured as follow:
+	     - Hour Format    = Format 12
+	     - Asynch Prediv  = Value according to source clock
+	     - Synch Prediv   = Value according to source clock
+	     - OutPut         = Output Disable
+	     - OutPutPolarity = High Polarity
+	     - OutPutType     = Open Drain
+	 */
+	RtcHandle.Init.HourFormat = RTC_HOURFORMAT_12;
+	RtcHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
+	RtcHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	RtcHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
 
-  if (HAL_RTC_Init(&RtcHandle) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+	if (HAL_RTC_Init(&RtcHandle) != HAL_OK) {
+		/* Initialization Error */
+		Error_Handler();
+	}
 }
 
 /**
@@ -678,36 +652,34 @@ static void RTC_Config(void)
  */
 static void RTC_TimeStampConfig(void)
 {
-  RTC_DateTypeDef sdatestructure;
-  RTC_TimeTypeDef stimestructure;
+	RTC_DateTypeDef sdatestructure;
+	RTC_TimeTypeDef stimestructure;
 
-  /* Configure the Date */
-  /* Set Date: Monday January 1st 2001 */
-  sdatestructure.Year = 0x01;
-  sdatestructure.Month = RTC_MONTH_JANUARY;
-  sdatestructure.Date = 0x01;
-  sdatestructure.WeekDay = RTC_WEEKDAY_MONDAY;
+	/* Configure the Date */
+	/* Set Date: Monday January 1st 2001 */
+	sdatestructure.Year = 0x01;
+	sdatestructure.Month = RTC_MONTH_JANUARY;
+	sdatestructure.Date = 0x01;
+	sdatestructure.WeekDay = RTC_WEEKDAY_MONDAY;
 
-  if (HAL_RTC_SetDate(&RtcHandle, &sdatestructure, FORMAT_BCD) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+	if (HAL_RTC_SetDate(&RtcHandle, &sdatestructure, FORMAT_BCD) != HAL_OK) {
+		/* Initialization Error */
+		Error_Handler();
+	}
 
-  /* Configure the Time */
-  /* Set Time: 00:00:00 */
-  stimestructure.Hours = 0x00;
-  stimestructure.Minutes = 0x00;
-  stimestructure.Seconds = 0x00;
-  stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
-  stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE ;
-  stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
+	/* Configure the Time */
+	/* Set Time: 00:00:00 */
+	stimestructure.Hours = 0x00;
+	stimestructure.Minutes = 0x00;
+	stimestructure.Seconds = 0x00;
+	stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
+	stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
 
-  if (HAL_RTC_SetTime(&RtcHandle, &stimestructure, FORMAT_BCD) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+	if (HAL_RTC_SetTime(&RtcHandle, &stimestructure, FORMAT_BCD) != HAL_OK) {
+		/* Initialization Error */
+		Error_Handler();
+	}
 }
 
 /**
@@ -720,18 +692,17 @@ static void RTC_TimeStampConfig(void)
  */
 void RTC_DateRegulate(uint8_t y, uint8_t m, uint8_t d, uint8_t dw)
 {
-  RTC_DateTypeDef sdatestructure;
+	RTC_DateTypeDef sdatestructure;
 
-  sdatestructure.Year = y;
-  sdatestructure.Month = m;
-  sdatestructure.Date = d;
-  sdatestructure.WeekDay = dw;
+	sdatestructure.Year = y;
+	sdatestructure.Month = m;
+	sdatestructure.Date = d;
+	sdatestructure.WeekDay = dw;
 
-  if (HAL_RTC_SetDate(&RtcHandle, &sdatestructure, FORMAT_BIN) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+	if (HAL_RTC_SetDate(&RtcHandle, &sdatestructure, FORMAT_BIN) != HAL_OK) {
+		/* Initialization Error */
+		Error_Handler();
+	}
 }
 
 /**
@@ -743,21 +714,20 @@ void RTC_DateRegulate(uint8_t y, uint8_t m, uint8_t d, uint8_t dw)
  */
 void RTC_TimeRegulate(uint8_t hh, uint8_t mm, uint8_t ss)
 {
-  RTC_TimeTypeDef stimestructure;
+	RTC_TimeTypeDef stimestructure;
 
-  stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
-  stimestructure.Hours = hh;
-  stimestructure.Minutes = mm;
-  stimestructure.Seconds = ss;
-  stimestructure.SubSeconds = 0;
-  stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-  stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
+	stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
+	stimestructure.Hours = hh;
+	stimestructure.Minutes = mm;
+	stimestructure.Seconds = ss;
+	stimestructure.SubSeconds = 0;
+	stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
 
-  if (HAL_RTC_SetTime(&RtcHandle, &stimestructure, FORMAT_BIN) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler();
-  }
+	if (HAL_RTC_SetTime(&RtcHandle, &stimestructure, FORMAT_BIN) != HAL_OK) {
+		/* Initialization Error */
+		Error_Handler();
+	}
 }
 
 /**
@@ -767,13 +737,12 @@ void RTC_TimeRegulate(uint8_t hh, uint8_t mm, uint8_t ss)
  */
 void Error_Handler(void)
 {
-  for (;;)
-  {
-    BSP_LED_On(LED2);
-    HAL_Delay(100);
-    BSP_LED_Off(LED2);
-    HAL_Delay(100);
-  }
+	for (;;) {
+		BSP_LED_On(LED2);
+		HAL_Delay(100);
+		BSP_LED_Off(LED2);
+		HAL_Delay(100);
+	}
 }
 
 /**
@@ -783,13 +752,11 @@ void Error_Handler(void)
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIOPin)
 {
-  if (GPIOPin == KEY_BUTTON_PIN)
-  {
-    if (BSP_PB_GetState(BUTTON_KEY) == (uint32_t)GPIO_PIN_RESET)
-    {
-      MagCalRequest = 1;
-    }
-  }
+	if (GPIOPin == KEY_BUTTON_PIN) {
+		if (BSP_PB_GetState(BUTTON_KEY) == (uint32_t)GPIO_PIN_RESET) {
+			MagCalRequest = 1;
+		}
+	}
 }
 
 /**
@@ -800,10 +767,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIOPin)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  if (htim->Instance == TIM_ALGO)
-  {
-    SensorReadRequest = 1;
-  }
+	if (htim->Instance == TIM_ALGO) {
+		SensorReadRequest = 1;
+	}
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -815,10 +781,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  */
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  for (;;)
-  {}
+	/* User can add his own implementation to report the file name and line number,
+	   ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	for (;;) {
+	}
 }
 #endif
 

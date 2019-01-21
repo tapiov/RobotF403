@@ -342,7 +342,7 @@ HAL_StatusTypeDef HAL_PWREx_ControlVoltageScaling(uint32_t VoltageScaling)
 				return HAL_TIMEOUT;
 			}
 		}
-	}else  {
+	}else {
 		return HAL_ERROR;
 	}
 
@@ -583,7 +583,7 @@ HAL_StatusTypeDef HAL_PWREx_EnterUnderDriveSTOPMode(uint32_t Regulator, uint8_t 
 	if (STOPEntry == PWR_SLEEPENTRY_WFI) {
 		/* Request Wait For Interrupt */
 		__WFI();
-	}else  {
+	}else {
 		/* Request Wait For Event */
 		__WFE();
 	}

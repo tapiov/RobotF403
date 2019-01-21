@@ -55,7 +55,7 @@ extern "C" {
 #define DEV_ADDR                        50U
 #define I2C_DATA_MAX_LENGTH_BYTES       16
 #define STREAMING_MSG_LENGTH           115
-#define MIN(A,B) ((A)<(B)?(A):(B))
+#define MIN(A, B) ((A) < (B) ? (A) : (B))
 
 /* Exported variables --------------------------------------------------------*/
 extern volatile uint8_t DataLoggerActive;

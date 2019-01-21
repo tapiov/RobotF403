@@ -524,7 +524,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 	/* Get the TIM Prescaler configuration -------------------------------------*/
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 }
@@ -566,7 +566,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSI) {
 				/* In Case the PLL Source is HSI (Internal Clock) */
 				vcoinput = (HSI_VALUE / (uint32_t)(RCC->PLLSAICFGR & RCC_PLLSAICFGR_PLLSAIM));
-			}else  {
+			}else {
 				/* In Case the PLL Source is HSE (External Clock) */
 				vcoinput = ((HSE_VALUE / (uint32_t)(RCC->PLLSAICFGR & RCC_PLLSAICFGR_PLLSAIM)));
 			}
@@ -588,7 +588,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSI) {
 				/* In Case the PLL Source is HSI (Internal Clock) */
 				vcoinput = (HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* In Case the PLL Source is HSE (External Clock) */
 				vcoinput = ((HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM)));
 			}
@@ -611,7 +611,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSI) {
 				/* In Case the PLL Source is HSI (Internal Clock) */
 				vcoinput = (HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* In Case the PLL Source is HSE (External Clock) */
 				vcoinput = ((HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM)));
 			}
@@ -632,7 +632,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSI) {
 				/* In Case the PLL Source is HSI (Internal Clock) */
 				frequency = (uint32_t)(HSI_VALUE);
-			}else  {
+			}else {
 				/* In Case the PLL Source is HSE (External Clock) */
 				frequency = (uint32_t)(HSE_VALUE);
 			}
@@ -665,7 +665,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
 			}
@@ -684,7 +684,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -700,7 +700,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 		{
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				frequency = HSE_VALUE;
-			}else  {
+			}else {
 				frequency = HSI_VALUE;
 			}
 			break;
@@ -734,7 +734,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
 			}
@@ -753,7 +753,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -769,7 +769,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 		{
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				frequency = HSE_VALUE;
-			}else  {
+			}else {
 				frequency = HSI_VALUE;
 			}
 			break;
@@ -1096,7 +1096,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 }
@@ -1139,7 +1139,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -1581,7 +1581,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 	/* Get the TIM Prescaler configuration -------------------------------------*/
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 }
@@ -1623,13 +1623,13 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SSRC) == RCC_PLLI2SCFGR_PLLI2SSRC) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(EXTERNAL_CLOCK_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* Configure the PLLI2S division factor */
 				/* PLLI2S_VCO Input  = PLL_SOURCE/PLLI2SM */
 				if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 					/* Get the I2S source clock value */
 					vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-				}else  {
+				}else {
 					/* Get the I2S source clock value */
 					vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
 				}
@@ -1648,7 +1648,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -1664,7 +1664,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 		{
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				frequency = HSE_VALUE;
-			}else  {
+			}else {
 				frequency = HSI_VALUE;
 			}
 			break;
@@ -1696,13 +1696,13 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SSRC) == RCC_PLLI2SCFGR_PLLI2SSRC) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(EXTERNAL_CLOCK_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* Configure the PLLI2S division factor */
 				/* PLLI2S_VCO Input  = PLL_SOURCE/PLLI2SM */
 				if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 					/* Get the I2S source clock value */
 					vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-				}else  {
+				}else {
 					/* Get the I2S source clock value */
 					vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
 				}
@@ -1721,7 +1721,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -1737,7 +1737,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 		{
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				frequency = HSE_VALUE;
-			}else  {
+			}else {
 				frequency = HSI_VALUE;
 			}
 			break;
@@ -1880,7 +1880,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 	/* Get the FMPI2C1 clock configuration -------------------------------------*/
@@ -1927,7 +1927,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -1943,7 +1943,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 		{
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				frequency = HSE_VALUE;
-			}else  {
+			}else {
 				frequency = HSI_VALUE;
 			}
 			break;
@@ -2203,7 +2203,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 }
@@ -2246,7 +2246,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -2421,7 +2421,7 @@ void HAL_RCCEx_GetPeriphCLKConfig(RCC_PeriphCLKInitTypeDef  *PeriphClkInit)
 	/* Get the TIM Prescaler configuration -------------------------------------*/
 	if ((RCC->DCKCFGR & RCC_DCKCFGR_TIMPRE) == RESET) {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_DESACTIVATED;
-	}else  {
+	}else {
 		PeriphClkInit->TIMPresSelection = RCC_TIMPRES_ACTIVATED;
 	}
 #endif /* STM32F401xC || STM32F401xE || STM32F411xE */
@@ -2466,7 +2466,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLI2SCFGR & RCC_PLLI2SCFGR_PLLI2SM));
 			}
@@ -2476,7 +2476,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
 			if ((RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC) == RCC_PLLSOURCE_HSE) {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSE_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
-			}else  {
+			}else {
 				/* Get the I2S source clock value */
 				vcoinput = (uint32_t)(HSI_VALUE / (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLM));
 			}
@@ -2520,7 +2520,7 @@ void HAL_RCCEx_SelectLSEMode(uint8_t Mode)
 	assert_param(IS_RCC_LSE_MODE(Mode));
 	if (Mode == RCC_LSE_HIGHDRIVE_MODE) {
 		SET_BIT(RCC->BDCR, RCC_BDCR_LSEMOD);
-	}else  {
+	}else {
 		CLEAR_BIT(RCC->BDCR, RCC_BDCR_LSEMOD);
 	}
 }
@@ -2812,7 +2812,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
 		if (__HAL_RCC_GET_PLL_OSCSOURCE() != RCC_PLLSOURCE_HSI) {
 			/* HSE used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSE_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
-		}else  {
+		}else {
 			/* HSI used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSI_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
 		}
@@ -2829,7 +2829,7 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
 		if (__HAL_RCC_GET_PLL_OSCSOURCE() != RCC_PLLSOURCE_HSI) {
 			/* HSE used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSE_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
-		}else  {
+		}else {
 			/* HSI used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSI_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
 		}
@@ -3021,7 +3021,7 @@ HAL_StatusTypeDef HAL_RCC_DeInit(void)
 	/* Adapt Systick interrupt period */
 	if (HAL_InitTick(TICK_INT_PRIORITY) != HAL_OK) {
 		return HAL_ERROR;
-	}else  {
+	}else {
 		return HAL_OK;
 	}
 }
@@ -3067,7 +3067,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 			if ((__HAL_RCC_GET_FLAG(RCC_FLAG_HSERDY) != RESET) && (RCC_OscInitStruct->HSEState == RCC_HSE_OFF)) {
 				return HAL_ERROR;
 			}
-		}else  {
+		}else {
 			/* Set the new HSE configuration ---------------------------------------*/
 			__HAL_RCC_HSE_CONFIG(RCC_OscInitStruct->HSEState);
 
@@ -3082,7 +3082,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 						return HAL_TIMEOUT;
 					}
 				}
-			}else  {
+			}else {
 				/* Get Start Tick*/
 				tickstart = HAL_GetTick();
 
@@ -3120,7 +3120,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 				/* Adjusts the Internal High Speed oscillator (HSI) calibration value.*/
 				__HAL_RCC_HSI_CALIBRATIONVALUE_ADJUST(RCC_OscInitStruct->HSICalibrationValue);
 			}
-		}else  {
+		}else {
 			/* Check the HSI State */
 			if ((RCC_OscInitStruct->HSIState) != RCC_HSI_OFF) {
 				/* Enable the Internal High Speed oscillator (HSI). */
@@ -3138,7 +3138,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 
 				/* Adjusts the Internal High Speed oscillator (HSI) calibration value.*/
 				__HAL_RCC_HSI_CALIBRATIONVALUE_ADJUST(RCC_OscInitStruct->HSICalibrationValue);
-			}else  {
+			}else {
 				/* Disable the Internal High Speed oscillator (HSI). */
 				__HAL_RCC_HSI_DISABLE();
 
@@ -3173,7 +3173,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 					return HAL_TIMEOUT;
 				}
 			}
-		}else  {
+		}else {
 			/* Disable the Internal Low Speed oscillator (LSI). */
 			__HAL_RCC_LSI_DISABLE();
 
@@ -3229,7 +3229,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 					return HAL_TIMEOUT;
 				}
 			}
-		}else  {
+		}else {
 			/* Get Start Tick*/
 			tickstart = HAL_GetTick();
 
@@ -3294,7 +3294,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 						return HAL_TIMEOUT;
 					}
 				}
-			}else  {
+			}else {
 				/* Disable the main PLL. */
 				__HAL_RCC_PLL_DISABLE();
 
@@ -3308,7 +3308,7 @@ HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 					}
 				}
 			}
-		}else  {
+		}else {
 			return HAL_ERROR;
 		}
 	}
@@ -3334,14 +3334,14 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 		RCC_OscInitStruct->HSEState = RCC_HSE_BYPASS;
 	}else if ((RCC->CR & RCC_CR_HSEON) == RCC_CR_HSEON) {
 		RCC_OscInitStruct->HSEState = RCC_HSE_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->HSEState = RCC_HSE_OFF;
 	}
 
 	/* Get the HSI configuration -----------------------------------------------*/
 	if ((RCC->CR & RCC_CR_HSION) == RCC_CR_HSION) {
 		RCC_OscInitStruct->HSIState = RCC_HSI_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->HSIState = RCC_HSI_OFF;
 	}
 
@@ -3352,21 +3352,21 @@ void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 		RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS;
 	}else if ((RCC->BDCR & RCC_BDCR_LSEON) == RCC_BDCR_LSEON) {
 		RCC_OscInitStruct->LSEState = RCC_LSE_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->LSEState = RCC_LSE_OFF;
 	}
 
 	/* Get the LSI configuration -----------------------------------------------*/
 	if ((RCC->CSR & RCC_CSR_LSION) == RCC_CSR_LSION) {
 		RCC_OscInitStruct->LSIState = RCC_LSI_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->LSIState = RCC_LSI_OFF;
 	}
 
 	/* Get the PLL configuration -----------------------------------------------*/
 	if ((RCC->CR & RCC_CR_PLLON) == RCC_CR_PLLON) {
 		RCC_OscInitStruct->PLL.PLLState = RCC_PLL_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->PLL.PLLState = RCC_PLL_OFF;
 	}
 	RCC_OscInitStruct->PLL.PLLSource = (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC);

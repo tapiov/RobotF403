@@ -229,12 +229,12 @@ void SysTick_Handler(void)
  */
 void TIM_ALGO_IRQHandler(void)
 {
-  HAL_TIM_IRQHandler(&AlgoTimHandle);
+	HAL_TIM_IRQHandler(&AlgoTimHandle);
 }
 
 void EXTI15_10_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(KEY_BUTTON_PIN);
+	HAL_GPIO_EXTI_IRQHandler(KEY_BUTTON_PIN);
 }
 
 /**

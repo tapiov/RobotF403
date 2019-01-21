@@ -395,25 +395,25 @@ void ls016b8uy_SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, ui
 {
 	if (Xpos < LS016B8UY_LCD_PIXEL_WIDTH) {
 		WindowsXstart = Xpos;
-	}else  {
+	}else {
 		WindowsXstart = 0;
 	}
 
 	if (Ypos < LS016B8UY_LCD_PIXEL_HEIGHT) {
 		WindowsYstart = Ypos;
-	}else  {
+	}else {
 		WindowsYstart = 0;
 	}
 
 	if (Width + Xpos <= LS016B8UY_LCD_PIXEL_WIDTH) {
 		WindowsXend = Width + Xpos - 1;
-	}else  {
+	}else {
 		WindowsXend = LS016B8UY_LCD_PIXEL_WIDTH - 1;
 	}
 
 	if (Height + Ypos <= LS016B8UY_LCD_PIXEL_HEIGHT) {
 		WindowsYend = Height + Ypos - 1;
-	}else  {
+	}else {
 		WindowsYend = LS016B8UY_LCD_PIXEL_HEIGHT - 1;
 	}
 }

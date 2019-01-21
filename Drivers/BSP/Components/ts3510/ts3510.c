@@ -166,7 +166,7 @@ uint8_t ts3510_TS_DetectTouch(uint16_t DeviceAddr)
 	/* check for first byte */
 	if ((aBufferTS[1] == 0xFF) && (aBufferTS[2] == 0xFF) && (aBufferTS[3] == 0xFF) && (aBufferTS[4] == 0xFF)) {
 		return 0;
-	}else  {
+	}else {
 		return 1;
 	}
 }

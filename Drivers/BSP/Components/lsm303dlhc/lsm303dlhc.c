@@ -241,7 +241,7 @@ void LSM303DLHC_AccReadXYZ(int16_t* pData)
 		for (i = 0; i < 3; i++) {
 			pnRawData[i] = ((int16_t)((uint16_t)buffer[2 * i + 1] << 8) + buffer[2 * i]);
 		}
-	}else  {/* Big Endian Mode */
+	}else { /* Big Endian Mode */
 		for (i = 0; i < 3; i++) {
 			pnRawData[i] = ((int16_t)((uint16_t)buffer[2 * i] << 8) + buffer[2 * i + 1]);
 		}

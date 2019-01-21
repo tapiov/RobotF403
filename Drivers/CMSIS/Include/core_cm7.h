@@ -1888,7 +1888,7 @@ __STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
 {
 	if ((int32_t)(IRQn) < 0) {
 		SCB->SHPR[(((uint32_t)(int32_t)IRQn) & 0xFUL) - 4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
-	}else  {
+	}else {
 		NVIC->IP[((uint32_t)(int32_t)IRQn)] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
 	}
 }
@@ -1907,7 +1907,7 @@ __STATIC_INLINE uint32_t NVIC_GetPriority(IRQn_Type IRQn)
 {
 	if ((int32_t)(IRQn) < 0) {
 		return(((uint32_t)SCB->SHPR[(((uint32_t)(int32_t)IRQn) & 0xFUL) - 4UL] >> (8U - __NVIC_PRIO_BITS)));
-	}else  {
+	}else {
 		return(((uint32_t)NVIC->IP[((uint32_t)(int32_t)IRQn)] >> (8U - __NVIC_PRIO_BITS)));
 	}
 }
@@ -2011,7 +2011,7 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void)
 		return 2UL; /* Double + Single precision FPU */
 	}else if ((mvfr0 & 0x00000FF0UL) == 0x020UL) {
 		return 1UL; /* Single precision FPU */
-	}else  {
+	}else {
 		return 0UL; /* No FPU */
 	}
 }
@@ -2453,7 +2453,7 @@ __STATIC_INLINE int32_t ITM_CheckChar(void)
 {
 	if (ITM_RxBuffer == ITM_RXBUFFER_EMPTY) {
 		return(0);                   /* no character available */
-	}else  {
+	}else {
 		return(1);                   /*    character available */
 	}
 }

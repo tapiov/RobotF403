@@ -70,22 +70,20 @@ extern "C" {
  * @{
  */
 
-typedef enum
-{
-  IKS01A2_MOTION_SENSOR_INT1_PIN = 0,
-  IKS01A2_MOTION_SENSOR_INT2_PIN
+typedef enum {
+	IKS01A2_MOTION_SENSOR_INT1_PIN = 0,
+	IKS01A2_MOTION_SENSOR_INT2_PIN
 } IKS01A2_MOTION_SENSOR_IntPin_t;
 
-typedef struct
-{
-  unsigned int FreeFallStatus : 1;
-  unsigned int TapStatus : 1;
-  unsigned int DoubleTapStatus : 1;
-  unsigned int WakeUpStatus : 1;
-  unsigned int StepStatus : 1;
-  unsigned int TiltStatus : 1;
-  unsigned int D6DOrientationStatus : 1;
-  unsigned int SleepStatus : 1;
+typedef struct {
+	unsigned int FreeFallStatus : 1;
+	unsigned int TapStatus : 1;
+	unsigned int DoubleTapStatus : 1;
+	unsigned int WakeUpStatus : 1;
+	unsigned int StepStatus : 1;
+	unsigned int TiltStatus : 1;
+	unsigned int D6DOrientationStatus : 1;
+	unsigned int SleepStatus : 1;
 } IKS01A2_MOTION_SENSOR_Event_Status_t;
 
 /**

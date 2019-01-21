@@ -483,7 +483,7 @@ void mfxstm32l152_IO_Start(uint16_t DeviceAddr, uint32_t IO_Pin)
 	/* remind that AGPIO are less efficient then normal GPIO (They use pooling rather then EXTI */
 	if (IO_Pin > 0xFFFF) {
 		mode |= MFXSTM32L152_ALTERNATE_GPIO_EN;
-	}else  {
+	}else {
 		mode &= ~MFXSTM32L152_ALTERNATE_GPIO_EN;
 	}
 
@@ -779,7 +779,7 @@ void mfxstm32l152_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinS
 	if (PinState != 0) {
 		/* Set the SET register */
 		mfxstm32l152_reg24_setPinValue(DeviceAddr, MFXSTM32L152_REG_ADR_GPO_SET1, IO_Pin, 1);
-	}else  {
+	}else {
 		/* Set the CLEAR register */
 		mfxstm32l152_reg24_setPinValue(DeviceAddr, MFXSTM32L152_REG_ADR_GPO_CLR1, IO_Pin, 1);
 	}
@@ -1489,7 +1489,7 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
 		/* Set the selected pin direction */
 		if (PinValue != 0) {
 			tmp |= (uint8_t)pin_0_7;
-		}else  {
+		}else {
 			tmp &= ~(uint8_t)pin_0_7;
 		}
 
@@ -1504,7 +1504,7 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
 		/* Set the selected pin direction */
 		if (PinValue != 0) {
 			tmp |= (uint8_t)pin_8_15;
-		}else  {
+		}else {
 			tmp &= ~(uint8_t)pin_8_15;
 		}
 
@@ -1519,7 +1519,7 @@ void mfxstm32l152_reg24_setPinValue(uint16_t DeviceAddr, uint8_t RegisterAddr, u
 		/* Set the selected pin direction */
 		if (PinValue != 0) {
 			tmp |= (uint8_t)pin_16_23;
-		}else  {
+		}else {
 			tmp &= ~(uint8_t)pin_16_23;
 		}
 

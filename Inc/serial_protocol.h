@@ -55,10 +55,9 @@
 /**
  * @brief  Serial message structure definition
  */
-typedef struct
-{
-  uint32_t Len;
-  uint8_t Data[TMsg_MaxLen];
+typedef struct {
+	uint32_t Len;
+	uint8_t Data[TMsg_MaxLen];
 } TMsg;
 
 /* Exported macro ------------------------------------------------------------*/

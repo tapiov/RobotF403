@@ -68,103 +68,93 @@ typedef int32_t (*LSM303AGR_GetTick_Func)(void);
 typedef int32_t (*LSM303AGR_WriteReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 typedef int32_t (*LSM303AGR_ReadReg_Func)(uint16_t, uint16_t, uint8_t *, uint16_t);
 
-typedef struct
-{
-  LSM303AGR_Init_Func          Init;
-  LSM303AGR_DeInit_Func        DeInit;
-  uint32_t                     BusType; /*0 means I2C, 1 means SPI-3-Wires */
-  uint8_t                      Address;
-  LSM303AGR_WriteReg_Func      WriteReg;
-  LSM303AGR_ReadReg_Func       ReadReg;
-  LSM303AGR_GetTick_Func       GetTick;
+typedef struct {
+	LSM303AGR_Init_Func Init;
+	LSM303AGR_DeInit_Func DeInit;
+	uint32_t BusType;               /*0 means I2C, 1 means SPI-3-Wires */
+	uint8_t Address;
+	LSM303AGR_WriteReg_Func WriteReg;
+	LSM303AGR_ReadReg_Func ReadReg;
+	LSM303AGR_GetTick_Func GetTick;
 } LSM303AGR_IO_t;
 
 
-typedef struct
-{
-  int16_t x;
-  int16_t y;
-  int16_t z;
+typedef struct {
+	int16_t x;
+	int16_t y;
+	int16_t z;
 } LSM303AGR_AxesRaw_t;
 
-typedef struct
-{
-  int32_t x;
-  int32_t y;
-  int32_t z;
+typedef struct {
+	int32_t x;
+	int32_t y;
+	int32_t z;
 } LSM303AGR_Axes_t;
 
-typedef struct
-{
-  LSM303AGR_IO_t        IO;
-  lsm303agr_ctx_t       Ctx;
-  uint8_t               is_initialized;
-  uint8_t               acc_is_enabled;
-  lsm303agr_odr_a_t     acc_odr;
+typedef struct {
+	LSM303AGR_IO_t IO;
+	lsm303agr_ctx_t Ctx;
+	uint8_t is_initialized;
+	uint8_t acc_is_enabled;
+	lsm303agr_odr_a_t acc_odr;
 } LSM303AGR_ACC_Object_t;
 
-typedef struct
-{
-  LSM303AGR_IO_t        IO;
-  lsm303agr_ctx_t       Ctx;
-  uint8_t               is_initialized;
-  uint8_t               mag_is_enabled;
+typedef struct {
+	LSM303AGR_IO_t IO;
+	lsm303agr_ctx_t Ctx;
+	uint8_t is_initialized;
+	uint8_t mag_is_enabled;
 } LSM303AGR_MAG_Object_t;
 
-typedef struct
-{
-  uint8_t   Acc;
-  uint8_t   Gyro;
-  uint8_t   Magneto;
-  uint8_t   LowPower;
-  uint32_t  GyroMaxFS;
-  uint32_t  AccMaxFS;
-  uint32_t  MagMaxFS;
-  float     GyroMaxOdr;
-  float     AccMaxOdr;
-  float     MagMaxOdr;
+typedef struct {
+	uint8_t Acc;
+	uint8_t Gyro;
+	uint8_t Magneto;
+	uint8_t LowPower;
+	uint32_t GyroMaxFS;
+	uint32_t AccMaxFS;
+	uint32_t MagMaxFS;
+	float GyroMaxOdr;
+	float AccMaxOdr;
+	float MagMaxOdr;
 } LSM303AGR_Capabilities_t;
 
-typedef struct
-{
-  int32_t (*Init)(LSM303AGR_ACC_Object_t *);
-  int32_t (*DeInit)(LSM303AGR_ACC_Object_t *);
-  int32_t (*ReadID)(LSM303AGR_ACC_Object_t *, uint8_t *);
-  int32_t (*GetCapabilities)(LSM303AGR_ACC_Object_t *, LSM303AGR_Capabilities_t *);
+typedef struct {
+	int32_t (*Init)(LSM303AGR_ACC_Object_t *);
+	int32_t (*DeInit)(LSM303AGR_ACC_Object_t *);
+	int32_t (*ReadID)(LSM303AGR_ACC_Object_t *, uint8_t *);
+	int32_t (*GetCapabilities)(LSM303AGR_ACC_Object_t *, LSM303AGR_Capabilities_t *);
 } LSM303AGR_ACC_CommonDrv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LSM303AGR_ACC_Object_t *);
-  int32_t (*Disable)(LSM303AGR_ACC_Object_t *);
-  int32_t (*GetSensitivity)(LSM303AGR_ACC_Object_t *, float *);
-  int32_t (*GetOutputDataRate)(LSM303AGR_ACC_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LSM303AGR_ACC_Object_t *, float);
-  int32_t (*GetFullScale)(LSM303AGR_ACC_Object_t *, int32_t *);
-  int32_t (*SetFullScale)(LSM303AGR_ACC_Object_t *, int32_t);
-  int32_t (*GetAxes)(LSM303AGR_ACC_Object_t *, LSM303AGR_Axes_t *);
-  int32_t (*GetAxesRaw)(LSM303AGR_ACC_Object_t *, LSM303AGR_AxesRaw_t *);
+typedef struct {
+	int32_t (*Enable)(LSM303AGR_ACC_Object_t *);
+	int32_t (*Disable)(LSM303AGR_ACC_Object_t *);
+	int32_t (*GetSensitivity)(LSM303AGR_ACC_Object_t *, float *);
+	int32_t (*GetOutputDataRate)(LSM303AGR_ACC_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LSM303AGR_ACC_Object_t *, float);
+	int32_t (*GetFullScale)(LSM303AGR_ACC_Object_t *, int32_t *);
+	int32_t (*SetFullScale)(LSM303AGR_ACC_Object_t *, int32_t);
+	int32_t (*GetAxes)(LSM303AGR_ACC_Object_t *, LSM303AGR_Axes_t *);
+	int32_t (*GetAxesRaw)(LSM303AGR_ACC_Object_t *, LSM303AGR_AxesRaw_t *);
 } LSM303AGR_ACC_Drv_t;
 
-typedef struct
-{
-  int32_t (*Init)(LSM303AGR_MAG_Object_t *);
-  int32_t (*DeInit)(LSM303AGR_MAG_Object_t *);
-  int32_t (*ReadID)(LSM303AGR_MAG_Object_t *, uint8_t *);
-  int32_t (*GetCapabilities)(LSM303AGR_MAG_Object_t *, LSM303AGR_Capabilities_t *);
+typedef struct {
+	int32_t (*Init)(LSM303AGR_MAG_Object_t *);
+	int32_t (*DeInit)(LSM303AGR_MAG_Object_t *);
+	int32_t (*ReadID)(LSM303AGR_MAG_Object_t *, uint8_t *);
+	int32_t (*GetCapabilities)(LSM303AGR_MAG_Object_t *, LSM303AGR_Capabilities_t *);
 } LSM303AGR_MAG_CommonDrv_t;
 
-typedef struct
-{
-  int32_t (*Enable)(LSM303AGR_MAG_Object_t *);
-  int32_t (*Disable)(LSM303AGR_MAG_Object_t *);
-  int32_t (*GetSensitivity)(LSM303AGR_MAG_Object_t *, float *);
-  int32_t (*GetOutputDataRate)(LSM303AGR_MAG_Object_t *, float *);
-  int32_t (*SetOutputDataRate)(LSM303AGR_MAG_Object_t *, float);
-  int32_t (*GetFullScale)(LSM303AGR_MAG_Object_t *, int32_t *);
-  int32_t (*SetFullScale)(LSM303AGR_MAG_Object_t *, int32_t);
-  int32_t (*GetAxes)(LSM303AGR_MAG_Object_t *, LSM303AGR_Axes_t *);
-  int32_t (*GetAxesRaw)(LSM303AGR_MAG_Object_t *, LSM303AGR_AxesRaw_t *);
+typedef struct {
+	int32_t (*Enable)(LSM303AGR_MAG_Object_t *);
+	int32_t (*Disable)(LSM303AGR_MAG_Object_t *);
+	int32_t (*GetSensitivity)(LSM303AGR_MAG_Object_t *, float *);
+	int32_t (*GetOutputDataRate)(LSM303AGR_MAG_Object_t *, float *);
+	int32_t (*SetOutputDataRate)(LSM303AGR_MAG_Object_t *, float);
+	int32_t (*GetFullScale)(LSM303AGR_MAG_Object_t *, int32_t *);
+	int32_t (*SetFullScale)(LSM303AGR_MAG_Object_t *, int32_t);
+	int32_t (*GetAxes)(LSM303AGR_MAG_Object_t *, LSM303AGR_Axes_t *);
+	int32_t (*GetAxesRaw)(LSM303AGR_MAG_Object_t *, LSM303AGR_AxesRaw_t *);
 } LSM303AGR_MAG_Drv_t;
 
 /**

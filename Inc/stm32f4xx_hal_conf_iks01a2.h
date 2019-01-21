@@ -125,8 +125,8 @@ extern "C" {
 #if !defined  (LSI_VALUE)
 #define LSI_VALUE  ((uint32_t)32000)       /*!< LSI Typical Value in Hz*/
 #endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
-The real value may vary depending on the variations
-in voltage and temperature.*/
+          The real value may vary depending on the variations
+          in voltage and temperature.*/
 /**
  * @brief External Low Speed oscillator (LSE) value.
  *        This value is used by the UART, RTC HAL module to compute the system frequency
@@ -149,10 +149,10 @@ in voltage and temperature.*/
 #endif /* EXTERNAL_SAI1_CLOCK_VALUE */
 
 /**
-  * @brief External clock source for I2S peripheral
-  *        This value is used by the I2S HAL module to compute the I2S clock source
-  *        frequency, this source is inserted directly through I2S_CKIN pad.
-  */
+ * @brief External clock source for I2S peripheral
+ *        This value is used by the I2S HAL module to compute the I2S clock source
+ *        frequency, this source is inserted directly through I2S_CKIN pad.
+ */
 #if !defined  (EXTERNAL_CLOCK_VALUE)
 #define EXTERNAL_CLOCK_VALUE    (12288000U) /*!< Value of the External oscillator in Hz*/
 #endif /* EXTERNAL_CLOCK_VALUE */

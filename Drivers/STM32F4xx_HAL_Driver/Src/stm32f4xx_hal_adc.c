@@ -308,7 +308,7 @@ HAL_StatusTypeDef HAL_ADC_Init(ADC_HandleTypeDef* hadc)
 		ADC_STATE_CLR_SET(hadc->State,
 				  HAL_ADC_STATE_BUSY_INTERNAL,
 				  HAL_ADC_STATE_READY);
-	}else  {
+	}else {
 		tmp_hal_status = HAL_ERROR;
 	}
 
@@ -470,7 +470,7 @@ HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc)
 		if (HAL_IS_BIT_SET(hadc->State, HAL_ADC_STATE_INJ_BUSY)) {
 			/* Reset ADC error code fields related to conversions on group regular */
 			CLEAR_BIT(hadc->ErrorCode, (HAL_ADC_ERROR_OVR | HAL_ADC_ERROR_DMA));
-		}else  {
+		}else {
 			/* Reset ADC all error code fields */
 			ADC_CLEAR_ERRORCODE(hadc);
 		}
@@ -496,7 +496,7 @@ HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc)
 				/* Enable the selected ADC software conversion for regular group */
 				hadc->Instance->CR2 |= (uint32_t)ADC_CR2_SWSTART;
 			}
-		}else  {
+		}else {
 			/* if instance of handle correspond to ADC1 and  no external trigger present enable software conversion of regular channels */
 			if ((hadc->Instance == ADC1) && ((hadc->Instance->CR2 & ADC_CR2_EXTEN) == RESET)) {
 				/* Enable the selected ADC software conversion for regular group */
@@ -743,7 +743,7 @@ HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc)
 		if (HAL_IS_BIT_SET(hadc->State, HAL_ADC_STATE_INJ_BUSY)) {
 			/* Reset ADC error code fields related to conversions on group regular */
 			CLEAR_BIT(hadc->ErrorCode, (HAL_ADC_ERROR_OVR | HAL_ADC_ERROR_DMA));
-		}else  {
+		}else {
 			/* Reset ADC all error code fields */
 			ADC_CLEAR_ERRORCODE(hadc);
 		}
@@ -772,7 +772,7 @@ HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc)
 				/* Enable the selected ADC software conversion for regular group */
 				hadc->Instance->CR2 |= (uint32_t)ADC_CR2_SWSTART;
 			}
-		}else  {
+		}else {
 			/* if instance of handle correspond to ADC1 and  no external trigger present enable software conversion of regular channels */
 			if ((hadc->Instance == ADC1) && ((hadc->Instance->CR2 & ADC_CR2_EXTEN) == RESET)) {
 				/* Enable the selected ADC software conversion for regular group */
@@ -1010,7 +1010,7 @@ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, ui
 		if (HAL_IS_BIT_SET(hadc->State, HAL_ADC_STATE_INJ_BUSY)) {
 			/* Reset ADC error code fields related to conversions on group regular */
 			CLEAR_BIT(hadc->ErrorCode, (HAL_ADC_ERROR_OVR | HAL_ADC_ERROR_DMA));
-		}else  {
+		}else {
 			/* Reset ADC all error code fields */
 			ADC_CLEAR_ERRORCODE(hadc);
 		}
@@ -1058,7 +1058,7 @@ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, ui
 				/* Enable the selected ADC software conversion for regular group */
 				hadc->Instance->CR2 |= (uint32_t)ADC_CR2_SWSTART;
 			}
-		}else  {
+		}else {
 			/* if instance of handle correspond to ADC1 and  no external trigger present enable software conversion of regular channels */
 			if ((hadc->Instance == ADC1) && ((hadc->Instance->CR2 & ADC_CR2_EXTEN) == RESET)) {
 				/* Enable the selected ADC software conversion for regular group */
@@ -1243,7 +1243,7 @@ HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConf
 
 		/* Set the new sample time */
 		hadc->Instance->SMPR1 |= ADC_SMPR1(sConfig->SamplingTime, sConfig->Channel);
-	}else  {/* ADC_Channel include in ADC_Channel_[0..9] */
+	}else { /* ADC_Channel include in ADC_Channel_[0..9] */
 		/* Clear the old sample time */
 		hadc->Instance->SMPR2 &= ~ADC_SMPR2(ADC_SMPR2_SMP0, sConfig->Channel);
 
@@ -1348,7 +1348,7 @@ HAL_StatusTypeDef HAL_ADC_AnalogWDGConfig(ADC_HandleTypeDef* hadc, ADC_AnalogWDG
 	if (AnalogWDGConfig->ITMode == ENABLE) {
 		/* Enable the ADC Analog watchdog interrupt */
 		__HAL_ADC_ENABLE_IT(hadc, ADC_IT_AWD);
-	}else  {
+	}else {
 		/* Disable the ADC Analog watchdog interrupt */
 		__HAL_ADC_DISABLE_IT(hadc, ADC_IT_AWD);
 	}
@@ -1475,7 +1475,7 @@ static void ADC_Init(ADC_HandleTypeDef* hadc)
 		/* Select external trigger polarity */
 		hadc->Instance->CR2 &= ~(ADC_CR2_EXTEN);
 		hadc->Instance->CR2 |= hadc->Init.ExternalTrigConvEdge;
-	}else  {
+	}else {
 		/* Reset the external trigger */
 		hadc->Instance->CR2 &= ~(ADC_CR2_EXTSEL);
 		hadc->Instance->CR2 &= ~(ADC_CR2_EXTEN);
@@ -1494,7 +1494,7 @@ static void ADC_Init(ADC_HandleTypeDef* hadc)
 		/* Set the number of channels to be converted in discontinuous mode */
 		hadc->Instance->CR1 &= ~(ADC_CR1_DISCNUM);
 		hadc->Instance->CR1 |= ADC_CR1_DISCONTINUOUS(hadc->Init.NbrOfDiscConversion);
-	}else  {
+	}else {
 		/* Disable the selected ADC regular discontinuous mode */
 		hadc->Instance->CR1 &= ~(ADC_CR1_DISCEN);
 	}
@@ -1554,7 +1554,7 @@ static void ADC_DMAConvCplt(DMA_HandleTypeDef *hdma)
 
 		/* Conversion complete callback */
 		HAL_ADC_ConvCpltCallback(hadc);
-	}else  {
+	}else {
 		/* Call DMA error callback */
 		hadc->DMA_Handle->XferErrorCallback(hdma);
 	}

@@ -81,35 +81,31 @@ extern void *EnvCompObj[IKS01A2_ENV_INSTANCES_NBR];
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Data(uint32_t Instance, float *Press, float *Temp)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Get_Data(EnvCompObj[Instance], Press, Temp) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Get_Data(EnvCompObj[Instance], Press, Temp) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -120,35 +116,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Data(uint32_t Instance, float *Press, float 
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Fth_Status(uint32_t Instance, uint8_t *Status)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Get_FTh_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Get_FTh_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -159,35 +151,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Fth_Status(uint32_t Instance, uint8_t *Statu
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Full_Status(uint32_t Instance, uint8_t *Status)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Get_Full_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Get_Full_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -198,35 +186,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Full_Status(uint32_t Instance, uint8_t *Stat
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Num_Samples(uint32_t Instance, uint8_t *NumSamples)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Get_Level(EnvCompObj[Instance], NumSamples) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Get_Level(EnvCompObj[Instance], NumSamples) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -237,35 +221,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Num_Samples(uint32_t Instance, uint8_t *NumS
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Ovr_Status(uint32_t Instance, uint8_t *Status)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Get_Ovr_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Get_Ovr_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -276,35 +256,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Get_Ovr_Status(uint32_t Instance, uint8_t *Statu
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Reset_Interrupt(uint32_t Instance, uint8_t Interrupt)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Reset_Interrupt(EnvCompObj[Instance], Interrupt) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Reset_Interrupt(EnvCompObj[Instance], Interrupt) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -315,35 +291,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Reset_Interrupt(uint32_t Instance, uint8_t Inter
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Interrupt(uint32_t Instance, uint8_t Interrupt)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Set_Interrupt(EnvCompObj[Instance], Interrupt) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Set_Interrupt(EnvCompObj[Instance], Interrupt) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -354,35 +326,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Interrupt(uint32_t Instance, uint8_t Interru
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Mode(uint32_t Instance, uint8_t Mode)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Set_Mode(EnvCompObj[Instance], Mode) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Set_Mode(EnvCompObj[Instance], Mode) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -393,35 +361,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Mode(uint32_t Instance, uint8_t Mode)
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Watermark_Level(uint32_t Instance, uint8_t Watermark)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Set_Watermark_Level(EnvCompObj[Instance], Watermark) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Set_Watermark_Level(EnvCompObj[Instance], Watermark) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -432,35 +396,31 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Set_Watermark_Level(uint32_t Instance, uint8_t W
  */
 int32_t IKS01A2_ENV_SENSOR_FIFO_Usage(uint32_t Instance, uint8_t Status)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      ret = BSP_ERROR_COMPONENT_FAILURE;
-      break;
+	case IKS01A2_HTS221_0:
+		ret = BSP_ERROR_COMPONENT_FAILURE;
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_FIFO_Usage(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_FIFO_Usage(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -474,78 +434,55 @@ int32_t IKS01A2_ENV_SENSOR_FIFO_Usage(uint32_t Instance, uint8_t Status)
  */
 int32_t IKS01A2_ENV_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Function, uint8_t *Status)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      if ((Function & ENV_HUMIDITY) == ENV_HUMIDITY)
-      {
-        if (HTS221_HUM_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-        {
-          ret = BSP_ERROR_COMPONENT_FAILURE;
-        }
-        else
-        {
-          ret = BSP_ERROR_NONE;
-        }
-      }
-      else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE)
-      {
-        if (HTS221_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-        {
-          ret = BSP_ERROR_COMPONENT_FAILURE;
-        }
-        else
-        {
-          ret = BSP_ERROR_NONE;
-        }
-      }
-      else
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      break;
+	case IKS01A2_HTS221_0:
+		if ((Function & ENV_HUMIDITY) == ENV_HUMIDITY) {
+			if (HTS221_HUM_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+				ret = BSP_ERROR_COMPONENT_FAILURE;
+			}else  {
+				ret = BSP_ERROR_NONE;
+			}
+		}else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE) {
+			if (HTS221_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+				ret = BSP_ERROR_COMPONENT_FAILURE;
+			}else  {
+				ret = BSP_ERROR_NONE;
+			}
+		}else  {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if ((Function & ENV_PRESSURE) == ENV_PRESSURE)
-      {
-        if (LPS22HB_PRESS_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-        {
-          ret = BSP_ERROR_COMPONENT_FAILURE;
-        }
-        else
-        {
-          ret = BSP_ERROR_NONE;
-        }
-      }
-      else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE)
-      {
-        if (LPS22HB_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE)
-        {
-          ret = BSP_ERROR_COMPONENT_FAILURE;
-        }
-        else
-        {
-          ret = BSP_ERROR_NONE;
-        }
-      }
-      else
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if ((Function & ENV_PRESSURE) == ENV_PRESSURE) {
+			if (LPS22HB_PRESS_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+				ret = BSP_ERROR_COMPONENT_FAILURE;
+			}else  {
+				ret = BSP_ERROR_NONE;
+			}
+		}else if ((Function & ENV_TEMPERATURE) == ENV_TEMPERATURE) {
+			if (LPS22HB_TEMP_Get_DRDY_Status(EnvCompObj[Instance], Status) != BSP_ERROR_NONE) {
+				ret = BSP_ERROR_COMPONENT_FAILURE;
+			}else  {
+				ret = BSP_ERROR_NONE;
+			}
+		}else  {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -557,42 +494,35 @@ int32_t IKS01A2_ENV_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Function,
  */
 int32_t IKS01A2_ENV_SENSOR_Read_Register(uint32_t Instance, uint8_t Reg, uint8_t *Data)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      if (HTS221_Read_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_HTS221_0:
+		if (HTS221_Read_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_Read_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_Read_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**
@@ -604,42 +534,35 @@ int32_t IKS01A2_ENV_SENSOR_Read_Register(uint32_t Instance, uint8_t Reg, uint8_t
  */
 int32_t IKS01A2_ENV_SENSOR_Write_Register(uint32_t Instance, uint8_t Reg, uint8_t Data)
 {
-  int32_t ret;
+	int32_t ret;
 
-  switch (Instance)
-  {
+	switch (Instance) {
 #if (USE_IKS01A2_ENV_SENSOR_HTS221_0 == 1)
-    case IKS01A2_HTS221_0:
-      if (HTS221_Write_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_HTS221_0:
+		if (HTS221_Write_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
 #if (USE_IKS01A2_ENV_SENSOR_LPS22HB_0 == 1)
-    case IKS01A2_LPS22HB_0:
-      if (LPS22HB_Write_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE)
-      {
-        ret = BSP_ERROR_COMPONENT_FAILURE;
-      }
-      else
-      {
-        ret = BSP_ERROR_NONE;
-      }
-      break;
+	case IKS01A2_LPS22HB_0:
+		if (LPS22HB_Write_Reg(EnvCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
+			ret = BSP_ERROR_COMPONENT_FAILURE;
+		}else  {
+			ret = BSP_ERROR_NONE;
+		}
+		break;
 #endif
 
-    default:
-      ret = BSP_ERROR_WRONG_PARAM;
-      break;
-  }
+	default:
+		ret = BSP_ERROR_WRONG_PARAM;
+		break;
+	}
 
-  return ret;
+	return ret;
 }
 
 /**

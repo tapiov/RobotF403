@@ -348,7 +348,7 @@ int XNUCLEO53L1A1_SetIntrStateId(int EnableIntr, int DevNo)
 			status = 1;
 			// for treating as error un-comment
 			//goto done;
-		}else  {
+		}else {
 			status = 0;
 		}
 		break;
@@ -361,7 +361,7 @@ int XNUCLEO53L1A1_SetIntrStateId(int EnableIntr, int DevNo)
 			status = 1;
 			// for treating as error un-comment
 			//goto done;
-		}else  {
+		}else {
 			status = 0;
 		}
 
@@ -383,7 +383,7 @@ int XNUCLEO53L1A1_SetIntrStateId(int EnableIntr, int DevNo)
 		 * on shared pin configuration this must be repeated for all device.
 		 * The same shall be done after clearing a condition in device and interrupt remain active.
 		 */
-	}else  {
+	}else {
 		HAL_NVIC_DisableIRQ(IntrNo);
 		__HAL_GPIO_EXTI_CLEAR_IT(IntrPin);
 		NVIC_ClearPendingIRQ(IntrNo);
@@ -450,7 +450,7 @@ int XNUCLEO53L1A1_GetPB1(int *state)
 			PortValue = 1;
 		else
 			PortValue = 0;
-	}else  {
+	}else {
 		XNUCLEO53L1A1_ErrLog("i/o error");
 	}
 	*state = PortValue;

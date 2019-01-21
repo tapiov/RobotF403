@@ -49,14 +49,13 @@ extern "C" {
 /**
  * @brief  Serial message engine structure definition
  */
-typedef struct
-{
-  uint8_t *pDMA_Buffer;
-  uint16_t StartOfMsg;
+typedef struct {
+	uint8_t *pDMA_Buffer;
+	uint16_t StartOfMsg;
 } TUart_Engine;
 
 /* Exported defines ----------------------------------------------------------*/
-#define UART_RxBufferSize (2*TMsg_MaxLen)
+#define UART_RxBufferSize (2 * TMsg_MaxLen)
 
 /* User can use this section to tailor USARTx/UARTx instance used and associated resources */
 /* Definition for USARTx clock resources */

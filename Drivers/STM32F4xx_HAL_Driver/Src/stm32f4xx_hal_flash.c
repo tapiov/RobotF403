@@ -192,7 +192,7 @@ HAL_StatusTypeDef HAL_FLASH_Program(uint32_t TypeProgram, uint32_t Address, uint
 		}else if (TypeProgram == FLASH_TYPEPROGRAM_WORD) {
 			/*Program word (32-bit) at a specified address.*/
 			FLASH_Program_Word(Address, (uint32_t)Data);
-		}else  {
+		}else {
 			/*Program double word (64-bit) at a specified address.*/
 			FLASH_Program_DoubleWord(Address, Data);
 		}
@@ -247,7 +247,7 @@ HAL_StatusTypeDef HAL_FLASH_Program_IT(uint32_t TypeProgram, uint32_t Address, u
 	}else if (TypeProgram == FLASH_TYPEPROGRAM_WORD) {
 		/*Program word (32-bit) at a specified address.*/
 		FLASH_Program_Word(Address, (uint32_t)Data);
-	}else  {
+	}else {
 		/*Program double word (64-bit) at a specified address.*/
 		FLASH_Program_DoubleWord(Address, Data);
 	}
@@ -279,7 +279,7 @@ void HAL_FLASH_IRQHandler(void)
 		}else if (pFlash.ProcedureOnGoing == FLASH_PROC_MASSERASE) {
 			/*return the faulty bank*/
 			addresstmp = pFlash.Bank;
-		}else  {
+		}else {
 			/*return the faulty address*/
 			addresstmp = pFlash.Address;
 		}
@@ -313,7 +313,7 @@ void HAL_FLASH_IRQHandler(void)
 				pFlash.Sector++;
 				addresstmp = pFlash.Sector;
 				FLASH_Erase_Sector(addresstmp, pFlash.VoltageForErase);
-			}else  {
+			}else {
 				/*No more sectors to Erase, user callback can be called.*/
 				/*Reset Sector and stop Erase sectors procedure*/
 				pFlash.Sector = addresstmp = 0xFFFFFFFFU;
@@ -325,7 +325,7 @@ void HAL_FLASH_IRQHandler(void)
 				/* FLASH EOP interrupt user callback */
 				HAL_FLASH_EndOfOperationCallback(addresstmp);
 			}
-		}else  {
+		}else {
 			if (pFlash.ProcedureOnGoing == FLASH_PROC_MASSERASE) {
 				/* MassErase ended. Return the selected bank */
 				/* Flush the caches to be sure of the data consistency */
@@ -333,7 +333,7 @@ void HAL_FLASH_IRQHandler(void)
 
 				/* FLASH EOP interrupt user callback */
 				HAL_FLASH_EndOfOperationCallback(pFlash.Bank);
-			}else  {
+			}else {
 				/*Program ended. Return the selected address*/
 				/* FLASH EOP interrupt user callback */
 				HAL_FLASH_EndOfOperationCallback(pFlash.Address);
@@ -455,7 +455,7 @@ HAL_StatusTypeDef HAL_FLASH_OB_Unlock(void)
 		/* Authorizes the Option Byte register programming */
 		FLASH->OPTKEYR = FLASH_OPT_KEY1;
 		FLASH->OPTKEYR = FLASH_OPT_KEY2;
-	}else  {
+	}else {
 		return HAL_ERROR;
 	}
 

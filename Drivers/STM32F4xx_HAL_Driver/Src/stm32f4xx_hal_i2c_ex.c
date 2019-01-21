@@ -127,7 +127,7 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigAnalogFilter(I2C_HandleTypeDef *hi2c, uint32_t
 		hi2c->State = HAL_I2C_STATE_READY;
 
 		return HAL_OK;
-	}else  {
+	}else {
 		return HAL_BUSY;
 	}
 }
@@ -170,7 +170,7 @@ HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_
 		hi2c->State = HAL_I2C_STATE_READY;
 
 		return HAL_OK;
-	}else  {
+	}else {
 		return HAL_BUSY;
 	}
 }

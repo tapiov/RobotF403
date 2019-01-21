@@ -358,7 +358,7 @@ void L3GD20_ReadXYZAngRate(float *pfData)
 		for (i = 0; i < 3; i++) {
 			RawData[i] = (int16_t)(((uint16_t)tmpbuffer[2 * i + 1] << 8) + tmpbuffer[2 * i]);
 		}
-	}else  {
+	}else {
 		for (i = 0; i < 3; i++) {
 			RawData[i] = (int16_t)(((uint16_t)tmpbuffer[2 * i] << 8) + tmpbuffer[2 * i + 1]);
 		}

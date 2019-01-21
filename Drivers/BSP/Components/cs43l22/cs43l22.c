@@ -347,7 +347,7 @@ uint32_t cs43l22_SetVolume(uint16_t DeviceAddr, uint8_t Volume)
 		/* Set the Master volume */
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_A_VOL, convertedvol - 0xE7);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_B_VOL, convertedvol - 0xE7);
-	}else  {
+	}else {
 		/* Set the Master volume */
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_A_VOL, convertedvol + 0x19);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_B_VOL, convertedvol + 0x19);
@@ -383,7 +383,7 @@ uint32_t cs43l22_SetMute(uint16_t DeviceAddr, uint32_t Cmd)
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0xFF);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_A_VOL, 0x01);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_B_VOL, 0x01);
-	}else  {/* AUDIO_MUTE_OFF Disable the Mute */
+	}else { /* AUDIO_MUTE_OFF Disable the Mute */
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_A_VOL, 0x00);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_B_VOL, 0x00);
 		counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, OutputDev);

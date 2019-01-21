@@ -261,7 +261,7 @@ void SystemCoreClockUpdate(void)
 		if (pllsource != 0) {
 			/* HSE used as PLL clock source */
 			pllvco = (HSE_VALUE / pllm) * ((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> 6);
-		}else  {
+		}else {
 			/* HSI used as PLL clock source */
 			pllvco = (HSI_VALUE / pllm) * ((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> 6);
 		}

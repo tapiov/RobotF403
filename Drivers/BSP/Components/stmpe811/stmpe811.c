@@ -501,7 +501,7 @@ void stmpe811_IO_InitPin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t Direction
 	/* Set the selected pin direction */
 	if (Direction != STMPE811_DIRECTION_IN) {
 		tmp |= (uint8_t)IO_Pin;
-	}else  {
+	}else {
 		tmp &= ~(uint8_t)IO_Pin;
 	}
 
@@ -608,7 +608,7 @@ void stmpe811_IO_WritePin(uint16_t DeviceAddr, uint32_t IO_Pin, uint8_t PinState
 	if (PinState != 0) {
 		/* Set the register */
 		IOE_Write(DeviceAddr, STMPE811_REG_IO_SET_PIN, (uint8_t)IO_Pin);
-	}else  {
+	}else {
 		/* Set the register */
 		IOE_Write(DeviceAddr, STMPE811_REG_IO_CLR_PIN, (uint8_t)IO_Pin);
 	}
@@ -830,7 +830,7 @@ uint8_t stmpe811_TS_DetectTouch(uint16_t DeviceAddr)
 		if (IOE_Read(DeviceAddr, STMPE811_REG_FIFO_SIZE) > 0) {
 			ret = 1;
 		}
-	}else  {
+	}else {
 		/* Reset FIFO */
 		IOE_Write(DeviceAddr, STMPE811_REG_FIFO_STA, 0x01);
 		/* Enable the FIFO again */

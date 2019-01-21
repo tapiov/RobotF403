@@ -390,7 +390,7 @@ HAL_StatusTypeDef HAL_TIMEx_HallSensor_Start_DMA(TIM_HandleTypeDef *htim, uint32
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if (((uint32_t)pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -683,7 +683,7 @@ HAL_StatusTypeDef HAL_TIMEx_OCN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Chan
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if (((uint32_t)pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -1084,7 +1084,7 @@ HAL_StatusTypeDef HAL_TIMEx_PWMN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Cha
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if (((uint32_t)pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -1686,7 +1686,7 @@ HAL_StatusTypeDef HAL_TIMEx_RemapConfig(TIM_HandleTypeDef *htim, uint32_t Remap)
 		__HAL_RCC_LPTIM1_CLK_ENABLE();
 
 		LPTIM1->OR = (Remap & 0xEFFFFFFFU);
-	}else  {
+	}else {
 		/* Set the Timer remapping configuration */
 		htim->Instance->OR = Remap;
 	}

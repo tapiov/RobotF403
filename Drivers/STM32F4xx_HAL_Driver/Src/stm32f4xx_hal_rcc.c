@@ -255,7 +255,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 			if ((__HAL_RCC_GET_FLAG(RCC_FLAG_HSERDY) != RESET) && (RCC_OscInitStruct->HSEState == RCC_HSE_OFF)) {
 				return HAL_ERROR;
 			}
-		}else  {
+		}else {
 			/* Set the new HSE configuration ---------------------------------------*/
 			__HAL_RCC_HSE_CONFIG(RCC_OscInitStruct->HSEState);
 
@@ -270,7 +270,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 						return HAL_TIMEOUT;
 					}
 				}
-			}else  {
+			}else {
 				/* Get Start Tick */
 				tickstart = HAL_GetTick();
 
@@ -301,7 +301,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 				/* Adjusts the Internal High Speed oscillator (HSI) calibration value.*/
 				__HAL_RCC_HSI_CALIBRATIONVALUE_ADJUST(RCC_OscInitStruct->HSICalibrationValue);
 			}
-		}else  {
+		}else {
 			/* Check the HSI State */
 			if ((RCC_OscInitStruct->HSIState) != RCC_HSI_OFF) {
 				/* Enable the Internal High Speed oscillator (HSI). */
@@ -319,7 +319,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 
 				/* Adjusts the Internal High Speed oscillator (HSI) calibration value. */
 				__HAL_RCC_HSI_CALIBRATIONVALUE_ADJUST(RCC_OscInitStruct->HSICalibrationValue);
-			}else  {
+			}else {
 				/* Disable the Internal High Speed oscillator (HSI). */
 				__HAL_RCC_HSI_DISABLE();
 
@@ -354,7 +354,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 					return HAL_TIMEOUT;
 				}
 			}
-		}else  {
+		}else {
 			/* Disable the Internal Low Speed oscillator (LSI). */
 			__HAL_RCC_LSI_DISABLE();
 
@@ -410,7 +410,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 					return HAL_TIMEOUT;
 				}
 			}
-		}else  {
+		}else {
 			/* Get Start Tick */
 			tickstart = HAL_GetTick();
 
@@ -472,7 +472,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 						return HAL_TIMEOUT;
 					}
 				}
-			}else  {
+			}else {
 				/* Disable the main PLL. */
 				__HAL_RCC_PLL_DISABLE();
 
@@ -486,7 +486,7 @@ __weak HAL_StatusTypeDef HAL_RCC_OscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruc
 					}
 				}
 			}
-		}else  {
+		}else {
 			return HAL_ERROR;
 		}
 	}
@@ -816,7 +816,7 @@ __weak uint32_t HAL_RCC_GetSysClockFreq(void)
 		if (__HAL_RCC_GET_PLL_OSCSOURCE() != RCC_PLLSOURCE_HSI) {
 			/* HSE used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSE_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
-		}else  {
+		}else {
 			/* HSI used as PLL clock source */
 			pllvco = (uint32_t)((((uint64_t)HSI_VALUE * ((uint64_t)((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos)))) / (uint64_t)pllm);
 		}
@@ -889,14 +889,14 @@ __weak void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 		RCC_OscInitStruct->HSEState = RCC_HSE_BYPASS;
 	}else if ((RCC->CR & RCC_CR_HSEON) == RCC_CR_HSEON) {
 		RCC_OscInitStruct->HSEState = RCC_HSE_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->HSEState = RCC_HSE_OFF;
 	}
 
 	/* Get the HSI configuration -----------------------------------------------*/
 	if ((RCC->CR & RCC_CR_HSION) == RCC_CR_HSION) {
 		RCC_OscInitStruct->HSIState = RCC_HSI_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->HSIState = RCC_HSI_OFF;
 	}
 
@@ -907,21 +907,21 @@ __weak void HAL_RCC_GetOscConfig(RCC_OscInitTypeDef  *RCC_OscInitStruct)
 		RCC_OscInitStruct->LSEState = RCC_LSE_BYPASS;
 	}else if ((RCC->BDCR & RCC_BDCR_LSEON) == RCC_BDCR_LSEON) {
 		RCC_OscInitStruct->LSEState = RCC_LSE_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->LSEState = RCC_LSE_OFF;
 	}
 
 	/* Get the LSI configuration -----------------------------------------------*/
 	if ((RCC->CSR & RCC_CSR_LSION) == RCC_CSR_LSION) {
 		RCC_OscInitStruct->LSIState = RCC_LSI_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->LSIState = RCC_LSI_OFF;
 	}
 
 	/* Get the PLL configuration -----------------------------------------------*/
 	if ((RCC->CR & RCC_CR_PLLON) == RCC_CR_PLLON) {
 		RCC_OscInitStruct->PLL.PLLState = RCC_PLL_ON;
-	}else  {
+	}else {
 		RCC_OscInitStruct->PLL.PLLState = RCC_PLL_OFF;
 	}
 	RCC_OscInitStruct->PLL.PLLSource = (uint32_t)(RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC);

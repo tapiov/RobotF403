@@ -570,7 +570,7 @@ static __INLINE uint32_t arm_recip_q31(
 
 	if (in > 0) {
 		signBits = ((uint32_t)(__CLZ(in) - 1));
-	}else  {
+	}else {
 		signBits = ((uint32_t)(__CLZ(-in) - 1));
 	}
 
@@ -617,7 +617,7 @@ static __INLINE uint32_t arm_recip_q15(
 
 	if (in > 0) {
 		signBits = ((uint32_t)(__CLZ(in) - 17));
-	}else  {
+	}else {
 		signBits = ((uint32_t)(__CLZ(-in) - 17));
 	}
 
@@ -671,7 +671,7 @@ static __INLINE q31_t __SSAT(
 		if (x > posMax) {
 			x = posMax;
 		}
-	}else  {
+	}else {
 		negMin = -posMax;
 
 		if (x < negMin) {
@@ -5372,7 +5372,7 @@ static __INLINE float32_t arm_linear_interp_f32(
 	}else if ((uint32_t)i >= S->nValues) {
 		/* Iniatilize output for above specified range as last output value of table */
 		y = pYData[S->nValues - 1];
-	}else  {
+	}else {
 		/* Calculation of nearest input values */
 		x0 = S->x1 + i * xSpacing;
 		x1 = S->x1 + (i + 1) * xSpacing;
@@ -5422,7 +5422,7 @@ static __INLINE q31_t arm_linear_interp_q31(
 		return(pYData[nValues - 1]);
 	}else if (index < 0) {
 		return(pYData[0]);
-	}else  {
+	}else {
 		/* 20 bits for the fractional part */
 		/* shift left by 11 to keep fract in 1.31 format */
 		fract = (x & 0x000FFFFF) << 11;
@@ -5475,7 +5475,7 @@ static __INLINE q15_t arm_linear_interp_q15(
 		return(pYData[nValues - 1]);
 	}else if (index < 0) {
 		return(pYData[0]);
-	}else  {
+	}else {
 		/* 20 bits for the fractional part */
 		/* fract is in 12.20 format */
 		fract = (x & 0x000FFFFF);
@@ -5528,7 +5528,7 @@ static __INLINE q7_t arm_linear_interp_q7(
 
 	if (index >= (nValues - 1)) {
 		return(pYData[nValues - 1]);
-	}else  {
+	}else {
 		/* 20 bits for the fractional part */
 		/* fract is in 12.20 format */
 		fract = (x & 0x000FFFFF);
@@ -5662,7 +5662,7 @@ static __INLINE arm_status arm_sqrt_f32(
 #endif
 
 		return(ARM_MATH_SUCCESS);
-	}else  {
+	}else {
 		*pOut = 0.0f;
 		return(ARM_MATH_ARGUMENT_ERROR);
 	}

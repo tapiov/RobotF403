@@ -399,7 +399,7 @@ HAL_StatusTypeDef HAL_TIM_Base_Start_DMA(TIM_HandleTypeDef *htim, uint32_t *pDat
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if ((pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -784,7 +784,7 @@ HAL_StatusTypeDef HAL_TIM_OC_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if (((uint32_t)pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -1281,7 +1281,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channe
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if (((uint32_t)pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -1755,7 +1755,7 @@ HAL_StatusTypeDef HAL_TIM_IC_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if ((pData == 0U) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -2520,7 +2520,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Stop_IT(TIM_HandleTypeDef *htim, uint32_t Chan
 
 		/* Disable the capture compare Interrupts 2 */
 		__HAL_TIM_DISABLE_IT(htim, TIM_IT_CC2);
-	}else  {
+	}else {
 		TIM_CCxChannelCmd(htim->Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
 		TIM_CCxChannelCmd(htim->Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
 
@@ -2563,7 +2563,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Ch
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if ((((pData1 == 0U) || (pData2 == 0U))) && (Length > 0)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -2681,7 +2681,7 @@ HAL_StatusTypeDef HAL_TIM_Encoder_Stop_DMA(TIM_HandleTypeDef *htim, uint32_t Cha
 
 		/* Disable the capture compare DMA Request 2 */
 		__HAL_TIM_DISABLE_DMA(htim, TIM_DMA_CC2);
-	}else  {
+	}else {
 		TIM_CCxChannelCmd(htim->Instance, TIM_CHANNEL_1, TIM_CCx_DISABLE);
 		TIM_CCxChannelCmd(htim->Instance, TIM_CHANNEL_2, TIM_CCx_DISABLE);
 
@@ -2983,7 +2983,7 @@ HAL_StatusTypeDef HAL_TIM_IC_ConfigChannel(TIM_HandleTypeDef *htim, TIM_IC_InitT
 
 		/* Set the IC3PSC value */
 		htim->Instance->CCMR2 |= sConfig->ICPrescaler;
-	}else  {
+	}else {
 		/* TI4 Configuration */
 		assert_param(IS_TIM_CC4_INSTANCE(htim->Instance));
 
@@ -3208,7 +3208,7 @@ HAL_StatusTypeDef HAL_TIM_OnePulse_ConfigChannel(TIM_HandleTypeDef *htim, TIM_On
 		__HAL_UNLOCK(htim);
 
 		return HAL_OK;
-	}else  {
+	}else {
 		return HAL_ERROR;
 	}
 }
@@ -3266,7 +3266,7 @@ HAL_StatusTypeDef HAL_TIM_DMABurst_WriteStart(TIM_HandleTypeDef *htim, uint32_t 
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if ((BurstBuffer == 0U) && (BurstLength > 0U)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -3483,7 +3483,7 @@ HAL_StatusTypeDef HAL_TIM_DMABurst_ReadStart(TIM_HandleTypeDef *htim, uint32_t B
 	}else if ((htim->State == HAL_TIM_STATE_READY)) {
 		if ((BurstBuffer == 0U) && (BurstLength > 0U)) {
 			return HAL_ERROR;
-		}else  {
+		}else {
 			htim->State = HAL_TIM_STATE_BUSY;
 		}
 	}
@@ -3733,7 +3733,7 @@ HAL_StatusTypeDef HAL_TIM_ConfigOCrefClear(TIM_HandleTypeDef *htim, TIM_ClearInp
 		if (sClearInputConfig->ClearInputState != RESET) {
 			/* Enable the Ocref clear feature for Channel 1 */
 			htim->Instance->CCMR1 |= TIM_CCMR1_OC1CE;
-		}else  {
+		}else {
 			/* Disable the Ocref clear feature for Channel 1 */
 			htim->Instance->CCMR1 &= ~TIM_CCMR1_OC1CE;
 		}
@@ -3745,7 +3745,7 @@ HAL_StatusTypeDef HAL_TIM_ConfigOCrefClear(TIM_HandleTypeDef *htim, TIM_ClearInp
 		if (sClearInputConfig->ClearInputState != RESET) {
 			/* Enable the Ocref clear feature for Channel 2 */
 			htim->Instance->CCMR1 |= TIM_CCMR1_OC2CE;
-		}else  {
+		}else {
 			/* Disable the Ocref clear feature for Channel 2 */
 			htim->Instance->CCMR1 &= ~TIM_CCMR1_OC2CE;
 		}
@@ -3757,7 +3757,7 @@ HAL_StatusTypeDef HAL_TIM_ConfigOCrefClear(TIM_HandleTypeDef *htim, TIM_ClearInp
 		if (sClearInputConfig->ClearInputState != RESET) {
 			/* Enable the Ocref clear feature for Channel 3 */
 			htim->Instance->CCMR2 |= TIM_CCMR2_OC3CE;
-		}else  {
+		}else {
 			/* Disable the Ocref clear feature for Channel 3 */
 			htim->Instance->CCMR2 &= ~TIM_CCMR2_OC3CE;
 		}
@@ -3769,7 +3769,7 @@ HAL_StatusTypeDef HAL_TIM_ConfigOCrefClear(TIM_HandleTypeDef *htim, TIM_ClearInp
 		if (sClearInputConfig->ClearInputState != RESET) {
 			/* Enable the Ocref clear feature for Channel 4 */
 			htim->Instance->CCMR2 |= TIM_CCMR2_OC4CE;
-		}else  {
+		}else {
 			/* Disable the Ocref clear feature for Channel 4 */
 			htim->Instance->CCMR2 &= ~TIM_CCMR2_OC4CE;
 		}
@@ -4395,7 +4395,7 @@ void TIM_TI1_SetConfig(TIM_TypeDef *TIMx, uint32_t TIM_ICPolarity, uint32_t TIM_
 	if (IS_TIM_CC2_INSTANCE(TIMx) != RESET) {
 		tmpccmr1 &= ~TIM_CCMR1_CC1S;
 		tmpccmr1 |= TIM_ICSelection;
-	}else  {
+	}else {
 		tmpccmr1 &= ~TIM_CCMR1_CC1S;
 		tmpccmr1 |= TIM_CCMR1_CC1S_0;
 	}

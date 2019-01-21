@@ -3072,7 +3072,7 @@ void s5k5cag_Init(uint16_t DeviceAddr, uint32_t resolution)
 		for (index = 0; index < (sizeof(S5K5CAG_Common) / 4); index++) {
 			if (0xFFFF == S5K5CAG_Common[index][0]) {
 				CAMERA_Delay(S5K5CAG_Common[index][1]);
-			}else  {
+			}else {
 				CAMERA_IO_Write(DeviceAddr, S5K5CAG_Common[index][0], S5K5CAG_Common[index][1]);
 				CAMERA_Delay(1);
 			}
@@ -3179,7 +3179,7 @@ void s5k5cag_Config(uint16_t DeviceAddr, uint32_t feature, uint32_t value, uint3
 			CAMERA_IO_Write(DeviceAddr, 0x0028, 0x7000); /* REG_TC_GP_SpecialEffects register (0x70000021E) */
 			CAMERA_IO_Write(DeviceAddr, 0x002A, 0x021E); /* REG_TC_GP_SpecialEffects register */
 			CAMERA_IO_Write(DeviceAddr, 0x0F12, value_tmp);
-		}else  {
+		}else {
 			/* Reset previous special effect view, restore normal view */
 			CAMERA_IO_Write(DeviceAddr, 0x0028, 0x7000); /* REG_TC_GP_SpecialEffects register (0x70000021E) */
 			CAMERA_IO_Write(DeviceAddr, 0x002A, 0x021E); /* REG_TC_GP_SpecialEffects register */

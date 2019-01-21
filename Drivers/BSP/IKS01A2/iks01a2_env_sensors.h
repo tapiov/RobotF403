@@ -88,20 +88,18 @@ extern "C" {
  */
 
 /* Environmental Sensor instance Info */
-typedef struct
-{
-  uint8_t Temperature;
-  uint8_t Pressure;
-  uint8_t Humidity;
-  uint8_t LowPower;
-  float   HumMaxOdr;
-  float   TempMaxOdr;
-  float   PressMaxOdr;
+typedef struct {
+	uint8_t Temperature;
+	uint8_t Pressure;
+	uint8_t Humidity;
+	uint8_t LowPower;
+	float HumMaxOdr;
+	float TempMaxOdr;
+	float PressMaxOdr;
 } IKS01A2_ENV_SENSOR_Capabilities_t;
 
-typedef struct
-{
-  uint32_t Functions;
+typedef struct {
+	uint32_t Functions;
 } IKS01A2_ENV_SENSOR_Ctx_t;
 
 /**
