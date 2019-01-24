@@ -46,7 +46,6 @@
 
 #include "main.h"
 
-int cuiGetInteger(const char* message);
 int uartSendChar(int ch);
 int uartReceiveChar(void);
 
@@ -56,29 +55,6 @@ volatile static int uartRXReady = 1;
 
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart6;
-
-/** @brief Asks user to input an integer number and returns its value
- * @param message A message to be prompted on the console when asking value
- * @retval The integer acquired from console
- */
-int cuiGetInteger(const char* message)
-{
-	int ret, value;
-	char buf[32];
-	do {
-		printf("%s", message);
-		fflush(stdout);
-		ret = scanf("%u", &value);
-		if (ret != 1) {
-			/* In case of non-matching characters, eat stdin as IAR and
-			 * TrueStudio won't flush it as Keil does */
-			scanf("%s", buf);
-			printf("\r\nPlease insert a valid integer number\r\n");
-		}
-	} while (ret != 1);
-
-	return value;
-}
 
 /** @brief Sends a character to serial port
  * @param ch Character to send
@@ -93,7 +69,6 @@ int uartSendChar(int ch)
 //	while ((uart2TXReady == 0)) {
 //		;
 //	}
-
 
 	uart2TXReady = 0;
 	uart6TXReady = 0;
@@ -129,7 +104,7 @@ int uartReceiveChar(void)
 
 	uartRXReady = 0;
 
-	HAL_UART_Receive_DMA(&huart6, &ch, 1);
+	HAL_UART_Receive_DMA(&huart2, &ch, 1);
 
 	while (uartRXReady == 0) {
 		;

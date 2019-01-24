@@ -77,7 +77,7 @@
 
 /* Extern variables ----------------------------------------------------------*/
 extern uint8_t Enabled6X; /* This "redundant" line is here to fulfil MISRA C-2012 rule 8.4 */
-uint8_t Enabled6X = 0;
+uint8_t Enabled6X = 1;
 
 /* Private variables ---------------------------------------------------------*/
 static uint8_t PresentationString[] = { "MEMS shield demo,"FW_ID ","FW_VERSION ","LIB_VERSION ","EXPANSION_BOARD };
