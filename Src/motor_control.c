@@ -66,6 +66,69 @@ void motor_init(void)
 	BSP_MotorControl_SetBridgeInputPwmFreq(1, 10000);
 }
 
+void robot_move(motorDir_t dir, int speed) {
+	if (dir == FORWARD) {
+
+		//printf_rtc_timestamp();
+		//printf("Running forward\n");
+
+		BSP_MotorControl_SetMaxSpeed(0, speed);
+		BSP_MotorControl_Run(0, BACKWARD);
+
+		BSP_MotorControl_SetMaxSpeed(1, speed);
+		BSP_MotorControl_Run(1, FORWARD);
+
+	} else if (dir == BACKWARD) {
+
+		//printf_rtc_timestamp();
+		//printf("Running backward\n");
+
+		BSP_MotorControl_SetMaxSpeed(0, 20);
+		BSP_MotorControl_Run(0, FORWARD);
+
+		BSP_MotorControl_SetMaxSpeed(1, 20);
+		BSP_MotorControl_Run(1, BACKWARD);
+	}
+}
+
+void robot_turn(turnDir_t turn, int speed) {
+	if (turn == RIGHT) {
+
+		//printf_rtc_timestamp();
+		//printf("Turning right\n");
+
+		BSP_MotorControl_SetMaxSpeed(0, speed);
+		BSP_MotorControl_Run(0, BACKWARD);
+
+		BSP_MotorControl_SetMaxSpeed(1, speed);
+		BSP_MotorControl_Run(1, BACKWARD);
+
+	} else if (turn == LEFT) {
+
+		//printf_rtc_timestamp();
+		//printf("Turning left\n");
+
+		BSP_MotorControl_SetMaxSpeed(0, speed);
+		BSP_MotorControl_Run(0, FORWARD);
+
+		BSP_MotorControl_SetMaxSpeed(1, speed);
+		BSP_MotorControl_Run(1, FORWARD);
+	}
+}
+
+void robot_stop(void) {
+
+	//printf_rtc_timestamp();
+	//printf("Stop\n");
+
+	BSP_MotorControl_SetMaxSpeed(0, 0);
+	BSP_MotorControl_Run(0, FORWARD);
+
+	BSP_MotorControl_SetMaxSpeed(1, 0);
+	BSP_MotorControl_Run(1, BACKWARD);
+
+}
+
 /**
  * @brief  This function is the User handler for the flag interrupt
  * @param  None

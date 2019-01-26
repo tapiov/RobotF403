@@ -101,6 +101,19 @@ typedef enum {
  * @}
  */
 
+/** @defgroup Device_Turn_Options Device Turn Options
+ * @{
+ */
+/// turn options
+typedef enum {
+	LEFT = 0,
+	RIGHT = 1,
+	UNKNOW_TURN = ((uint8_t) 0xFF)
+} turnDir_t;
+/**
+ * @}
+ */
+
 /** @defgroup Device_Action_Options Device Action Options
  * @{
  */
