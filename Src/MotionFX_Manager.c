@@ -145,7 +145,7 @@ void MotionFX_manager_run(MFX_input_t *data_in, MFX_output_t *data_out, float de
 	if (discardedCount == sampleToDiscard) {
 		MotionFX_propagate(data_out, data_in, delta_time);
 		MotionFX_update(data_out, data_in, delta_time, NULL);
-	}else  {
+	}else {
 		discardedCount++;
 	}
 }
@@ -154,7 +154,7 @@ void MotionFX_manager_run(MFX_CM0P_input_t *data_in, MFX_CM0P_output_t *data_out
 {
 	if (discardedCount == sampleToDiscard) {
 		MotionFX_CM0P_update(data_out, data_in, delta_time);
-	}else  {
+	}else {
 		discardedCount++;
 	}
 }

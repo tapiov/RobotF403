@@ -119,7 +119,7 @@ int ReverseByteStuffCopyByte(uint8_t *Source, uint8_t *Dest)
 			return 2;
 		}
 		return 0; // invalide sequence
-	}else  {
+	}else {
 		*Dest = Source[0];
 		return 1;
 	}
@@ -144,7 +144,7 @@ int ReverseByteStuffCopyByte2(uint8_t Source0, uint8_t Source1, uint8_t *Dest)
 			return 2;
 		}
 		return 0; // invalid sequence
-	}else  {
+	}else {
 		*Dest = Source0;
 		return 1;
 	}
@@ -165,19 +165,19 @@ int ReverseByteStuffCopy(TMsg *Dest, uint8_t *Source)
 		if (state == 0) {
 			if ((*Source) == (uint8_t)TMsg_BS) {
 				state = 1;
-			}else  {
+			}else {
 				Dest->Data[count] = *Source;
 				count++;
 			}
-		}else  {
+		}else {
 			if ((*Source) == (uint8_t)TMsg_BS) {
 				Dest->Data[count] = TMsg_BS;
 				count++;
-			}else  {
+			}else {
 				if ((*Source) == (uint8_t)TMsg_BS_EOF) {
 					Dest->Data[count] = TMsg_EOF;
 					count++;
-				}else  {
+				}else {
 					return 0; // invalid sequence
 				}
 			}

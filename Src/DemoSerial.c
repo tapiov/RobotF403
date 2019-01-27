@@ -293,7 +293,7 @@ int HandleMSG(TMsg *Msg)
 		if (Enabled6X == 1U) {
 			MotionFX_manager_stop_9X();
 			MotionFX_manager_start_6X();
-		}else  {
+		}else {
 			MotionFX_manager_stop_6X();
 			MotionFX_manager_start_9X();
 		}

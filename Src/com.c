@@ -82,7 +82,7 @@ int UART_ReceivedMSG(TMsg *Msg)
 
 		if (dma_counter >= UartEngine.StartOfMsg) {
 			length = dma_counter - UartEngine.StartOfMsg;
-		}else  {
+		}else {
 			length = (uint16_t)UART_RxBufferSize + dma_counter - UartEngine.StartOfMsg;
 		}
 		j = UartEngine.StartOfMsg;

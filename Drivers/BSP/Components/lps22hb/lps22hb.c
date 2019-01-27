@@ -112,7 +112,7 @@ int32_t LPS22HB_RegisterBusIO(LPS22HB_Object_t *pObj, LPS22HB_IO_t *pIO)
 
 	if (pObj == NULL) {
 		ret = LPS22HB_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -129,7 +129,7 @@ int32_t LPS22HB_RegisterBusIO(LPS22HB_Object_t *pObj, LPS22HB_IO_t *pIO)
 			ret = LPS22HB_ERROR;
 		}else if (pObj->IO.Init() != LPS22HB_OK) {
 			ret = LPS22HB_ERROR;
-		}else  {
+		}else {
 			if (pObj->IO.BusType == LPS22HB_SPI_3WIRES_BUS) { /* SPI 3-Wires */
 				/* Enable the SPI 3-Wires support only the first time */
 				if (pObj->is_initialized == 0U) {
@@ -315,7 +315,7 @@ int32_t LPS22HB_PRESS_SetOutputDataRate(LPS22HB_Object_t *pObj, float Odr)
 	/* Check if the component is enabled */
 	if (pObj->press_is_enabled == 1U) {
 		return LPS22HB_SetOutputDataRate_When_Enabled(pObj, Odr);
-	}else  {
+	}else {
 		return LPS22HB_SetOutputDataRate_When_Disabled(pObj, Odr);
 	}
 }
@@ -430,7 +430,7 @@ int32_t LPS22HB_TEMP_SetOutputDataRate(LPS22HB_Object_t *pObj, float Odr)
 	/* Check if the component is enabled */
 	if (pObj->temp_is_enabled == 1U) {
 		return LPS22HB_SetOutputDataRate_When_Enabled(pObj, Odr);
-	}else  {
+	}else {
 		return LPS22HB_SetOutputDataRate_When_Disabled(pObj, Odr);
 	}
 }
@@ -859,7 +859,7 @@ static int32_t LPS22HB_Initialize(LPS22HB_Object_t *pObj)
 		if (lps22hb_auto_add_inc_set(&(pObj->Ctx), PROPERTY_DISABLE) != LPS22HB_OK) {
 			return LPS22HB_ERROR;
 		}
-	}else  {/* SPI 4-Wires or SPI 3-Wires */
+	}else { /* SPI 4-Wires or SPI 3-Wires */
 		if (lps22hb_auto_add_inc_set(&(pObj->Ctx), PROPERTY_ENABLE) != LPS22HB_OK) {
 			return LPS22HB_ERROR;
 		}
@@ -893,7 +893,7 @@ static int32_t ReadRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t L
 		}
 
 		return ret;
-	}else  {/* SPI 4-Wires or SPI 3-Wires */
+	}else { /* SPI 4-Wires or SPI 3-Wires */
 		return pObj->IO.ReadReg(pObj->IO.Address, Reg, pData, Length);
 	}
 }
@@ -921,7 +921,7 @@ static int32_t WriteRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t 
 		}
 
 		return ret;
-	}else  {/* SPI 4-Wires or SPI 3-Wires */
+	}else { /* SPI 4-Wires or SPI 3-Wires */
 		return pObj->IO.WriteReg(pObj->IO.Address, Reg, pData, Length);
 	}
 }

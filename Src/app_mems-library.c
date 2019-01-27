@@ -273,7 +273,7 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_ACCELERO, &acceleration)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nACC[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nACC_X[%d]: %d, ACC_Y[%d]: %d, ACC_Z[%d]: %d\r\n", (int)Instance,
 			 (int)acceleration.x, (int)Instance, (int)acceleration.y, (int)Instance, (int)acceleration.z);
 	}
@@ -283,7 +283,7 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_MOTION_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -291,7 +291,7 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetOutputDataRate(Instance, MOTION_ACCELERO, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);
@@ -301,7 +301,7 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetFullScale(Instance, MOTION_ACCELERO, &fullScale)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: %d g\r\n", (int)Instance, (int)fullScale);
 		}
 
@@ -324,7 +324,7 @@ static void Gyro_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_GYRO, &angular_velocity)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nGYR[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nGYR_X[%d]: %d, GYR_Y[%d]: %d, GYR_Z[%d]: %d\r\n", (int)Instance,
 			 (int)angular_velocity.x, (int)Instance, (int)angular_velocity.y, (int)Instance, (int)angular_velocity.z);
 	}
@@ -334,7 +334,7 @@ static void Gyro_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_MOTION_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -342,7 +342,7 @@ static void Gyro_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetOutputDataRate(Instance, MOTION_GYRO, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);
@@ -352,7 +352,7 @@ static void Gyro_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetFullScale(Instance, MOTION_GYRO, &fullScale)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: %d dps\r\n", (int)Instance, (int)fullScale);
 		}
 
@@ -375,7 +375,7 @@ static void Magneto_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_MOTION_SENSOR_GetAxes(Instance, MOTION_MAGNETO, &magnetic_field)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nMAG[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nMAG_X[%d]: %d, MAG_Y[%d]: %d, MAG_Z[%d]: %d\r\n", (int)Instance,
 			 (int)magnetic_field.x, (int)Instance, (int)magnetic_field.y, (int)Instance, (int)magnetic_field.z);
 	}
@@ -385,7 +385,7 @@ static void Magneto_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_MOTION_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -393,7 +393,7 @@ static void Magneto_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetOutputDataRate(Instance, MOTION_MAGNETO, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);
@@ -403,7 +403,7 @@ static void Magneto_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_MOTION_SENSOR_GetFullScale(Instance, MOTION_MAGNETO, &fullScale)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: ERROR\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "FS[%d]: %d gauss\r\n", (int)Instance, (int)fullScale);
 		}
 
@@ -425,7 +425,7 @@ static void Temp_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_TEMPERATURE, &temperature)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nTemp[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		floatToInt(temperature, &out_value, 2);
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nTemp[%d]: %d.%02d degC\r\n", (int)Instance, (int)out_value.out_int,
 			 (int)out_value.out_dec);
@@ -436,7 +436,7 @@ static void Temp_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_ENV_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -444,7 +444,7 @@ static void Temp_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_ENV_SENSOR_GetOutputDataRate(Instance, ENV_TEMPERATURE, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);
@@ -468,7 +468,7 @@ static void Press_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_PRESSURE, &pressure)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nPress[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		floatToInt(pressure, &out_value, 2);
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nPress[%d]: %d.%02d hPa\r\n", (int)Instance, (int)out_value.out_int,
 			 (int)out_value.out_dec);
@@ -479,7 +479,7 @@ static void Press_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_ENV_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -487,7 +487,7 @@ static void Press_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_ENV_SENSOR_GetOutputDataRate(Instance, ENV_PRESSURE, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);
@@ -511,7 +511,7 @@ static void Hum_Sensor_Handler(uint32_t Instance)
 
 	if (IKS01A2_ENV_SENSOR_GetValue(Instance, ENV_HUMIDITY, &humidity)) {
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nHum[%d]: Error\r\n", (int)Instance);
-	}else  {
+	}else {
 		floatToInt(humidity, &out_value, 2);
 		snprintf(dataOut, MAX_BUF_SIZE, "\r\nHum[%d]: %d.%02d %%\r\n", (int)Instance, (int)out_value.out_int,
 			 (int)out_value.out_dec);
@@ -522,7 +522,7 @@ static void Hum_Sensor_Handler(uint32_t Instance)
 	if (verbose == 1) {
 		if (IKS01A2_ENV_SENSOR_ReadID(Instance, &whoami)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			snprintf(dataOut, MAX_BUF_SIZE, "WHOAMI[%d]: 0x%x\r\n", (int)Instance, (int)whoami);
 		}
 
@@ -530,7 +530,7 @@ static void Hum_Sensor_Handler(uint32_t Instance)
 
 		if (IKS01A2_ENV_SENSOR_GetOutputDataRate(Instance, ENV_HUMIDITY, &odr)) {
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: Error\r\n", (int)Instance);
-		}else  {
+		}else {
 			floatToInt(odr, &out_value, 3);
 			snprintf(dataOut, MAX_BUF_SIZE, "ODR[%d]: %d.%03d Hz\r\n", (int)Instance, (int)out_value.out_int,
 				 (int)out_value.out_dec);

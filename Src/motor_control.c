@@ -66,9 +66,9 @@ void motor_init(void)
 	BSP_MotorControl_SetBridgeInputPwmFreq(1, 10000);
 }
 
-void robot_move(motorDir_t dir, int speed) {
+void robot_move(motorDir_t dir, int speed)
+{
 	if (dir == FORWARD) {
-
 		//printf_rtc_timestamp();
 		//printf("Running forward\n");
 
@@ -77,9 +77,7 @@ void robot_move(motorDir_t dir, int speed) {
 
 		BSP_MotorControl_SetMaxSpeed(1, speed);
 		BSP_MotorControl_Run(1, FORWARD);
-
 	} else if (dir == BACKWARD) {
-
 		//printf_rtc_timestamp();
 		//printf("Running backward\n");
 
@@ -91,9 +89,9 @@ void robot_move(motorDir_t dir, int speed) {
 	}
 }
 
-void robot_turn(turnDir_t turn, int speed) {
+void robot_turn(turnDir_t turn, int speed)
+{
 	if (turn == RIGHT) {
-
 		//printf_rtc_timestamp();
 		//printf("Turning right\n");
 
@@ -102,9 +100,7 @@ void robot_turn(turnDir_t turn, int speed) {
 
 		BSP_MotorControl_SetMaxSpeed(1, speed);
 		BSP_MotorControl_Run(1, BACKWARD);
-
 	} else if (turn == LEFT) {
-
 		//printf_rtc_timestamp();
 		//printf("Turning left\n");
 
@@ -116,8 +112,8 @@ void robot_turn(turnDir_t turn, int speed) {
 	}
 }
 
-void robot_stop(void) {
-
+void robot_stop(void)
+{
 	//printf_rtc_timestamp();
 	//printf("Stop\n");
 
@@ -126,7 +122,6 @@ void robot_stop(void) {
 
 	BSP_MotorControl_SetMaxSpeed(1, 0);
 	BSP_MotorControl_Run(1, BACKWARD);
-
 }
 
 /**

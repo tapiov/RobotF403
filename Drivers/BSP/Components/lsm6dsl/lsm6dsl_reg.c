@@ -1640,7 +1640,7 @@ int32_t lsm6dsl_xl_lp1_bandwidth_get(lsm6dsl_ctx_t *ctx,
 		if ((reg.ctrl8_xl.lpf2_xl_en != 0x00U) ||
 		    (reg.ctrl8_xl.hp_slope_xl_en != 0x00U)) {
 			*val = LSM6DSL_XL_LP1_NA;
-		}else  {
+		}else {
 			ret = lsm6dsl_read_reg(ctx, LSM6DSL_CTRL1_XL, &reg.byte, 1);
 			switch (reg.ctrl1_xl.lpf1_bw_sel) {
 			case LSM6DSL_XL_LP1_ODR_DIV_2:
@@ -1702,7 +1702,7 @@ int32_t lsm6dsl_xl_lp2_bandwidth_get(lsm6dsl_ctx_t *ctx,
 		if ((reg.ctrl8_xl.lpf2_xl_en == 0x00U) ||
 		    (reg.ctrl8_xl.hp_slope_xl_en != 0x00U)) {
 			*val = LSM6DSL_XL_LP_NA;
-		}else  {
+		}else {
 			switch ((reg.ctrl8_xl.input_composite << 4) + reg.ctrl8_xl.hpcf_xl) {
 			case LSM6DSL_XL_LOW_LAT_LP_ODR_DIV_50:
 				*val = LSM6DSL_XL_LOW_LAT_LP_ODR_DIV_50;
@@ -2127,7 +2127,7 @@ int32_t lsm6dsl_pin_int1_route_set(lsm6dsl_ctx_t *ctx,
 									    (val.int1_double_tap != 0x00U) ||
 									    (val.int1_inact_state != 0x00U)) {
 										reg.tap_cfg.interrupts_enable = PROPERTY_ENABLE;
-									}else  {
+									}else {
 										reg.tap_cfg.interrupts_enable = PROPERTY_DISABLE;
 									}
 									ret = lsm6dsl_write_reg(ctx, LSM6DSL_TAP_CFG, &reg.byte, 1);
@@ -2247,7 +2247,7 @@ int32_t lsm6dsl_pin_int2_route_set(lsm6dsl_ctx_t *ctx,
 								    (val.int2_double_tap != 0x00U) ||
 								    (val.int2_inact_state != 0x00U)) {
 									reg.tap_cfg.interrupts_enable = PROPERTY_ENABLE;
-								}else  {
+								}else {
 									reg.tap_cfg.interrupts_enable = PROPERTY_DISABLE;
 								}
 								ret = lsm6dsl_write_reg(ctx, LSM6DSL_TAP_CFG, &reg.byte, 1);

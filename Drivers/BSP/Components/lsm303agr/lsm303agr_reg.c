@@ -252,7 +252,7 @@ int32_t lsm303agr_xl_operating_mode_get(lsm303agr_ctx_t *ctx,
 		*val = LSM303AGR_LP_8bit;
 	}else if (hr) {
 		*val = LSM303AGR_HR_12bit;
-	}else  {
+	}else {
 		*val = LSM303AGR_NM_10bit;
 	}
 

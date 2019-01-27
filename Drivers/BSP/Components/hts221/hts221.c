@@ -112,7 +112,7 @@ int32_t HTS221_RegisterBusIO(HTS221_Object_t *pObj, HTS221_IO_t *pIO)
 
 	if (pObj == NULL) {
 		ret = HTS221_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -127,7 +127,7 @@ int32_t HTS221_RegisterBusIO(HTS221_Object_t *pObj, HTS221_IO_t *pIO)
 
 		if (pObj->IO.Init != NULL) {
 			ret = pObj->IO.Init();
-		}else  {
+		}else {
 			ret = HTS221_ERROR;
 		}
 	}
@@ -658,7 +658,7 @@ static int32_t ReadRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t L
 	if (pObj->IO.BusType == (uint32_t)HTS221_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}
@@ -679,7 +679,7 @@ static int32_t WriteRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_t 
 	if (pObj->IO.BusType == (uint32_t)HTS221_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}

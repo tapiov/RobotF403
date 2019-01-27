@@ -97,7 +97,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 		if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK) {
 			Error_Handler();
 		}
-	}else  {
+	}else {
 		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
 		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
 		RCC_OscInitStruct.LSIState = RCC_LSI_ON;

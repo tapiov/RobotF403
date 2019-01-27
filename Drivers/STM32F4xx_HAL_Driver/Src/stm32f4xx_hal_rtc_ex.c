@@ -455,7 +455,7 @@ HAL_StatusTypeDef HAL_RTCEx_SetTamper_IT(RTC_HandleTypeDef *hrtc, RTC_TamperType
 	if (sTamper->Tamper == RTC_TAMPER_1) {
 		/* Clear RTC Tamper 1 flag */
 		__HAL_RTC_TAMPER_CLEAR_FLAG(hrtc, RTC_FLAG_TAMP1F);
-	}else  {
+	}else {
 		/* Clear RTC Tamper 2 flag */
 		__HAL_RTC_TAMPER_CLEAR_FLAG(hrtc, RTC_FLAG_TAMP2F);
 	}
@@ -1159,7 +1159,7 @@ HAL_StatusTypeDef HAL_RTCEx_SetCoarseCalib(RTC_HandleTypeDef* hrtc, uint32_t Cal
 		__HAL_UNLOCK(hrtc);
 
 		return HAL_ERROR;
-	}else  {
+	}else {
 		/* Enable the Coarse Calibration */
 		__HAL_RTC_COARSE_CALIB_ENABLE(hrtc);
 
@@ -1210,7 +1210,7 @@ HAL_StatusTypeDef HAL_RTCEx_DeactivateCoarseCalib(RTC_HandleTypeDef* hrtc)
 		__HAL_UNLOCK(hrtc);
 
 		return HAL_ERROR;
-	}else  {
+	}else {
 		/* Enable the Coarse Calibration */
 		__HAL_RTC_COARSE_CALIB_DISABLE(hrtc);
 
@@ -1370,7 +1370,7 @@ HAL_StatusTypeDef HAL_RTCEx_SetSynchroShift(RTC_HandleTypeDef* hrtc, uint32_t Sh
 				return HAL_ERROR;
 			}
 		}
-	}else  {
+	}else {
 		/* Enable the write protection for RTC registers */
 		__HAL_RTC_WRITEPROTECTION_ENABLE(hrtc);
 
@@ -1496,7 +1496,7 @@ HAL_StatusTypeDef HAL_RTCEx_SetRefClock(RTC_HandleTypeDef* hrtc)
 		__HAL_UNLOCK(hrtc);
 
 		return HAL_ERROR;
-	}else  {
+	}else {
 		__HAL_RTC_CLOCKREF_DETECTION_ENABLE(hrtc);
 
 		/* Exit Initialization mode */
@@ -1543,7 +1543,7 @@ HAL_StatusTypeDef HAL_RTCEx_DeactivateRefClock(RTC_HandleTypeDef* hrtc)
 		__HAL_UNLOCK(hrtc);
 
 		return HAL_ERROR;
-	}else  {
+	}else {
 		__HAL_RTC_CLOCKREF_DETECTION_DISABLE(hrtc);
 
 		/* Exit Initialization mode */

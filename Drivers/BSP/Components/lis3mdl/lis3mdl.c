@@ -98,7 +98,7 @@ int32_t LIS3MDL_RegisterBusIO(LIS3MDL_Object_t *pObj, LIS3MDL_IO_t *pIO)
 
 	if (pObj == NULL) {
 		ret = LIS3MDL_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -115,7 +115,7 @@ int32_t LIS3MDL_RegisterBusIO(LIS3MDL_Object_t *pObj, LIS3MDL_IO_t *pIO)
 			ret = LIS3MDL_ERROR;
 		}else if (pObj->IO.Init() != LIS3MDL_OK) {
 			ret = LIS3MDL_ERROR;
-		}else  {
+		}else {
 			if (pObj->IO.BusType == LIS3MDL_SPI_3WIRES_BUS) { /* SPI 3-Wires */
 				/* Enable the SPI 3-Wires support only the first time */
 				if (pObj->is_initialized == 0U) {
@@ -581,7 +581,7 @@ static int32_t ReadRegWrap(void *handle, uint8_t Reg, uint8_t *pData, uint16_t L
 	if (pObj->IO.BusType == LIS3MDL_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 4-Wires or SPI 3-Wires */
+	}else { /* SPI 4-Wires or SPI 3-Wires */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}
@@ -599,7 +599,7 @@ static int32_t WriteRegWrap(void *handle, uint8_t Reg, uint8_t *pData, uint16_t 
 	if (pObj->IO.BusType == LIS3MDL_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 4-Wires or SPI 3-Wires */
+	}else { /* SPI 4-Wires or SPI 3-Wires */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}

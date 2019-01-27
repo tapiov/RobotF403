@@ -220,7 +220,7 @@ int32_t IKS01A2_MOTION_SENSOR_DeInit(uint32_t Instance)
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (MotionDrv[Instance]->DeInit(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_COMPONENT_FAILURE;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -241,7 +241,7 @@ int32_t IKS01A2_MOTION_SENSOR_GetCapabilities(uint32_t Instance, IKS01A2_MOTION_
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (MotionDrv[Instance]->GetCapabilities(MotionCompObj[Instance], Capabilities) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -262,7 +262,7 @@ int32_t IKS01A2_MOTION_SENSOR_ReadID(uint32_t Instance, uint8_t *Id)
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (MotionDrv[Instance]->ReadID(MotionCompObj[Instance], Id) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -284,14 +284,14 @@ int32_t IKS01A2_MOTION_SENSOR_Enable(uint32_t Instance, uint32_t Function)
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->Enable(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -314,14 +314,14 @@ int32_t IKS01A2_MOTION_SENSOR_Disable(uint32_t Instance, uint32_t Function)
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->Disable(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -345,14 +345,14 @@ int32_t IKS01A2_MOTION_SENSOR_GetAxes(uint32_t Instance, uint32_t Function, IKS0
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->GetAxes(MotionCompObj[Instance], Axes) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -376,14 +376,14 @@ int32_t IKS01A2_MOTION_SENSOR_GetAxesRaw(uint32_t Instance, uint32_t Function, I
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->GetAxesRaw(MotionCompObj[Instance], Axes) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -407,15 +407,15 @@ int32_t IKS01A2_MOTION_SENSOR_GetSensitivity(uint32_t Instance, uint32_t Functio
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->GetSensitivity(MotionCompObj[Instance],
 											     Sensitivity) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -439,14 +439,14 @@ int32_t IKS01A2_MOTION_SENSOR_GetOutputDataRate(uint32_t Instance, uint32_t Func
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->GetOutputDataRate(MotionCompObj[Instance], Odr) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -470,15 +470,15 @@ int32_t IKS01A2_MOTION_SENSOR_GetFullScale(uint32_t Instance, uint32_t Function,
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->GetFullScale(MotionCompObj[Instance],
 											   Fullscale) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -502,14 +502,14 @@ int32_t IKS01A2_MOTION_SENSOR_SetOutputDataRate(uint32_t Instance, uint32_t Func
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->SetOutputDataRate(MotionCompObj[Instance], Odr) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -533,15 +533,15 @@ int32_t IKS01A2_MOTION_SENSOR_SetFullScale(uint32_t Instance, uint32_t Function,
 
 	if (Instance >= IKS01A2_MOTION_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((MotionCtx[Instance].Functions & Function) == Function) {
 			if (MotionFuncDrv[Instance][FunctionIndex[Function]]->SetFullScale(MotionCompObj[Instance],
 											   Fullscale) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -585,7 +585,7 @@ static int32_t LSM6DSL_0_Probe(uint32_t Functions)
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
 	}else if (id != LSM6DSL_ID) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		(void)LSM6DSL_GetCapabilities(&lsm6dsl_obj_0, &cap);
 		MotionCtx[IKS01A2_LSM6DSL_0].Functions = ((uint32_t)cap.Gyro) | ((uint32_t)cap.Acc << 1) | ((uint32_t)cap.Magneto << 2);
 
@@ -599,7 +599,7 @@ static int32_t LSM6DSL_0_Probe(uint32_t Functions)
 
 			if (MotionDrv[IKS01A2_LSM6DSL_0]->Init(MotionCompObj[IKS01A2_LSM6DSL_0]) != LSM6DSL_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -610,7 +610,7 @@ static int32_t LSM6DSL_0_Probe(uint32_t Functions)
 
 			if (MotionDrv[IKS01A2_LSM6DSL_0]->Init(MotionCompObj[IKS01A2_LSM6DSL_0]) != LSM6DSL_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -647,7 +647,7 @@ static int32_t LSM303AGR_ACC_0_Probe(uint32_t Functions)
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
 	}else if (id != (uint8_t)LSM303AGR_ID_XL) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		(void)LSM303AGR_ACC_GetCapabilities(&lsm303agr_acc_obj_0, &cap);
 		MotionCtx[IKS01A2_LSM303AGR_ACC_0].Functions = ((uint32_t)cap.Gyro) | ((uint32_t)cap.Acc << 1) | ((
 															  uint32_t)cap.Magneto << 2);
@@ -663,7 +663,7 @@ static int32_t LSM303AGR_ACC_0_Probe(uint32_t Functions)
 
 			if (MotionDrv[IKS01A2_LSM303AGR_ACC_0]->Init(MotionCompObj[IKS01A2_LSM303AGR_ACC_0]) != LSM303AGR_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -701,7 +701,7 @@ static int32_t LSM303AGR_MAG_0_Probe(uint32_t Functions)
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
 	}else if (id != (uint8_t)LSM303AGR_ID_MG) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		(void)LSM303AGR_MAG_GetCapabilities(&lsm303agr_mag_obj_0, &cap);
 		MotionCtx[IKS01A2_LSM303AGR_MAG_0].Functions = ((uint32_t)cap.Gyro) | ((uint32_t)cap.Acc << 1) | ((
 															  uint32_t)cap.Magneto << 2);
@@ -717,7 +717,7 @@ static int32_t LSM303AGR_MAG_0_Probe(uint32_t Functions)
 
 			if (MotionDrv[IKS01A2_LSM303AGR_MAG_0]->Init(MotionCompObj[IKS01A2_LSM303AGR_MAG_0]) != LSM303AGR_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}

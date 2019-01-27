@@ -506,7 +506,7 @@ int32_t BSP_USART2_RegisterDefaultMspCallbacks(void)
 		ret = BSP_ERROR_PERIPH_FAILURE;
 	}else if (HAL_UART_RegisterCallback(&hComHandle[COM1], HAL_UART_MSPDEINIT_CB_ID, USART2_MspDeInit) != HAL_OK) {
 		ret = BSP_ERROR_PERIPH_FAILURE;
-	}else  {
+	}else {
 		IsUsart2MspCbValid = 1U;
 	}
 
@@ -530,7 +530,7 @@ int32_t BSP_USART2_RegisterMspCallbacks(BSP_UART_Cb_t *Callback)
 		ret = BSP_ERROR_PERIPH_FAILURE;
 	}else if (HAL_UART_RegisterCallback(&hComHandle[COM1], HAL_UART_MSPDEINIT_CB_ID, Callback->pMspUsartDeInitCb) != HAL_OK) {
 		ret = BSP_ERROR_PERIPH_FAILURE;
-	}else  {
+	}else {
 		IsUsart2MspCbValid = 1U;
 	}
 

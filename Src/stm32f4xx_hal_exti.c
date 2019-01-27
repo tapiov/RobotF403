@@ -187,7 +187,7 @@ HAL_StatusTypeDef HAL_EXTI_GetHandle(EXTI_HandleTypeDef *hexti, uint32_t ExtiLin
 	/* Check null pointer */
 	if (hexti == NULL) {
 		return HAL_ERROR;
-	}else  {
+	}else {
 		/* Store line number as handle private field */
 		hexti->Line = ExtiLine;
 		return HAL_OK;

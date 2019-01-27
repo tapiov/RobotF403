@@ -131,7 +131,7 @@ int32_t LSM303AGR_ACC_RegisterBusIO(LSM303AGR_ACC_Object_t *pObj, LSM303AGR_IO_t
 
 	if (pObj == NULL) {
 		ret = LSM303AGR_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -148,7 +148,7 @@ int32_t LSM303AGR_ACC_RegisterBusIO(LSM303AGR_ACC_Object_t *pObj, LSM303AGR_IO_t
 			ret = LSM303AGR_ERROR;
 		}else if (pObj->IO.Init() != LSM303AGR_OK) {
 			ret = LSM303AGR_ERROR;
-		}else  {
+		}else {
 			if (pObj->IO.BusType == LSM303AGR_SPI_3WIRES_BUS) { /* SPI 3-Wires */
 				/* Enable the SPI 3-Wires support only the first time */
 				if (pObj->is_initialized == 0U) {
@@ -420,7 +420,7 @@ int32_t LSM303AGR_ACC_GetOutputDataRate(LSM303AGR_ACC_Object_t *pObj, float *Odr
 			ret = LSM303AGR_ERROR;
 			break;
 		}
-	}else  {/* HR and NM modes */
+	}else { /* HR and NM modes */
 		switch (odr_low_level) {
 		case LSM303AGR_XL_POWER_DOWN:
 			*Odr = 0.0f;
@@ -478,7 +478,7 @@ int32_t LSM303AGR_ACC_SetOutputDataRate(LSM303AGR_ACC_Object_t *pObj, float Odr)
 	/* Check if the component is enabled */
 	if (pObj->acc_is_enabled == 1U) {
 		return LSM303AGR_ACC_SetOutputDataRate_When_Enabled(pObj, Odr);
-	}else  {
+	}else {
 		return LSM303AGR_ACC_SetOutputDataRate_When_Disabled(pObj, Odr);
 	}
 }
@@ -704,7 +704,7 @@ int32_t LSM303AGR_MAG_RegisterBusIO(LSM303AGR_MAG_Object_t *pObj, LSM303AGR_IO_t
 
 	if (pObj == NULL) {
 		ret = LSM303AGR_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -721,7 +721,7 @@ int32_t LSM303AGR_MAG_RegisterBusIO(LSM303AGR_MAG_Object_t *pObj, LSM303AGR_IO_t
 			ret = LSM303AGR_ERROR;
 		}else if (pObj->IO.Init() != LSM303AGR_OK) {
 			ret = LSM303AGR_ERROR;
-		}else  {
+		}else {
 			if (pObj->IO.BusType != LSM303AGR_I2C_BUS) { /* If the bus type is not I2C */
 				/* Disable I2C interface support only the first time */
 				if (pObj->is_initialized == 0U) {
@@ -1278,7 +1278,7 @@ static int32_t ReadAccRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_
 	if (pObj->IO.BusType == LSM303AGR_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}
@@ -1299,7 +1299,7 @@ static int32_t WriteAccRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16
 	if (pObj->IO.BusType == LSM303AGR_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}
@@ -1320,7 +1320,7 @@ static int32_t ReadMagRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16_
 	if (pObj->IO.BusType == LSM303AGR_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte read */
 		return pObj->IO.ReadReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}
@@ -1341,7 +1341,7 @@ static int32_t WriteMagRegWrap(void *Handle, uint8_t Reg, uint8_t *pData, uint16
 	if (pObj->IO.BusType == LSM303AGR_I2C_BUS) { /* I2C */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x80U), pData, Length);
-	}else  {/* SPI 3-Wires */
+	}else { /* SPI 3-Wires */
 		/* Enable Multi-byte write */
 		return pObj->IO.WriteReg(pObj->IO.Address, (Reg | 0x40U), pData, Length);
 	}

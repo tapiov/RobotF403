@@ -97,7 +97,7 @@ void SaveCalibrationToMemory(uint16_t DataSize, uint32_t *Data)
 
 		if (HAL_FLASH_Program(TYPEPROGRAM_WORD, address, word) == HAL_OK) {
 			address += 4;
-		}else  {
+		}else {
 			/* Error occurred while writing data in Flash memory */
 			Error_Handler();
 		}
@@ -110,13 +110,13 @@ void SaveCalibrationToMemory(uint16_t DataSize, uint32_t *Data)
 
 		if ((nword + 1U) < DataSize) {
 			hword = (uint64_t)(*(Data + nword + 1)) << 32; /* MISRA C-2012 rule 18.4 violation for purpose */
-		}else  {
+		}else {
 			hword = 0;
 		}
 
 		if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, address, hword | lword) == HAL_OK) {
 			address += 8U;
-		}else  {
+		}else {
 			/* Error occurred while writing data in Flash memory */
 			Error_Handler();
 		}
@@ -239,7 +239,7 @@ static uint32_t GetPage(uint32_t Addr)
 	if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
 		/* Bank 1 */
 		page = (Addr - FLASH_BASE) / FLASH_PAGE_SIZE;
-	}else  {
+	}else {
 		/* Bank 2 */
 		page = (Addr - (FLASH_BASE + FLASH_BANK_SIZE)) / FLASH_PAGE_SIZE;
 	}
@@ -260,14 +260,14 @@ static uint32_t GetBank(uint32_t Addr)
 		/* No Bank swap */
 		if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
 			bank = FLASH_BANK_1;
-		}else  {
+		}else {
 			bank = FLASH_BANK_2;
 		}
-	}else  {
+	}else {
 		/* Bank swap */
 		if (Addr < (FLASH_BASE + FLASH_BANK_SIZE)) {
 			bank = FLASH_BANK_2;
-		}else  {
+		}else {
 			bank = FLASH_BANK_1;
 		}
 	}

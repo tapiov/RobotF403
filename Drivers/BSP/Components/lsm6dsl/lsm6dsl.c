@@ -120,7 +120,7 @@ int32_t LSM6DSL_RegisterBusIO(LSM6DSL_Object_t *pObj, LSM6DSL_IO_t *pIO)
 
 	if (pObj == NULL) {
 		ret = LSM6DSL_ERROR;
-	}else  {
+	}else {
 		pObj->IO.Init = pIO->Init;
 		pObj->IO.DeInit = pIO->DeInit;
 		pObj->IO.BusType = pIO->BusType;
@@ -137,7 +137,7 @@ int32_t LSM6DSL_RegisterBusIO(LSM6DSL_Object_t *pObj, LSM6DSL_IO_t *pIO)
 			ret = LSM6DSL_ERROR;
 		}else if (pObj->IO.Init() != LSM6DSL_OK) {
 			ret = LSM6DSL_ERROR;
-		}else  {
+		}else {
 			if (pObj->IO.BusType == LSM6DSL_SPI_3WIRES_BUS) { /* SPI 3-Wires */
 				/* Enable the SPI 3-Wires support only the first time */
 				if (pObj->is_initialized == 0U) {
@@ -448,7 +448,7 @@ int32_t LSM6DSL_ACC_SetOutputDataRate(LSM6DSL_Object_t *pObj, float Odr)
 	/* Check if the component is enabled */
 	if (pObj->acc_is_enabled == 1U) {
 		return LSM6DSL_ACC_SetOutputDataRate_When_Enabled(pObj, Odr);
-	}else  {
+	}else {
 		return LSM6DSL_ACC_SetOutputDataRate_When_Disabled(pObj, Odr);
 	}
 }
@@ -745,7 +745,7 @@ int32_t LSM6DSL_GYRO_SetOutputDataRate(LSM6DSL_Object_t *pObj, float Odr)
 	/* Check if the component is enabled */
 	if (pObj->gyro_is_enabled == 1U) {
 		return LSM6DSL_GYRO_SetOutputDataRate_When_Enabled(pObj, Odr);
-	}else  {
+	}else {
 		return LSM6DSL_GYRO_SetOutputDataRate_When_Disabled(pObj, Odr);
 	}
 }

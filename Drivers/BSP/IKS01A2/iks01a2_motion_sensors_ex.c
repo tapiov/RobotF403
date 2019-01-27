@@ -88,7 +88,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_6D_Orientation(uint32_t Instance, IKS01A2_M
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_6D_Orientation(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -128,7 +128,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_6D_Orientation(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_6D_Orientation(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -169,7 +169,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_6D_Orientation_Threshold(uint32_t Instance, ui
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_6D_Orientation_Threshold(MotionCompObj[Instance], Threshold) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -211,7 +211,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Free_Fall_Detection(uint32_t Instance, IKS0
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Free_Fall_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -251,7 +251,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Free_Fall_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Free_Fall_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -292,7 +292,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Free_Fall_Threshold(uint32_t Instance, uint8_t
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Free_Fall_Threshold(MotionCompObj[Instance], Threshold) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -333,7 +333,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Free_Fall_Duration(uint32_t Instance, uint8_t 
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Free_Fall_Duration(MotionCompObj[Instance], Duration) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -374,7 +374,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Pedometer(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Pedometer(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -414,7 +414,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Pedometer(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Pedometer(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -455,7 +455,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Pedometer_Threshold(uint32_t Instance, uint8_t
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Pedometer_Threshold(MotionCompObj[Instance], Threshold) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -496,7 +496,7 @@ int32_t IKS01A2_MOTION_SENSOR_Reset_Step_Counter(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Step_Counter_Reset(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -538,7 +538,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Single_Tap_Detection(uint32_t Instance, IKS
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Single_Tap_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -578,7 +578,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Single_Tap_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Single_Tap_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -620,7 +620,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Double_Tap_Detection(uint32_t Instance, IKS
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Double_Tap_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -660,7 +660,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Double_Tap_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Double_Tap_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -701,7 +701,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Tap_Threshold(uint32_t Instance, uint8_t Thres
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Tap_Threshold(MotionCompObj[Instance], Threshold) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -742,7 +742,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Tap_Shock_Time(uint32_t Instance, uint8_t Time
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Tap_Shock_Time(MotionCompObj[Instance], Time) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -783,7 +783,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Tap_Quiet_Time(uint32_t Instance, uint8_t Time
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Tap_Quiet_Time(MotionCompObj[Instance], Time) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -824,7 +824,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Tap_Duration_Time(uint32_t Instance, uint8_t T
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Tap_Duration_Time(MotionCompObj[Instance], Time) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -866,7 +866,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Tilt_Detection(uint32_t Instance, IKS01A2_M
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Tilt_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -906,7 +906,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Tilt_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Tilt_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -948,7 +948,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Wake_Up_Detection(uint32_t Instance, IKS01A
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Wake_Up_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -988,7 +988,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Wake_Up_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Wake_Up_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1029,7 +1029,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Wake_Up_Threshold(uint32_t Instance, uint8_t T
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Wake_Up_Threshold(MotionCompObj[Instance], Threshold) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1070,7 +1070,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Wake_Up_Duration(uint32_t Instance, uint8_t Du
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Wake_Up_Duration(MotionCompObj[Instance], Duration) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1111,7 +1111,7 @@ int32_t IKS01A2_MOTION_SENSOR_Enable_Inactivity_Detection(uint32_t Instance, IKS
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Enable_Inactivity_Detection(MotionCompObj[Instance], (LSM6DSL_SensorIntPin_t)IntPin) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1151,7 +1151,7 @@ int32_t IKS01A2_MOTION_SENSOR_Disable_Inactivity_Detection(uint32_t Instance)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Disable_Inactivity_Detection(MotionCompObj[Instance]) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1192,7 +1192,7 @@ int32_t IKS01A2_MOTION_SENSOR_Set_Sleep_Duration(uint32_t Instance, uint8_t Dura
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Set_Sleep_Duration(MotionCompObj[Instance], Duration) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1234,7 +1234,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_Event_Status(uint32_t Instance, IKS01A2_MOTION
 		/* The second cast (void *) is added to bypass Misra R11.3 rule */
 		if (LSM6DSL_ACC_Get_Event_Status(MotionCompObj[Instance], (LSM6DSL_Event_Status_t *)(void *)Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1280,16 +1280,16 @@ int32_t IKS01A2_MOTION_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Functi
 		if ((Function & MOTION_ACCELERO) == MOTION_ACCELERO) {
 			if (LSM6DSL_ACC_Get_DRDY_Status(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}else if ((Function & MOTION_GYRO) == MOTION_GYRO) {
 			if (LSM6DSL_GYRO_Get_DRDY_Status(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
 		}
 		break;
@@ -1299,7 +1299,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Functi
 	case IKS01A2_LSM303AGR_ACC_0:
 		if (LSM303AGR_ACC_Get_DRDY_Status(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1309,7 +1309,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_DRDY_Status(uint32_t Instance, uint32_t Functi
 	case IKS01A2_LSM303AGR_MAG_0:
 		if (LSM303AGR_MAG_Get_DRDY_Status(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1338,7 +1338,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_XL(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_XL(MotionCompObj[Instance], xl) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1379,7 +1379,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_XH(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_XH(MotionCompObj[Instance], xh) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1420,7 +1420,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_YL(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_YL(MotionCompObj[Instance], yl) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1461,7 +1461,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_YH(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_YH(MotionCompObj[Instance], yh) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1502,7 +1502,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_ZL(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_ZL(MotionCompObj[Instance], zl) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1543,7 +1543,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_6D_Orientation_ZH(uint32_t Instance, uint8_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_6D_Orientation_ZH(MotionCompObj[Instance], zh) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1584,7 +1584,7 @@ int32_t IKS01A2_MOTION_SENSOR_Get_Step_Count(uint32_t Instance, uint16_t *StepCo
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_ACC_Get_Step_Count(MotionCompObj[Instance], StepCount) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1626,7 +1626,7 @@ int32_t IKS01A2_MOTION_SENSOR_Read_Register(uint32_t Instance, uint8_t Reg, uint
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_Read_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1636,7 +1636,7 @@ int32_t IKS01A2_MOTION_SENSOR_Read_Register(uint32_t Instance, uint8_t Reg, uint
 	case IKS01A2_LSM303AGR_ACC_0:
 		if (LSM303AGR_ACC_Read_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1646,7 +1646,7 @@ int32_t IKS01A2_MOTION_SENSOR_Read_Register(uint32_t Instance, uint8_t Reg, uint
 	case IKS01A2_LSM303AGR_MAG_0:
 		if (LSM303AGR_MAG_Read_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1676,7 +1676,7 @@ int32_t IKS01A2_MOTION_SENSOR_Write_Register(uint32_t Instance, uint8_t Reg, uin
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_Write_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1686,7 +1686,7 @@ int32_t IKS01A2_MOTION_SENSOR_Write_Register(uint32_t Instance, uint8_t Reg, uin
 	case IKS01A2_LSM303AGR_ACC_0:
 		if (LSM303AGR_ACC_Write_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1696,7 +1696,7 @@ int32_t IKS01A2_MOTION_SENSOR_Write_Register(uint32_t Instance, uint8_t Reg, uin
 	case IKS01A2_LSM303AGR_MAG_0:
 		if (LSM303AGR_MAG_Write_Reg(MotionCompObj[Instance], Reg, Data) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1725,7 +1725,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Get_Num_Samples(uint32_t Instance, uint16_t *
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Get_Num_Samples(MotionCompObj[Instance], NumSamples) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1766,7 +1766,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Get_Full_Status(uint32_t Instance, uint8_t *S
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Get_Full_Status(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1810,16 +1810,16 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_Decimation(uint32_t Instance, uint32_t Fu
 		if ((Function & MOTION_ACCELERO) == MOTION_ACCELERO) {
 			if (LSM6DSL_FIFO_ACC_Set_Decimation(MotionCompObj[Instance], Decimation) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}else if ((Function & MOTION_GYRO) == MOTION_GYRO) {
 			if (LSM6DSL_FIFO_GYRO_Set_Decimation(MotionCompObj[Instance], Decimation) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 		break;
@@ -1860,7 +1860,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_ODR_Value(uint32_t Instance, float Odr)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Set_ODR_Value(MotionCompObj[Instance], Odr) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1901,7 +1901,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full(uint32_t Instance, uint8_t
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Set_INT1_FIFO_Full(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1942,7 +1942,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_Watermark_Level(uint32_t Instance, uint16
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Set_Watermark_Level(MotionCompObj[Instance], Watermark) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -1983,7 +1983,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_Stop_On_Fth(uint32_t Instance, uint8_t St
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Set_Stop_On_Fth(MotionCompObj[Instance], Status) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -2024,7 +2024,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Set_Mode(uint32_t Instance, uint8_t Mode)
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Set_Mode(MotionCompObj[Instance], Mode) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -2065,7 +2065,7 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Get_Pattern(uint32_t Instance, uint16_t *Patt
 	case IKS01A2_LSM6DSL_0:
 		if (LSM6DSL_FIFO_Get_Pattern(MotionCompObj[Instance], Pattern) != BSP_ERROR_NONE) {
 			ret = BSP_ERROR_COMPONENT_FAILURE;
-		}else  {
+		}else {
 			ret = BSP_ERROR_NONE;
 		}
 		break;
@@ -2109,16 +2109,16 @@ int32_t IKS01A2_MOTION_SENSOR_FIFO_Get_Axis(uint32_t Instance, uint32_t Function
 		if ((Function & MOTION_ACCELERO) == MOTION_ACCELERO) {
 			if (LSM6DSL_FIFO_ACC_Get_Axis(MotionCompObj[Instance], Data) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}else if ((Function & MOTION_GYRO) == MOTION_GYRO) {
 			if (LSM6DSL_FIFO_GYRO_Get_Axis(MotionCompObj[Instance], Data) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 		break;
@@ -2162,16 +2162,16 @@ int32_t IKS01A2_MOTION_SENSOR_Set_SelfTest(uint32_t Instance, uint32_t Function,
 		if ((Function & MOTION_ACCELERO) == MOTION_ACCELERO) {
 			if (LSM6DSL_ACC_Set_SelfTest(MotionCompObj[Instance], Mode) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}else if ((Function & MOTION_GYRO) == MOTION_GYRO) {
 			if (LSM6DSL_GYRO_Set_SelfTest(MotionCompObj[Instance], Mode) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 		break;

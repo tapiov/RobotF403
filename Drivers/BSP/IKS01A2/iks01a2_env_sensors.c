@@ -195,7 +195,7 @@ int32_t IKS01A2_ENV_SENSOR_DeInit(uint32_t Instance)
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (EnvDrv[Instance]->DeInit(EnvCompObj[Instance]) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_COMPONENT_FAILURE;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -216,7 +216,7 @@ int32_t IKS01A2_ENV_SENSOR_GetCapabilities(uint32_t Instance, IKS01A2_ENV_SENSOR
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (EnvDrv[Instance]->GetCapabilities(EnvCompObj[Instance], Capabilities) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -237,7 +237,7 @@ int32_t IKS01A2_ENV_SENSOR_ReadID(uint32_t Instance, uint8_t *Id)
 		ret = BSP_ERROR_WRONG_PARAM;
 	}else if (EnvDrv[Instance]->ReadID(EnvCompObj[Instance], Id) != BSP_ERROR_NONE) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		ret = BSP_ERROR_NONE;
 	}
 
@@ -258,14 +258,14 @@ int32_t IKS01A2_ENV_SENSOR_Enable(uint32_t Instance, uint32_t Function)
 
 	if (Instance >= IKS01A2_ENV_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((EnvCtx[Instance].Functions & Function) == Function) {
 			if (EnvFuncDrv[Instance][FunctionIndex[Function]]->Enable(EnvCompObj[Instance]) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -287,14 +287,14 @@ int32_t IKS01A2_ENV_SENSOR_Disable(uint32_t Instance, uint32_t Function)
 
 	if (Instance >= IKS01A2_ENV_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((EnvCtx[Instance].Functions & Function) == Function) {
 			if (EnvFuncDrv[Instance][FunctionIndex[Function]]->Disable(EnvCompObj[Instance]) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -317,14 +317,14 @@ int32_t IKS01A2_ENV_SENSOR_GetOutputDataRate(uint32_t Instance, uint32_t Functio
 
 	if (Instance >= IKS01A2_ENV_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((EnvCtx[Instance].Functions & Function) == Function) {
 			if (EnvFuncDrv[Instance][FunctionIndex[Function]]->GetOutputDataRate(EnvCompObj[Instance], Odr) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -347,14 +347,14 @@ int32_t IKS01A2_ENV_SENSOR_SetOutputDataRate(uint32_t Instance, uint32_t Functio
 
 	if (Instance >= IKS01A2_ENV_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((EnvCtx[Instance].Functions & Function) == Function) {
 			if (EnvFuncDrv[Instance][FunctionIndex[Function]]->SetOutputDataRate(EnvCompObj[Instance], Odr) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -377,14 +377,14 @@ int32_t IKS01A2_ENV_SENSOR_GetValue(uint32_t Instance, uint32_t Function, float 
 
 	if (Instance >= IKS01A2_ENV_INSTANCES_NBR) {
 		ret = BSP_ERROR_WRONG_PARAM;
-	}else  {
+	}else {
 		if ((EnvCtx[Instance].Functions & Function) == Function) {
 			if (EnvFuncDrv[Instance][FunctionIndex[Function]]->GetValue(EnvCompObj[Instance], Value) != BSP_ERROR_NONE) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
-		}else  {
+		}else {
 			ret = BSP_ERROR_WRONG_PARAM;
 		}
 	}
@@ -430,7 +430,7 @@ static int32_t HTS221_0_Probe(uint32_t Functions)
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
 	}else if (id != HTS221_ID) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		(void)HTS221_GetCapabilities(&hts221_obj_0, &cap);
 		EnvCtx[IKS01A2_HTS221_0].Functions = ((uint32_t)cap.Temperature) | ((uint32_t)cap.Pressure << 1) | ((
 															    uint32_t)cap.Humidity << 2);
@@ -445,7 +445,7 @@ static int32_t HTS221_0_Probe(uint32_t Functions)
 
 			if (EnvDrv[IKS01A2_HTS221_0]->Init(EnvCompObj[IKS01A2_HTS221_0]) != HTS221_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -455,7 +455,7 @@ static int32_t HTS221_0_Probe(uint32_t Functions)
 
 			if (EnvDrv[IKS01A2_HTS221_0]->Init(EnvCompObj[IKS01A2_HTS221_0]) != HTS221_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -495,7 +495,7 @@ static int32_t LPS22HB_0_Probe(uint32_t Functions)
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
 	}else if (id != LPS22HB_ID) {
 		ret = BSP_ERROR_UNKNOWN_COMPONENT;
-	}else  {
+	}else {
 		(void)LPS22HB_GetCapabilities(&lps22hb_obj_0, &cap);
 
 		EnvCtx[IKS01A2_LPS22HB_0].Functions = ((uint32_t)cap.Temperature) | ((uint32_t)cap.Pressure << 1) | ((
@@ -511,7 +511,7 @@ static int32_t LPS22HB_0_Probe(uint32_t Functions)
 
 			if (EnvDrv[IKS01A2_LPS22HB_0]->Init(EnvCompObj[IKS01A2_LPS22HB_0]) != LPS22HB_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}
@@ -521,7 +521,7 @@ static int32_t LPS22HB_0_Probe(uint32_t Functions)
 
 			if (EnvDrv[IKS01A2_LPS22HB_0]->Init(EnvCompObj[IKS01A2_LPS22HB_0]) != LPS22HB_OK) {
 				ret = BSP_ERROR_COMPONENT_FAILURE;
-			}else  {
+			}else {
 				ret = BSP_ERROR_NONE;
 			}
 		}

@@ -427,7 +427,7 @@ static void FX_Data_Handler(TMsg *Msg)
 #else
 #error Not supported platform
 #endif
-				}else  {
+				}else {
 					(void)memcpy(&Msg->Data[55], (void *)pdata_out->quaternion_9X, 4U * sizeof(float));
 					(void)memcpy(&Msg->Data[71], (void *)pdata_out->rotation_9X, 3U * sizeof(float));
 					(void)memcpy(&Msg->Data[83], (void *)pdata_out->gravity_9X, 3U * sizeof(float));
@@ -616,7 +616,7 @@ static void RTC_Config(void)
 		RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSI;
 		RtcHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV_LSI;
 		RtcSynchPrediv = RTC_SYNCH_PREDIV_LSI;
-	}else  {
+	}else {
 		/* We use LSE */
 		UseLSI = 0;
 		RtcHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV_LSE;
