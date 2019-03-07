@@ -63,9 +63,6 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
-extern int UseLSI; /* This "redundant" line is here to fulfil MISRA C-2012 rule 8.4 */
-int UseLSI = 0;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -111,7 +108,8 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 	HAL_PWR_EnableBkUpAccess();
 
 	/*##-2- Configue LSE/LSI as RTC clock soucre ###############################*/
-	if (UseLSI == 0) {
+	// We always use on-board xtal
+	if (1) {
 		RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
 		RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
 		RCC_OscInitStruct.LSEState = RCC_LSE_ON;

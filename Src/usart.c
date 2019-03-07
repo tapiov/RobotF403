@@ -42,6 +42,10 @@
 
 /* USER CODE BEGIN 0 */
 
+extern uint8_t RTC_GetReadRequest(void);
+extern void RTC_ResetReadRequest(void);
+extern MFX_output_t run_mems_process();
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;
@@ -270,6 +274,90 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+int uartSendChar(int ch)
+{
+
+	while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY) {
+	}
+
+	HAL_UART_Transmit_DMA(&huart2, (uint8_t *)&ch, 1);
+
+	while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY) {
+	}
+
+	return ch;
+}
+
+/** @brief Receives a character from serial port
+ * @param None
+ * @retval Character received
+ */
+int uartReceiveChar(void)
+{
+	uint8_t ch;
+
+	while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY) {
+	}
+
+	HAL_UART_Receive_DMA(&huart2, &ch, 1);
+
+	// Running MEMS process while waiting for input
+	while (HAL_UART_GetState(&huart2) != HAL_UART_STATE_READY) {
+		if (RTC_GetReadRequest() == 1) {
+			run_mems_process();
+			RTC_ResetReadRequest();
+		}
+	}
+
+	return ch;
+}
+
+/** @brief putchar call for standard output implementation
+ * @param ch Character to print
+ * @retval Character printed
+ */
+int __io_putchar(int ch)
+{
+	uartSendChar(ch);
+
+	return 0;
+}
+
+/** @brief getchar call for standard input implementation
+ * @param None
+ * @retval Character acquired from standard input
+ */
+int __io_getchar(void)
+{
+	return uartReceiveChar();
+}
+
+/**
+ * @brief  Tx Transfer completed callback
+ * @param  UartHandle: UART handle.
+ * @note   This example shows a simple way to report end of DMA Tx transfer, and
+ *         you can add your own implementation.
+ * @retval None
+ */
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+
+
+}
+
+/**
+ * @brief  Rx Transfer completed callback
+ * @param  UartHandle: UART handle
+ * @note   This example shows a simple way to report end of DMA Rx transfer, and
+ *         you can add your own implementation.
+ * @retval None
+ */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+
+}
+
 
 /* USER CODE END 1 */
 

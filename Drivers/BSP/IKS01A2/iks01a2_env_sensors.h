@@ -53,6 +53,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "iks01a2_conf.h"
+#include "mems.h"
 #include "env_sensor.h"
 
 #ifndef USE_IKS01A2_ENV_SENSOR_HTS221_0

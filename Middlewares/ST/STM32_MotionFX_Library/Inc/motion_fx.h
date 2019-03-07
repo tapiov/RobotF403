@@ -54,7 +54,6 @@ extern "C" {
  * @{
  */
 
-
 /** @defgroup MOTION_FX_Exported_Types MOTION_FX_Exported_Types
  * @{
  */
@@ -64,27 +63,25 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {
-	MFX_ENGINE_DISABLE = 0,
-	MFX_ENGINE_ENABLE = 1
+	MFX_ENGINE_DISABLE = 0, MFX_ENGINE_ENABLE = 1
 } MFX_engine_state_t;
 
 typedef enum {
-	MFX_ENGINE_OUTPUT_NED = 0,
-	MFX_ENGINE_OUTPUT_ENU = 1
+	MFX_ENGINE_OUTPUT_NED = 0, MFX_ENGINE_OUTPUT_ENU = 1
 } MFX_engine_output_ref_sys;
 
 typedef struct {
-	float ATime;                        /* merge rate to the accel */
-	float MTime;                        /* merge rate to the mag */
-	float FrTime;                       /* merge rate to the accel when external accelerations occours */
-	unsigned char LMode;                /* gyro bias learn mode: 1-static learning, 2-dynamic learning */
-	float gbias_mag_th_sc_6X;           /* 6 axes scaler for the gyro bias mag threshold nominal */
-	float gbias_acc_th_sc_6X;           /* 6 axes scaler for the gyro bias acc threshold nominal */
-	float gbias_gyro_th_sc_6X;          /* 6 axes scaler for the gyro bias gyro threshold nominal */
-	float gbias_mag_th_sc_9X;           /* 9 axes scaler for the gyro bias mag threshold nominal */
-	float gbias_acc_th_sc_9X;           /* 9 axes scaler for the gyro bias acc threshold nominal */
-	float gbias_gyro_th_sc_9X;          /* 9 axes scaler for the gyro bias gyro threshold nominal */
-	unsigned char modx;                 /* setting to indicate the decimation, set to 1 in smartphone/tablet, set to >=1 in embedded solutions */
+	float ATime; /* merge rate to the accel */
+	float MTime; /* merge rate to the mag */
+	float FrTime; /* merge rate to the accel when external accelerations occours */
+	unsigned char LMode; /* gyro bias learn mode: 1-static learning, 2-dynamic learning */
+	float gbias_mag_th_sc_6X; /* 6 axes scaler for the gyro bias mag threshold nominal */
+	float gbias_acc_th_sc_6X; /* 6 axes scaler for the gyro bias acc threshold nominal */
+	float gbias_gyro_th_sc_6X; /* 6 axes scaler for the gyro bias gyro threshold nominal */
+	float gbias_mag_th_sc_9X; /* 9 axes scaler for the gyro bias mag threshold nominal */
+	float gbias_acc_th_sc_9X; /* 9 axes scaler for the gyro bias acc threshold nominal */
+	float gbias_gyro_th_sc_9X; /* 9 axes scaler for the gyro bias gyro threshold nominal */
+	unsigned char modx; /* setting to indicate the decimation, set to 1 in smartphone/tablet, set to >=1 in embedded solutions */
 	char acc_orientation[MFX_QNUM_AXES]; /* accelerometer data orientation */
 	char gyro_orientation[MFX_QNUM_AXES]; /* gyroscope data orientation */
 	char mag_orientation[MFX_QNUM_AXES]; /* magnetometer data orientation */
@@ -93,41 +90,41 @@ typedef struct {
 } MFX_knobs_t;
 
 typedef struct {
-	float mag[MFX_NUM_AXES];            /* Calibrated mag [uT]/50 */
-	float acc[MFX_NUM_AXES];            /* Acceleration in [g] */
-	float gyro[MFX_NUM_AXES];           /* Angular rate [dps] */
+	float mag[MFX_NUM_AXES]; /* Calibrated mag [uT]/50 */
+	float acc[MFX_NUM_AXES]; /* Acceleration in [g] */
+	float gyro[MFX_NUM_AXES]; /* Angular rate [dps] */
 } MFX_input_t;
 
 typedef struct {
-	float rotation_9X[MFX_NUM_AXES];      /* 9 axes yaw, pitch and roll */
-	float quaternion_9X[MFX_QNUM_AXES];   /* 9 axes quaternion */
-	float gravity_9X[MFX_NUM_AXES];       /* 9 axes device frame gravity */
+	float rotation_9X[MFX_NUM_AXES]; 			/* 9 axes yaw, pitch and roll */
+	float quaternion_9X[MFX_QNUM_AXES]; 		/* 9 axes quaternion */
+	float gravity_9X[MFX_NUM_AXES]; 			/* 9 axes device frame gravity */
 	float linear_acceleration_9X[MFX_NUM_AXES]; /* 9 axes device frame linear acceleration */
-	float heading_9X;                     /* 9 axes heading */
-	float headingErr_9X;                  /* 9 axes heading error in deg */
-	float rotation_6X[MFX_NUM_AXES];      /* 6 axes yaw, pitch and roll */
-	float quaternion_6X[MFX_QNUM_AXES];   /* 6 axes quaternion */
-	float gravity_6X[MFX_NUM_AXES];       /* 6 axes device frame gravity */
+	float heading_9X; 							/* 9 axes heading */
+	float headingErr_9X; 						/* 9 axes heading error in deg */
+	float rotation_6X[MFX_NUM_AXES]; 			/* 6 axes yaw, pitch and roll */
+	float quaternion_6X[MFX_QNUM_AXES]; 		/* 6 axes quaternion */
+	float gravity_6X[MFX_NUM_AXES]; 			/* 6 axes device frame gravity */
 	float linear_acceleration_6X[MFX_NUM_AXES]; /* 6 axes device frame linear acceleration */
-	float heading_6X;                     /* 6 axes heading */
-	float headingErr_6X;                  /* 6 axes heading error in deg */
+	float heading_6X; 							/* 6 axes heading */
+	float headingErr_6X; 						/* 6 axes heading error in deg */
+	float temperature;					  		// Temperature
+	float pressure;						  		// Pressure
+	float humidity;						  		// Humidity
 } MFX_output_t;
 
 typedef enum {
-	MFX_MAGCALUNKNOWN = 0,
-	MFX_MAGCALPOOR,
-	MFX_MAGCALOK,
-	MFX_MAGCALGOOD
+	MFX_MAGCALUNKNOWN = 0, MFX_MAGCALPOOR, MFX_MAGCALOK, MFX_MAGCALGOOD
 } MFX_MagCal_quality_t;
 
 typedef struct {
-	float mag[MFX_NUM_AXES];            /* Uncalibrated mag [uT]/50 */
-	int time_stamp;                     /* Timestamp [ms] */
+	float mag[MFX_NUM_AXES]; /* Uncalibrated mag [uT]/50 */
+	int time_stamp; /* Timestamp [ms] */
 } MFX_MagCal_input_t;
 
 typedef struct {
-	float hi_bias[3];                   /* Hard iron offset array [uT]/50 */
-	MFX_MagCal_quality_t cal_quality;   /* Calibration quality factor */
+	float hi_bias[3]; /* Hard iron offset array [uT]/50 */
+	MFX_MagCal_quality_t cal_quality; /* Calibration quality factor */
 } MFX_MagCal_output_t;
 
 /**
@@ -212,7 +209,8 @@ void MotionFX_getGbias(float *gbias);
  * @param  eml_q_update set to NULL
  * @retval none
  */
-void MotionFX_update(MFX_output_t *data_out, MFX_input_t *data_in, float eml_deltatime, float *eml_q_update);
+void MotionFX_update(MFX_output_t *data_out, MFX_input_t *data_in,
+		float eml_deltatime, float *eml_q_update);
 
 /**
  * @brief  Run the Kalman filter propagate
@@ -221,7 +219,8 @@ void MotionFX_update(MFX_output_t *data_out, MFX_input_t *data_in, float eml_del
  * @param  eml_deltatime delta time between two propagate calls [sec]
  * @retval none
  */
-void MotionFX_propagate(MFX_output_t *data_out, MFX_input_t *data_in, float eml_deltatime);
+void MotionFX_propagate(MFX_output_t *data_out, MFX_input_t *data_in,
+		float eml_deltatime);
 
 /**
  * @brief  Initialize the compass calibration library

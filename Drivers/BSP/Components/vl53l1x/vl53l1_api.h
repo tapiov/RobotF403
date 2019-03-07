@@ -64,6 +64,8 @@
 #ifndef _VL53L1_API_H_
 #define _VL53L1_API_H_
 
+#include "range.h"
+
 #include "vl53l1_api_strings.h"
 #include "vl53l1_api_core.h"
 

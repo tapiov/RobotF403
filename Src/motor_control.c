@@ -22,6 +22,9 @@ static volatile uint16_t gLastError;
 
 /* Private function prototypes -----------------------------------------------*/
 
+bool BSP_MotorControl_SetMaxSpeed(uint8_t deviceId, uint16_t newMaxSpeed);
+bool BSP_MotorControl_SetMinSpeed(uint8_t deviceId, uint16_t newMinSpeed);
+
 static void MyFlagInterruptHandler(void);
 void Error_Handler(uint16_t error);
 

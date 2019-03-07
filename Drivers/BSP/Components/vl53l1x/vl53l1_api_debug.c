@@ -173,9 +173,9 @@ void  VL53L1_signed_fixed_point_sprintf(
 
 	/* Build format string */
 	if (sign_bit > 0)
-		sprintf(fmt, "-%%u.%%0%uu", dec_points);
+		sprintf(fmt, "-%%u.%%0%lu", dec_points);
 	else
-		sprintf(fmt, "%%u.%%0%uu", dec_points);
+		sprintf(fmt, "%%u.%%0%lu", dec_points);
 
 	/* Convert fractional part into a decimal
 	 * need 64-bit head room at this point

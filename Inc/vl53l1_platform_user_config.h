@@ -80,5 +80,10 @@
 
 #define VL53L1_MAX_STRING_LENGTH 512
 
+// For VL53L1X from main.h
+#define isAutonomousExample 1  // Allow to select either autonomous ranging or fast ranging example */
+#define isInterrupt 0 /* If isInterrupt = 1 then device working in interrupt mode, else device working in polling mode */
+
+
 #endif  /* _VL53L1_PLATFORM_USER_CONFIG_H_ */
 

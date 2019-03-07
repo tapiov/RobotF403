@@ -47,37 +47,9 @@
  */
 
 /* Private defines -----------------------------------------------------------*/
-#define LPS25HB_UNICLEO_ID_ONBOARD 1
-#define LPS25HB_UNICLEO_ID_DIL 2
-#define LPS22HB_UNICLEO_ID 3
-#define HTS221_UNICLEO_ID 1
-#define LSM6DS0_UNICLEO_ID 1
-#define LSM6DS3_UNICLEO_ID 2
-#define LSM6DSL_UNICLEO_ID 3
-#define LIS3MDL_UNICLEO_ID 1
-#define LSM303AGR_UNICLEO_ID_MAG 2
-
-#define FW_ID "4"
-#define FW_VERSION "2.3.0"
-#if ((defined (USE_STM32F4XX_NUCLEO)) || (defined (USE_STM32L4XX_NUCLEO)) || (defined (USE_STM32L1XX_NUCLEO)))
-#define LIB_VERSION "2.1.0"
-#elif (defined (USE_STM32L0XX_NUCLEO))
-#define LIB_VERSION "1.1.0"
-#else
-#error Not supported platform
-#endif
-
-#if (defined (USE_IKS01A2))
-#define EXPANSION_BOARD "IKS01A2"
-#else
-#error Not supported shield
-#endif
-
-#define DATA_TX_LEN  MIN(4, DATABYTE_LEN)
 
 /* Extern variables ----------------------------------------------------------*/
-extern uint8_t Enabled6X; /* This "redundant" line is here to fulfil MISRA C-2012 rule 8.4 */
-uint8_t Enabled6X = 1;
+
 
 /* Private variables ---------------------------------------------------------*/
 static uint8_t PresentationString[] = { "MEMS shield demo,"FW_ID ","FW_VERSION ","LIB_VERSION ","EXPANSION_BOARD };

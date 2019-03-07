@@ -53,6 +53,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "iks01a2_conf.h"
+#include "mems.h"
 #include "motion_sensor.h"
 
 #ifndef USE_IKS01A2_MOTION_SENSOR_LSM6DSL_0

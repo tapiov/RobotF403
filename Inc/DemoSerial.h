@@ -59,7 +59,6 @@ extern "C" {
 
 /* Exported variables --------------------------------------------------------*/
 extern volatile uint8_t DataLoggerActive;
-extern volatile uint32_t SensorsEnabled;
 extern TIM_HandleTypeDef AlgoTimHandle;
 extern UART_HandleTypeDef UartHandle;
 

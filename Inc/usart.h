@@ -62,6 +62,9 @@ void MX_USART6_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+int uartSendChar(int ch);
+int uartReceiveChar(void);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

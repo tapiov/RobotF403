@@ -74,20 +74,6 @@ extern "C" {
 /** @defgroup NUCLEO_F401RE_LOW_LEVEL_Exported_Types NUCLEO_F401RE LOW LEVEL Exported Types
  * @{
  */
-typedef enum {
-	LED2 = 0U
-} Led_TypeDef;
-
-typedef enum {
-	BUTTON_USER = 0U,
-	/* Alias */
-	BUTTON_KEY  = BUTTON_USER
-} Button_TypeDef;
-
-typedef enum {
-	BUTTON_MODE_GPIO = 0U,
-	BUTTON_MODE_EXTI = 1U
-} ButtonMode_TypeDef;
 
 typedef enum {
 	COM1 = 0U,
@@ -126,7 +112,6 @@ typedef struct {
 /** @defgroup NUCLEO_F401RE_LOW_LEVEL_LED NUCLEO_F401RE LOW LEVEL LED
  * @{
  */
-#define LEDn                              1U
 
 #define LED2_GPIO_PORT                    GPIOA
 #define LED2_GPIO_CLK_ENABLE()            __HAL_RCC_GPIOA_CLK_ENABLE()
@@ -142,22 +127,6 @@ typedef struct {
 /* Button state */
 #define BUTTON_RELEASED                   0U
 #define BUTTON_PRESSED                    1U
-
-#define BUTTONn                           1U
-
-/**
- * @brief Key push-button
- */
-#define KEY_BUTTON_GPIO_PIN               GPIO_PIN_13
-#define KEY_BUTTON_GPIO_PORT              GPIOC
-#define KEY_BUTTON_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
-#define KEY_BUTTON_GPIO_CLK_DISABLE()     __HAL_RCC_GPIOC_CLK_DISABLE()
-#define KEY_BUTTON_EXTI_IRQn              EXTI15_10_IRQn
-#define KEY_BUTTON_EXTI_LINE              EXTI_LINE_13
-#define BSP_BUTTON_KEY_IT_PRIORITY        0xF
-/**
- * @}
- */
 
 /** @defgroup NUCLEO_F401RE_LOW_LEVEL_COM NUCLEO_F401RE LOW LEVEL COM
  * @{
@@ -207,28 +176,6 @@ typedef struct {
  * @{
  */
 /* Exported Functions --------------------------------------------------------*/
-int32_t  BSP_GetVersion(void);
-int32_t  BSP_LED_Init(Led_TypeDef Led);
-int32_t  BSP_LED_DeInit(Led_TypeDef Led);
-int32_t  BSP_LED_On(Led_TypeDef Led);
-int32_t  BSP_LED_Off(Led_TypeDef Led);
-int32_t  BSP_LED_Toggle(Led_TypeDef Led);
-int32_t  BSP_LED_GetState(Led_TypeDef Led);
-int32_t  BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode);
-int32_t  BSP_PB_DeInit(Button_TypeDef Button);
-int32_t  BSP_PB_GetState(Button_TypeDef Button);
-void     BSP_PB_Callback(Button_TypeDef Button);
-int32_t  BSP_COM_Init(COM_TypeDef COM);
-int32_t  BSP_COM_DeInit(COM_TypeDef COM);
-
-#if (USE_COM_LOG == 1)
-int32_t  BSP_COM_SelectLogPort(COM_TypeDef COM);
-#endif
-
-#if (USE_HAL_UART_REGISTER_CALLBACKS == 1)
-int32_t BSP_USART2_RegisterDefaultMspCallbacks(void);
-int32_t BSP_USART2_RegisterMspCallbacks(BSP_UART_Cb_t *Callback);
-#endif /* USE_HAL_UART_REGISTER_CALLBACKS */
 
 /**
  * @}

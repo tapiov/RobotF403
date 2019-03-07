@@ -86,6 +86,8 @@ extern DMA_HandleTypeDef hdma_usart6_rx;
 extern DMA_HandleTypeDef hdma_usart6_tx;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart6;
+extern TIM_HandleTypeDef htim5;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -229,7 +231,7 @@ void SysTick_Handler(void)
  */
 void TIM_ALGO_IRQHandler(void)
 {
-	HAL_TIM_IRQHandler(&AlgoTimHandle);
+	HAL_TIM_IRQHandler(&htim5);
 }
 
 void EXTI15_10_IRQHandler(void)
